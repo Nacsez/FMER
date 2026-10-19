@@ -2,9 +2,9 @@
 
 19 October 2026. The owner authorized uploading the reviewed source and assets to
 the private Nacsez/FMER repository and creating a draft release. The repository
-must remain private and the release unpublished for owner review. Firmware bytes,
-wire identity and the 700-series build system are unchanged. Companion feedback
-export version labels are corrected to734; the source and media package is refreshed.
+must remain private and the release unpublished for owner review. 734-r2 keeps the wire identity and700-series system, but replaces vendor runtime
+archives with the reviewed source build. The exact tested package, corresponding
+source, notices and Companion are refreshed together.
 
 | Area | Status |
 |---|---|
@@ -13,9 +13,9 @@ export version labels are corrected to734; the source and media package is refre
 | Copy and video preparation | General descriptions, individual highlights, exact limits, eight video plans and short-form alternatives drafted. |
 | Help integration | Sheets appear in related offline handbook topics and a searchable visual gallery. Parameter/menu references remain available. |
 | Source/public metadata | Clean allowlisted export, public README/AGENTS, feedback template, ignore rules and file hashes; no existing private history exported. |
-| Extracted target source | Compiles and links with pinned external toolchain; all three loadable ELF sections match qualified734 byte-for-byte. Whole-file metadata differs. No device write. |
-| Firmware and radio | Qualified734 firmware retained. Bluetooth first after release and primary feedback; not advertised as working. |
-| Automated verification | See VERIFICATION.md and the local release manifest; no new physical-device qualification is implied. |
+| Extracted target source | Source-built runtime and public configuration inputs reproduce the exact 734-r2 application and FWSC; all 34 extracted-tree CTest suites and 42 loader checks pass. External compiler/headers required. |
+| Firmware and radio | Source-built734-r2 tested on Amethyst; Citrine retained as734-r1 reference. Bluetooth first after release and primary feedback; not advertised as working. |
+| Automated verification | Full workspace regression passes; live Amethyst comparison and preservation pass. See VERIFICATION.md and the exact portable rehearsal referenced by the release manifest. |
 | Publication | Nacsez/FMER: private upload and draft release authorized; public visibility and publication reserved for owner review. |
 | Original splash artwork | Owner confirmed ownership and GPL-3.0-only permission on 19 October; original PNG, generator and source notice included in both source packages. |
 
@@ -24,12 +24,10 @@ export version labels are corrected to734; the source and media package is refre
 The owner has selected GPL-3.0-only for original FMER firmware, Companion and
 default instruments and the original splash artwork. Dependency notices remain in
 force. The artwork permission item is closed; [ARTWORK.md](ARTWORK.md) records the
-owner's grant and the delivered source form. One material distribution review
-remains unresolved in the existing record:
-
-- Redistribution/source basis and GPL compatibility of the exact linked vendor
-  runtime libraries. The target links `libc`, `libm` and `compiler-rt`; having the
-  compiler locally or pinning archive hashes does not settle that review.
+owner's grant and the delivered source form. The linked-runtime gap is addressed for734-r2 by licensed source replacement,
+with the compiler external and public configuration-data provenance. Read the
+[options and boundaries](RUNTIME_REVIEW_734.md). No vendor proprietary engine
+or runtime archive is linked; no bespoke permission request was made.
 
 Source-rebuild results should be read at their actual scope: an extracted-tree
 build on the development computer is not a clean Windows VM or universal binary

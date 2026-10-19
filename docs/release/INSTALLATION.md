@@ -27,11 +27,11 @@ Your library and diagnostics remain in your Windows user-data directory.
 
 ## Firmware-only download
 
-**fmer734-compatible-r1.fwsc** is the actual firmware update package, identical
+**fmer734-compatible-r2.fwsc** is the actual firmware update package, identical
 byte-for-byte to the one bundled in Companion. It is a standard FM-1 FWSC package
 with a guarded update loader; it is not a raw flash dump or a desktop executable.
 
-SHA-256: `204a292ea499af8ac157024510c8324199fe950912f45c4a03fe93bd55cbecd9`
+SHA-256: `a953cd928543a333b9065e911b8b452757fce71944d4344cc8cb7c0e1b4e5e41`
 
 The package uses the two-stage FM-1 USB-MIDI update flow: stage the updater,
 reconnect to it, transfer the application, then verify the restarted identity.

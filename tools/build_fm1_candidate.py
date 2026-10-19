@@ -235,7 +235,7 @@ def inspect_elf(data: bytes) -> dict:
     return {**identity, "sections": allocated, "startup_symbols": {name: symbols[name] for name in needed}}
 
 
-def build_candidate(toolchain: Path, libcxx: Path, upstream: Path, output: Path, usb_product: str = "FMER Test01") -> dict:
+def build_candidate(toolchain: Path, libcxx: Path, upstream: Path, output: Path, usb_product: str = "FMER Test01", runtime: str = "source") -> dict:
     output.mkdir(parents=True, exist_ok=False)
     report = {"schema": 1, "kind": "fm1_board_build_candidate", "success": False,
               "release": False, "packaged": False, "flashable": False,
@@ -247,7 +247,10 @@ def build_candidate(toolchain: Path, libcxx: Path, upstream: Path, output: Path,
     try:
         lock = json.loads(probe.LOCK.read_text(encoding="utf-8"))
         report["toolchain_lock_sha256"] = probe.sha256(probe.LOCK)
-        probe.verify_files(toolchain, lock["toolchain"]["files"])
+        # Source builds need the compiler/headers, never the vendor archives.
+        tool_files=[item for item in lock['toolchain']['files']
+                    if runtime != 'source' or not item['path'].endswith('.a')]
+        probe.verify_files(toolchain, tool_files)
         probe.verify_files(libcxx, lock["libcxx"]["files"])
         msfa_lock = json.loads((ROOT / "evidence/msfa-source.json").read_text(encoding="utf-8"))
         report["msfa_lock_sha256"] = probe.sha256(ROOT / "evidence/msfa-source.json")
@@ -318,9 +321,18 @@ def build_candidate(toolchain: Path, libcxx: Path, upstream: Path, output: Path,
         elf = output / "fm1.elf"
         script = ROOT / "firmware/fm1/app.ld"
         report["linker_script_sha256"] = probe.sha256(script)
+        if runtime == 'source':
+            import source_runtime
+            report['runtime'] = source_runtime.build(toolchain, output / 'runtime', checked)
+            runtime_path = output / 'runtime'
+        elif runtime == 'vendor-reference':
+            runtime_path = toolchain / 'pi32v2-lib/r3'
+            report['runtime'] = {'kind': runtime, 'distribution_review': 'unresolved'}
+        else:
+            raise ValueError('Unknown runtime selection')
         checked("link", [str(toolchain / "bin/pi32v2-ld.exe"), "-m", "elf32pi32v2", "--gc-sections",
                 "-T", str(script), "-Map", str(output / "fm1.map"), "-o", str(elf)] + objects +
-                ["-L", str(toolchain / "pi32v2-lib/r3"), "--start-group", "-lc", "-lm", "-lcompiler-rt", "--end-group"])
+                ["-L", str(runtime_path), "--start-group", "-lc", "-lm", "-lcompiler-rt", "--end-group"])
         undefined = checked("undefined-symbols", [str(toolchain / "bin/llvm-nm.exe"), "--undefined-only", str(elf)])
         if undefined["stdout"].strip():
             raise ValueError("Board ELF has unresolved symbols")
@@ -341,6 +353,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--libcxx-root", type=Path)
     parser.add_argument("--upstream-root", type=Path, default=FELUCCA)
     parser.add_argument("--out", type=Path)
+    parser.add_argument('--runtime', choices=('vendor-reference', 'source'), default='source',
+                        help='source uses reviewed source-built libraries; candidate only, requires target qualification')
     parser.add_argument("--usb-product", choices=("FMER Test01", "FMER Citrine", "FMER"), default="FMER Test01")
     args = parser.parse_args(argv)
     lock = json.loads(probe.LOCK.read_text(encoding="utf-8"))
@@ -349,7 +363,7 @@ def main(argv: list[str] | None = None) -> int:
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ") + "-" + uuid.uuid4().hex[:8]
     output = (args.out or ROOT / "artifacts/fm1-candidate" / stamp).resolve()
     try:
-        report = build_candidate(toolchain, libcxx, args.upstream_root.resolve(), output, args.usb_product)
+        report = build_candidate(toolchain, libcxx, args.upstream_root.resolve(), output, args.usb_product, args.runtime)
     except OSError as error:
         print(str(error), file=sys.stderr)
         return 2

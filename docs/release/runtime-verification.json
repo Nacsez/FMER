@@ -1,0 +1,667 @@
+{
+  "schema": 1,
+  "date": "2026-10-19",
+  "revision": "734-r2",
+  "classification": "Source/license review, offline tests and Amethyst hardware regression; no public publication",
+  "runtime": {
+    "schema": 1,
+    "application_objects_identical": 25,
+    "reference_elf": "cbf11b610b6b6eb01f8f3ad101632c86dc3345a78e856ec8fc60f2bf39c7e2f5",
+    "candidate_elf": "263c5c2fa278a4d117d3d2985c91a5db89ffc8a1ac064770d6c31386df730f58",
+    "vendor_archive_link": false,
+    "source_manifest_sha256": "3aaad4d59c17adb70224457aca6ae5507855b97d03d24a371aefec50b4bcc9e6",
+    "section_deltas": {
+      ".text": 192,
+      ".ram_text": 0,
+      ".data": 0,
+      ".bss": 0,
+      ".pool": 0,
+      ".workspace": 0,
+      ".noinit": 0
+    },
+    "objects": [
+      {
+        "archive": "libc.a",
+        "member": "lib_a-memcmp.o",
+        "source": "newlib/newlib/libc/string/memcmp.c",
+        "new_sha256": "4cfb339aa4123e3750a06ba6cde4257f3ac5cc4950568604a2175897393a6cda",
+        "reference_sha256": "e38394e3213d882df6c0bd5b03416c40846b8270b1fb8cdb1bebac4a329b41e3",
+        "allocated_equal": false,
+        "relocations_equal": true,
+        "exports_equal": false,
+        "object_contract_equal": false
+      },
+      {
+        "archive": "libc.a",
+        "member": "lib_a-memcpy.o",
+        "source": "newlib/newlib/libc/string/memcpy.c",
+        "new_sha256": "ff697adaeb0452682581dbf5ddbf182232e958e9486874f2e2bc598806f7a8f5",
+        "reference_sha256": "68d4d421a273296fac779a0b62fc061114e092ff21bc8c3f6092160b3ad29a10",
+        "allocated_equal": false,
+        "relocations_equal": true,
+        "exports_equal": false,
+        "object_contract_equal": false
+      },
+      {
+        "archive": "libc.a",
+        "member": "lib_a-memmove.o",
+        "source": "newlib/newlib/libc/string/memmove.c",
+        "new_sha256": "5df13e2d8321fb2d847a11e33be7f1372527b03260bccb532d81c78702d0dfab",
+        "reference_separate_object": false
+      },
+      {
+        "archive": "libc.a",
+        "member": "lib_a-memset.o",
+        "source": "newlib/newlib/libc/string/memset.c",
+        "new_sha256": "c0c62ed21b62371fce1ef2c1c3f13142908bb7a2af0621dec22919e9054bd64f",
+        "reference_sha256": "2b609aa00d7fc0e8030966479a46d1046f5338d17cfd1fcc8211ca1ad8da7fa3",
+        "allocated_equal": false,
+        "relocations_equal": true,
+        "exports_equal": false,
+        "object_contract_equal": false
+      },
+      {
+        "archive": "libc.a",
+        "member": "lib_a-sf_fpclassify.o",
+        "source": "newlib/newlib/libm/common/sf_fpclassify.c",
+        "new_sha256": "b1eeffef3114aa7edb4ec40b554c4c7f7544b42c7d1f73f595d579122be31d1c",
+        "reference_sha256": "47391d30da42a36380449baba67aa5ec9319d37400c26258fb6654ea6a44dbeb",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libc.a",
+        "member": "lib_a-strlen.o",
+        "source": "newlib/newlib/libc/string/strlen.c",
+        "new_sha256": "abaa9d6bfb6953683ae57bc7d2bf593be1fb895b4b56b703bdfb6dc6c9006774",
+        "reference_sha256": "568f996182ea664acedce21d6e6c64e37e438cded84f369a39026bec11ad87c9",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "adddf3.o",
+        "source": "compiler-rt/lib/builtins/adddf3.c",
+        "new_sha256": "8d70aecea946368bfabefa80fa6ec72f5187e9086623f951c44d892fc01c2517",
+        "reference_sha256": "6c9f81d32e8056f374dd5ac286a4f0e270250060c2e2d2cd2bc78e3627afba75",
+        "allocated_equal": false,
+        "relocations_equal": true,
+        "exports_equal": false,
+        "object_contract_equal": false
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "comparedf2.o",
+        "source": "compiler-rt/lib/builtins/comparedf2.c",
+        "new_sha256": "7bcfbaf2a99ef9ab7f42058832eb446a4ed2d34daaaba164dbf83c4a4bd993d6",
+        "reference_sha256": "c977860cd74640d8baf61ac6816191585bf4571356d87051a63154989a71ae13",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "divdf3.o",
+        "source": "compiler-rt/lib/builtins/divdf3.c",
+        "new_sha256": "aea9d7c3d89098657163cfd50ca6bf7e3d5409ebcd2df2ef206b0663c1446906",
+        "reference_sha256": "6296d6b60ad3f6bfb1571eb1a900287382e35fb041e0ccf2ae425b2be31156de",
+        "allocated_equal": false,
+        "relocations_equal": true,
+        "exports_equal": false,
+        "object_contract_equal": false
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "fixdfsi.o",
+        "source": "compiler-rt/lib/builtins/fixdfsi.c",
+        "new_sha256": "0b0c0379899131191fe205f7cab876cbf2ce72653a4ac74a0851ea6138c8c29a",
+        "reference_sha256": "a77960e5180a986eaec4364799632b53bb6c6af7cce97f0ad5158f8394ad54d3",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "floatsidf.o",
+        "source": "compiler-rt/lib/builtins/floatsidf.c",
+        "new_sha256": "1d373683d23ef9ccd037cbb84173deee2ff015b4fb6e60721b67a2d93e9b82f3",
+        "reference_sha256": "5ee35ef976189fed46f5a188fea37e5afe990ef6ad6e901977649e6e928d41e7",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "muldf3.o",
+        "source": "compiler-rt/lib/builtins/muldf3.c",
+        "new_sha256": "f4b98a4ff78b34ae55e90c1a408a3a7a172aa6df83abeead67b1551b838bbe45",
+        "reference_sha256": "9700d9655569151d6513ca3f6f406749054553b0e614ae23fbdc0f17a69351fe",
+        "allocated_equal": false,
+        "relocations_equal": true,
+        "exports_equal": false,
+        "object_contract_equal": false
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "subdf3.o",
+        "source": "compiler-rt/lib/builtins/subdf3.c",
+        "new_sha256": "293b4dc5fc59dd2d265c0f686fcf79eeec305aaa085cebaeca17c13cecd87a19",
+        "reference_sha256": "79c630b028bb3aa0040a365a7a9291f18571e2b79956ecde7e6eb73a4f75cf40",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "udivdi3.o",
+        "source": "compiler-rt/lib/builtins/udivdi3.c",
+        "new_sha256": "845ccb6b283901267289d9060f822eabc5c9073c63b76a35f0d1a36a93c4dde2",
+        "reference_sha256": "0ae42f6b8fd27f1d9fb449a969207be5f551ec4a238e2cc5a29b978e52492fc1",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "udivmoddi4.o",
+        "source": "compiler-rt/lib/builtins/udivmoddi4.c",
+        "new_sha256": "92da3e63fd01e930540361f42c543366cce6d242795fde1196d5765455641429",
+        "reference_sha256": "27e582716a49e2d0b402d8557c98dd4db661b87dc8e8adbdcdf27e7c075a1878",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libcompiler-rt.a",
+        "member": "umoddi3.o",
+        "source": "compiler-rt/lib/builtins/umoddi3.c",
+        "new_sha256": "93eca85248b887bb115dcd556ab5be6cfe2309c0c07908ae4e4458aed5e04683",
+        "reference_sha256": "2721088fda5dfcd85c9f2660bfa86a0784846a589aa9449897824e8c77e81c7c",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-e_log.o",
+        "source": "newlib/newlib/libm/math/e_log.c",
+        "new_sha256": "df7585bdf3e30b35b2168cea6a834251464050bc3cedd3a93a7161eaff3b86d5",
+        "reference_sha256": "df296ac0216fa1dd67d2f96a918c351d28c01c146f75d5e2ff28c22d3bf68dc6",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-e_pow.o",
+        "source": "newlib/newlib/libm/math/e_pow.c",
+        "new_sha256": "87ea5f0d794eef67dd0d16cff2534c8ad4b8df190d16cb6479af04eba34cacca",
+        "reference_sha256": "3b6add8d974106e1f7c5042fe35b03a00de815e129ac9fab9bdfc720fc6e5bba",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-e_rem_pio2.o",
+        "source": "newlib/newlib/libm/math/e_rem_pio2.c",
+        "new_sha256": "e6c644cc1b685704eb3e8e046809fd483ad21a61388149668f9391067d067c12",
+        "reference_sha256": "bdbb29b0991388ffa90d1e0fcfeb0f80facb8f605872f9ab347b7f00e86207a0",
+        "allocated_equal": false,
+        "relocations_equal": false,
+        "exports_equal": false,
+        "object_contract_equal": false
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-e_sqrt.o",
+        "source": "newlib/newlib/libm/math/e_sqrt.c",
+        "new_sha256": "87c4195014dc71f430c3d31a98ee0bbdf13935bbf39761708e437f4518c4f0fa",
+        "reference_sha256": "1ed990e7385469343a85524c3d3c3da18295ed2705cc80cdaa3174b46097cb0a",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-ef_log.o",
+        "source": "newlib/newlib/libm/math/ef_log.c",
+        "new_sha256": "ae632ec4d0253e1566f724d7aec4d2273c61a2bdf7ab5af1b0b594632bb57208",
+        "reference_sha256": "7d0407fb1460b58192e81a5f622218190dc5aa211c556cd7297cc275a79debea",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-ef_pow.o",
+        "source": "newlib/newlib/libm/math/ef_pow.c",
+        "new_sha256": "1ddf5b6b5ec87d6063f3bdf547bbecf5df68487dbbd3c3d326a3900406bcbdc3",
+        "reference_sha256": "7f109997328f1f0199fd37d298d2e7eb98742a3f7d1855d79722d42924e25c37",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-ef_rem_pio2.o",
+        "source": "newlib/newlib/libm/math/ef_rem_pio2.c",
+        "new_sha256": "6a6b5d358d58bcc84b51e7b5ab420c858a384769144a008606b1ca5fdad98bb1",
+        "reference_sha256": "5947f6dd57c551c4c92f40e8338197476447101e3270525986a235ea7938202e",
+        "allocated_equal": false,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": false
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-ef_sqrt.o",
+        "source": "newlib/newlib/libm/math/ef_sqrt.c",
+        "new_sha256": "79ae847265406ad9bab7c36f4bb41ea50dcd9d0c6bfdba2d12b16e4144f6a6f7",
+        "reference_sha256": "4073b0f256fbc4cf0467c52cea61fcbba0ac6377de6f8727992a5ae5943e2552",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-k_cos.o",
+        "source": "newlib/newlib/libm/math/k_cos.c",
+        "new_sha256": "e9cdd39c01a4f863cb1bee5b176c64ca1c8c72f82dc26c92daa9ad48d3b5fa06",
+        "reference_sha256": "4c7b2eceeca03e5d836ffd5be610dfe872600bafdadbf9dc2a772a8dcbd26ebf",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-k_rem_pio2.o",
+        "source": "newlib/newlib/libm/math/k_rem_pio2.c",
+        "new_sha256": "7b1a2055f12eb335e1d510d124c107607c33ce9b00a0d788797a1674835e37b0",
+        "reference_sha256": "1e1fd38df680f2725690ad81f78da3e391992bdf3b1381eedb7e693483409910",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-k_sin.o",
+        "source": "newlib/newlib/libm/math/k_sin.c",
+        "new_sha256": "98b3ce7ead675b4b02f194ef4650c480b643c8c80337183ff42212db00a03549",
+        "reference_sha256": "2c9155d9dc1f608f51f8d7fe60234ee4dc4e990e6ce84c53e0bca645eed193c1",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-kf_rem_pio2.o",
+        "source": "newlib/newlib/libm/math/kf_rem_pio2.c",
+        "new_sha256": "327ab29c17b2e45649e0b4eb026b2ed62d9ec10d250b5657bb9ab112048dc3b6",
+        "reference_sha256": "be6da219c7ba9279f7584eae7d2cd79b6bbee6842629a7ff466090b8974579bd",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-kf_tan.o",
+        "source": "newlib/newlib/libm/math/kf_tan.c",
+        "new_sha256": "4e0fba4d7f182c5d88f843066c2d17924b3b530b8000aa43faa2f32eaa8167fa",
+        "reference_sha256": "3bb10109b269f4940a67a30c13039150ec96d78e20035af2c08549f994758184",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-s_copysign.o",
+        "source": "newlib/newlib/libm/common/s_copysign.c",
+        "new_sha256": "a2450ffcf4b06c424942cdc86e1e8c31180d9d7a1a27ffea155be7056276aa0d",
+        "reference_sha256": "51922a3d2f0fe75fd64dfdc5db8827b55b9cc148cb47df94672976dbd61ef106",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-s_cos.o",
+        "source": "newlib/newlib/libm/math/s_cos.c",
+        "new_sha256": "59225bceee53d7ab5f7ba430a0ccf2e4ede97f1e6c0d87946a1f95a12267a292",
+        "reference_sha256": "7a461e8c8303908ba62c65148c52e3b2a15c657f15bbecf6f2aa57e9b1413ff7",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-s_fabs.o",
+        "source": "newlib/newlib/libm/math/s_fabs.c",
+        "new_sha256": "3d94997aef6dc478bdd2a265e70dda15060b0beb341d68439e911f66515510cf",
+        "reference_sha256": "efd6cb02bcff7e920c9a83f54b0f1860ccccc4e159fab46faa0a353d751989d2",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-s_floor.o",
+        "source": "newlib/newlib/libm/math/s_floor.c",
+        "new_sha256": "da856914c4ef71938bf98ef88427fff74a714fa1cd582dc9453be271be8874f9",
+        "reference_sha256": "46f9a9c7b0f334a7bcea8ba87c57c22c685f363f99d62fa1b90f7607c1637e4b",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-s_nan.o",
+        "source": "newlib/newlib/libm/common/s_nan.c",
+        "new_sha256": "621819495cddf1414a263eca17fa58ba1f7307324f1c015c3632aff9f42618b9",
+        "reference_sha256": "f32b5b27c8c78cd46ec636a310e52306ef71f10524f2480708a223af98c25c1f",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-s_scalbn.o",
+        "source": "newlib/newlib/libm/common/s_scalbn.c",
+        "new_sha256": "c9ab96a13650de06ba2ac72715b095c137d6af767f470a54a08b1a777c97738f",
+        "reference_sha256": "a223e0887e972e2b46c583bc2a514e1deaa6f6b0f23c3400f749137b364bb201",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-s_sin.o",
+        "source": "newlib/newlib/libm/math/s_sin.c",
+        "new_sha256": "5c0ef4e833b89fa2d35a106a54a808adce40ff6acb2c2c38925a4dfb429c14fb",
+        "reference_sha256": "612f33bfc08693996311f08029fc5581a2462e5dbc447e1682236d128c4a39ea",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-sf_copysign.o",
+        "source": "newlib/newlib/libm/common/sf_copysign.c",
+        "new_sha256": "36319ad84aa19b2fbdba3af245859097077d354080d5a29bc19de8d0d289978e",
+        "reference_sha256": "e57c5d68bb9ac1a448b4bad8b01f959066d58409f194aacfdb71fde0a76ab24e",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-sf_fabs.o",
+        "source": "newlib/newlib/libm/math/sf_fabs.c",
+        "new_sha256": "d681219ae7768f7eebae6ba46a3ae10e0d2635ba42ce7ec58f6f2449e26f4dcc",
+        "reference_sha256": "2d642ca1a021f4e343d62d21187fb5efcb5485da1b9f31ce8dcdfdb7d2957a98",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-sf_floor.o",
+        "source": "newlib/newlib/libm/math/sf_floor.c",
+        "new_sha256": "4440fc3bf5968acca049b8924cc4bd1735668fa1976d26b2915c83297fc7c2dd",
+        "reference_sha256": "35858ac78f46d3d1f677307f16982379f2ba40cd6b30fe14634431033e893584",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-sf_log2.o",
+        "source": "newlib/newlib/libm/common/sf_log2.c",
+        "new_sha256": "396e3023a11b6e13b087443cb0b9d49854ac2f832e5c31ec33ea73571de97cb0",
+        "reference_sha256": "862872b1ff5e13e0ea5cfe4d4fcb649c6459b17aad4103982d48c4fa01180eca",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-sf_nan.o",
+        "source": "newlib/newlib/libm/common/sf_nan.c",
+        "new_sha256": "3f796d9923bfe452229dbf24ccada50d56eb6fbbc07bb3bd37ab3c452c1a50e2",
+        "reference_sha256": "7897d187e41dd31a9d4553961f2a143903ab6d70adf34e056dabb1301bbc05a4",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-sf_scalbn.o",
+        "source": "newlib/newlib/libm/common/sf_scalbn.c",
+        "new_sha256": "6613676336c6682537cad655418337355c049de9e4adaf27db76a4cf6ecd43d6",
+        "reference_sha256": "2be00a535ecbf870da250afc38a18e788ec03f9b03b0cbc45fca72999f6eec3a",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-sf_tan.o",
+        "source": "newlib/newlib/libm/math/sf_tan.c",
+        "new_sha256": "5cc1fca06c9a9fc85380ed9dcdada7c557552fce54c3e7234c7e4051439cd20f",
+        "reference_sha256": "887b2d0d336cf7cdaea7acc55df8212933f2157a58a3895b87b186b8267996f6",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-w_exp2.o",
+        "source": "newlib/newlib/libm/math/w_exp2.c",
+        "new_sha256": "8006d38f8e6401fa300239ac6938358687d6545190fa370e50670536168631b0",
+        "reference_sha256": "4305a02b93020e3fd3fd9c961c2749538f1c24b6465ce72536405d78269e1506",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-w_log.o",
+        "source": "newlib/newlib/libm/math/w_log.c",
+        "new_sha256": "b4d098092b86d7c1b777ce1eab8c0c657c08e8d0e0b9f26815cb77382aeb2579",
+        "reference_sha256": "05ecb4dfc9e279665180ed7d779d03f0c8cdbefd0ff3d12ad870f8bfa7c9992c",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-w_pow.o",
+        "source": "newlib/newlib/libm/math/w_pow.c",
+        "new_sha256": "e73794f7345cece29a92fb7e78a057267c7e54a46cc36fad6dc5860316da5a1f",
+        "reference_sha256": "56b37b0933403c983b694f59cab78550e605ddc1ea985fa346b23a395bb18b43",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-wf_exp2.o",
+        "source": "newlib/newlib/libm/math/wf_exp2.c",
+        "new_sha256": "5a6102b1b0386310e0813a66b4ac5334b219ab17e74dee7f7fdcd2c71926b5d0",
+        "reference_sha256": "89529c23510f6cc5a01c6c9472bb4202437d0cb48d0ffd3cb2b2c101fb83b4bc",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-wf_log.o",
+        "source": "newlib/newlib/libm/math/wf_log.c",
+        "new_sha256": "8432f71f09b220f17864efca82ec6ef3de1e2f29c61b94d44fb8c2792372ca67",
+        "reference_sha256": "a47ce3c61e884f9ae5821be784ba83d8cb3366e4f6a1d4ba2e01ef2c631cde3d",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      },
+      {
+        "archive": "libm.a",
+        "member": "lib_a-wf_pow.o",
+        "source": "newlib/newlib/libm/math/wf_pow.c",
+        "new_sha256": "5b627184034a7b12a62ba0f77bbbe92b450fb43b1d1ab3263e4e55512893d737",
+        "reference_sha256": "26cbc41ffe254c958fed9eac10f6684dfb1dccbdcd0732c9bc1fbb6e0e18dd66",
+        "allocated_equal": true,
+        "relocations_equal": true,
+        "exports_equal": true,
+        "object_contract_equal": true
+      }
+    ],
+    "exact_object_contracts": 40,
+    "scope": "Offline source/link/object evidence; not whole-firmware or mathematical equivalence, audio or target timing qualification"
+  },
+  "package_sha256": "a953cd928543a333b9065e911b8b452757fce71944d4344cc8cb7c0e1b4e5e41",
+  "loader_sha256": "c640eff6f75a2a4a5cceb9d3cbb8dc9b461ae908d3aff4ce1cd4b554ff575634",
+  "loader_passes": 42,
+  "host_behavior_checks": 1172204,
+  "reference": {
+    "presets": 64,
+    "chords": 35,
+    "maximum_preset_render_us": 1005,
+    "maximum_matrix_render_us": 1182
+  },
+  "candidate": {
+    "presets": 64,
+    "chords": 35,
+    "maximum_preset_render_us": 1044,
+    "maximum_matrix_render_us": 1206
+  },
+  "pcm": [
+    {
+      "phase": "reference-runtime-2",
+      "success": true,
+      "frames": 4411392,
+      "peak": 2670,
+      "wav_sha256": "d2154a7f35e27beb6f43059425a5bcf8d0cd86a1cb9f9f5005506602df20bdfb",
+      "report_sha256": "d750a533887085fca02b054e450d2702679ea46d72d7f87c1747b7ff03573913"
+    },
+    {
+      "phase": "source-runtime",
+      "success": true,
+      "frames": 4411392,
+      "peak": 2387,
+      "wav_sha256": "5a9e23de8725aa75a5046e5e2370d6fac397f0d5a4d292961ffd927bf7fead67",
+      "report_sha256": "b49d815b4ea8ebdc9c51e8d5443d56825c7590e607688008d988f01538edbdeb"
+    }
+  ],
+  "preservation": {
+    "success": true,
+    "saved_checks": {
+      "instruments": true,
+      "projects": true,
+      "fx_default": true
+    },
+    "working_state_exact": true,
+    "midi_restored": true,
+    "instrument_slots": 128,
+    "project_slots": 16
+  },
+  "evidence_hashes": {
+    "live/Amethyst/install-2/result.json": "7a71c7452139ebbe2f42dcc9996ee5efb67a8e1c459160f06a2ea59ec117bfca",
+    "live/Amethyst/reference-runtime-3/report.json": "4449a93326f12f9ca71dfcb129e623dbe104c0438ec3681b16fd600066598605",
+    "live/Amethyst/source-runtime/report.json": "034110eaefa755bcc1c3702d3c669ef58da2c9d690119a9342bb0e7525ed2522",
+    "live/Amethyst/after/report.json": "b20be081bf7ced30c973e282f78862e880a3c5368843e705f0a425003126a4cc",
+    "package-release/loader-tests.json": "eabc5cc7f06e3cb30b3b988abb519c85f2b4a02fcf7e4b4510794b4eecacae29",
+    "public-image-comparison.json": "2007e5418b72e4af5dd5736e3b63b4f892f28702bad6dfb8e6724452183e85a5"
+  },
+  "midi": {
+    "success": true,
+    "cases": 8,
+    "report_sha256": "1ca4e3c4620502c752c69f1d91c419a74bd57095caa0f0ae8042d9d457c12a05"
+  },
+  "workflow": {
+    "success": true,
+    "report_sha256": "b91b97675a7a0da4a58917ff10f2122610851731a6e21840c2a6c4c44a5d8fe6"
+  },
+  "workspace_tests": {
+    "total_python": 1075,
+    "passed_python": 1058,
+    "skipped_python": 17,
+    "ctest_suites": 34,
+    "status": "passed"
+  },
+  "export_tests": {
+    "ctest_suites": 34,
+    "status": "passed",
+    "target": {
+      "reference_elf_sha256": "263c5c2fa278a4d117d3d2985c91a5db89ffc8a1ac064770d6c31386df730f58",
+      "exported_elf_sha256": "4551464a20a336770ac81b5f56a291e5c3139891b60654e9cb7baa926f10e5b9",
+      "application_payload_identical": true,
+      "application_sha256": "7fe7aeff7469756a2af456f317d13d85324d4860c60825cee8ecd812f06de647",
+      "application_bytes": 214720
+    },
+    "package_identical": true,
+    "package_sha256": "a953cd928543a333b9065e911b8b452757fce71944d4344cc8cb7c0e1b4e5e41",
+    "loader_checks": 42
+  },
+  "external_format": {
+    "source": "https://github.com/isod89/sloop-fm1/blob/4ec1ac829fd2bdf2c571ea215fb3d62477d01220/tools/fm1_install.py",
+    "source_sha256": "9e117608e328b91dd5cb178400d9c88b1ee45677b87ae8b704536c0f38fea8f9",
+    "firmware_sha256": "a953cd928543a333b9065e911b8b452757fce71944d4344cc8cb7c0e1b4e5e41",
+    "unmodified_parser_functions": [
+      "InstallError",
+      "_crc16",
+      "_dec",
+      "load_package",
+      "logical_image",
+      "package_damage",
+      "product_of"
+    ],
+    "parsed_identity": "FM-1_734",
+    "logical_bytes_identical": true,
+    "force_override": false,
+    "corruption_rejected": true,
+    "hardware_access": false,
+    "upstream_backend_loaded": false,
+    "scope": "Reviewed parser functions only; no imported upstream top-level or MIDI code and no live installer qualification."
+  }
+}

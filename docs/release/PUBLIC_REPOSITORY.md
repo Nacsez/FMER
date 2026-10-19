@@ -22,7 +22,8 @@ the distribution gates in RELEASE_READINESS.md are resolved.
 Included: implementation, portable core, target adapter/loader, host UI, build and
 test tools, original default recipes, offline Help and its editable figure sources,
 release documentation, notices and the incorporated Felucca platform subset with
-its pinned metadata. Compiler/runtime binaries are separate build prerequisites.
+its pinned metadata. Compiler/normal headers are separate build prerequisites; the selected runtime
+sources and public configuration-data recipe are now included.
 
 Excluded: `.git` history, research corpus, private logs and AppData, device dumps,
 saved user libraries, personal recordings, build directories, ZIPs, executables,
@@ -40,11 +41,11 @@ builder's pinned-path verifier expects that layout. This is the sole acquisition
 subtree exported. Do not copy the rest of `third_party/acquired` to make a build
 work; supply the compiler and headers through documented command-line paths.
 
-## Before the owner supplies the destination
+## Before updating the private draft
 
 1. Rebuild host tests from the extracted source and check target link from the
    same tree with separately acquired, pinned toolchain inputs.
-2. Retain the approved splash source/notice and resolve linked-runtime distribution obligations.
+2. Retain the approved splash source/notice and retain the734-r2 source-runtime and public-resource notices.
 3. Review the source manifest and archive contents for private data.
 4. Match firmware, Companion source, runtime notices and release hashes.
 5. Record a local annotated milestone tag without changing wire/build identity.

@@ -32,3 +32,9 @@ Use isolated libraries in tests. Record exact build inputs, outcomes, failures
 and skips. Host tests do not qualify audio, electrical behavior or a physical
 transport. Unknown hardware layouts remain blocked. Protect the boot/identity/
 calibration regions and saved musical data in every installer modification.
+
+734-r2 target builds default to the included licensed source runtime. Keep its
+per-file provenance and notices, and the public configuration-data provenance.
+The compiler is external; do not link or distribute unreviewed vendor archives.
+Do not promote vendor-reference builds or weaken installer preservation guards.
+Read docs/release/RUNTIME_REVIEW_734.md.

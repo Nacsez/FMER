@@ -24,6 +24,8 @@ endif()
 
 include(CTest)
 if(BUILD_TESTING)
+    enable_language(C)
+    add_subdirectory(tests/runtime)
     add_executable(fx_audit tools/fx_audit.cpp)
     target_link_libraries(fx_audit PRIVATE fmer_core)
     find_package(Python3 3.10 REQUIRED COMPONENTS Interpreter)

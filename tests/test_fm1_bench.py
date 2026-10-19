@@ -73,7 +73,7 @@ class BenchDiagnostics(unittest.TestCase):
         extra="1 0 2 2200 30 5 200 512 3 4 2 0 120 1450 1500 20 500 0 4 4 4 1 20 1400 2900 2905"
         frame=QUERY[:6]+b"\x02"+(base+" "+extra).encode()+b"\xF7"
         noise=frame.replace(b"1 0 2 2200",b"1 0 4 2200")
-        for identity in ("FM-1_726","FM-1_727","FM-1_728","FM-1_729","FM-1_730"):
+        for identity in ("FM-1_726","FM-1_727","FM-1_728","FM-1_729","FM-1_730","FM-1_731","FM-1_732","FM-1_733","FM-1_734"):
             self.assertEqual(parse_diagnostics(noise,identity=identity)["va_wave"],4)
         with self.assertRaises(ValueError):parse_diagnostics(noise,identity="FM-1_725")
         data=parse_diagnostics(frame)

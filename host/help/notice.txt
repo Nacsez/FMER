@@ -39,16 +39,32 @@ licenses. Portable releases include notices/Python-LICENSE.txt and runtime
 provenance. Microsoft/LLVM/JieLi components retain their respective terms;
 GPL licensing of FMER does not relicense external tools or libraries.
 
+Source-built C/math/compiler runtime (734-r2)
+Newlib2.2.0 selected sources: Red Hat, Regents of the University of California,
+Sun Microsystems and other per-file notices retained in
+third_party/runtime/newlib/COPYING.NEWLIB and each source file.
+LLVM compiler-rt4.0.1: MIT option of the legacy MIT/UIUC dual license;
+third_party/runtime/compiler-rt/LICENSE.TXT and CREDITS.TXT retained.
+Source files are unmodified; FMER selects a minimal subset and build flags.
+third_party/runtime/PROVENANCE.json records the exact source/file hashes.
+The pi32v2 compiler remains external; its prebuilt runtime archives are not linked.
+
 Original default patches are FMER recipes, not a redistributed vendor sound
 bank. Imported patches, stock firmware and private unit dumps have separate
 rights. The research corpus is preserved under its original rights notice.
 
-Official M-VAVE resource research (not bundled or linked)
+Official M-VAVE configuration resources and firmware research
 https://github.com/m-vave/fm1_open
 Reviewed commit: b178ac43c25f010c60a878056fb5331fe693fd62.
 THIRD_PARTY.md grants Apache-2.0 for the exact public sdk/firmware/FM-1_015.fwsc
 resource. FMER's recovery-layout admission is separate from those rights; this
-build does not distribute that image or the distinct open V13 firmware.
+build does not distribute that complete image or the distinct open V13 firmware.
+734-r2 includes only its unmodified383-byte configuration and2,873-byte EQ data
+as editable hexadecimal JSON, relocated into FMER's supported layout. The JSON
+representation and generated layout are FMER modifications; original data bytes
+are unchanged. M-VAVE and identified JieLi configuration-resource attribution,
+the complete publisher notices and Apache-2.0 are retained under
+third_party/fm1_resources and in the portable notices directory.
 See evidence/community-20261018.json and its linked research report. This finding
 does not grant rights over a private unit dump or an unrelated sound bank.
 

@@ -80,9 +80,10 @@ def stage(out,companion,source,rehearsal):
     for p in (R/'docs/release/media').glob('*.pdf'):shutil.copy2(p,out/p.name)
     press_pack(out)
     files={p.name:dict(sha256=sha(p),bytes=p.stat().st_size) for p in sorted(out.iterdir()) if p.is_file()}
-    dump(out/'release-manifest.json',dict(firmware=734,tag='build-734',repository='Nacsez/FMER',draft=True,
-        public_distribution_cleared=False,source_manifest_sha256=hashlib.sha256(json.dumps(manifest,sort_keys=True).encode()).hexdigest(),
-        unchanged_firmware_package_sha256=record['package_sha256'],deployment_rehearsal_sha256=sha(rehearsal),
+    dump(out/'release-manifest.json',dict(firmware=734,tag='build-734-r2',repository='Nacsez/FMER',draft=True,
+        publication_authorized=False,runtime_license_basis='Included Newlib/LLVM source and notices; external compiler; see RUNTIME_REVIEW_734.md',
+        source_manifest_sha256=hashlib.sha256(json.dumps(manifest,sort_keys=True).encode()).hexdigest(),
+        firmware_package_sha256=record['package_sha256'],deployment_rehearsal_sha256=sha(rehearsal),
         files=files,limitations='See INSTALLATION.md and docs/release/RELEASE_READINESS.md; private draft only.'))
     (out/'SHA256SUMS.txt').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in sorted(out.iterdir()) if p.is_file()),encoding='ascii')
     print(json.dumps(dict(output=str(out),assets=len(files)+2,firmware=record['package_sha256'],network_access=False)))

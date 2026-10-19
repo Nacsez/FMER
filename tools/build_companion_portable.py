@@ -37,10 +37,11 @@ def defaults(out,executable):
 
 def source_archive(out):
     paths=[]
-    for name in ('core','host','tools','tests','ui','hal','firmware/fm1','third_party/msfa','packaging','docs/help','docs/release'):
+    for name in ('core','host','tools','tests','ui','hal','firmware/fm1','third_party/msfa','third_party/runtime','third_party/fm1_resources','packaging','docs/help','docs/release'):
         paths += [p for p in (ROOT/name).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix.lower() in ('.c','.cc','.cpp','.h','.hpp','.s','.ld','.inc','.in','.py','.html','.htm','.css','.js','.json','.cmake','.patch','.cs','.md','.txt') and not p.name.endswith('QUALIFICATION.json') and 'qualifications' not in p.parts]
     paths += [ROOT/name for name in ('CMakeLists.txt','LICENSE','LICENSING.md','NOTICE','CONTRIBUTING.md','DEPENDENCIES.md','docs/SOURCE_BUILD.md','docs/DESIGN.md','docs/COMPANION_PRODUCT.md','docs/COMPANION_RELEASE_733.md','evidence/target-toolchain.json','evidence/msfa-source.json','evidence/python-portable-runtime.json')]
     paths += [ROOT/name for name in ('docs/research/2026-10-18-community-interoperability.md','evidence/community-20261018.json')]
+    paths += [ROOT/'third_party/runtime/newlib/COPYING.NEWLIB']
     paths += [ROOT/'packaging/PUBLIC.gitignore',ROOT/'packaging/PUBLIC.gitattributes']
     # Explicit owner GPL-3.0-only grant, 2026-10-19; see docs/release/ARTWORK.md.
     # Include the original raster source, not only its generated firmware header.
@@ -93,6 +94,13 @@ def build(out):
     shutil.copy2(ROOT/'evidence/python-portable-runtime.json',notices/'Python-runtime-provenance.json')
     shutil.copy2(ROOT/'third_party/msfa/COPYING',notices/'MSFA-Apache-2.0.txt')
     shutil.copy2(ROOT/'third_party/msfa/README.md',notices/'MSFA-provenance.md')
+    shutil.copy2(ROOT/'third_party/runtime/newlib/COPYING.NEWLIB',notices/'Newlib-LICENSE.txt')
+    shutil.copy2(ROOT/'third_party/runtime/compiler-rt/LICENSE.TXT',notices/'LLVM-runtime-LICENSE.txt')
+    shutil.copy2(ROOT/'third_party/runtime/compiler-rt/CREDITS.TXT',notices/'LLVM-runtime-CREDITS.txt')
+    shutil.copy2(ROOT/'third_party/runtime/PROVENANCE.json',notices/'Firmware-runtime-provenance.json')
+    shutil.copy2(ROOT/'third_party/fm1_resources/UPSTREAM-NOTICES.md',notices/'Configuration-UPSTREAM-NOTICES.md')
+    shutil.copy2(ROOT/'third_party/fm1_resources/LICENSE-APACHE-2.0.txt',notices/'Configuration-Apache-2.0.txt')
+    shutil.copy2(ROOT/'third_party/fm1_resources/README.md',notices/'Configuration-provenance.md')
     shutil.copy2(ROOT/'firmware/fm1/loader/LICENSE',notices/'GPL-3.0.txt')
     for name in ('LICENSE','LICENSING.md','NOTICE'):
         shutil.copy2(ROOT/name,out/name)

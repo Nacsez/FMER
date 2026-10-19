@@ -1,4 +1,47 @@
-# 734 release preparation verification
+# 734-r2 runtime release verification
+
+19 October 2026. This revision replaces the vendor runtime archives and private
+packaging reference. The musical application and updater write policy are unchanged.
+The current firmware package is `fmer734-compatible-r2.fwsc`, SHA256
+`a953cd928543a333b9065e911b8b452757fce71944d4344cc8cb7c0e1b4e5e41`.
+See [the runtime review](RUNTIME_REVIEW_734.md) and
+[sanitized evidence](runtime-verification.json) for scope, source pins and limits.
+
+| Check | Result |
+|---|---|
+| Complete workspace regression | 1,075 Python tests: 1,058 pass, 17 explicitly skipped; all 34 compiled/host suites pass |
+| Runtime behavior | 1,172,204 checks pass on the host; target code generation is tested separately |
+| Extracted source | Fresh source tree builds; all 34 CTest suites pass |
+| Extracted target | Default source-runtime build succeeds with external pinned compiler/headers; entire application payload matches the tested build |
+| Extracted installer | Produces the exact current FWSC hash, without private ROM or vendor runtime archives; all 42 independent loader checks pass |
+| Live Amethyst regression | Before/after 64 preset cases and 35 chord/effect cases pass; no new audio overruns, MIDI overflow, rejected messages, crash, load shed or LCD timeout |
+| USB audio and MIDI | 100-second PCM capture before/after; eight MIDI cases pass; no analog listening or long endurance claim |
+| Saved data | All 128 instrument slots, 16 project destinations and default FX order compare equal; working state and MIDI settings restored |
+| Navigation | Five mode/navigation/route-save cases pass |
+| External installer format | Pinned SLOOP parser accepts the exact r2 package without force, matches logical bytes/identity and rejects corruption; no external installer wrote hardware |
+
+The exported ELF hash is
+`4551464a20a336770ac81b5f56a291e5c3139891b60654e9cb7baa926f10e5b9`;
+the live-tested ELF hash is
+`263c5c2fa278a4d117d3d2985c91a5db89ffc8a1ac064770d6c31386df730f58`.
+Non-payload ELF metadata differs. Both produce the same 214,720-byte application,
+SHA256 `7fe7aeff7469756a2af456f317d13d85324d4860c60825cee8ecd812f06de647`,
+and the same final FWSC bytes. This is a development-computer reconstruction,
+not an independent clean-machine or cross-compiler reproducibility claim.
+
+The exact Companion ZIP must pass the ten launch/lifecycle/content checks before
+release staging accepts it. The accompanying release manifest records that ZIP
+and rehearsal evidence by hash. Checks cover extraction with spaces, isolated user
+data, bundled runtime, Help, firmware inspection, notices/source, default-library
+rendering, quit/relaunch, idle-server replacement and last-tab shutdown. No device
+is opened by that rehearsal. This separates package verification from the live
+Amethyst installation above. Citrine remains the prior runtime reference.
+
+The public repository stays private and the release stays draft. Source provenance
+does not expand installation compatibility or waive remaining performance,
+power/endurance, listening and recovery-matrix qualifications.
+
+## Earlier 734-r1 documentation/package rehearsal (historical)
 
 19 October2026. No device was opened or flashed during this documentation and
 packaging pass. Existing firmware payload remains

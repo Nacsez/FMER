@@ -1,0 +1,919 @@
+{
+  "schema": 1,
+  "scope": "Source-built runtime candidate; no vendor binary archives redistributed",
+  "sources": [
+    {
+      "url": "https://sourceware.org/pub/newlib/newlib-2.2.0.tar.gz",
+      "bytes": 16521910,
+      "sha256": "f8add263b0737591aff451b12a00c262c2efac4fa87d741fa1c318fc3bb335be",
+      "authentication": "HTTPS; hash pinned on acquisition; detached signature not verified"
+    },
+    {
+      "url": "https://releases.llvm.org/4.0.1/compiler-rt-4.0.1.src.tar.xz",
+      "bytes": 1434100,
+      "sha256": "a3c87794334887b93b7a766c507244a7cdcce1d48b2e9249fc9a94f2c3beb440",
+      "authentication": "HTTPS; hash pinned on acquisition; detached signature not verified"
+    }
+  ],
+  "units": [
+    {
+      "archive": "libc.a",
+      "member": "lib_a-memcmp.o",
+      "source": "newlib/newlib/libc/string/memcmp.c",
+      "optimization": "-O2",
+      "reference_allocated_bytes_equal": false,
+      "license": "Newlib permissive terms; see COPYING.NEWLIB and file notices"
+    },
+    {
+      "archive": "libc.a",
+      "member": "lib_a-memcpy.o",
+      "source": "newlib/newlib/libc/string/memcpy.c",
+      "optimization": "-O2",
+      "reference_allocated_bytes_equal": false,
+      "license": "Newlib permissive terms; see COPYING.NEWLIB and file notices"
+    },
+    {
+      "archive": "libc.a",
+      "member": "lib_a-memmove.o",
+      "source": "newlib/newlib/libc/string/memmove.c",
+      "optimization": "-O2",
+      "reference_allocated_bytes_equal": false,
+      "license": "Newlib permissive terms; see COPYING.NEWLIB and file notices",
+      "reason": "Vendor memcpy object also supplies memmove; upstream uses a separate translation unit."
+    },
+    {
+      "archive": "libc.a",
+      "member": "lib_a-memset.o",
+      "source": "newlib/newlib/libc/string/memset.c",
+      "optimization": "-O2",
+      "reference_allocated_bytes_equal": false,
+      "license": "Newlib permissive terms; see COPYING.NEWLIB and file notices"
+    },
+    {
+      "archive": "libc.a",
+      "member": "lib_a-sf_fpclassify.o",
+      "source": "newlib/newlib/libm/common/sf_fpclassify.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "Newlib permissive terms; see COPYING.NEWLIB and file notices"
+    },
+    {
+      "archive": "libc.a",
+      "member": "lib_a-strlen.o",
+      "source": "newlib/newlib/libc/string/strlen.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "Newlib permissive terms; see COPYING.NEWLIB and file notices"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "adddf3.o",
+      "source": "compiler-rt/lib/builtins/adddf3.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": false,
+      "license": "MIT"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "comparedf2.o",
+      "source": "compiler-rt/lib/builtins/comparedf2.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "MIT"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "divdf3.o",
+      "source": "compiler-rt/lib/builtins/divdf3.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": false,
+      "license": "MIT"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "fixdfsi.o",
+      "source": "compiler-rt/lib/builtins/fixdfsi.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "MIT"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "floatsidf.o",
+      "source": "compiler-rt/lib/builtins/floatsidf.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "MIT"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "muldf3.o",
+      "source": "compiler-rt/lib/builtins/muldf3.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": false,
+      "license": "MIT"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "subdf3.o",
+      "source": "compiler-rt/lib/builtins/subdf3.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "MIT"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "udivdi3.o",
+      "source": "compiler-rt/lib/builtins/udivdi3.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "MIT"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "udivmoddi4.o",
+      "source": "compiler-rt/lib/builtins/udivmoddi4.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "MIT"
+    },
+    {
+      "archive": "libcompiler-rt.a",
+      "member": "umoddi3.o",
+      "source": "compiler-rt/lib/builtins/umoddi3.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "MIT"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-e_log.o",
+      "source": "newlib/newlib/libm/math/e_log.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-e_pow.o",
+      "source": "newlib/newlib/libm/math/e_pow.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-e_rem_pio2.o",
+      "source": "newlib/newlib/libm/math/e_rem_pio2.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": false,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-e_sqrt.o",
+      "source": "newlib/newlib/libm/math/e_sqrt.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-ef_log.o",
+      "source": "newlib/newlib/libm/math/ef_log.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-ef_pow.o",
+      "source": "newlib/newlib/libm/math/ef_pow.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-ef_rem_pio2.o",
+      "source": "newlib/newlib/libm/math/ef_rem_pio2.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": false,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-ef_sqrt.o",
+      "source": "newlib/newlib/libm/math/ef_sqrt.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-k_cos.o",
+      "source": "newlib/newlib/libm/math/k_cos.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-k_rem_pio2.o",
+      "source": "newlib/newlib/libm/math/k_rem_pio2.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-k_sin.o",
+      "source": "newlib/newlib/libm/math/k_sin.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-kf_rem_pio2.o",
+      "source": "newlib/newlib/libm/math/kf_rem_pio2.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-kf_tan.o",
+      "source": "newlib/newlib/libm/math/kf_tan.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-s_copysign.o",
+      "source": "newlib/newlib/libm/common/s_copysign.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-s_cos.o",
+      "source": "newlib/newlib/libm/math/s_cos.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-s_fabs.o",
+      "source": "newlib/newlib/libm/math/s_fabs.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-s_floor.o",
+      "source": "newlib/newlib/libm/math/s_floor.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-s_nan.o",
+      "source": "newlib/newlib/libm/common/s_nan.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "Newlib permissive terms; see COPYING.NEWLIB and file notices"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-s_scalbn.o",
+      "source": "newlib/newlib/libm/common/s_scalbn.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-s_sin.o",
+      "source": "newlib/newlib/libm/math/s_sin.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-sf_copysign.o",
+      "source": "newlib/newlib/libm/common/sf_copysign.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-sf_fabs.o",
+      "source": "newlib/newlib/libm/math/sf_fabs.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-sf_floor.o",
+      "source": "newlib/newlib/libm/math/sf_floor.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-sf_log2.o",
+      "source": "newlib/newlib/libm/common/sf_log2.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-sf_nan.o",
+      "source": "newlib/newlib/libm/common/sf_nan.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "Newlib permissive terms; see COPYING.NEWLIB and file notices"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-sf_scalbn.o",
+      "source": "newlib/newlib/libm/common/sf_scalbn.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-sf_tan.o",
+      "source": "newlib/newlib/libm/math/sf_tan.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-w_exp2.o",
+      "source": "newlib/newlib/libm/math/w_exp2.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-w_log.o",
+      "source": "newlib/newlib/libm/math/w_log.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-w_pow.o",
+      "source": "newlib/newlib/libm/math/w_pow.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-wf_exp2.o",
+      "source": "newlib/newlib/libm/math/wf_exp2.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-wf_log.o",
+      "source": "newlib/newlib/libm/math/wf_log.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    },
+    {
+      "archive": "libm.a",
+      "member": "lib_a-wf_pow.o",
+      "source": "newlib/newlib/libm/math/wf_pow.c",
+      "optimization": "-Oz",
+      "reference_allocated_bytes_equal": true,
+      "license": "SunPro"
+    }
+  ],
+  "files": [
+    {
+      "path": "newlib/newlib/libc/string/memcmp.c",
+      "source_path": "newlib/libc/string/memcmp.c",
+      "sha256": "d4be9ab93bfaa7676e2fead505c63f6649b217015006934325be157ed5c44395",
+      "bytes": 2436,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libc/string/memcpy.c",
+      "source_path": "newlib/libc/string/memcpy.c",
+      "sha256": "9b715959087f084e9b310de2d80173613247fe460f013861bd25daec3ade771a",
+      "bytes": 2746,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libc/string/memset.c",
+      "source_path": "newlib/libc/string/memset.c",
+      "sha256": "7b693819210db1ef4cc6ac2bd394b9a1844697e5a06c0f4654a7348daf3f0bca",
+      "bytes": 2236,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libc/string/local.h",
+      "source_path": "newlib/libc/string/local.h",
+      "sha256": "84dc9f335aba27c3d9792777995b36bea7acedd2bd41f496f5434e4300ef60e9",
+      "bytes": 691,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libc/ctype/local.h",
+      "source_path": "newlib/libc/ctype/local.h",
+      "sha256": "ed428983e6dbaa2808456e4c30cee253245af8844d68c1f04ca64ba75ff0e25a",
+      "bytes": 688,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/common/sf_fpclassify.c",
+      "source_path": "newlib/libm/common/sf_fpclassify.c",
+      "sha256": "3eb898b01a65b9d87b82cd9559eec2c87197a85ac05aa7edc49f9ac85b2a16b0",
+      "bytes": 713,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/common/fdlibm.h",
+      "source_path": "newlib/libm/common/fdlibm.h",
+      "sha256": "1bba6249d4b2503f3c4f9dd75dc17520a75a070c19f44e1c3d6461a198ea2b22",
+      "bytes": 11929,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libc/string/strlen.c",
+      "source_path": "newlib/libc/string/strlen.c",
+      "sha256": "2b4a1dddad6eadacbfae1f01275927e1a69972075a6e8d18e59a8fd538955dc2",
+      "bytes": 1873,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/adddf3.c",
+      "source_path": "lib/builtins/adddf3.c",
+      "sha256": "5ced65bf714b0837066f8e2b97d2fb7b12528ffc17c4966eee2146276d0bfc20",
+      "bytes": 740,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/fp_add_impl.inc",
+      "source_path": "lib/builtins/fp_add_impl.inc",
+      "sha256": "ab027959934d5079e56b7a9e7df2216eedd8f75086baec54ea2238dcd245f98a",
+      "bytes": 5392,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/fp_lib.h",
+      "source_path": "lib/builtins/fp_lib.h",
+      "sha256": "7f708358cb3dc1509e13436503e4e72cd73617482b3b1ff465aece6349edcef5",
+      "bytes": 9152,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/int_lib.h",
+      "source_path": "lib/builtins/int_lib.h",
+      "sha256": "6f21dbe4a9aa1641199f1fc6cad2124cfa186428dd918a728751aeb2a724e1a4",
+      "bytes": 3857,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/int_types.h",
+      "source_path": "lib/builtins/int_types.h",
+      "sha256": "a545fca142d7a7f101333f68cd88f121cdbc300204a70b421ddcdb556b323b9d",
+      "bytes": 3191,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/int_endianness.h",
+      "source_path": "lib/builtins/int_endianness.h",
+      "sha256": "3214cb49b829d43fb71cec794d995f66cf57d45ff034f08df565aff325094c77",
+      "bytes": 2915,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/int_util.h",
+      "source_path": "lib/builtins/int_util.h",
+      "sha256": "6afb257f6b3edb7a2d25b1affa4d4dacd67258017f6fdd726b96d148c6405081",
+      "bytes": 1346,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/comparedf2.c",
+      "source_path": "lib/builtins/comparedf2.c",
+      "sha256": "f2ed52644b6ee481cd756a952c3fc5347a8bef6cf0a7e6dc6b4fc47984892158",
+      "bytes": 4196,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/divdf3.c",
+      "source_path": "lib/builtins/divdf3.c",
+      "sha256": "fe72fd0aef091fa8309979f9221f98e1dc72a47c5be212412925d0585a3d03be",
+      "bytes": 7653,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/fixdfsi.c",
+      "source_path": "lib/builtins/fixdfsi.c",
+      "sha256": "78eeea8fcc1797bea2b361744f07a16cc114178079398501d5637246a680e70c",
+      "bytes": 588,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/fp_fixint_impl.inc",
+      "source_path": "lib/builtins/fp_fixint_impl.inc",
+      "sha256": "588900ec9c6580f215d13be7b42bf1bd2d9a8541b040c7fb710c9db61c3eac24",
+      "bytes": 1585,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/floatsidf.c",
+      "source_path": "lib/builtins/floatsidf.c",
+      "sha256": "100fbc2e90ae133a71454034de571366633db0bc226c218ad09538851094a378",
+      "bytes": 1656,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/muldf3.c",
+      "source_path": "lib/builtins/muldf3.c",
+      "sha256": "f8d4db7b686c4febc119c10bd0c64b683e2fb5576bfdd7e419e66362b5ae237e",
+      "bytes": 741,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/fp_mul_impl.inc",
+      "source_path": "lib/builtins/fp_mul_impl.inc",
+      "sha256": "cf7205f177de4c05a902b218316a8b39e53bf6090d5a3bba8a1fc21e05d1dddb",
+      "bytes": 4807,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/subdf3.c",
+      "source_path": "lib/builtins/subdf3.c",
+      "sha256": "4ca235db21b8c7541b64e06e0ffe0ca1bfb762faac9e0bdfd9603d045d78130f",
+      "bytes": 804,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/udivdi3.c",
+      "source_path": "lib/builtins/udivdi3.c",
+      "sha256": "3ddfb205852b02fa4e7c5e372337a2cc9658386dea211f7b9f59e06c53665a9f",
+      "bytes": 642,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/udivmoddi4.c",
+      "source_path": "lib/builtins/udivmoddi4.c",
+      "sha256": "1d27a31f5e3c4cd1851daffed0791738892b2182322c04b7d94425ee0b0291ba",
+      "bytes": 6645,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/lib/builtins/umoddi3.c",
+      "source_path": "lib/builtins/umoddi3.c",
+      "sha256": "47f847579af17498ec124f42749d90a544adb9955d1ac82fc40c02f47e35d461",
+      "bytes": 664,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/e_log.c",
+      "source_path": "newlib/libm/math/e_log.c",
+      "sha256": "623b52cc9cf5e9512b00ff0451c2b0c8422b4156c082795b5307ef99ea4cb347",
+      "bytes": 4567,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/e_pow.c",
+      "source_path": "newlib/libm/math/e_pow.c",
+      "sha256": "062fc63dc367ab2df9fd7f0c1071f613fce29cb2faab854babfdd39f5e523bf1",
+      "bytes": 10127,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/e_rem_pio2.c",
+      "source_path": "newlib/libm/math/e_rem_pio2.c",
+      "sha256": "5e80de2aa15d9e85dfc2e5a92271f14ed39213bf9c3954494994f2e0f9c40858",
+      "bytes": 5612,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/e_sqrt.c",
+      "source_path": "newlib/libm/math/e_sqrt.c",
+      "sha256": "6d1c65be1de7b080310a7d3bce08f7f66da3acadbaa8053d518b43024adc5d7c",
+      "bytes": 14510,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/ef_log.c",
+      "source_path": "newlib/libm/math/ef_log.c",
+      "sha256": "158e7e60f5c8cd0a1105712c9aaf54c706e0e634ac9a48d57e14c6ed4ec70c30",
+      "bytes": 2518,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/ef_pow.c",
+      "source_path": "newlib/libm/math/ef_pow.c",
+      "sha256": "251150c064bf01ee0f2dd19f3e79ac13c87b745f7758f99efd405e17cab96be1",
+      "bytes": 7603,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/ef_rem_pio2.c",
+      "source_path": "newlib/libm/math/ef_rem_pio2.c",
+      "sha256": "64349d09eacaf87beb002f9b12d86153737c020a13762794b639ae3faca2f6dc",
+      "bytes": 5974,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/ef_sqrt.c",
+      "source_path": "newlib/libm/math/ef_sqrt.c",
+      "sha256": "7b2cbf7ac9b50853f10a29a9ccc43a8d0d41b91b590c3a7cf751b19fa6c96be1",
+      "bytes": 2014,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/k_cos.c",
+      "source_path": "newlib/libm/math/k_cos.c",
+      "sha256": "f0e70a8ac9e9fffc0783cba05104fa90ab676450da737cf0c0e2fdcaa4484bfd",
+      "bytes": 3079,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/k_rem_pio2.c",
+      "source_path": "newlib/libm/math/k_rem_pio2.c",
+      "sha256": "1123eaff975595bf56d5e1ae3c218a6c71dc8709bf86c68bee207ac53221fa16",
+      "bytes": 8607,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/k_sin.c",
+      "source_path": "newlib/libm/math/k_sin.c",
+      "sha256": "fb43493e9b0b882fb9dd9715d44e0e00c25c1724a18f40a9c9fc114a63e32130",
+      "bytes": 2482,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/kf_rem_pio2.c",
+      "source_path": "newlib/libm/math/kf_rem_pio2.c",
+      "sha256": "ca0521c7d2a745c332832eb8747780b3c87908896ebc4f0c26cf2ef572f8cf53",
+      "bytes": 5207,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/kf_tan.c",
+      "source_path": "newlib/libm/math/kf_tan.c",
+      "sha256": "42f649485b5a0edf9103d2ab42ebdc75af86a843c8a62dac228ba7d56230ae36",
+      "bytes": 2667,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/common/s_copysign.c",
+      "source_path": "newlib/libm/common/s_copysign.c",
+      "sha256": "dd7e69e31c64d9dc0a7c69d7e9f20019b133291b38f15724c72284d6285bf8d2",
+      "bytes": 1813,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/s_cos.c",
+      "source_path": "newlib/libm/math/s_cos.c",
+      "sha256": "af89424f187be4d0991474f6331ae1fd23281a7bc7be5895f3fbaf54a4d07d20",
+      "bytes": 2046,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/s_fabs.c",
+      "source_path": "newlib/libm/math/s_fabs.c",
+      "sha256": "9123aaa7d0c3b538db9f37d2cde1156d56013d1394f6a798fa5a6c5363e31b3a",
+      "bytes": 1361,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/s_floor.c",
+      "source_path": "newlib/libm/math/s_floor.c",
+      "sha256": "bfcaab777d6cde5ebb3402b56ae57f8f17155cb6ec7a81793dfe67290616ddda",
+      "bytes": 2775,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/common/s_nan.c",
+      "source_path": "newlib/libm/common/s_nan.c",
+      "sha256": "32817856c652e2d2c4396c09a6336b7062e7dbcccf663a05b5cc4e2648db0802",
+      "bytes": 733,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/common/s_scalbn.c",
+      "source_path": "newlib/libm/common/s_scalbn.c",
+      "sha256": "fd58a65d2700f1e55e48a752a133aa2e02605ed715be20d7a20f643cbc28f780",
+      "bytes": 2859,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/s_sin.c",
+      "source_path": "newlib/libm/math/s_sin.c",
+      "sha256": "cdaef8e0eaddbc6b7b94ec7cfddf43f2fa582394e8ea0a6641407ab7b73986f8",
+      "bytes": 2967,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/common/sf_copysign.c",
+      "source_path": "newlib/libm/common/sf_copysign.c",
+      "sha256": "29f9fac19328beb4eebe6f2cd41bd8b6a30b8fca589210cdd49e1a853cdbcc35",
+      "bytes": 1123,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/sf_fabs.c",
+      "source_path": "newlib/libm/math/sf_fabs.c",
+      "sha256": "7714898070107896198789fbf8a64aae3092d5f0e03af50facb23eb5951b6dff",
+      "bytes": 938,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/sf_floor.c",
+      "source_path": "newlib/libm/math/sf_floor.c",
+      "sha256": "79719c79df40f334772f6b06b08931fb0eca30cd2654415e8ddcd2a92e39ba0d",
+      "bytes": 1721,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/common/sf_log2.c",
+      "source_path": "newlib/libm/common/sf_log2.c",
+      "sha256": "cfb4210ae0aa68d8d138f8d0c3b450ca63200d87281fb66040f9e93a8cc022ea",
+      "bytes": 946,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/common/sf_nan.c",
+      "source_path": "newlib/libm/common/sf_nan.c",
+      "sha256": "b36cd6026a14baa51e4cb063153f9ba21ea64819d0b437937fef41724c6d9b04",
+      "bytes": 365,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/common/sf_scalbn.c",
+      "source_path": "newlib/libm/common/sf_scalbn.c",
+      "sha256": "33f7c9d2a93c7335192b940798c2510db666fb9026f2bab20114fb960673cdcb",
+      "bytes": 2125,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/sf_tan.c",
+      "source_path": "newlib/libm/math/sf_tan.c",
+      "sha256": "b58a95baca2abea8a7facaeacb668464aabc7931b702663ec463d60517010444",
+      "bytes": 1212,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/w_exp2.c",
+      "source_path": "newlib/libm/math/w_exp2.c",
+      "sha256": "ebc97db71c2b7fa337b5cdfc0d0fe0a2390eb90583ab226ffeeb9fa1e4bd39da",
+      "bytes": 1404,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/w_log.c",
+      "source_path": "newlib/libm/math/w_log.c",
+      "sha256": "3864f8484e11299d1d67d565a9b6ecc480f2651b3a9d023053afd75bc7e0de64",
+      "bytes": 2600,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/w_pow.c",
+      "source_path": "newlib/libm/math/w_pow.c",
+      "sha256": "9343c5d5e3d5d74ae3ce129737585891a153728bdde33eda20e68ecd52d41a6c",
+      "bytes": 4988,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/wf_exp2.c",
+      "source_path": "newlib/libm/math/wf_exp2.c",
+      "sha256": "45bbc875188089021417d7e0127ca2ada1d36137e3ea1ed09abeb551d5ba7d48",
+      "bytes": 926,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/wf_log.c",
+      "source_path": "newlib/libm/math/wf_log.c",
+      "sha256": "01e56e1d14718b5b47956a58607c2dbccca366700c156cb22dd85ef619f48a82",
+      "bytes": 1825,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libm/math/wf_pow.c",
+      "source_path": "newlib/libm/math/wf_pow.c",
+      "sha256": "aa75e8573d51686c0157d37f63442581cce9582d0d3ebf8a40555e59b03d54f2",
+      "bytes": 4279,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "newlib/COPYING.NEWLIB",
+      "source_path": "COPYING.NEWLIB",
+      "sha256": "67d85383229c8950fa7bebd1adb74f1382f32d38acc36488055c546ce218e091",
+      "bytes": 46331,
+      "component": "newlib",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/LICENSE.TXT",
+      "source_path": "LICENSE.TXT",
+      "sha256": "415ec2b15961f8b34859a50af386663f552bb62b9fffd69e8eb676c792ea022e",
+      "bytes": 4289,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "compiler-rt/CREDITS.TXT",
+      "source_path": "CREDITS.TXT",
+      "sha256": "a9901f47a089da41e4690682d00ce4cedaa2baf41fedbe79beee366d43ac2461",
+      "bytes": 1049,
+      "component": "compiler-rt",
+      "modified": false
+    },
+    {
+      "path": "newlib/newlib/libc/string/memmove.c",
+      "source_path": "newlib/libc/string/memmove.c",
+      "sha256": "b02a40d5622dfff6e705ae5e35285e8c68a8235386594ab21330883f11481421",
+      "bytes": 3409,
+      "component": "newlib",
+      "modified": false
+    }
+  ]
+}

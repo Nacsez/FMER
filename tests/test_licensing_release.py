@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 import build_companion_help as handbook
 import build_companion_portable as portable
 import build_fm1_candidate as target
+import source_runtime
 
 
 class SourceDistributionTests(unittest.TestCase):
@@ -39,6 +40,15 @@ class SourceDistributionTests(unittest.TestCase):
                 for path in target.local_source_files()+target.local_header_files():
                     name=path.relative_to(portable.ROOT).as_posix()
                     self.assertEqual(archive.read(name),path.read_bytes())
+                for entry in source_runtime.verify()['files']:
+                    name='third_party/runtime/'+entry['path']
+                    self.assertEqual(archive.read(name),(portable.ROOT/name).read_bytes())
+                for name in ('third_party/runtime/PROVENANCE.json',
+                             'third_party/fm1_resources/parameters.json',
+                             'third_party/fm1_resources/UPSTREAM-NOTICES.md',
+                             'third_party/fm1_resources/LICENSE-APACHE-2.0.txt',
+                             'tests/runtime/CMakeLists.txt'):
+                    self.assertEqual(archive.read(name),(portable.ROOT/name).read_bytes())
                 for folder in ('core','host','firmware/fm1'):
                     for path in (portable.ROOT/folder).rglob('CMakeLists.txt'):
                         name=path.relative_to(portable.ROOT).as_posix()

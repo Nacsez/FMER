@@ -1369,7 +1369,8 @@ def validate_package(raw: bytes, template=None) -> dict:
 
 def build_loader(output: Path, toolchain: Path, lock: dict, template=TEST01_TEMPLATE, *, stock_v15=False, portable=False) -> bytes:
     import target_probe
-    target_probe.verify_files(toolchain, lock["toolchain"]["files"])
+    # The freestanding loader links no runtime archive.
+    target_probe.verify_files(toolchain, [f for f in lock['toolchain']['files'] if not f['path'].endswith('.a')])
     source = ROOT / "firmware/fm1/loader"
     output.mkdir(parents=True, exist_ok=False)
     compiler = str(toolchain / "bin/clang.exe")

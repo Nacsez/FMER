@@ -76,8 +76,10 @@ an official FMER release. See [CONTRIBUTING.md](CONTRIBUTING.md).
    A file named "Corresponding Source" is not, by itself, a compliance finding.
    Resolve required source and installation-information obligations before
    publishing binaries; do not substitute an untested download promise.
-4. Complete the vendor compiler/runtime-library redistribution review.
-   Their provenance does not alone establish redistribution permission.
+4. 734-r2 builds its selected runtime from licensed Newlib/LLVM source and includes
+   source/notices. It links no vendor binary runtime archive. The compiler remains
+   an external prerequisite and is not redistributed. Preserve this boundary;
+   do not treat it as clearance for a different SDK or an older binary.
    The original FMER splash permission is recorded in the artwork source notice;
    it does not grant rights to unrelated third-party artwork.
    Stock resources require an explicit per-asset license and admission review.
@@ -88,6 +90,13 @@ GPL permits charging for copies; it does not impose a zero-price condition.
 Private modifications need not be posted publicly merely because they exist.
 Distribution of covered works carries the license's source and notice duties.
 FMER is provided without warranty to the extent permitted by law; see LICENSE.
+
+The identified linked-runtime gap is addressed by the source-built734-r2 route.
+Configuration/EQ data are sourced from the explicitly Apache-licensed public
+resource, with complete attribution and no private dump dependency. The original
+stock application and opaque device trailer are not bundled. Read the
+[options, exact boundaries and verification](docs/release/RUNTIME_REVIEW_734.md).
+This does not change the separate requirement for owner-authorized publication.
 
 Primary references: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html),
 [GNU license FAQ](https://www.gnu.org/licenses/gpl-faq.en.html), and

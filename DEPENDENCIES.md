@@ -1,3 +1,19 @@
+## 2026-10-19 ? Source-built runtime734-r2
+
+Newlib2.2.0 and LLVM compiler-rt4.0.1:49 unmodified source units plus local
+headers/notices, pinned in third_party/runtime/PROVENANCE.json. LLVM MIT option;
+Newlib per-file/default notices retained. No upstream build scripts ran. HTTPS
+archive hashes are verified; the retained LLVM signature was not verified.
+Additional llvm-ar executable pin is in tools/source_runtime.py. Vendor runtime
+archives are neither needed nor linked by the default build.
+
+Only383-byte configuration and2,873-byte EQ blocks from the already-pinned
+M-VAVE public OriginalV15 resource are included under its Apache-2.0 grant.
+Their decoded bytes match the qualified layout; the complete publisher notices
+and provenance accompany them in third_party/fm1_resources. No vendor engine,
+stock application, boot image or private dump is added.
+See docs/release/RUNTIME_REVIEW_734.md.
+
 ## 2026-10-19 — Original FMER splash license
 
 Owner-supplied FMER SPLASH.png is now explicitly GPL-3.0-only, including its

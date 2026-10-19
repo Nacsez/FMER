@@ -93,3 +93,7 @@ Original FMER code, Companion, default instruments and splash are **GPL-3.0-only
 Keep [LICENSE](LICENSE), [LICENSING.md](LICENSING.md), [NOTICE](NOTICE) and dependency
 notices. Felucca supplies board support, MSFA the FM foundation, and SLOOP the updater
 foundation. No private device dumps, stock banks or compiler binaries are included.
+
+734-r2 replaces vendor runtime archives with included Newlib/LLVM source while
+keeping the musical application unchanged. The public configuration-data recipe
+allows package rebuilds without a private unit dump. [Review and test scope](docs/release/RUNTIME_REVIEW_734.md).

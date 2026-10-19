@@ -43,7 +43,7 @@ def parse_diagnostics(frame: bytes, *, identity=None) -> dict:
         raise ValueError("Diagnostic value exceeds its contract")
     result = dict(zip(fields, numbers))
     if frame[6] == 2:
-        for key,low,high in (("engine",0,1),("algorithm",0,31),("va_wave",0,4 if identity in ("FM-1_726","FM-1_727","FM-1_728","FM-1_729","FM-1_730","FM-1_731") else 3),
+        for key,low,high in (("engine",0,1),("algorithm",0,31),("va_wave",0,4 if identity in ("FM-1_726","FM-1_727","FM-1_728","FM-1_729","FM-1_730","FM-1_731","FM-1_732","FM-1_733","FM-1_734") else 3),
                              ("cutoff_hz",20,20000),("delay_percent",0,100),
                              ("attack_ms",0,10000),("release_ms",0,10000),
                              ("gain_q10",0,1024),("octave_plus3",0,6),("voice_limit",1,12),

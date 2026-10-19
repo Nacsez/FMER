@@ -54,8 +54,8 @@ validation remains enabled. The builder stages and records FMER modifications
 to control input, USB and MIDI UART code; it does not alter the acquired copy.
 
 The required JieLi pi32v2 r3 toolchain and libc++ headers are pinned in
-`evidence/target-toolchain.json`. Compiler/library distributions are separate
-prerequisites with their own licenses; private acquisition directories and
+`evidence/target-toolchain.json`. The compiler and normal headers are separate
+prerequisites with their own licenses; source-built runtime inputs are included; private acquisition directories and
 device-specific dumps are not distributed. The firmware's original source,
 generated header inputs, linker script and packaging/loader scripts are
 included. Review `firmware/fm1/loader/PROVENANCE.json`, compatibility.h and write_policy.h before
@@ -66,7 +66,28 @@ Use the existing package/loader validation and preservation tests before any
 write. Runtime memory-layout and calibration checks remain required. Changing
 source does not justify bypassing those checks.
 
-## Release verification still required
+## Source runtime and public packaging (734-r2)
+
+Target builds now default to `--runtime source`. The included Newlib/LLVM subset
+is hash-checked and compiled locally; vendor libc/libm/compiler-rt archives are
+not required or linked. `--runtime vendor-reference` is only an explicit private
+comparison option. The additional llvm-ar tool pin is in tools/source_runtime.py.
+
+Build the independent loader tests from firmware/fm1/loader/tests using CMake.
+Then run `python tools/build_release_firmware.py --candidate <target-build>
+--out <new-package-directory> --loader-test <fmer_portable_loader_test executable>
+--stage-only --toolchain-root <pinned-compiler-directory>`. This creates an isolated package/catalog without replacing the
+bundled release. It uses the public configuration/EQ JSON and generated format
+metadata; no private ROM, vendor SDK payload or network download is needed.
+Source and notices are under third_party/runtime and third_party/fm1_resources.
+Keep stage-only packages separate until target and preservation tests pass.
+
+See [the734-r2 review](release/RUNTIME_REVIEW_734.md) for exact hashes, memory,
+numerical limits, target evidence and the external-compiler boundary.
+
+## Earlier734-r1 source rehearsal
+
+The following results describe the earlier vendor-runtime build, not734-r2.
 
 The 734 extracted-source rehearsal configured and rebuilt the host executable
 and codec tests in a fresh directory, rendered an audible chord, and passed
@@ -84,7 +105,8 @@ the extracted-tree target-source gap, not clean-machine/VM qualification or
 vendor-runtime terms. The initial sandbox compiler invocation was denied; the
 reviewed compile-only retry succeeded. Results are in the release test record.
 
-The734 licensing pass does not claim settled vendor-runtime terms.
+The earlier734-r1 licensing pass did not settle vendor-runtime terms.734-r2
+addresses that issue with the source-built replacement described above.
 Resolve all required corresponding-source and installation-information details
 before a public binary release. Record exact compiler, source and output hashes
 with the release. The owner licensed the original splash artwork and its editable
