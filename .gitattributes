@@ -1,0 +1,9 @@
+# Hash-pinned inputs and generated-help provenance must survive a checkout.
+# A deliberate future LF migration must regenerate those records together.
+* -text
+*.png binary
+# Pinned upstream inputs are verified byte-for-byte.
+third_party/msfa/** -text
+third_party/acquired/fm1-target-review/community/felucca/** -text
+# Unlike the private workspace, this tree's evidence contains ONLY build pins.
+# Keep those files in source archives.

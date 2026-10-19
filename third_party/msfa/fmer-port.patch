@@ -1,0 +1,386 @@
+--- a/src/dx7note.cc
++++ b/src/dx7note.cc
+@@ -74,7 +74,8 @@
+ int ScaleVelocity(int velocity, int sensitivity) {
+   int clamped_vel = max(0, min(127, velocity));
+   int vel_value = velocity_data[clamped_vel >> 1] - 239;
+-  int scaled_vel = ((sensitivity * vel_value + 7) >> 3) << 4;
++  // FMER: multiplication preserves intended signed scaling without negative shift.
++  int scaled_vel = ((sensitivity * vel_value + 7) >> 3) * 16;
+   return scaled_vel;
+ }
+ 
+@@ -129,6 +130,8 @@
+ };
+ 
+ void Dx7Note::init(const char patch[156], int midinote, int velocity) {
++  // FMER: reset feedback explicitly, including deterministic recycled voices.
++  fb_buf_[0] = fb_buf_[1] = 0;
+   int rates[4];
+   int levels[4];
+   for (int op = 0; op < 6; op++) {
+@@ -151,7 +154,8 @@
+ #ifdef VERBOSE
+     cout << op << ": " << level_scaling << " " << outlevel << endl;
+ #endif
+-    outlevel = outlevel << 5;
++    // FMER: keyboard scaling can make this negative before the later clamp.
++    outlevel = outlevel * 32;
+     outlevel += ScaleVelocity(velocity, patch[off + 15]);
+     outlevel = max(0, outlevel);
+     int rate_scaling = ScaleRate(midinote, patch[off + 13]);
+@@ -166,6 +170,14 @@
+     // cout << op << " freq: " << freq << endl;
+     params_[op].phase = 0;
+     params_[op].gain[1] = 0;
++    // FMER original amplitude modulation, not a measured DX7 depth curve.
++    // AMS 0/1/2/3 reaches 0/1/2/4 octaves of attenuation (approximately
++    // 0/6/12/24 dB) at AMD99 and LFO peak. The unsigned range is bounded;
++    // AMD0 or AMS0 produces exact zero and preserves the dry gain path.
++    static const int am_octaves[] = {0, 1, 2, 4};
++    ampmoddepth_[op] = static_cast<int32_t>(
++        (static_cast<int64_t>(patch[140]) * am_octaves[patch[off + 14]] *
++         (1 << 24)) / 99);
+   }
+   for (int i = 0; i < 4; i++) {
+     rates[i] = patch[126 + i];
+@@ -182,18 +194,28 @@
+ void Dx7Note::compute(int32_t *buf, int32_t lfo_val, int32_t lfo_delay,
+   const Controllers *ctrls) {
+   int32_t pitchmod = pitchenv_.getsample();
+-  uint32_t pmd = pitchmoddepth_ * lfo_delay;  // Q32
++  // FMER: Q32 intentionally spans the unsigned range; avoid signed overflow.
++  uint32_t pmd = static_cast<uint32_t>(pitchmoddepth_) *
++      static_cast<uint32_t>(lfo_delay);  // Q32
+   // TODO: add modulation sources (mod wheel, etc)
+   int32_t senslfo = pitchmodsens_ * (lfo_val - (1 << 23));
+   pitchmod += (((int64_t)pmd) * (int64_t)senslfo) >> 39;
+ 
+   // hardcodes a pitchbend range of 3 semitones, TODO make configurable
+   int pitchbend = ctrls->values_[kControllerPitch];
+-  int32_t pb = (pitchbend - 0x2000) << 9;
++  int32_t pb = (pitchbend - 0x2000) * 512;
+   pitchmod += pb;
++  // LFO and its delay are unipolar Q24. One shared product per control block,
++  // then one per sensitive operator; existing FM gain interpolation smooths
++  // the block endpoints. A minimum log level keeps Exp2's shift in range.
++  int32_t am = static_cast<int32_t>(
++      (static_cast<int64_t>(lfo_val) * lfo_delay) >> 24);
+   for (int op = 0; op < 6; op++) {
+     params_[op].gain[0] = params_[op].gain[1];
+     int32_t level = env_[op].getsample();
++    if (ampmoddepth_[op] != 0)
++      level = max(0, level - static_cast<int32_t>(
++          (static_cast<int64_t>(ampmoddepth_[op]) * am) >> 24));
+     int32_t gain = Exp2::lookup(level - (14 * (1 << 24)));
+     //int32_t gain = pow(2, 10 + level * (1.0 / (1 << 24)));
+     params_[op].freq = Freqlut::lookup(basepitch_[op] + pitchmod);
+@@ -209,3 +231,8 @@
+   }
+ }
+ 
++void Dx7Note::shift_ratio_pitch(int32_t delta, const char patch[156]) {
++  for (int op = 0; op < 6; ++op)
++    if (patch[op * 21 + 17] == 0) basepitch_[op] += delta;
++}
++
+--- a/src/dx7note.h
++++ b/src/dx7note.h
+@@ -29,7 +29,8 @@
+ 
+ class Dx7Note {
+  public:
+-  void init(const char patch[128], int midinote, int velocity);
++  // FMER: correct the historical declaration; implementation reads VCED.
++  void init(const char patch[156], int midinote, int velocity);
+ 
+   // Note: this _adds_ to the buffer. Interesting question whether it's
+   // worth it...
+@@ -37,6 +38,15 @@
+     const Controllers *ctrls);
+ 
+   void keyup();
++  // FMER portamento: Q24 log2-frequency delta on ratio operators only.
++  // The caller supplies the retained note snapshot. Fixed oscillators, phase,
++  // envelopes, feedback and key/velocity scaling remain unchanged.
++  void shift_ratio_pitch(int32_t delta, const char patch[156]);
++  // FMER: all envelopes must complete; nonzero release levels remain active.
++  bool finished() const {
++    for (int op = 0; op < 6; ++op) if (!env_[op].finished()) return false;
++    return true;
++  }
+ 
+   // TODO: parameter changes
+ 
+@@ -57,6 +67,9 @@
+   int algorithm_;
+   int pitchmoddepth_;
+   int pitchmodsens_;
++  // FMER original AMD/AMS curve: maximum log2 attenuation per operator, Q24.
++  // Kept in the note snapshot; no allocation or transcendental audio work.
++  int32_t ampmoddepth_[6];
+ };
+ 
+ #endif  // SYNTH_DX7NOTE_H_
+--- a/src/env.h
++++ b/src/env.h
+@@ -40,6 +40,8 @@
+   void keydown(bool down);
+   void setparam(int param, int value);
+   static int scaleoutlevel(int outlevel);
++  // FMER: permit bounded voice retirement after a zero-level release.
++  bool finished() const { return !down_ && ix_ >= 4 && levels_[3] == 0; }
+  private:
+   int rates_[4];
+   int levels_[4];
+--- a/src/fm_core.cc
++++ b/src/fm_core.cc
+@@ -146,6 +146,8 @@
+     } else if (!add) {
+       has_contents[outbus] = false;
+     }
+-    param.phase += param.freq << LG_N;
++    // FMER: explicitly wrap the 24-bit phase instead of signed overflow.
++    param.phase = static_cast<int32_t>((static_cast<uint32_t>(param.phase) +
++        (static_cast<uint32_t>(param.freq) << LG_N)) & 0xffffffu);
+   }
+ }
+--- a/src/fm_op_kernel.cc
++++ b/src/fm_op_kernel.cc
+@@ -156,7 +156,8 @@
+                          int32_t gain1, int32_t gain2, bool add) {
+   int32_t dgain = (gain2 - gain1 + (N >> 1)) >> LG_N;
+   int32_t gain = gain1;
+-  int32_t phase = phase0;
++  // FMER: unsigned modulo phase avoids signed overflow in the scalar path.
++  uint32_t phase = static_cast<uint32_t>(phase0);
+   if (hasNeon()) {
+ #ifdef HAVE_NEON_INTRINSICS
+     neon_fm_kernel(input, add ? output : zeros, output, N,
+@@ -166,14 +167,18 @@
+     if (add) {
+       for (int i = 0; i < N; i++) {
+         gain += dgain;
+-        int32_t y = Sin::lookup(phase + input[i]);
+-        output[i] += ((int64_t)y * (int64_t)gain) >> 24;
++        int32_t y = Sin::lookup(static_cast<int32_t>((phase + static_cast<uint32_t>(input[i])) & 0xffffffu));
++        // FMER: retain the full product, then narrow before the output add.
++        // Unsigned addition defines the same low 32-bit result on overflow.
++        const int32_t sample = static_cast<int32_t>(((int64_t)y * gain) >> 24);
++        output[i] = static_cast<int32_t>(static_cast<uint32_t>(output[i]) +
++                                       static_cast<uint32_t>(sample));
+         phase += freq;
+       }
+     } else {
+       for (int i = 0; i < N; i++) {
+         gain += dgain;
+-        int32_t y = Sin::lookup(phase + input[i]);
++        int32_t y = Sin::lookup(static_cast<int32_t>((phase + static_cast<uint32_t>(input[i])) & 0xffffffu));
+         output[i] = ((int64_t)y * (int64_t)gain) >> 24;
+         phase += freq;
+       }
+@@ -186,7 +191,8 @@
+                               int32_t gain1, int32_t gain2, bool add) {
+   int32_t dgain = (gain2 - gain1 + (N >> 1)) >> LG_N;
+   int32_t gain = gain1;
+-  int32_t phase = phase0;
++  // FMER: unsigned modulo phase avoids signed overflow in the scalar path.
++  uint32_t phase = static_cast<uint32_t>(phase0);
+   if (hasNeon()) {
+ #ifdef HAVE_NEON_INTRINSICS
+     neon_fm_kernel(zeros, add ? output : zeros, output, N,
+@@ -196,14 +202,17 @@
+     if (add) {
+       for (int i = 0; i < N; i++) {
+         gain += dgain;
+-        int32_t y = Sin::lookup(phase);
+-        output[i] += ((int64_t)y * (int64_t)gain) >> 24;
++        int32_t y = Sin::lookup(static_cast<int32_t>(phase & 0xffffffu));
++        // FMER: exact low 32-bit accumulation without a redundant 64-bit add.
++        const int32_t sample = static_cast<int32_t>(((int64_t)y * gain) >> 24);
++        output[i] = static_cast<int32_t>(static_cast<uint32_t>(output[i]) +
++                                       static_cast<uint32_t>(sample));
+         phase += freq;
+       }
+     } else {
+       for (int i = 0; i < N; i++) {
+         gain += dgain;
+-        int32_t y = Sin::lookup(phase);
++        int32_t y = Sin::lookup(static_cast<int32_t>(phase & 0xffffffu));
+         output[i] = ((int64_t)y * (int64_t)gain) >> 24;
+         phase += freq;
+       }
+@@ -223,7 +232,8 @@
+                               int32_t gain1, int32_t gain2, bool add) {
+   int32_t dgain = (gain2 - gain1 + (N >> 1)) >> LG_N;
+   int32_t gain = gain1;
+-  int32_t phase = phase0;
++  // FMER: unsigned modulo phase avoids signed overflow in the scalar path.
++  uint32_t phase = static_cast<uint32_t>(phase0);
+ #ifdef HIGH_ACCURACY
+   int32_t u = Sin::compute10(phase << 6);
+   u = ((int64_t)u * gain) >> 30;
+@@ -257,7 +267,8 @@
+                               int32_t gain1, int32_t gain2, bool add) {
+   int32_t dgain = (gain2 - gain1 + (N >> 1)) >> LG_N;
+   int32_t gain = gain1;
+-  int32_t phase = phase0;
++  // FMER: unsigned modulo phase avoids signed overflow in the scalar path.
++  uint32_t phase = static_cast<uint32_t>(phase0);
+ #ifdef HIGH_ACCURACY
+   int32_t u = floor(gain * sin(phase * (M_PI / (1 << 23))) + 0.5);
+   int32_t v = floor(gain * cos((phase - freq * 0.5) * (M_PI / (1 << 23))) + 0.5);
+@@ -285,7 +296,8 @@
+                               int32_t gain1, int32_t gain2, bool add) {
+   int32_t dgain = (gain2 - gain1 + (N >> 1)) >> LG_N;
+   int32_t gain = gain1;
+-  int32_t phase = phase0;
++  // FMER: unsigned modulo phase avoids signed overflow in the scalar path.
++  uint32_t phase = static_cast<uint32_t>(phase0);
+ #ifdef DOUBLE_ACCURACY
+   int32_t u = floor((1 << 30) * sin(phase * (M_PI / (1 << 23))) + 0.5);
+   double a_d = sin(freq * (M_PI / (1 << 24)));
+@@ -325,7 +337,8 @@
+                               int32_t gain1, int32_t gain2, bool add) {
+   int32_t dgain = (gain2 - gain1 + (N >> 1)) >> LG_N;
+   int32_t gain = gain1;
+-  int32_t phase = phase0;
++  // FMER: unsigned modulo phase avoids signed overflow in the scalar path.
++  uint32_t phase = static_cast<uint32_t>(phase0);
+ #ifdef HIGH_ACCURACY
+   int32_t u = Sin::compute10(phase << 6);
+   int32_t lastu = Sin::compute10((phase - freq) << 6);
+@@ -353,7 +366,8 @@
+                             int32_t *fb_buf, int fb_shift, bool add) {
+   int32_t dgain = (gain2 - gain1 + (N >> 1)) >> LG_N;
+   int32_t gain = gain1;
+-  int32_t phase = phase0;
++  // FMER: unsigned modulo phase avoids signed overflow in the scalar path.
++  uint32_t phase = static_cast<uint32_t>(phase0);
+   int32_t y0 = fb_buf[0];
+   int32_t y = fb_buf[1];
+   if (add) {
+@@ -361,9 +375,11 @@
+       gain += dgain;
+       int32_t scaled_fb = (y0 + y) >> (fb_shift + 1);
+       y0 = y;
+-      y = Sin::lookup(phase + scaled_fb);
++      y = Sin::lookup(static_cast<int32_t>((phase + static_cast<uint32_t>(scaled_fb)) & 0xffffffu));
+       y = ((int64_t)y * (int64_t)gain) >> 24;
+-      output[i] += y;
++      // FMER: define modulo output accumulation consistently with the other kernels.
++      output[i] = static_cast<int32_t>(static_cast<uint32_t>(output[i]) +
++                                     static_cast<uint32_t>(y));
+       phase += freq;
+     }
+   } else {
+@@ -371,7 +387,7 @@
+       gain += dgain;
+       int32_t scaled_fb = (y0 + y) >> (fb_shift + 1);
+       y0 = y;
+-      y = Sin::lookup(phase + scaled_fb);
++      y = Sin::lookup(static_cast<int32_t>((phase + static_cast<uint32_t>(scaled_fb)) & 0xffffffu));
+       y = ((int64_t)y * (int64_t)gain) >> 24;
+       output[i] = y;
+       phase += freq;
+--- a/src/freqlut.cc
++++ b/src/freqlut.cc
+@@ -51,5 +51,12 @@
+   int lowbits = logfreq & ((1 << SAMPLE_SHIFT) - 1);
+   int32_t y = y0 + ((((int64_t)(y1 - y0) * (int64_t)lowbits)) >> SAMPLE_SHIFT);
+   int hibits = logfreq >> 24;
+-  return y >> (MAX_LOGFREQ_INT - hibits);
++  // FMER: extreme valid pitch envelopes can exceed the original shift range.
++  const int shift = MAX_LOGFREQ_INT - hibits;
++  if (shift >= 31) return 0;
++  if (shift < 0) {
++    if (shift <= -24) return 0;
++    return static_cast<int32_t>((static_cast<uint32_t>(y) << -shift) & 0xffffffu);
++  }
++  return y >> shift;
+ }
+--- a/src/pitchenv.cc
++++ b/src/pitchenv.cc
+@@ -47,7 +47,8 @@
+     rates_[i] = r[i];
+     levels_[i] = l[i];
+   }
+-  level_ = pitchtab[l[3]] << 19;
++  // FMER: defined signed scaling for pitch levels below the midpoint.
++  level_ = pitchtab[l[3]] * (1 << 19);
+   down_ = true;
+   advance(0);
+ }
+@@ -82,7 +83,7 @@
+   ix_ = newix;
+   if (ix_ < 4) {
+     int newlevel = levels_[ix_];
+-    targetlevel_ = pitchtab[newlevel] << 19;
++    targetlevel_ = pitchtab[newlevel] * (1 << 19);
+     rising_ = (targetlevel_ > level_);
+ 
+     inc_ = ratetab[rates_[ix_]] * unit_;
+--- a/src/sin.h
++++ b/src/sin.h
+@@ -50,7 +50,12 @@
+   int dy = sintab[phase_int];
+   int y0 = sintab[phase_int + 1];
+ 
+-  return y0 + (((int64_t)dy * (int64_t)lowbits) >> SHIFT);
++  // FMER: the pinned 1024-entry integer recurrence yields |dy|<=102943.
++  // lowbits<=16383, so |dy*lowbits|<=1686515169 fits signed32 exactly.
++  // Narrow arithmetic avoids redundant high-half work in every FM sample.
++  // The regression exhausts all 2^24 phases against the original 64-bit form.
++  static_assert(SIN_LG_N_SAMPLES == 10, "Re-prove sine delta bounds for a new table size");
++  return y0 + ((dy * lowbits) >> SHIFT);
+ #else
+   int phase_int = (phase >> SHIFT) & (SIN_N_SAMPLES - 1);
+   int y0 = sintab[phase_int];
+--- a/src/synth.h
++++ b/src/synth.h
+@@ -20,15 +20,26 @@
+ // This may not be present on MSVC.
+ // See http://stackoverflow.com/questions/126279/c99-stdint-h-header-and-ms-visual-studio
+ #include <stdint.h>
++#include <stddef.h>
++// FMER 2026-10-05: the selected MSFA translation units never use this macro.
++// FMER_DEVICE has one musical-core owner and no C++ thread library. This branch
++// provides compiler ordering only; the target HAL owns device/DMA bus barriers.
++#if defined(FMER_DEVICE)
++#define SynthMemoryBarrier() __asm__ __volatile__("" ::: "memory")
++#else
++// Standard portable host fence; no platform framework dependency.
++#include <atomic>
++#define SynthMemoryBarrier() std::atomic_thread_fence(std::memory_order_seq_cst)
++#endif
+ 
+ // TODO(raph): move from fixed to variable N
+ #define LG_N 6
+ #define N (1 << LG_N)
+ 
+-#if defined(__APPLE__)
++#if 0 && defined(__APPLE__)
+ #include <libkern/OSAtomic.h>
+ #define SynthMemoryBarrier() OSMemoryBarrier()
+-#elif defined(__GNUC__)
++#elif 0 && defined(__GNUC__)
+ #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 1)
+ #define SynthMemoryBarrier() __sync_synchronize()
+ #endif
+@@ -51,13 +62,14 @@
+     return a > b ? a : b;
+ }
+ 
+-#ifdef __aarch64__
++// FMER: scalar reference path selected on every host for comparable renders.
++#if defined(FMER_MSFA_ENABLE_NEON) && defined(__aarch64__)
+ #define HAVE_NEON_INTRINSICS
+ #include <arm_neon.h>
+ static inline bool hasNeon() {
+   return true;
+ }
+-#elif __ARM_NEON__
++#elif defined(FMER_MSFA_ENABLE_NEON) && defined(__ARM_NEON__)
+ #define HAVE_NEON_INTRINSICS
+ #include <arm_neon.h>
+ // TODO: get this working (although maybe we don't even care about non-NEON ARM any more)

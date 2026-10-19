@@ -1,0 +1,24 @@
+/artifacts/
+/local/
+/private/
+/Deploy/
+__pycache__/
+*.pyc
+/.env
+/.env.*
+*.exe
+*.dll
+*.rom
+*.fwsc
+*.zip
+*.wav
+*.mp3
+*.mp4
+# The incorporated Felucca source subtree MUST remain tracked.
+# Other compiler/runtime acquisitions remain external inputs.
+/third_party/acquired/*
+!/third_party/acquired/fm1-target-review/
+/third_party/acquired/fm1-target-review/*
+!/third_party/acquired/fm1-target-review/community/
+/third_party/acquired/fm1-target-review/community/*
+!/third_party/acquired/fm1-target-review/community/felucca/

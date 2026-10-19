@@ -1,0 +1,1103 @@
+{
+  "index": [
+    {
+      "file": "panel-home.png",
+      "alt": "Home view",
+      "caption": "Home view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-home-four-tracks.png",
+      "alt": "Home four tracks view",
+      "caption": "Home four tracks view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-splash.png",
+      "alt": "Splash view",
+      "caption": "Splash view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "getting-started": [
+    {
+      "file": "app-banks.png",
+      "alt": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.",
+      "caption": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC. Actual browser capture."
+    },
+    {
+      "file": "app-editor.png",
+      "alt": "Companion Editor: canonical values, musical selectors, sliders and local sound audition.",
+      "caption": "Companion Editor: canonical values, musical selectors, sliders and local sound audition. Actual browser capture."
+    }
+  ],
+  "connection": [
+    {
+      "file": "app-unit.png",
+      "alt": "Your FM-1: explicit reads, destinations and verified transfers. Offline view.",
+      "caption": "Your FM-1: explicit reads, destinations and verified transfers. Offline view. Actual browser capture."
+    },
+    {
+      "file": "panel-usb-link.png",
+      "alt": "Usb link view",
+      "caption": "Usb link view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "library": [
+    {
+      "file": "feature-companion-library.svg",
+      "alt": "Companion library: annotated screen reference",
+      "caption": "Organize instruments and projects locally on your computer. Open for full-size view."
+    },
+    {
+      "file": "app-library.png",
+      "alt": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected.",
+      "caption": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected. Actual browser capture."
+    }
+  ],
+  "banks": [
+    {
+      "file": "feature-instrument-banks.svg",
+      "alt": "128 onboard instrument slots: annotated screen reference",
+      "caption": "64 editable DEFAULT slots and 64 independent USER slots. Open for full-size view."
+    },
+    {
+      "file": "app-banks.png",
+      "alt": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.",
+      "caption": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC. Actual browser capture."
+    },
+    {
+      "file": "panel-presets.png",
+      "alt": "Presets view",
+      "caption": "Presets view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-user-presets.png",
+      "alt": "User presets view",
+      "caption": "User presets view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "controls-42.svg",
+      "alt": "PRESETS physical control map",
+      "caption": "PRESETS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-43.svg",
+      "alt": "SAVE / INSTRUMENT physical control map",
+      "caption": "SAVE / INSTRUMENT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-44.svg",
+      "alt": "SAVE / PROJECT physical control map",
+      "caption": "SAVE / PROJECT: knob positions and page actions. Diagram from the audited panel map."
+    }
+  ],
+  "editor": [
+    {
+      "file": "feature-companion-banks.svg",
+      "alt": "Companion editing and banks: annotated screen reference",
+      "caption": "Edit visually, audition locally and choose explicit unit destinations. Open for full-size view."
+    },
+    {
+      "file": "app-editor.png",
+      "alt": "Companion Editor: canonical values, musical selectors, sliders and local sound audition.",
+      "caption": "Companion Editor: canonical values, musical selectors, sliders and local sound audition. Actual browser capture."
+    },
+    {
+      "file": "panel-focus.png",
+      "alt": "Focus view",
+      "caption": "Focus view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "fm": [
+    {
+      "file": "feature-algorithms.svg",
+      "alt": "FM algorithm diagrams: annotated screen reference",
+      "caption": "See how the six operators connect. Open for full-size view."
+    },
+    {
+      "file": "feature-fm-envelopes.svg",
+      "alt": "FM envelopes and scaling: annotated screen reference",
+      "caption": "Shape both loudness and harmonic movement. Open for full-size view."
+    },
+    {
+      "file": "feature-fm-synthesis.svg",
+      "alt": "Six-operator FM: annotated screen reference",
+      "caption": "Four-voice FM sound design with DX7-style voice exchange. Open for full-size view."
+    },
+    {
+      "file": "panel-algorithm-1.png",
+      "alt": "Algorithm 1 view",
+      "caption": "Algorithm 1 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-algorithm-5.png",
+      "alt": "Algorithm 5 view",
+      "caption": "Algorithm 5 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-fm-envelope.png",
+      "alt": "Fm envelope view",
+      "caption": "Fm envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-algorithm-2.png",
+      "alt": "FM algorithm 2",
+      "caption": "Algorithm 2: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-3.png",
+      "alt": "FM algorithm 3",
+      "caption": "Algorithm 3: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-4.png",
+      "alt": "FM algorithm 4",
+      "caption": "Algorithm 4: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-6.png",
+      "alt": "FM algorithm 6",
+      "caption": "Algorithm 6: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-7.png",
+      "alt": "FM algorithm 7",
+      "caption": "Algorithm 7: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-8.png",
+      "alt": "FM algorithm 8",
+      "caption": "Algorithm 8: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-9.png",
+      "alt": "FM algorithm 9",
+      "caption": "Algorithm 9: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-10.png",
+      "alt": "FM algorithm 10",
+      "caption": "Algorithm 10: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-11.png",
+      "alt": "FM algorithm 11",
+      "caption": "Algorithm 11: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-12.png",
+      "alt": "FM algorithm 12",
+      "caption": "Algorithm 12: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-13.png",
+      "alt": "FM algorithm 13",
+      "caption": "Algorithm 13: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-14.png",
+      "alt": "FM algorithm 14",
+      "caption": "Algorithm 14: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-15.png",
+      "alt": "FM algorithm 15",
+      "caption": "Algorithm 15: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-16.png",
+      "alt": "FM algorithm 16",
+      "caption": "Algorithm 16: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-17.png",
+      "alt": "FM algorithm 17",
+      "caption": "Algorithm 17: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-18.png",
+      "alt": "FM algorithm 18",
+      "caption": "Algorithm 18: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-19.png",
+      "alt": "FM algorithm 19",
+      "caption": "Algorithm 19: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-20.png",
+      "alt": "FM algorithm 20",
+      "caption": "Algorithm 20: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-21.png",
+      "alt": "FM algorithm 21",
+      "caption": "Algorithm 21: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-22.png",
+      "alt": "FM algorithm 22",
+      "caption": "Algorithm 22: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-23.png",
+      "alt": "FM algorithm 23",
+      "caption": "Algorithm 23: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-24.png",
+      "alt": "FM algorithm 24",
+      "caption": "Algorithm 24: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-25.png",
+      "alt": "FM algorithm 25",
+      "caption": "Algorithm 25: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-26.png",
+      "alt": "FM algorithm 26",
+      "caption": "Algorithm 26: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-27.png",
+      "alt": "FM algorithm 27",
+      "caption": "Algorithm 27: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-28.png",
+      "alt": "FM algorithm 28",
+      "caption": "Algorithm 28: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-29.png",
+      "alt": "FM algorithm 29",
+      "caption": "Algorithm 29: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-30.png",
+      "alt": "FM algorithm 30",
+      "caption": "Algorithm 30: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-31.png",
+      "alt": "FM algorithm 31",
+      "caption": "Algorithm 31: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "panel-algorithm-32.png",
+      "alt": "FM algorithm 32",
+      "caption": "Algorithm 32: actual operator routing drawn by firmware 734."
+    },
+    {
+      "file": "controls-02.svg",
+      "alt": "FM EDIT / TUNE physical control map",
+      "caption": "FM EDIT / TUNE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-03.svg",
+      "alt": "FM EDIT / SENSITIVITY physical control map",
+      "caption": "FM EDIT / SENSITIVITY: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-04.svg",
+      "alt": "FM EDIT / KEY SCALE physical control map",
+      "caption": "FM EDIT / KEY SCALE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-05.svg",
+      "alt": "FM EDIT / CURVE physical control map",
+      "caption": "FM EDIT / CURVE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-06.svg",
+      "alt": "FM EDIT / OP RATES physical control map",
+      "caption": "FM EDIT / OP RATES: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-07.svg",
+      "alt": "FM EDIT / OP LEVELS physical control map",
+      "caption": "FM EDIT / OP LEVELS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-08.svg",
+      "alt": "FM EDIT / PITCH RATES physical control map",
+      "caption": "FM EDIT / PITCH RATES: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-09.svg",
+      "alt": "FM EDIT / PITCH LEVELS physical control map",
+      "caption": "FM EDIT / PITCH LEVELS: knob positions and page actions. Diagram from the audited panel map."
+    }
+  ],
+  "va": [
+    {
+      "file": "feature-virtual-analog.svg",
+      "alt": "Virtual Analog: annotated screen reference",
+      "caption": "A second engine for direct oscillator, filter and envelope work. Open for full-size view."
+    },
+    {
+      "file": "panel-va-envelope.png",
+      "alt": "Va envelope view",
+      "caption": "Va envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "app-editor-va.png",
+      "alt": "Companion VA Editor: oscillator, filter and envelope controls.",
+      "caption": "Companion VA Editor: oscillator, filter and envelope controls. Actual browser capture."
+    },
+    {
+      "file": "controls-10.svg",
+      "alt": "VA EDIT physical control map",
+      "caption": "VA EDIT: knob positions and page actions. Diagram from the audited panel map."
+    }
+  ],
+  "effects": [
+    {
+      "file": "feature-fx-routing.svg",
+      "alt": "Reorder the effects chain: annotated screen reference",
+      "caption": "Choose the order in which the six stages process audio. Open for full-size view."
+    },
+    {
+      "file": "feature-drive-lfo.svg",
+      "alt": "Drive and LFO enable: annotated screen reference",
+      "caption": "Add saturation or enable the sound\u2019s stored modulation. Open for full-size view."
+    },
+    {
+      "file": "feature-chorus-phaser.svg",
+      "alt": "Chorus and phaser: annotated screen reference",
+      "caption": "Four named characters for each modulation effect. Open for full-size view."
+    },
+    {
+      "file": "feature-delay.svg",
+      "alt": "Free-time or tempo-synced delay: annotated screen reference",
+      "caption": "Dial milliseconds or choose a musical division. Open for full-size view."
+    },
+    {
+      "file": "feature-reverb.svg",
+      "alt": "Four reverb models: annotated screen reference",
+      "caption": "Room, Plate, Hall and Cloud share direct return and decay controls. Open for full-size view."
+    },
+    {
+      "file": "feature-filter-band.svg",
+      "alt": "Band-pass and HOME controls: annotated screen reference",
+      "caption": "The same controls remain in the same order. Open for full-size view."
+    },
+    {
+      "file": "feature-filter.svg",
+      "alt": "Filter and resonance: annotated screen reference",
+      "caption": "Low-pass, high-pass and band-pass with directional shading. Open for full-size view."
+    },
+    {
+      "file": "panel-effects-clean.png",
+      "alt": "Effects clean view",
+      "caption": "Effects clean view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-fx-chain.png",
+      "alt": "Signal chain: selected stage and its position in the processing order.",
+      "caption": "Signal chain: selected stage and its position in the processing order. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-home-filter-0.png",
+      "alt": "Low-pass fill extends left of cutoff.",
+      "caption": "Low-pass fill extends left of cutoff. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-home-filter-1.png",
+      "alt": "High-pass fill extends right of cutoff.",
+      "caption": "High-pass fill extends right of cutoff. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-home-filter-2.png",
+      "alt": "Band-pass fill surrounds cutoff.",
+      "caption": "Band-pass fill surrounds cutoff. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "controls-13.svg",
+      "alt": "FX / FILTER / SPACE physical control map",
+      "caption": "FX / FILTER / SPACE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-14.svg",
+      "alt": "FX / MODULATION physical control map",
+      "caption": "FX / MODULATION: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-15.svg",
+      "alt": "FX / SPACE SETTINGS physical control map",
+      "caption": "FX / SPACE SETTINGS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-16.svg",
+      "alt": "FX / SIGNAL CHAIN physical control map",
+      "caption": "FX / SIGNAL CHAIN: knob positions and page actions. Diagram from the audited panel map."
+    }
+  ],
+  "modulation": [
+    {
+      "file": "feature-lfo.svg",
+      "alt": "Engine-specific modulation: annotated screen reference",
+      "caption": "Stored motion settings for FM and VA instruments. Open for full-size view."
+    },
+    {
+      "file": "panel-glide.png",
+      "alt": "Glide view",
+      "caption": "Glide view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-fm-envelope.png",
+      "alt": "Fm envelope view",
+      "caption": "Fm envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-va-envelope.png",
+      "alt": "Va envelope view",
+      "caption": "Va envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "arp": [
+    {
+      "file": "feature-arp.svg",
+      "alt": "Eleven arpeggiator types: annotated screen reference",
+      "caption": "Turn held notes into a timed musical part. Open for full-size view."
+    },
+    {
+      "file": "panel-arp.png",
+      "alt": "Arp view",
+      "caption": "Arp view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-arp-exclusive.png",
+      "alt": "Arp exclusive view",
+      "caption": "Arp exclusive view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-arp-capacity.png",
+      "alt": "Arp capacity view",
+      "caption": "Arp capacity view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "controls-20.svg",
+      "alt": "ARP / TYPE/LATCH physical control map",
+      "caption": "ARP / TYPE/LATCH: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-21.svg",
+      "alt": "ARP / TIMING physical control map",
+      "caption": "ARP / TIMING: knob positions and page actions. Diagram from the audited panel map."
+    }
+  ],
+  "sequencer": [
+    {
+      "file": "feature-patterns.svg",
+      "alt": "Sixteen patterns per project: annotated screen reference",
+      "caption": "Build phrases from 1 to 64 steps and switch them in performance. Open for full-size view."
+    },
+    {
+      "file": "feature-recording.svg",
+      "alt": "Record notes or generated arps: annotated screen reference",
+      "caption": "A four-beat count-in leads into quantized recording. Open for full-size view."
+    },
+    {
+      "file": "panel-sequence.png",
+      "alt": "Sequence view",
+      "caption": "Sequence view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-record.png",
+      "alt": "Recording: four-beat count-in, quantization and Overdub/Replace.",
+      "caption": "Recording: four-beat count-in, quantization and Overdub/Replace. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-tracks-single.png",
+      "alt": "Tracks single view",
+      "caption": "Tracks single view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "controls-22.svg",
+      "alt": "SEQ / PERFORM physical control map",
+      "caption": "SEQ / PERFORM: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-23.svg",
+      "alt": "SEQ / SONG entries physical control map",
+      "caption": "SEQ / SONG entries: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-24.svg",
+      "alt": "SEQ / SONG setup physical control map",
+      "caption": "SEQ / SONG setup: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-25.svg",
+      "alt": "SEQ / PATTERNS physical control map",
+      "caption": "SEQ / PATTERNS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-26.svg",
+      "alt": "SEQ / STEP EDIT physical control map",
+      "caption": "SEQ / STEP EDIT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-27.svg",
+      "alt": "SEQ / NOTE EDIT physical control map",
+      "caption": "SEQ / NOTE EDIT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-28.svg",
+      "alt": "SEQ / COPY / EDIT physical control map",
+      "caption": "SEQ / COPY / EDIT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-29.svg",
+      "alt": "SEQ / RECORD physical control map",
+      "caption": "SEQ / RECORD: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-30.svg",
+      "alt": "SEQ / CHAIN MEMBERS physical control map",
+      "caption": "SEQ / CHAIN MEMBERS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-31.svg",
+      "alt": "SEQ / PLAY MODE physical control map",
+      "caption": "SEQ / PLAY MODE: knob positions and page actions. Diagram from the audited panel map."
+    }
+  ],
+  "pattern-edit": [
+    {
+      "file": "feature-copy-chain.svg",
+      "alt": "Copy sections and chain patterns: annotated screen reference",
+      "caption": "Reuse musical material and keep it moving. Open for full-size view."
+    },
+    {
+      "file": "feature-note-edit.svg",
+      "alt": "Edit notes, rests and ties: annotated screen reference",
+      "caption": "Refine a phrase without recording it again. Open for full-size view."
+    },
+    {
+      "file": "panel-sequence-bank4.png",
+      "alt": "Sequence bank4 view",
+      "caption": "Sequence bank4 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-patterns16.png",
+      "alt": "Patterns16 view",
+      "caption": "Patterns16 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-chain.png",
+      "alt": "Chain view",
+      "caption": "Chain view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "performance": [
+    {
+      "file": "feature-mixer.svg",
+      "alt": "Four-track performance mixer: annotated screen reference",
+      "caption": "One knob per track, with a clearly selected editing layer. Open for full-size view."
+    },
+    {
+      "file": "feature-playing-modes.svg",
+      "alt": "Playing modes: annotated screen reference",
+      "caption": "One instrument or four independent parts. Open for full-size view."
+    },
+    {
+      "file": "panel-mixer.png",
+      "alt": "Mixer view",
+      "caption": "Mixer view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-home-four-tracks.png",
+      "alt": "Home four tracks view",
+      "caption": "Home four tracks view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-four-track-fullscreen.png",
+      "alt": "Four track fullscreen view",
+      "caption": "Four track fullscreen view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "projects": [
+    {
+      "file": "feature-projects.svg",
+      "alt": "Onboard projects and saving: annotated screen reference",
+      "caption": "Keep a complete working arrangement on the instrument. Open for full-size view."
+    },
+    {
+      "file": "panel-project-save.png",
+      "alt": "Project save view",
+      "caption": "Project save view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "app-library.png",
+      "alt": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected.",
+      "caption": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected. Actual browser capture."
+    }
+  ],
+  "midi": [
+    {
+      "file": "feature-midi.svg",
+      "alt": "Wired MIDI and clock: annotated screen reference",
+      "caption": "Play, synchronize and control FMER from other instruments or a DAW. Open for full-size view."
+    },
+    {
+      "file": "panel-midi-output.png",
+      "alt": "Midi output view",
+      "caption": "Midi output view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-midi-clock.png",
+      "alt": "Midi clock view",
+      "caption": "Midi clock view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "controls-34.svg",
+      "alt": "GLO / MIDI INPUT physical control map",
+      "caption": "GLO / MIDI INPUT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-35.svg",
+      "alt": "GLO / MIDI OUTPUT physical control map",
+      "caption": "GLO / MIDI OUTPUT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-36.svg",
+      "alt": "GLO / MIDI CLOCK physical control map",
+      "caption": "GLO / MIDI CLOCK: knob positions and page actions. Diagram from the audited panel map."
+    }
+  ],
+  "backups": [
+    {
+      "file": "feature-companion-backup.svg",
+      "alt": "Backup and restore: annotated screen reference",
+      "caption": "Keep a recoverable copy before changing an installation. Open for full-size view."
+    },
+    {
+      "file": "app-backups.png",
+      "alt": "Backups: separate local Library export and complete unit musical-data snapshots.",
+      "caption": "Backups: separate local Library export and complete unit musical-data snapshots. Actual browser capture."
+    },
+    {
+      "file": "panel-restore.png",
+      "alt": "Restore view",
+      "caption": "Restore view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "firmware": [
+    {
+      "file": "feature-companion-install.svg",
+      "alt": "Offline firmware installation: annotated screen reference",
+      "caption": "Inspect, install and verify from one local Companion window. Open for full-size view."
+    },
+    {
+      "file": "app-firmware.png",
+      "alt": "Firmware: inspect the bundled installer before confirming a device write.",
+      "caption": "Firmware: inspect the bundled installer before confirming a device write. Actual browser capture."
+    }
+  ],
+  "workflows": [
+    {
+      "file": "workflow-safe-install.svg",
+      "alt": "Companion installation workflow: annotated screen reference",
+      "caption": "Stock firmware cannot provide FMER musical backups. Unknown layouts require diagnosis, not a forced write. Open for full-size view."
+    },
+    {
+      "file": "workflow-paired-usb.svg",
+      "alt": "Two-unit USB performance: annotated screen reference",
+      "caption": "One direct peer. No direct USB audio between units, USB hub mode or Bluetooth group support. Open for full-size view."
+    },
+    {
+      "file": "workflow-mode-workflow.svg",
+      "alt": "Choose the right playing mode: annotated screen reference",
+      "caption": "Entering/leaving4T stops playback. Ordinary page navigation and preset browsing do not change mode. Open for full-size view."
+    },
+    {
+      "file": "workflow-data-map.svg",
+      "alt": "What is saved where?: annotated screen reference",
+      "caption": "A project references track instruments. Moving a bank instrument can change projects that reference its slot. Open for full-size view."
+    },
+    {
+      "file": "workflow-sound-to-song.svg",
+      "alt": "From sound to arrangement: annotated screen reference",
+      "caption": "Tracks reference saved instrument slots. Save edited sounds before the project. Open for full-size view."
+    },
+    {
+      "file": "panel-record.png",
+      "alt": "Recording: four-beat count-in, quantization and Overdub/Replace.",
+      "caption": "Recording: four-beat count-in, quantization and Overdub/Replace. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-song.png",
+      "alt": "Song: four lanes on a shared timeline, with repeat blocks and transposition.",
+      "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "app-banks.png",
+      "alt": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.",
+      "caption": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC. Actual browser capture."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "file": "feature-battery.svg",
+      "alt": "Estimated battery percentage: annotated screen reference",
+      "caption": "A numeric estimate in the compact status header. Open for full-size view."
+    },
+    {
+      "file": "panel-global-mode.png",
+      "alt": "Global mode view",
+      "caption": "Global mode view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-estimated-battery.png",
+      "alt": "Estimated battery view",
+      "caption": "Estimated battery view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-legend.png",
+      "alt": "Legend view",
+      "caption": "Legend view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "app-feedback.png",
+      "alt": "Beta feedback form",
+      "caption": "Optional beta feedback and local diagnostic summary."
+    }
+  ],
+  "glossary": [
+    {
+      "file": "panel-algorithm-5.png",
+      "alt": "Algorithm 5 view",
+      "caption": "Algorithm 5 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-song.png",
+      "alt": "Song: four lanes on a shared timeline, with repeat blocks and transposition.",
+      "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-mixer.png",
+      "alt": "Mixer view",
+      "caption": "Mixer view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "limits": [
+    {
+      "file": "panel-tracks.png",
+      "alt": "Tracks view",
+      "caption": "Tracks view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-estimated-battery.png",
+      "alt": "Estimated battery view",
+      "caption": "Estimated battery view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "song": [
+    {
+      "file": "feature-song.svg",
+      "alt": "Song arrangements: annotated screen reference",
+      "caption": "Arrange patterns, transpositions and repeats on a shared timeline. Open for full-size view."
+    },
+    {
+      "file": "panel-song.png",
+      "alt": "Song: four lanes on a shared timeline, with repeat blocks and transposition.",
+      "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-song-setup.png",
+      "alt": "Song lane setup: LIVE/SONG, end behavior and entry insertion/deletion.",
+      "caption": "Song lane setup: LIVE/SONG, end behavior and entry insertion/deletion. Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "shortcuts": [
+    {
+      "file": "feature-shortcuts.svg",
+      "alt": "Shortcuts / one sheet: annotated screen reference",
+      "caption": "Modifier gestures, navigation and performance commands. Open for full-size view."
+    },
+    {
+      "file": "feature-scopes.svg",
+      "alt": "Live visual feedback: annotated screen reference",
+      "caption": "Expand the display when the sound is the focus. Open for full-size view."
+    },
+    {
+      "file": "panel-shortcuts.png",
+      "alt": "Shortcuts view",
+      "caption": "Shortcuts view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-scope-only.png",
+      "alt": "Scope only view",
+      "caption": "Scope only view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "usb-link": [
+    {
+      "file": "feature-usb-link.svg",
+      "alt": "Direct USB instrument link: annotated screen reference",
+      "caption": "Connect two powered FMER units without a computer. Open for full-size view."
+    },
+    {
+      "file": "panel-usb-link.png",
+      "alt": "Usb link view",
+      "caption": "Usb link view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-midi-clock.png",
+      "alt": "Midi clock view",
+      "caption": "Midi clock view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "reference": [
+    {
+      "file": "app-editor.png",
+      "alt": "Companion Editor: canonical values, musical selectors, sliders and local sound audition.",
+      "caption": "Companion Editor: canonical values, musical selectors, sliders and local sound audition. Actual browser capture."
+    },
+    {
+      "file": "panel-fm-envelope.png",
+      "alt": "Fm envelope view",
+      "caption": "Fm envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-va-envelope.png",
+      "alt": "Va envelope view",
+      "caption": "Va envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "licensing": [
+    {
+      "file": "fmer-foundations.svg",
+      "alt": "FMER software foundations and DX7 interchange boundaries",
+      "caption": "Original architecture diagram: hardware support, musical engines and file interchange have distinct responsibilities and licenses."
+    }
+  ],
+  "panel": [
+    {
+      "file": "controls-00.svg",
+      "alt": "HOME physical control map",
+      "caption": "HOME: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-01.svg",
+      "alt": "HOME / FOUR TRACKS physical control map",
+      "caption": "HOME / FOUR TRACKS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-02.svg",
+      "alt": "FM EDIT / TUNE physical control map",
+      "caption": "FM EDIT / TUNE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-03.svg",
+      "alt": "FM EDIT / SENSITIVITY physical control map",
+      "caption": "FM EDIT / SENSITIVITY: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-04.svg",
+      "alt": "FM EDIT / KEY SCALE physical control map",
+      "caption": "FM EDIT / KEY SCALE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-05.svg",
+      "alt": "FM EDIT / CURVE physical control map",
+      "caption": "FM EDIT / CURVE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-06.svg",
+      "alt": "FM EDIT / OP RATES physical control map",
+      "caption": "FM EDIT / OP RATES: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-07.svg",
+      "alt": "FM EDIT / OP LEVELS physical control map",
+      "caption": "FM EDIT / OP LEVELS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-08.svg",
+      "alt": "FM EDIT / PITCH RATES physical control map",
+      "caption": "FM EDIT / PITCH RATES: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-09.svg",
+      "alt": "FM EDIT / PITCH LEVELS physical control map",
+      "caption": "FM EDIT / PITCH LEVELS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-10.svg",
+      "alt": "VA EDIT physical control map",
+      "caption": "VA EDIT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-11.svg",
+      "alt": "FM ENV physical control map",
+      "caption": "FM ENV: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-12.svg",
+      "alt": "VA ENV physical control map",
+      "caption": "VA ENV: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-13.svg",
+      "alt": "FX / FILTER / SPACE physical control map",
+      "caption": "FX / FILTER / SPACE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-14.svg",
+      "alt": "FX / MODULATION physical control map",
+      "caption": "FX / MODULATION: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-15.svg",
+      "alt": "FX / SPACE SETTINGS physical control map",
+      "caption": "FX / SPACE SETTINGS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-16.svg",
+      "alt": "FX / SIGNAL CHAIN physical control map",
+      "caption": "FX / SIGNAL CHAIN: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-17.svg",
+      "alt": "FM LFO / FM MODULATION physical control map",
+      "caption": "FM LFO / FM MODULATION: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-18.svg",
+      "alt": "FM LFO / FM SYNC physical control map",
+      "caption": "FM LFO / FM SYNC: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-19.svg",
+      "alt": "VA LFO physical control map",
+      "caption": "VA LFO: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-20.svg",
+      "alt": "ARP / TYPE/LATCH physical control map",
+      "caption": "ARP / TYPE/LATCH: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-21.svg",
+      "alt": "ARP / TIMING physical control map",
+      "caption": "ARP / TIMING: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-22.svg",
+      "alt": "SEQ / PERFORM physical control map",
+      "caption": "SEQ / PERFORM: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-23.svg",
+      "alt": "SEQ / SONG entries physical control map",
+      "caption": "SEQ / SONG entries: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-24.svg",
+      "alt": "SEQ / SONG setup physical control map",
+      "caption": "SEQ / SONG setup: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-25.svg",
+      "alt": "SEQ / PATTERNS physical control map",
+      "caption": "SEQ / PATTERNS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-26.svg",
+      "alt": "SEQ / STEP EDIT physical control map",
+      "caption": "SEQ / STEP EDIT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-27.svg",
+      "alt": "SEQ / NOTE EDIT physical control map",
+      "caption": "SEQ / NOTE EDIT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-28.svg",
+      "alt": "SEQ / COPY / EDIT physical control map",
+      "caption": "SEQ / COPY / EDIT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-29.svg",
+      "alt": "SEQ / RECORD physical control map",
+      "caption": "SEQ / RECORD: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-30.svg",
+      "alt": "SEQ / CHAIN MEMBERS physical control map",
+      "caption": "SEQ / CHAIN MEMBERS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-31.svg",
+      "alt": "SEQ / PLAY MODE physical control map",
+      "caption": "SEQ / PLAY MODE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-32.svg",
+      "alt": "GLO / VOICE/TEMPO physical control map",
+      "caption": "GLO / VOICE/TEMPO: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-33.svg",
+      "alt": "GLO / MONO GLIDE physical control map",
+      "caption": "GLO / MONO GLIDE: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-34.svg",
+      "alt": "GLO / MIDI INPUT physical control map",
+      "caption": "GLO / MIDI INPUT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-35.svg",
+      "alt": "GLO / MIDI OUTPUT physical control map",
+      "caption": "GLO / MIDI OUTPUT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-36.svg",
+      "alt": "GLO / MIDI CLOCK physical control map",
+      "caption": "GLO / MIDI CLOCK: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-37.svg",
+      "alt": "GLO / USB LINK physical control map",
+      "caption": "GLO / USB LINK: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-38.svg",
+      "alt": "GLO / ICON LEGEND physical control map",
+      "caption": "GLO / ICON LEGEND: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-39.svg",
+      "alt": "GLO / SHORTCUTS physical control map",
+      "caption": "GLO / SHORTCUTS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-40.svg",
+      "alt": "GLO / INFO physical control map",
+      "caption": "GLO / INFO: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-41.svg",
+      "alt": "GLO / RESET/CLEAR physical control map",
+      "caption": "GLO / RESET/CLEAR: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-42.svg",
+      "alt": "PRESETS physical control map",
+      "caption": "PRESETS: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-43.svg",
+      "alt": "SAVE / INSTRUMENT physical control map",
+      "caption": "SAVE / INSTRUMENT: knob positions and page actions. Diagram from the audited panel map."
+    },
+    {
+      "file": "controls-44.svg",
+      "alt": "SAVE / PROJECT physical control map",
+      "caption": "SAVE / PROJECT: knob positions and page actions. Diagram from the audited panel map."
+    }
+  ]
+}

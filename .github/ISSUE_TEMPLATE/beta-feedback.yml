@@ -1,0 +1,26 @@
+name: Beta feedback
+description: Report your FMER testing experience; all test areas are optional.
+title: "[Beta] "
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for testing. Use issues for feedback; code contributions are currently reserved. Do not attach ROMs, private libraries or entire AppData folders."
+  - type: input
+    id: versions
+    attributes:
+      label: Versions and setup
+      description: Companion/firmware versions, OS, starting firmware and connections.
+  - type: textarea
+    id: experience
+    attributes:
+      label: What did you test and how did it go?
+      description: Companion UX, flashing, FMER UX, navigation, sounds, FX, arp, sequencer, voice modes, MIDI, or anything else. Skip untested areas.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Expected behavior, actual behavior and reproduction steps
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostic summary or media
+      description: Attach the companion Beta feedback export (ZIP if needed). Review for personal information first. Media is optional.

@@ -1,0 +1,831 @@
+{
+  "product": "FM-1_708",
+  "package_sha256": "6a8a6d3d8447a6a144597140e730a30eefd0be7f0c2a581731d785d691ffcbc1",
+  "loader_sha256": "ac024dfb0f04fb4357d3c373c4a0eb8ca3b18fdb89ea034e486ae92a03b56d21",
+  "loader_image_bytes": 11116,
+  "template": "test01-v15-20261005",
+  "stock_app_reference_sha256": "8c1d13a5934eb3c70a5fec644577618a31b2a96c8748a7b692c506a86505dbb1",
+  "origin_identity": "FM-1_707",
+  "loader_identity": "ota-FM-1_708",
+  "origin_app_sha256": "47e95182ae17d3bdbee4cdb563c8c5fedfcb0a4fe58d72d56600185de7c5f541",
+  "origin_package_sha256": "31050c6041152f44f0ffda60c26c96c0194ee88de235b21557223157ac4fdfd1",
+  "reference_backup_sha256": "acb1e08e1c8360bcb0f1719b5940f57c473462c5ee1e8a7a4404c611a7ba9c88",
+  "reference_backup_report_sha256": "546e218c111ef0772cdc8f464061a619e35f6201cf623ffe492edcb22f1dc7c3",
+  "app_elf_sha256": "756b72bd2f50d69ae4eb4677ac7da6fab19baff3dd50f21c7aa020f383292fae",
+  "raw_app_sha256": "15dd5faf324bea122663c6beb917ae6cf4cafceea3b59bbe8a8994127d9cea9b",
+  "schema": 3,
+  "runtime_preflight_qualified": true,
+  "qualified_utc": "2026-10-07T12:32:26.914347+00:00",
+  "scope": "Exact Test01 installed707-to708 transition. Complete Release regression, 64-preset and performance probes, 8530 journal interruption cases, native v2 cross-language migration, exact-source board save races, linked RAM flash and resource audits, independent exact package/calibration/origin review and33 loader regressions. Physical708 execution follows installation.",
+  "source_files": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "674f186d381eecbf92a400d19b427e75ee69276286b8d90f766ea73bb5f35425"
+    },
+    {
+      "path": "artifacts/fm1-705-state-transfer/transfer.py",
+      "sha256": "ce4f78ee9fb47b9875b4a853bb683e5946605ee1a4052b00554ffab5ed861d33"
+    },
+    {
+      "path": "artifacts/fm1-handoff/706-20261006/qualify.py",
+      "sha256": "235bf88ad1678db3868b5314c7a640b4007555796b0e9142578aea33e85b9968"
+    },
+    {
+      "path": "artifacts/fm1-handoff/707-20261006/qualify.py",
+      "sha256": "2125c1c9498a088d14457e78bd0729f7def9ece5f0d6e388c95a1bb48e46992f"
+    },
+    {
+      "path": "artifacts/fm1-handoff/708-20261007/qualify.py",
+      "sha256": "2a582f52b8ecef88d936aa8f182de371ee72ccb6928d47b1e3528230dc83363e"
+    },
+    {
+      "path": "artifacts/fm1-independent-review/708-20261007/review.py",
+      "sha256": "6a7a067bd00b74524bf790dce67fef462b9bbd46d0cb449470d9adaae3092da8"
+    },
+    {
+      "path": "artifacts/fm1-session-review/705-20261006/boot-default-controls.json",
+      "sha256": "458ac1026af4f633ce065522a0210a90aa20787c01c77b75876b33aaed150ed2"
+    },
+    {
+      "path": "artifacts/fm1-session-review/705-20261006/pattern-before-and-after-reset.json",
+      "sha256": "71cf8e69374ae80b1ebbce54c7f5938b4f2905457e7e832cd6419960444b1983"
+    },
+    {
+      "path": "core/effects.cpp",
+      "sha256": "7ca8cdb76bfcbc7303e2f8a1f12002282e485698bdc0447235abf85b74b8937b"
+    },
+    {
+      "path": "core/effects.hpp",
+      "sha256": "807f22581dadc8d47e6241af64c323569c93d180f7ecee8191554df8129287d5"
+    },
+    {
+      "path": "core/factory_presets.cpp",
+      "sha256": "c67138f3910955173accbc644163f93101acdb9676cf0661454e749f03812157"
+    },
+    {
+      "path": "core/factory_presets.hpp",
+      "sha256": "7fede286d37ea3fdfd5f51b263600dcd9a09dc35961aa0cc6e73a0d4574ca829"
+    },
+    {
+      "path": "core/parameters.hpp",
+      "sha256": "8fc9e8f38b9c88d0ca5c45ddf6eed14c4b495fb720d21d7e518bff7735be630d"
+    },
+    {
+      "path": "core/patch.cpp",
+      "sha256": "ad734f4010b358c7d60359f9e83eb42f59bce951d164f8458914dacdde4f2db5"
+    },
+    {
+      "path": "core/patch.hpp",
+      "sha256": "878355222ba399a2ba4f9452038fc408531ee73c32276a6ed7923a8758852503"
+    },
+    {
+      "path": "core/performance.cpp",
+      "sha256": "59b1efca5052fd4dcdf2d4db940ed240ae25e05fd0292654ae74f537707be473"
+    },
+    {
+      "path": "core/performance.hpp",
+      "sha256": "6bb7526079b7879aedfa9673bd1e0cf73de5bc9ccfd708302eb89d1469e8e16b"
+    },
+    {
+      "path": "core/storage.cpp",
+      "sha256": "86880f0df0690456424a01647753a96da14313a5b277e18f091f1b0af4fec830"
+    },
+    {
+      "path": "core/storage.hpp",
+      "sha256": "e277d18f60bb95dca99f7c2819ea512b1eba504b4dbbb6edca43b536ee58b250"
+    },
+    {
+      "path": "core/synth.cpp",
+      "sha256": "cd7af52606de53a85972c206b0f652c95686c521d3e345708117351155551cf9"
+    },
+    {
+      "path": "core/synth.hpp",
+      "sha256": "837abb5a292bf5b142b6b8ec3c040cc1273a537e9cc2bb15f82e8a272fea78ab"
+    },
+    {
+      "path": "evidence/fm1-upgrade-701-to-702.json",
+      "sha256": "f2593e76c3fdfc4acc2d23224485b886be0c8aa962be0db99d574b71b96458ea"
+    },
+    {
+      "path": "evidence/fm1-upgrade-702-to-703.json",
+      "sha256": "d87c5650f7071e55e462e79207815228f40f4439edc453561204a968d7dc07f5"
+    },
+    {
+      "path": "evidence/fm1-upgrade-703-to-704.json",
+      "sha256": "d4c3a57530ea8714f590e1fa6f2bcc8c8ee3b1414410b3455ab2780fae330197"
+    },
+    {
+      "path": "evidence/fm1-upgrade-704-to-705.json",
+      "sha256": "74d9c342210a1b7318478f819f9591028c26482acf563c4441bcd410535e2332"
+    },
+    {
+      "path": "evidence/fm1-upgrade-705-to-706.json",
+      "sha256": "e48237da84499dec35a278f47ffb59bba54a8e558210dbf683f4dd5f4a03f4f7"
+    },
+    {
+      "path": "evidence/fm1-upgrade-706-to-707.json",
+      "sha256": "920778c7cc206d70f20b15a29cebfbe2f757e52d68bf88ccc7e16fade08bb98e"
+    },
+    {
+      "path": "evidence/fm1-upgrade-707-to-708.json",
+      "sha256": "586d97ba3db628558a78ede1465eca465a209cc2965257f43d409ae45d44dc6d"
+    },
+    {
+      "path": "evidence/msfa-source.json",
+      "sha256": "00603477348b007e8014ca694a1b5ce3b57a110ddc78ddc779221c697246a356"
+    },
+    {
+      "path": "evidence/target-toolchain.json",
+      "sha256": "9edfc171c2373e103e0089bdc4aee8679e57d368f757feb0ea25af8583977c55"
+    },
+    {
+      "path": "firmware/fm1/app.ld",
+      "sha256": "8ced654bd2d88c591479918847dfa16e9e3d302e4213324f15bcf342c61e7484"
+    },
+    {
+      "path": "firmware/fm1/board.c",
+      "sha256": "0c720e7e6998952f21d036047cba85f91fa7c64c5d6e86048b68e47918b9940a"
+    },
+    {
+      "path": "firmware/fm1/control_mailbox.h",
+      "sha256": "731b1476ee4158014f867b538b3c133a0813f47846014dae29e0664ea9fdd73d"
+    },
+    {
+      "path": "firmware/fm1/control_model.h",
+      "sha256": "49a9709c46f8b0af99a7d70b0b934b8e57f4cc1872883acc40e0254a3bff5f74"
+    },
+    {
+      "path": "firmware/fm1/dsp_adapter.cpp",
+      "sha256": "ec6381c21c1b338961707884b6297c9d54df510388ea25da5a6139e3409529b2"
+    },
+    {
+      "path": "firmware/fm1/dsp_adapter.h",
+      "sha256": "cc7b1e38465153c7ded6a66f1af1f81d1521aa526de86310675b00f6e396c076"
+    },
+    {
+      "path": "firmware/fm1/frame_dispatch.h",
+      "sha256": "772b287ae7eaba880ca35a70789a498baf093a4db78e00d8bb906bae343eb344"
+    },
+    {
+      "path": "firmware/fm1/led_model.h",
+      "sha256": "6479478b987b85087c0d5c22a534d90166e01988a7f99619520d70f82cff169b"
+    },
+    {
+      "path": "firmware/fm1/loader/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "firmware/fm1/loader/PROVENANCE.json",
+      "sha256": "f0652ae27b41a7bca3932a51a03c43ba67ba8b21e452c442af04343f00e9e160"
+    },
+    {
+      "path": "firmware/fm1/loader/crt0_ldr.S",
+      "sha256": "bd4149b97520d1dcc271f730c5a046b0dbf97909e48e968e0ba18304ffc37841"
+    },
+    {
+      "path": "firmware/fm1/loader/hal/fm1_cc.h",
+      "sha256": "46c533a0926ba9298ae36705f857ed609a61b95511ba7f0d1800857b4760dd73"
+    },
+    {
+      "path": "firmware/fm1/loader/hal/fm1_flash.h",
+      "sha256": "ee9700389d8bf842606b7210e52e125c085a44fbb5d30301cf189d823c4d5e90"
+    },
+    {
+      "path": "firmware/fm1/loader/hal/fm1_gpio.h",
+      "sha256": "5e3937e32a3b4b9b9ae622c5b42c8819ec8a16f2d76dbddec91654703c77a216"
+    },
+    {
+      "path": "firmware/fm1/loader/hal/fm1_sys.h",
+      "sha256": "5d56781274406b0a1bf816c66d86c0b0b23b49757cc6f5644df566127827a9a7"
+    },
+    {
+      "path": "firmware/fm1/loader/hal/fm1_time.h",
+      "sha256": "e83c725eae2ec5a163771ca2b8f1c0779354456f2e20a32febc7b6755758a97d"
+    },
+    {
+      "path": "firmware/fm1/loader/hal/fm1_usb.h",
+      "sha256": "d3401dac8c866c1a992ff4d982eaa8214e899416c4547adbd9e10ca6609329ab"
+    },
+    {
+      "path": "firmware/fm1/loader/hal/fm1_xip.h",
+      "sha256": "dcba6ddb9cd2403e1d97c4db49d836110ef2805d2369db7ed323e3fbe26c56ed"
+    },
+    {
+      "path": "firmware/fm1/loader/ldr_core.c",
+      "sha256": "03d23facfe8bff61b7ecee1387624f9a2240a2cca5759411d303839a0b71f442"
+    },
+    {
+      "path": "firmware/fm1/loader/loader.c",
+      "sha256": "e42b2f0cfdded19a2b2809d1114c4546f13bd2c549908490f3dc0cc5781a384f"
+    },
+    {
+      "path": "firmware/fm1/loader/loader.ld",
+      "sha256": "4acae8c9a16cf9a70f53a546f9175b5a86d2bc5cb6bce39513a2ff3c4fdba4ae"
+    },
+    {
+      "path": "firmware/fm1/loader/qualifications/701-test01-20261005.json",
+      "sha256": "b4e6c02c016790e08fc5c3dd06aa876ab902e1c6f3a04bef71eb7df5e25f15e2"
+    },
+    {
+      "path": "firmware/fm1/loader/qualifications/702-test01-20261006.json",
+      "sha256": "a59f0ca57acb3b52c737924f85818f9c984aa4fd37bb46528c0856af3123f6ea"
+    },
+    {
+      "path": "firmware/fm1/loader/qualifications/703-test01-20261006.json",
+      "sha256": "6b3ad62e3f68118c46cf9b113b1e4dd89cbfe2c315528e0590217ad10f50c051"
+    },
+    {
+      "path": "firmware/fm1/loader/qualifications/704-test01-20261006.json",
+      "sha256": "fb9e6c5c83fcf9509a7d0080a5a23148817cb394edc987d1c909cf388a20b7ad"
+    },
+    {
+      "path": "firmware/fm1/loader/qualifications/705-test01-20261006.json",
+      "sha256": "0627883b21fad031ed1811fa061126bb1c2056703037f1d512caf4a3ecff7279"
+    },
+    {
+      "path": "firmware/fm1/loader/qualifications/706-test01-20261006.json",
+      "sha256": "2d2a99b19ecae8791883b4ebbab5e07a847dfbe0d488d6fc729544c893b54587"
+    },
+    {
+      "path": "firmware/fm1/loader/qualifications/707-test01-20261006.json",
+      "sha256": "cd820ae401047113147612cc06a510ff28fb7e6fbb92b110ad04c15183f8abe0"
+    },
+    {
+      "path": "firmware/fm1/loader/sha256.h",
+      "sha256": "df18c6d6a2f97e1c53504793b1a01786a5cf2adfa97f8f24f8a44dc38abc3cda"
+    },
+    {
+      "path": "firmware/fm1/loader/src/libc.c",
+      "sha256": "344b09afe33da826feefeb1ea2a1a7c50732f91c133fee30174819645edc131a"
+    },
+    {
+      "path": "firmware/fm1/loader/src/ota.c",
+      "sha256": "651d8840b2630fe599cd8aec970cbe825240eedb6e93b5ee2f5a0965026efe7d"
+    },
+    {
+      "path": "firmware/fm1/loader/src/usb.c",
+      "sha256": "7a7412db01339e3fb144060fc886fcee2d380799f73ded224c18cf07486153f1"
+    },
+    {
+      "path": "firmware/fm1/loader/stock_reference.h",
+      "sha256": "785da57af3f1d72e15c86fb47543e616e664d8fab278a46faa5913e354419756"
+    },
+    {
+      "path": "firmware/fm1/loader/tests/CMakeLists.txt",
+      "sha256": "b63f10fa78051cb4c4ff99b322866c7ce97b68a04710a3cb0978cb472e3b1f69"
+    },
+    {
+      "path": "firmware/fm1/loader/tests/loader_test.c",
+      "sha256": "a3e897ae02bae114734cd98c7988c7fef4cd2b452ba20050305a6a872c6eec8b"
+    },
+    {
+      "path": "firmware/fm1/loader/write_policy.h",
+      "sha256": "aae6bd7777adeda718ef87484e8f87cc3d8f8bb48772d358a3fa81633649f27b"
+    },
+    {
+      "path": "firmware/fm1/native_state.h",
+      "sha256": "88cc032ba0ee5863ce51d86146f242003756ac03afe705d1edddb3baec4564bd"
+    },
+    {
+      "path": "firmware/fm1/onboard_store.h",
+      "sha256": "160e4f8006d18b748b718a34db4ead0c1b827b14e46c40ac5ba1ca51a851efbc"
+    },
+    {
+      "path": "firmware/fm1/panel_gesture.h",
+      "sha256": "0e7a68c88f5c130fc33b3b55f73e5600a80ccd4e08d4b43e9ddbc62d2f88497d"
+    },
+    {
+      "path": "firmware/fm1/panel_model.h",
+      "sha256": "1b7a25bcbffe996a3f2aa4f5c859a92b3afa1d4c7120f0260bcd04cbaf6005fb"
+    },
+    {
+      "path": "firmware/fm1/preset_store.h",
+      "sha256": "390a4d6703c1cf0ceb11d7009aa6de814f2756ae6445f01a2ebc88ac5e1ebf86"
+    },
+    {
+      "path": "firmware/fm1/runtime.cpp",
+      "sha256": "e6ef5ed49edd220c0b586de0d816a9c62fb5941567b03f2006c983c05d35bb87"
+    },
+    {
+      "path": "firmware/fm1/trace.h",
+      "sha256": "04c6e068952445252564d11409141a9f2c627e8d7a2c1ced797c7d359cd33fed"
+    },
+    {
+      "path": "firmware/fm1/ui.h",
+      "sha256": "557736365b7caf3cd7c7c843dc8d5861e98feaaa125abe1ff5b4a7e071e14498"
+    },
+    {
+      "path": "tests/board_adapter_tests.cpp",
+      "sha256": "ad8f789b44ae5b5f55f4ed01410190df98a898fdf37dfd1d294482a8f9abad7d"
+    },
+    {
+      "path": "tests/codec_tests.cpp",
+      "sha256": "64ef2bfd3c8e28500adfe0b541da89ec27c853f1d90810dca86c285947dda2cc"
+    },
+    {
+      "path": "tests/effects_tests.cpp",
+      "sha256": "389846a2cb6d44887c4c63ef19a9dd269afb7b8c06b340c8d748f0aa0b16673b"
+    },
+    {
+      "path": "tests/extract_fm1_native_board.py",
+      "sha256": "19a171c7c777f445c5641b9a482d1855bf9f0555398ca421ca70939ca0b5fdab"
+    },
+    {
+      "path": "tests/extract_fm1_storage_board.py",
+      "sha256": "ad676fbdc5f23b19f8cc1ad95a06e17cf7eae92f266ccf30f2b4eefb606bc5d9"
+    },
+    {
+      "path": "tests/factory_presets_tests.cpp",
+      "sha256": "1db9686fb3145dec569010021580d3a0ceced457c7043722639cca9095f716a6"
+    },
+    {
+      "path": "tests/fm1_control_mailbox_tests.cpp",
+      "sha256": "20798de223cf9322074f109b12a4937dcee8c991bb365f3377c69828768b976f"
+    },
+    {
+      "path": "tests/fm1_dispatch_tests.cpp",
+      "sha256": "cc957e6af8afdf7c2bd7e642a580ffc2e1001078ec6d9fc64bb9814c3ee46631"
+    },
+    {
+      "path": "tests/fm1_gesture_tests.cpp",
+      "sha256": "73f3555c3938dd84ac23d0b8b2f8e023e5667e72decd5d96047f98693f31577f"
+    },
+    {
+      "path": "tests/fm1_led_tests.cpp",
+      "sha256": "6a968312de911980951833be4e83e8756d58d5212adc9c7adf2150a9a31b434c"
+    },
+    {
+      "path": "tests/fm1_native_board_tests.cpp",
+      "sha256": "e9d9b8d48f166639a5c18279e42dd1bdbe3f958f2c7f4f81973abdb8a7b885b0"
+    },
+    {
+      "path": "tests/fm1_native_state_tests.cpp",
+      "sha256": "71452a69a7ce343944010f8264080dab2c53429aada8766340cdd95c263ae780"
+    },
+    {
+      "path": "tests/fm1_native_v2_probe.cpp",
+      "sha256": "41ab9f023ca174763ca05b3778dab7590d32926dceced059bdcb9f0eedd8615f"
+    },
+    {
+      "path": "tests/fm1_panel_tests.cpp",
+      "sha256": "cfc31e653228fb4a46a1c92e648e84832c5a11654a00cd674d375ae6dd136749"
+    },
+    {
+      "path": "tests/fm1_preset_store_tests.cpp",
+      "sha256": "ec06e401c0969409d7b8bdd6d223a6b5d4a619684aaec936984d9f027d8122c7"
+    },
+    {
+      "path": "tests/fm1_storage_board_tests.cpp",
+      "sha256": "2d1614773b4c0cd07407c35cbd4a44f8038b64a9eb63bab8b41c461a29cb0b1f"
+    },
+    {
+      "path": "tests/fm1_trace_tests.cpp",
+      "sha256": "fa2d78021b98028f2e222d474ff3daeb1e478692922fa4ddd1e6da797ca09c53"
+    },
+    {
+      "path": "tests/fm1_ui_tests.cpp",
+      "sha256": "59164c645fcba0483a0d0438103b7c1de394cca97e40e0b65ed9b22ea68afa54"
+    },
+    {
+      "path": "tests/host_integration.py",
+      "sha256": "1b79814b8d73ac45b195d7e641316048caf64aadeb8d3f34ff5a17e66f518eaa"
+    },
+    {
+      "path": "tests/performance_tests.cpp",
+      "sha256": "900c85666e13715b809f5f4e6549a2478325a7d132abb02ff73b360658ec9759"
+    },
+    {
+      "path": "tests/storage_tests.cpp",
+      "sha256": "337bbdd0c5dd58940032d22d40ece5b7a4b0cfc5409331307cc8ff6e81461c83"
+    },
+    {
+      "path": "tests/synth_tests.cpp",
+      "sha256": "dd382bde5e8ea400d4774eabfc883dcde948685766934d80d68880c419f5514c"
+    },
+    {
+      "path": "tests/test_dev.py",
+      "sha256": "22878a727cc13d0c57197ad7d0e2cb405104b2794cb5146391300779fe56c090"
+    },
+    {
+      "path": "tests/test_device_protocol.py",
+      "sha256": "237c876aa21e10f1f752543ae5255540feee0e6839971c93c3f98019a10df861"
+    },
+    {
+      "path": "tests/test_fm1_704_bench.py",
+      "sha256": "9b0e1ee2ba461b85a01629a69d0f273679dcd4e10a31b3df0ececf15ff020775"
+    },
+    {
+      "path": "tests/test_fm1_707_bench.py",
+      "sha256": "98b4eab660e460169858647c7f2658f73e1f3fe168d12ae0a1a4aa6dd0e0f098"
+    },
+    {
+      "path": "tests/test_fm1_708_bench.py",
+      "sha256": "d3650045746202687bf512a2e45e6f39d38cc8c0fbb6e16a25d90427cd7c86f9"
+    },
+    {
+      "path": "tests/test_fm1_bench.py",
+      "sha256": "c6ad2a3b598e68d33b6d0b6b19774662216a3a10b4965c903fd90e035500f0ca"
+    },
+    {
+      "path": "tests/test_fm1_build.py",
+      "sha256": "5e1c7bcd0550743259a1109b288f450ffc61e2f91ff25b105d4630f97da49477"
+    },
+    {
+      "path": "tests/test_fm1_flash_compare.py",
+      "sha256": "02bdfd5d50f1c17b20b3277257962a17a1be36ac3dcb076207b9f99e6472ed25"
+    },
+    {
+      "path": "tests/test_fm1_flash_transport.py",
+      "sha256": "6d32495d4f57b56c24bab1ae0f76c5d00a904ff4c110009e9fa497c92e5cde52"
+    },
+    {
+      "path": "tests/test_fm1_native_bridge.py",
+      "sha256": "2b289fd4c6d1ce987d16e27d184fb66bb64d4dfac7668eab6470512d77564669"
+    },
+    {
+      "path": "tests/test_fm1_native_bridge_v2.py",
+      "sha256": "c5c08a8cfa19a5c6975e9de0e520b23fb64c24bcae281d7d32e0ae7beebc3796"
+    },
+    {
+      "path": "tests/test_fm1_native_state.py",
+      "sha256": "b27e9ed47d2d29b794cafdc489e8e59dad52e993b124ea5fcfce14cb50f8968f"
+    },
+    {
+      "path": "tests/test_fm1_native_v2.py",
+      "sha256": "1a34f0798daa0473e5bb0facd6453e2daa34e4309c6fcfb98df3195cd51629c4"
+    },
+    {
+      "path": "tests/test_fm1_package.py",
+      "sha256": "0ecc2f900620489b7d25eced94f2fcd4b18af6afd518f5e5f5d4fd253056518a"
+    },
+    {
+      "path": "tests/test_fm1_rom_backup.py",
+      "sha256": "1a0dfac368dbc5786826d242fd6c70bc937a939c7f77a571eb5d4a9eaab4770e"
+    },
+    {
+      "path": "tests/test_fm1_rom_entry.py",
+      "sha256": "d328f99de23a63dd7c52e8f770384690c5fe25c33c4ba8f3ceef840c92be2362"
+    },
+    {
+      "path": "tests/test_fm1_rom_protocol.py",
+      "sha256": "6245d873b4410ba8bd2384ef4b35d68b03500b638956d1872f58e3f19ecfcc97"
+    },
+    {
+      "path": "tests/test_fm1_session.py",
+      "sha256": "a6bddb03607df7f0bd562b030edb6dc8f0b9a2a43bc9953a094d8bcbea80c6b3"
+    },
+    {
+      "path": "tests/test_hardware_bridge.py",
+      "sha256": "ec95dde179e3c78e11add975c1d581e4d445a5fc12f32a688a9c26dcb83e588c"
+    },
+    {
+      "path": "tests/test_hardware_inventory.py",
+      "sha256": "d7c10be96a0ebfb19241f8512502e2115c74ea87c66551afe0795eb19561fe13"
+    },
+    {
+      "path": "tests/test_library.py",
+      "sha256": "90a6d03766cd4f3459dec20f2aaa5a2d1464f460329e87c9c431191f386048a5"
+    },
+    {
+      "path": "tests/test_sandbox.py",
+      "sha256": "a23d772cb74d8d0e4ae2ec4f592385ac38bab7b320f7610cc69b810c3f5db1e1"
+    },
+    {
+      "path": "tests/test_stock_reference.py",
+      "sha256": "631d83d3ed2fcc4545a894748f1d950199c2233e85a7194cd8a88b899c5b2338"
+    },
+    {
+      "path": "tests/test_target_probe.py",
+      "sha256": "9d221064ab8c6a09038a13ea4df1ad33210e466cbc59419fffb72c34ac9a7b51"
+    },
+    {
+      "path": "tests/test_workspace.py",
+      "sha256": "4c926a309df5a5e6c8ca2677c45ab2e794673aaab6c855385524476aadd04369"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/app.ld",
+      "sha256": "250b93c08ee74e64e17b5c3d43473aef02f20c59f0b917d8fd982e9bb72bae7f"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/crt0.S",
+      "sha256": "e26b8e38377cd477beaa2f238f5022c6e9d221947fc546d34fe857d9d3add0a0"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_adc.h",
+      "sha256": "1917870bd802de9134d33335efbcf886b296705dff06688925fd7325589c0c1a"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_audio.h",
+      "sha256": "22351440699748546e932098e3016c618d6137dd0ae34557e08a107641d4e62e"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_cc.h",
+      "sha256": "46c533a0926ba9298ae36705f857ed609a61b95511ba7f0d1800857b4760dd73"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_flash.h",
+      "sha256": "4262011962539937a2d0c51aee8c4f06df50cc35f74cef3fc6c42bf8afc8acd3"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_gpio.h",
+      "sha256": "5e3937e32a3b4b9b9ae622c5b42c8819ec8a16f2d76dbddec91654703c77a216"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_guard.h",
+      "sha256": "6a5ddde30c97ff094ba7f843be53eeafc820caf451fe3270c06a17be178a4608"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_input.h",
+      "sha256": "b1b6325a72d3a6e7c9aa02c56860417786befde23ab1556ccad87c38ffc5a705"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_irq.h",
+      "sha256": "073110bc5bd85eb0b8271d124e11d5458d7e99af638df5d43f79a20d1846daaa"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_isr.S",
+      "sha256": "2aad84e24a51c79b187ef3faf9d1bae108b1389bf78659f6b02dbbd95d8a7d7b"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_lcd_hw.h",
+      "sha256": "4fc3318a703fd55200153442acac4eb33ef56ff8e2eb82ba18ed0a3b9e655c1e"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_sys.h",
+      "sha256": "037bc64e65650fb2c8d3a23b218992fad347e9098352aae4938738622af2c224"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_time.h",
+      "sha256": "22116c4b6a365c8510ba1dab12f0e8a452343a82435abff7640648c630b740fa"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_timer.h",
+      "sha256": "d5e89b90035018207264fd89ea2b0988d5d716506df07233c9dd2c39741b71e8"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_uart.h",
+      "sha256": "0df7266a58996c688a4279c6b7edbaa7921e18805c8a65f1ff156680b03fcff6"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_usb.h",
+      "sha256": "12b9b31bde0dbb15fa15379a215eaec11e882bd33c18f4b250fa9e3a47c202f0"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_vec.S",
+      "sha256": "8f9e787871332f522157d561dc3cfe8906ed0abf160139ed5819cfdeab66f01a"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/hal/fm1_xip.h",
+      "sha256": "dcba6ddb9cd2403e1d97c4db49d836110ef2805d2369db7ed323e3fbe26c56ed"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/src/lcd.c",
+      "sha256": "5a0f3c8b538bddd8266da7523c8f592ec124d8f0b38876edc10c0f123785400b"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/src/midi_uart.c",
+      "sha256": "459cf47e648a91523713b27886448d8992ab8629288c76f6e5d317be54c4435f"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/src/ota.c",
+      "sha256": "9ebbac3ddd8db939951a7d28958d85d43aaaf04191464bea0803f1ade5bb40ab"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/src/storage.c",
+      "sha256": "7043745bdadefc820a372ad4641d5c1edb43acf1ddaff6d1d258cef45c81dd48"
+    },
+    {
+      "path": "third_party/acquired/fm1-target-review/community/felucca/source/firmware/src/usb.c",
+      "sha256": "ea2b55ade91cbb0e3d5f9a9fbc290349cb5e66dbf9b552065450345eb0ae6705"
+    },
+    {
+      "path": "third_party/msfa/src/aligned_buf.h",
+      "sha256": "97c267c756088e18fe0a8a5c7d59df3ab5cf967337c7f7d0f90155ba7ea4e366"
+    },
+    {
+      "path": "third_party/msfa/src/controllers.h",
+      "sha256": "68bf695b3b3176bf618a919f840093909a89325c57057c73bf8eee5fc8ae61b9"
+    },
+    {
+      "path": "third_party/msfa/src/dx7note.cc",
+      "sha256": "e1545d21974ab801b4035da565e9ef91c94649e0f001b8911637ed1d015b3c5f"
+    },
+    {
+      "path": "third_party/msfa/src/dx7note.h",
+      "sha256": "e03fa66d09f7ac9cf01d0f48f17335de432def5af46c6719c7dcd2f3aeb0390a"
+    },
+    {
+      "path": "third_party/msfa/src/env.cc",
+      "sha256": "83bf4debc5ea480466892ccf572adcc27b55ee2ac3c21979485e6fa73e5b9ccc"
+    },
+    {
+      "path": "third_party/msfa/src/env.h",
+      "sha256": "70027f8c74cb184275a56f8b549a00b510342ad29f4ed938398ca850e6c4d6f6"
+    },
+    {
+      "path": "third_party/msfa/src/exp2.cc",
+      "sha256": "fe7dc02d600fcaf198ca32b10edfb28ff695d107b401c3fa92a7ac73d2e9096f"
+    },
+    {
+      "path": "third_party/msfa/src/exp2.h",
+      "sha256": "23aa480e221e5d1f928a5ccab654a9c01a80eb0b610fd66d9364af09d18cdda8"
+    },
+    {
+      "path": "third_party/msfa/src/fm_core.cc",
+      "sha256": "5fc793182fbb166ef865693401ad87673227b7f2f12d641adf890bd0b57f6f77"
+    },
+    {
+      "path": "third_party/msfa/src/fm_core.h",
+      "sha256": "8b44690d4965cffe82f71dd12125b7d3b63fb59556c4cac0472cc984cd29a1ea"
+    },
+    {
+      "path": "third_party/msfa/src/fm_op_kernel.cc",
+      "sha256": "1b93f1166f0b7a4d7c318db17539752c318b50551107bb8ffa1d0b526d545c12"
+    },
+    {
+      "path": "third_party/msfa/src/fm_op_kernel.h",
+      "sha256": "62bfcbbccf445504dd195a6beb05179b9e03235e8e4b19e661b761ddc0e80603"
+    },
+    {
+      "path": "third_party/msfa/src/freqlut.cc",
+      "sha256": "6b88d9c80deda9460b24dbfd40699ed3fc55029ea62e0fba0b5b22305769744b"
+    },
+    {
+      "path": "third_party/msfa/src/freqlut.h",
+      "sha256": "d319ee2d35e8e8e2c860b6fc2a2d1382bf5782d1d147264914325ca41f89f00b"
+    },
+    {
+      "path": "third_party/msfa/src/lfo.cc",
+      "sha256": "47a34fc38eab4cfc46376732a6ddfd24631b8ef27a67ec4177300a264e5ff867"
+    },
+    {
+      "path": "third_party/msfa/src/lfo.h",
+      "sha256": "f88ba2fbd63626483c7a028537a0434aec3b7a159fee154efc0451f8b784dba2"
+    },
+    {
+      "path": "third_party/msfa/src/patch.cc",
+      "sha256": "b4a70d7812052dc52621c2d80f480dcc17b6ff0044cc6e215caae88df41d07b7"
+    },
+    {
+      "path": "third_party/msfa/src/patch.h",
+      "sha256": "2ddf975db873de9071adcec6bf8539a38f98e35e5f2b220045cff658e489b020"
+    },
+    {
+      "path": "third_party/msfa/src/pitchenv.cc",
+      "sha256": "305f969b67e2d410859da662974fca4d856a5ca30d4c46ad4fc8501e7ca386a1"
+    },
+    {
+      "path": "third_party/msfa/src/pitchenv.h",
+      "sha256": "5701a2dcaf13e1ba7141cfc605ba6163ddffd73a91a0362d31b18a4f99fcd72d"
+    },
+    {
+      "path": "third_party/msfa/src/sin.cc",
+      "sha256": "06ac6f168f6e63f73e6195bbd4a1a65713f01594aeccef469f9c36e9e22e1d11"
+    },
+    {
+      "path": "third_party/msfa/src/sin.h",
+      "sha256": "77486d3ac19d53514a8d26cd2164374ceceab9b15f8d98f876d4db7647321cc2"
+    },
+    {
+      "path": "third_party/msfa/src/synth.h",
+      "sha256": "ecf566247425498a7f9030bc47aa825ad2dab60aa046f00b99285ba5cfb42e95"
+    },
+    {
+      "path": "tools/build_fm1_candidate.py",
+      "sha256": "dd55acb085c1829e59f95a3a0670238482d73964da8a16ffa9e3256d42be5954"
+    },
+    {
+      "path": "tools/device_protocol.py",
+      "sha256": "4327545341f2264e5413c1c4bb7de0bade82298c24d9ce7789a2777b74d10edf"
+    },
+    {
+      "path": "tools/fm1_704_bench.py",
+      "sha256": "cb046e7c9dbcbd84cd97f40b19ce70bf1fc40f595b76939e2d0c25f53e845452"
+    },
+    {
+      "path": "tools/fm1_707_bench.py",
+      "sha256": "9bfdc35b8321dd6cd56c8887abe8ee82bd3ac300793b88497875a7b1e132bc0f"
+    },
+    {
+      "path": "tools/fm1_708_bench.py",
+      "sha256": "2f5167d1eeee809ac0d0013714565f7cdb8e00c6d4b9a113c6a77984a443a3bd"
+    },
+    {
+      "path": "tools/fm1_bench.py",
+      "sha256": "07b1f332feee305c04709d5f5f1d49d339104d6602f6a68c682c37bd13d85dcc"
+    },
+    {
+      "path": "tools/fm1_flash_compare.py",
+      "sha256": "d566e84fc16e4247da7b2914e0bc0bce2f9caa72074c8dbd1b3a45c247d06da7"
+    },
+    {
+      "path": "tools/fm1_flash_transport.py",
+      "sha256": "e5fbb165c41a4e67eae901c681c97909ea5f7ec6381fba6609a21edbe8626461"
+    },
+    {
+      "path": "tools/fm1_native_bridge.py",
+      "sha256": "4d6fff6d44c0cd436e6b45d5b0705cb22655064d221676884a353860c99d2d86"
+    },
+    {
+      "path": "tools/fm1_native_bridge_v2.py",
+      "sha256": "32a2bbeea72fa8d7f4ff85d768fea6d22907f50768459296f1d115d259f0b7e3"
+    },
+    {
+      "path": "tools/fm1_native_state.py",
+      "sha256": "89f5e155feff0d8fe1c5ddabbc1f2d446cc13c05f77b71520515a881e5b21f96"
+    },
+    {
+      "path": "tools/fm1_native_state_v2.py",
+      "sha256": "a753c44761d572c9f6be41463cadb89ec35356f7d103d383d59f7141c86d5b72"
+    },
+    {
+      "path": "tools/fm1_package.py",
+      "sha256": "c082a0b8b847b75b996799d11140819b3e77b365febcae258e79c05ef2defe13"
+    },
+    {
+      "path": "tools/fm1_rom_backup.py",
+      "sha256": "c36b00c0bc63d6d8d94d53fbc4676272f30c94b4ed67611a92f2f5bc78c4d0b4"
+    },
+    {
+      "path": "tools/fm1_rom_entry.py",
+      "sha256": "71b673c1cd1cb1cd4f6f9eb661c8c781d81eb5932dea0dbdff43f53ee393a4e5"
+    },
+    {
+      "path": "tools/fm1_rom_protocol.py",
+      "sha256": "8462376e5477b5857559d91b49faaa502b0c3605588f12dded57d033bfec1ab4"
+    },
+    {
+      "path": "tools/fm1_session.py",
+      "sha256": "c36bbd819fc2585a86ee0f10ff32506cd27888b15fef865a02f6531fe15e9d81"
+    },
+    {
+      "path": "tools/hardware_bridge.py",
+      "sha256": "5ce97812dcb575a414998be8b0600fd3eb4087ee19495de460a8cc589cd20c4b"
+    }
+  ],
+  "checks": [
+    {
+      "path": "artifacts/runs/20261007T123001.400629Z-test-2cc2db8f/summary.json",
+      "sha256": "bbf4dd517f0ef65b4aef3dd05b0cd5a3125f00b3a4d03ec4cd125af4c40cb5c5"
+    },
+    {
+      "path": "artifacts/fm1-candidate/20261007T121941.265386Z-d892900b/report.json",
+      "sha256": "89b045db26e418664d63100dfd256d0ad16970ee2090a5855a48552bdf25f9cf"
+    },
+    {
+      "path": "artifacts/presets-708/report.json",
+      "sha256": "42f989c90609b731c081044d3e0191d4b65ba48e014b130548a67fb0967c92bf"
+    },
+    {
+      "path": "artifacts/performance-708/report.json",
+      "sha256": "29bb39c7c0810b16a406b27ee9716fcbf7acb8909321746bedfb6349e7f4f2aa"
+    },
+    {
+      "path": "artifacts/fm1-storage-708/report.json",
+      "sha256": "b556488c2d08032479cb43721ecb713bb7aafa372dee0dade2e95e2daefb4e4b"
+    },
+    {
+      "path": "artifacts/fm1-native-v2-708/report.json",
+      "sha256": "379508028860038074993a158d0a5c16a009bf0c5c7c9bbffae8551f6cc048bb"
+    },
+    {
+      "path": "artifacts/fm1-storage-board-708/report.json",
+      "sha256": "a1ee4debaabaa35f65296b75686b480095d85c0556cc906de1c14c4d85dd8f5b"
+    },
+    {
+      "path": "artifacts/fm1-708-resource-review/final-20261007T1220Z/report.json",
+      "sha256": "b3f07371d020b7c4849cf9181f5a6d09d0d2a27f5c01c0881c7985376d871edf"
+    },
+    {
+      "path": "artifacts/fm1-storage-ram-audit/708-final-stack-20261007/report.json",
+      "sha256": "c908f62ac8a0f303591cff0fa3dadfa2ccae0518cec1c175b28d2bc66d58d6ea"
+    },
+    {
+      "path": "artifacts/fm1-independent-review/708-20261007/report.json",
+      "sha256": "414cf36fad858dd7dc32c6add0c8f6c6311a1b9000d210eb44a0e104d10a67ab"
+    },
+    {
+      "path": "artifacts/fm1-independent-review/708-20261007/loader-tests-report.json",
+      "sha256": "744e7f90bdd025463b30d56011ba67e66025e480f3609db4d4638d335ca6924b"
+    },
+    {
+      "path": "artifacts/fm1-upgrade-708-review/20261007/final-report.json",
+      "sha256": "8764f2bf929673d65df004f1486ae0f655554e2bac40818e98aa582e0cb95437"
+    },
+    {
+      "path": "artifacts/bench-708-tools/report.json",
+      "sha256": "8cc17812434ff6f8629b183cc5551752d8ecd854032df025212cd032ec2f1e7d"
+    },
+    {
+      "path": "artifacts/fm1-native-bridge/20261007T123039.154416Z-a8f63c1d/report.json",
+      "sha256": "becfed2880a32601c176f910d271cdc88804ab345f658f175f0938e2c69bce6c"
+    }
+  ],
+  "limits": [
+    "No physical708 execution at preflash qualification time",
+    "Onboard journal tested with synthetic NOR interruptions; actual save/readback/restart follows installation",
+    "No claim of stock analog fidelity, optical LED measurement or actual brownout recovery",
+    "Static stack estimates are not runtime watermarks or formal WCET",
+    "Independent dead-app recovery and original-backup restore remain unqualified"
+  ]
+}

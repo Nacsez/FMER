@@ -1,0 +1,56 @@
+FMER
+Original FMER firmware, Companion and original default instruments:
+GNU General Public License version 3 only (GPL-3.0-only).
+See LICENSE and LICENSING.md. Existing per-file copyright notices apply.
+
+FMER splash artwork
+Original artwork supplied and owned by the FMER project owner.
+GPL-3.0-only by express owner authorization on 19 October 2026, including
+the artwork's editable source and generated splash reproductions.
+Source: FMER SPLASH.png. Generator: tools/generate_fm1_visuals.py.
+See docs/release/ARTWORK.md for the source hash and scope.
+
+Felucca hardware/platform foundation
+https://github.com/hugelton/Felucca
+Reviewed commit: 20c275e39f75fa820978032efaceddfc5283c8cb (v1.0.1).
+Copyright (C) 2026 Leo Kuroshita (@kurogedelic), Hügelton Instruments.
+GPL-3.0-only for the incorporated platform files; upstream notices are retained.
+FMER uses Felucca startup/interrupt code, hardware abstraction, control scanning,
+audio and display hardware support, USB MIDI/audio, MIDI UART and OTA support.
+FMER-specific patches are performed by tools/build_fm1_candidate.py and recorded
+with hashes/diffs in the build report. This does not imply that FMER includes
+Felucca's synth engines, preset library, native project format or entire UI.
+
+SLOOP updater foundation
+https://github.com/isod89/sloop-fm1
+Reviewed commit: f2b44c219b8a4ac00bc06dca756cdae8a259dd1a.
+GPL-3.0-only. Original notices are retained in firmware/fm1/loader/;
+PROVENANCE.json identifies each source and FMER's preservation/validation changes.
+
+Google Music Synthesizer for Android (MSFA)
+https://github.com/google/music-synthesizer-for-android
+Reviewed commit: f67d41d313b7dc85f6fb99e79e515cc9d208cfff.
+Apache License 2.0. Copyright notices are retained per file.
+See third_party/msfa/COPYING, README.md, fmer-port.patch and
+evidence/msfa-source.json. No upstream preset bank is included.
+
+Python Windows embeddable runtime and bundled components retain their own
+licenses. Portable releases include notices/Python-LICENSE.txt and runtime
+provenance. Microsoft/LLVM/JieLi components retain their respective terms;
+GPL licensing of FMER does not relicense external tools or libraries.
+
+Original default patches are FMER recipes, not a redistributed vendor sound
+bank. Imported patches, stock firmware and private unit dumps have separate
+rights. The research corpus is preserved under its original rights notice.
+
+Official M-VAVE resource research (not bundled or linked)
+https://github.com/m-vave/fm1_open
+Reviewed commit: b178ac43c25f010c60a878056fb5331fe693fd62.
+THIRD_PARTY.md grants Apache-2.0 for the exact public sdk/firmware/FM-1_015.fwsc
+resource. FMER's recovery-layout admission is separate from those rights; this
+build does not distribute that image or the distinct open V13 firmware.
+See evidence/community-20261018.json and its linked research report. This finding
+does not grant rights over a private unit dump or an unrelated sound bank.
+
+This NOTICE records provenance and attribution. It adds no restrictions to
+the licenses and makes no claim of upstream sponsorship or endorsement.

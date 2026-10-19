@@ -1,0 +1,206 @@
+{
+  "license": "GPL-3.0-only",
+  "repository": "https://github.com/isod89/sloop-fm1",
+  "commit": "f2b44c219b8a4ac00bc06dca756cdae8a259dd1a",
+  "files": [
+    {
+      "path": "loader.c",
+      "upstream_path": "firmware/loader/loader.c",
+      "upstream_sha256": "d1a68016bde7c5f1ecdd2613f1f9ef55cd5822e65a0c6e3394fb9249f1d0fdea",
+      "modified": true,
+      "local_sha256": "d2561f44482436b528fddb515acfecfa4142402c495ebd032d2b863bce7c1d3e",
+      "changes": "FMER identity, private diagnostics, startup-image snapshot, staged-record-only write bounds and retained RAM record; 702 successor identity with exact installed-701 origin digest in separate reference header; 703 successor identity with exact installed-702 origin digest; 704 successor identity with exact installed-703 origin digest; 705 successor identity with exact installed-704 origin digest; 706 successor identity with exact installed-705 origin digest; 707 successor identity with exact installed-706 origin digest; compiled binary differs from 706 only in identity and 32-byte origin fingerprint; 708 only permits the exact E4F00 staged-record CRC write and rejects any other matched record before application writes, protecting native slots independently of record contents;709 changes only identity; exact708 origin is separately pinned.;710 changes only successor identity and exact installed709 origin digest.;711 changes only successor identity and exact installed710 origin digest.;712 changes only successor identity and exact installed711 origin digest.;713 updates only identity and installed712 origin.;714 updates only identity and installed713 origin.;715 updates only identity and installed714 origin.;716 updates only identity and installed715 origin.;717 identity and exact716 origin only.;718 identity and exact717 origin only.;719 identity and exact installed718 origin only.;720 changes only successor identity and exact installed seventh719 inline origin in the separate reference header.;722 identity and exact installed721 origin only.;723 changes only successor identity; exact installed722 release2 digest is in separate reference header.;724 identity and exact installed723 release4 origin only."
+    },
+    {
+      "path": "ldr_core.c",
+      "upstream_path": "firmware/loader/ldr_core.c",
+      "upstream_sha256": "389aa2e09e74fdac184221edd9b8b7d76eb59ec3dabd11008cbb06081f9fe1de",
+      "modified": true,
+      "local_sha256": "03d23facfe8bff61b7ecee1387624f9a2240a2cca5759411d303839a0b71f442",
+      "changes": "Full staged-image proof, bounded VM scan, CRC-only record invalidation, strict success reply and guarded abort; 708 only permits the exact E4F00 staged-record CRC write and rejects any other matched record before application writes, protecting native slots independently of record contents"
+    },
+    {
+      "path": "loader.ld",
+      "upstream_path": "firmware/loader/loader.ld",
+      "upstream_sha256": "4acae8c9a16cf9a70f53a546f9175b5a86d2bc5cb6bce39513a2ff3c4fdba4ae",
+      "modified": false,
+      "local_sha256": "4acae8c9a16cf9a70f53a546f9175b5a86d2bc5cb6bce39513a2ff3c4fdba4ae"
+    },
+    {
+      "path": "crt0_ldr.S",
+      "upstream_path": "firmware/loader/crt0_ldr.S",
+      "upstream_sha256": "bd4149b97520d1dcc271f730c5a046b0dbf97909e48e968e0ba18304ffc37841",
+      "modified": false,
+      "local_sha256": "bd4149b97520d1dcc271f730c5a046b0dbf97909e48e968e0ba18304ffc37841"
+    },
+    {
+      "path": "src/libc.c",
+      "upstream_path": "firmware/src/libc.c",
+      "upstream_sha256": "344b09afe33da826feefeb1ea2a1a7c50732f91c133fee30174819645edc131a",
+      "modified": false,
+      "local_sha256": "344b09afe33da826feefeb1ea2a1a7c50732f91c133fee30174819645edc131a"
+    },
+    {
+      "path": "src/usb.c",
+      "upstream_path": "firmware/src/usb.c",
+      "upstream_sha256": "da4d6637bf58c60df30ed13f46b21241f09d908d50ca6c75bce26dc426c2d8d2",
+      "modified": true,
+      "local_sha256": "7a7412db01339e3fb144060fc886fcee2d380799f73ded224c18cf07486153f1",
+      "changes": "FMER manufacturer/product descriptor strings"
+    },
+    {
+      "path": "src/ota.c",
+      "upstream_path": "firmware/src/ota.c",
+      "upstream_sha256": "ffc981586704b41f62c763248037d1fe373c84c3566c0486de795296f9841855",
+      "modified": true,
+      "local_sha256": "651d8840b2630fe599cd8aec970cbe825240eedb6e93b5ee2f5a0965026efe7d",
+      "changes": "FMER-only diagnostic dispatch before vendor frame decoder"
+    },
+    {
+      "path": "hal/fm1_cc.h",
+      "upstream_path": "firmware/hal/fm1_cc.h",
+      "upstream_sha256": "46c533a0926ba9298ae36705f857ed609a61b95511ba7f0d1800857b4760dd73",
+      "modified": false,
+      "local_sha256": "46c533a0926ba9298ae36705f857ed609a61b95511ba7f0d1800857b4760dd73"
+    },
+    {
+      "path": "hal/fm1_flash.h",
+      "upstream_path": "firmware/hal/fm1_flash.h",
+      "upstream_sha256": "ee9700389d8bf842606b7210e52e125c085a44fbb5d30301cf189d823c4d5e90",
+      "modified": false,
+      "local_sha256": "ee9700389d8bf842606b7210e52e125c085a44fbb5d30301cf189d823c4d5e90"
+    },
+    {
+      "path": "hal/fm1_gpio.h",
+      "upstream_path": "firmware/hal/fm1_gpio.h",
+      "upstream_sha256": "5e3937e32a3b4b9b9ae622c5b42c8819ec8a16f2d76dbddec91654703c77a216",
+      "modified": false,
+      "local_sha256": "5e3937e32a3b4b9b9ae622c5b42c8819ec8a16f2d76dbddec91654703c77a216"
+    },
+    {
+      "path": "hal/fm1_sys.h",
+      "upstream_path": "firmware/hal/fm1_sys.h",
+      "upstream_sha256": "5d56781274406b0a1bf816c66d86c0b0b23b49757cc6f5644df566127827a9a7",
+      "modified": false,
+      "local_sha256": "5d56781274406b0a1bf816c66d86c0b0b23b49757cc6f5644df566127827a9a7"
+    },
+    {
+      "path": "hal/fm1_time.h",
+      "upstream_path": "firmware/hal/fm1_time.h",
+      "upstream_sha256": "e83c725eae2ec5a163771ca2b8f1c0779354456f2e20a32febc7b6755758a97d",
+      "modified": false,
+      "local_sha256": "e83c725eae2ec5a163771ca2b8f1c0779354456f2e20a32febc7b6755758a97d"
+    },
+    {
+      "path": "hal/fm1_usb.h",
+      "upstream_path": "firmware/hal/fm1_usb.h",
+      "upstream_sha256": "d3401dac8c866c1a992ff4d982eaa8214e899416c4547adbd9e10ca6609329ab",
+      "modified": false,
+      "local_sha256": "d3401dac8c866c1a992ff4d982eaa8214e899416c4547adbd9e10ca6609329ab"
+    },
+    {
+      "path": "hal/fm1_xip.h",
+      "upstream_path": "firmware/hal/fm1_xip.h",
+      "upstream_sha256": "dcba6ddb9cd2403e1d97c4db49d836110ef2805d2369db7ed323e3fbe26c56ed",
+      "modified": false,
+      "local_sha256": "dcba6ddb9cd2403e1d97c4db49d836110ef2805d2369db7ed323e3fbe26c56ed"
+    },
+    {
+      "path": "LICENSE",
+      "upstream_path": "LICENSE",
+      "upstream_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "modified": false,
+      "local_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    }
+  ],
+  "derived_sources": [
+    {
+      "upstream_path": "tools/fm1pkg_make.py",
+      "upstream_sha256": "284fa4553d3194d6c374b7cb3ff169ac11a5d3f496861ed17f7bae28e79d7ea3",
+      "local_path": "tools/fm1_package.py",
+      "scope": "Reviewed selected algorithms/tests adapted; upstream orchestration not executed"
+    },
+    {
+      "upstream_path": "tools/lz4blk.py",
+      "upstream_sha256": "bede501ca8774ba6942b35ad2c43823e9f48f13d0fb001ef9b73cdaf41460e16",
+      "local_path": "tools/fm1_package.py",
+      "scope": "Reviewed selected algorithms/tests adapted; upstream orchestration not executed"
+    },
+    {
+      "upstream_path": "tools/build.py",
+      "upstream_sha256": "85dad9f9dff88bd33f9f4292060c55076c82e97bdeae0884b55e3311170ac589",
+      "local_path": "tools/fm1_package.py",
+      "scope": "Reviewed selected algorithms/tests adapted; upstream orchestration not executed"
+    },
+    {
+      "upstream_path": "tests/ldr_test.c",
+      "upstream_sha256": "9614f627ad4509601dd160f32a259abe408589e45e47bffc50e51eb7717f9698",
+      "local_path": "firmware/fm1/loader/tests/loader_test.c",
+      "scope": "Reviewed selected algorithms/tests adapted; upstream orchestration not executed"
+    }
+  ],
+  "original_fmer_files": [
+    {
+      "path": "sha256.h",
+      "sha256": "df18c6d6a2f97e1c53504793b1a01786a5cf2adfa97f8f24f8a44dc38abc3cda",
+      "license": "GPL-3.0-only"
+    },
+    {
+      "path": "stock_reference.h",
+      "sha256": "ddebd4cf10546caaf8e051e82b1b14d1e2a969340e5efa2e6dffcac8c6c3aec3",
+      "license": "GPL-3.0-only"
+    },
+    {
+      "path": "tests/CMakeLists.txt",
+      "sha256": "b63f10fa78051cb4c4ff99b322866c7ce97b68a04710a3cb0978cb472e3b1f69",
+      "license": "GPL-3.0-only"
+    },
+    {
+      "path": "write_policy.h",
+      "sha256": "aae6bd7777adeda718ef87484e8f87cc3d8f8bb48772d358a3fa81633649f27b",
+      "license": "GPL-3.0-only"
+    }
+  ],
+  "review_notes": "Fresh full raw Test01 original-app SHA256 required before accepted abort; measured by two matching ROM reads with pinned backup report. No flash journal. This exact-unit variant does not qualify general FM-1_015 images or cold-resume recovery. SHA256 is original FMER FIPS180-4 implementation tested with published vectors. No vendor payload stored here. For the 707 transition, the admitted origin is the exact installed 706 raw application from its hash-pinned completed package/journal, not the stock backup; see evidence/fm1-upgrade-706-to-707.json. The original twice-read stock backup/calibration template is retained unchanged. 708 admits the exact installed707 package origin and narrows the write barrier/record preflight to E4F00; native journal97000-E0000 is never writable by the loader. Source-level regressions retain all prior27 cases plus six new boundary/record cases; see evidence/fm1-upgrade-707-to-708.json. Corrected719 retains the719 loader identity/code and changes only stock_reference.h to the exact initial719 raw application fingerprint. The admitted initial package and completed flash journal are explicitly pinned in tools/fm1_package.py; historical719 retains its718-origin validation path. No general same-version override. The third719 image retains the same loader code/identity and changes only its admitted digest to the installed package-corrected719 raw application. Package5478b24942aa8b3a1febd8d3252f1277155c539c7ac1393da464c78e9b925f2e and completed journal49864627a85fa8d9a9859fe38a9cd7c2ec82cc5fcb064529b212d5aea41de9fe are separately pinned; the validator requires one unique known digest and the transport requires its exact matching package/app pair. Older719 packages retain finite backward validation. Optimized fourth719 retains unchanged loader code/identity; stock_reference.h admits only the installed third719 raw app333d874707ef788ce44b3fc218e1217b1961579bd4b1622fe56f835be31c6ef3. Package9717e6ead972a2d2487dd3af80b1f4a8845005341b5552f3b814c1771a52e50b and completed journal1bbbdc3e025946cd7966a8dd594aa631a20bdf2c77ec9e5098bdbd43100f5492 are frozen separately. All historical predecessor paths remain strict and finite; no same-version force option. Arithmetic fifth719 retains the same loader code and identity, admitting only fourth719 raw application467efd7fc0dce81a7410ec790e136800a7ef989f13313792d4378b5a753e6348 from package425eb83f0f67f6eb5dca1b8772f0e21d80fbc8ed8302aba3281d4f88e7071ece and completed journalf847ceeb03865e267230333e40d3b73462e40d5df3b0d5e925a128dbbe8ce21e. Five exact historical predecessors remain finite; package/application pairs cannot be mixed. Phaser sixth719 retains the same loader code and identity, admitting only fifth719 raw application a2fe6e71ed513a81b41f7e52a633434768cfc7c8da9107bec0046e1f896177f1 from package c831751ae34d6c7166bcf80efd6c614f48791a1954476913fbc71114ab21a2e8 and completed journal 77a7f4a877d9e04d3a45b446d47f2bce1e51b17919e62740c874c70040bb00c0. Six historical predecessors remain finite, with exact application/package pairing. Dispatch seventh719 retains the same loader code and identity, admitting only sixth719 raw application ed7ced0f9844d9b0a22b37cb5431e9bd95984a16406bdedcc1b1511edfc7df10 from package 133ecd05fb8dfc30005d835054a070bcd0fdd1122b8befab4bc11a5634905544 and completed journal bdcbf5a6c7ef38f9f0144c993afb67055b9c1e29d50a766a2785a7e63f2b8032. Seven historical predecessors remain finite, with exact application/package pairing. Corrected720 retains the720 loader code and identity; stock_reference.h admits only the installed release4 raw application c00da676063a1e02e70cfdbb7d5a0d2932f1e9d8dcc5cd0a4b78530caa358e85, from package 24151d0f9a5c32417e6019e817935f5b5de8b26116d779057561bb9faaf0fcd1 and completed journal bfe086ed630f40568b293a155b2368821301f731ec5e146960431febca9f809d. The exact719-inline to initial720 route remains valid as a finite backward predecessor chain. Missing, repeated, mixed or unknown digests and mismatched package/application/identity pairs are rejected; there is no general720 same-version override. Loader write_policy.h, application bounds, protected head, calibration and journal exclusion remain unchanged. Third720 candidate transition retains loader code/identity and changes only the admitted digest to exact release5 raw application 1925b91e4a55e428e8510a50838283373f93b34f7530ebcb6990841151359aa5, from package be8ffbea9fe5cb9e715bca9e7d9406da0e8815fb8a20189668100e4a4a9a4e21 and completed journal c8d4e31b3ad428f3539dfa0451adfbf6c2c78e8b2f09d714be390f51e01028e3. Both prior720 and seventh719 origins retain their exact finite backward validation routes. Package and raw-app digests must be paired to the correct identity; duplicated, mixed and unknown embedded origins remain rejected. Write bounds, calibration and protected journal are unchanged.",
+  "721_transition": {
+    "date": "2026-10-11",
+    "origin_identity": "FM-1_720",
+    "origin_raw_app_sha256": "00d3c2533c82dd3bd87d5ef170070c2a1bd43b153aaff9b6d5666c5375e33489",
+    "package_and_completed_journal": {
+      "artifacts/development-720/package-release6/fmer-candidate.fwsc": "2afc1f61212f49b9884a5f862d3d8c9ff3ad02cf8a3f86e55fce64aa3a2f2124",
+      "artifacts/fm1-flash/20261011T174946.265044Z-c8a798ff/events.jsonl": "f669567f68aa202b59cee339434c1868b93df246023c7c8969b8d221aeb6813e"
+    },
+    "scope": "Only exact installed720 release6 fingerprint and721 loader identity; unchanged write policy, head/calibration/journal protection. No generic origin override."
+  },
+  "722_transition": {
+    "date": "2026-10-12",
+    "origin_identity": "FM-1_721",
+    "origin_raw_app_sha256": "a797339fb5a21a44534f6e9297fbfff124406951fbbcc9226031af70a4719664",
+    "package_and_completed_journal": {
+      "artifacts\\development-721\\package-release1\\fmer-candidate.fwsc": "b331220eab6984d390c9e667eda62302dea0e776325ba80696d6308d91015edb",
+      "artifacts\\fm1-flash\\20261011T215436.525161Z-6a08b7f7\\events.jsonl": "bf2192351f4bb1dba79342f6e6de2aee5116d8817198c3f279d9b1c47d54a14c"
+    },
+    "scope": "Only exact installed721 fingerprint and722 loader identity. Write policy/head/calibration/journal unchanged; no generic origin override."
+  },
+  "722_corrected_transition": {
+    "origin_app": "2d6a0d916b008bcb191f30f1a7dac75d28019c328c3d5c77bcd1a0c2c7be8640",
+    "origin_package": "0ef9f457d7513bc9252070ab3b375c5e883c79b57efd666dd2cbbf60e2fd09fb",
+    "completed_journal": "d6a28fc998aa133345c114383813b6cd070a246047398eb6bc86d8638de66954",
+    "scope": "Exact installed722 release1 only. Loader binary/code identity unchanged; only admitted origin digest changes. Historical721 route retained. No generic same-version override."
+  },
+  "723_transition": {
+    "date": "2026-10-12",
+    "origin_identity": "FM-1_722",
+    "origin_raw_app_sha256": "35c76af05a26214644864db82c3af32f57c27c0af9db63c9a1ed4191b1f0f257",
+    "package_sha256": "7dc33dda06d5c6d75acacdb58001f57a91dc93fedea1550a2d5a26ddf9f040a8",
+    "completed_journal": "artifacts/fm1-flash/20261012T014130.384520Z-3c6cf69a/events.jsonl",
+    "journal_sha256": "a6a5de4d67e173e52da3722a33ee2e973e6a597c79675a02b27444b8815aee67",
+    "scope": "Only exact installed722 release2 origin and723 identity. Protected head/calibration/journal unchanged."
+  },
+  "725_transition": {
+    "scope": "Only loader identity and exact installed724 release3 app fingerprint; write bounds unchanged."
+  },
+  "726_transition": {
+    "scope": "Identity only from725; exact installed724 origin and all protected bounds unchanged."
+  }
+}

@@ -1,0 +1,478 @@
+{
+  "schema": 1,
+  "reviewed_utc": "2026-10-18T18:07:39.407579+00:00",
+  "classification": "publisher/source inspection and offline regression; no hardware or installation",
+  "open_repository_commit": "b178ac43c25f010c60a878056fb5331fe693fd62",
+  "felucca_repository_commit": "5738617968a22b5d4c0d3470cfcc95559052f446",
+  "acquisitions": [
+    {
+      "file": "open-index.html",
+      "url": "https://open.m-vave.com/",
+      "bytes": 266693,
+      "sha256": "6f76b2893eeb214fd6fa3a11c61c2a93abfd0c5989e1d05ddff28b17d37a3e33",
+      "fetched": "2026-10-18T17:59:49.744021+00:00"
+    },
+    {
+      "file": "open-main.json",
+      "url": "https://api.github.com/repos/m-vave/fm1_open/commits/main",
+      "bytes": 136516,
+      "sha256": "fbd9708f9083e323c6bc5c3302a8517f5c8f8b7d0bddf51dfa6c48facb11d07a",
+      "fetched": "2026-10-18T17:59:50.229635+00:00"
+    },
+    {
+      "file": "felucca-main.json",
+      "url": "https://api.github.com/repos/hugelton/Felucca/commits/main",
+      "bytes": 14233,
+      "sha256": "9b323d2d72e7566b723663c12a75989cb3849ce416aa1750d61f2118887a42c6",
+      "fetched": "2026-10-18T17:59:50.553160+00:00"
+    },
+    {
+      "file": "open-tree.json",
+      "url": "https://api.github.com/repos/m-vave/fm1_open/git/trees/b178ac43c25f010c60a878056fb5331fe693fd62?recursive=1",
+      "bytes": 38467,
+      "sha256": "3d691babdcc88f36eff1e9cc1ab16fdc11514eb9c6850164f8c6b93fc926edab",
+      "fetched": "2026-10-18T18:00:33.937941+00:00"
+    },
+    {
+      "file": "felucca-tree.json",
+      "url": "https://api.github.com/repos/hugelton/Felucca/git/trees/5738617968a22b5d4c0d3470cfcc95559052f446?recursive=1",
+      "bytes": 63561,
+      "sha256": "22d156804c2d58371a702dc7e5c6a585f08b248e785285494d6904082e21df9b",
+      "fetched": "2026-10-18T18:00:34.755073+00:00"
+    },
+    {
+      "file": "open-THIRD_PARTY.md",
+      "url": "https://raw.githubusercontent.com/m-vave/fm1_open/b178ac43c25f010c60a878056fb5331fe693fd62/THIRD_PARTY.md",
+      "bytes": 141957,
+      "sha256": "c37b0de889ed570764f5e6699c22d699fbea7b22813ec302e19e26755318461b",
+      "fetched": "2026-10-18T18:00:35.174208+00:00"
+    },
+    {
+      "file": "open-LICENSE.md",
+      "url": "https://raw.githubusercontent.com/m-vave/fm1_open/b178ac43c25f010c60a878056fb5331fe693fd62/LICENSE.md",
+      "bytes": 38431,
+      "sha256": "fe7344af68a6e65d0cf623e3eca1ff4a4d751ba538bffbc5248134b79d02f1fd",
+      "fetched": "2026-10-18T18:00:35.471928+00:00"
+    },
+    {
+      "file": "open-README.md",
+      "url": "https://raw.githubusercontent.com/m-vave/fm1_open/b178ac43c25f010c60a878056fb5331fe693fd62/README.md",
+      "bytes": 1862,
+      "sha256": "8f086e8f20a4f09fb622e885b8ad5dfea9a7016648d88568485e82d4ccdad5e9",
+      "fetched": "2026-10-18T18:00:35.769995+00:00"
+    },
+    {
+      "file": "open-script-0.js",
+      "url": "https://open.m-vave.com/assets/fm1/f2d85d6e8c80ad1925cf39a58ed1a255b753b86f2450961d5a1abb6455d1752e.js",
+      "bytes": 195338,
+      "sha256": "f2d85d6e8c80ad1925cf39a58ed1a255b753b86f2450961d5a1abb6455d1752e",
+      "fetched": "2026-10-18T18:00:38.063670+00:00"
+    },
+    {
+      "file": "open-script-1.js",
+      "url": "https://open.m-vave.com/assets/fm1/e64888aeb0179d2da36d678d74bd7bbab2c32c3d9e7c9733380717f41087d21d.js",
+      "bytes": 58952,
+      "sha256": "e64888aeb0179d2da36d678d74bd7bbab2c32c3d9e7c9733380717f41087d21d",
+      "fetched": "2026-10-18T18:00:39.457748+00:00"
+    },
+    {
+      "file": "open-script-2.js",
+      "url": "https://open.m-vave.com/assets/fm1/9aaa937f86a0b2ab80a8917af361c53b8b8288e40242e2d8b20a409db372842c.js",
+      "bytes": 16896,
+      "sha256": "9aaa937f86a0b2ab80a8917af361c53b8b8288e40242e2d8b20a409db372842c",
+      "fetched": "2026-10-18T18:00:40.498075+00:00"
+    },
+    {
+      "file": "open-v13-package.bin",
+      "url": "https://open.m-vave.com/assets/fm1/c35330f1cad641f38908a6269c7316fdaf4ffb8b1091a7b3282fa31b9be9fe74.bin",
+      "bytes": 479796,
+      "sha256": "c35330f1cad641f38908a6269c7316fdaf4ffb8b1091a7b3282fa31b9be9fe74",
+      "fetched": "2026-10-18T18:01:20.547511+00:00"
+    },
+    {
+      "file": "stock-v15-package.bin",
+      "url": "https://open.m-vave.com/assets/fm1/db1642b2b6fa5c2cccb11ffd13878068bb28601678d3644049f99dc40e7edb8a.bin",
+      "bytes": 699956,
+      "sha256": "db1642b2b6fa5c2cccb11ffd13878068bb28601678d3644049f99dc40e7edb8a",
+      "fetched": "2026-10-18T18:01:22.618946+00:00"
+    },
+    {
+      "file": "open-sdk--Package.cs",
+      "url": "https://raw.githubusercontent.com/m-vave/fm1_open/b178ac43c25f010c60a878056fb5331fe693fd62/sdk/Package.cs",
+      "bytes": 10059,
+      "sha256": "1073026536b64f0d90a60f1a4229703a7fd8d2eaefee2310d8161a4dabdbe2dd",
+      "fetched": "2026-10-18T18:01:22.790677+00:00"
+    },
+    {
+      "file": "open-sdk--manifest.json",
+      "url": "https://raw.githubusercontent.com/m-vave/fm1_open/b178ac43c25f010c60a878056fb5331fe693fd62/sdk/manifest.json",
+      "bytes": 9275,
+      "sha256": "7ad0fa9d7e5b15c9c5212abf865c647673d5c838b1d62beda93051cb1ce05063",
+      "fetched": "2026-10-18T18:01:22.937886+00:00"
+    },
+    {
+      "file": "open-sdk--firmware--FM-1_015.fwsc",
+      "url": "https://raw.githubusercontent.com/m-vave/fm1_open/b178ac43c25f010c60a878056fb5331fe693fd62/sdk/firmware/FM-1_015.fwsc",
+      "bytes": 699956,
+      "sha256": "db1642b2b6fa5c2cccb11ffd13878068bb28601678d3644049f99dc40e7edb8a",
+      "fetched": "2026-10-18T18:01:23.402214+00:00"
+    },
+    {
+      "file": "open-app--project.c",
+      "url": "https://raw.githubusercontent.com/m-vave/fm1_open/b178ac43c25f010c60a878056fb5331fe693fd62/app/project.c",
+      "bytes": 28639,
+      "sha256": "3482ca368ff6cb1a2e5becb0ebaa253323de0b458f3e53c57717b631c484f876",
+      "fetched": "2026-10-18T18:01:23.603072+00:00"
+    },
+    {
+      "file": "felucca-web--EDITOR_PROTOCOL.md",
+      "url": "https://raw.githubusercontent.com/hugelton/Felucca/5738617968a22b5d4c0d3470cfcc95559052f446/web/EDITOR_PROTOCOL.md",
+      "bytes": 109560,
+      "sha256": "23a00a10ed6b6c2f160bff1971c5acbf9d747233e9a8882c2bfd76174da75023",
+      "fetched": "2026-10-18T18:01:23.883153+00:00"
+    },
+    {
+      "file": "felucca-firmware--src--editor_fm6.c",
+      "url": "https://raw.githubusercontent.com/hugelton/Felucca/5738617968a22b5d4c0d3470cfcc95559052f446/firmware/src/editor_fm6.c",
+      "bytes": 5805,
+      "sha256": "c5e3efb6d1f745eab4937fdeb59032a5993f70ab7fe7d8f7e85e286637f6f830",
+      "fetched": "2026-10-18T18:01:24.043955+00:00"
+    },
+    {
+      "file": "felucca-firmware--src--up_fm6.c",
+      "url": "https://raw.githubusercontent.com/hugelton/Felucca/5738617968a22b5d4c0d3470cfcc95559052f446/firmware/src/up_fm6.c",
+      "bytes": 8658,
+      "sha256": "b27133718343caefde31d297b908453ee9f2917851aaf543f26c660a342c4a28",
+      "fetched": "2026-10-18T18:01:24.211482+00:00"
+    },
+    {
+      "file": "felucca-web--editor.html",
+      "url": "https://raw.githubusercontent.com/hugelton/Felucca/5738617968a22b5d4c0d3470cfcc95559052f446/web/editor.html",
+      "bytes": 293302,
+      "sha256": "9746fa24ebc0db8e90951d230403a2c34f3ee55480d892150b58fa3cbac2927b",
+      "fetched": "2026-10-18T18:01:24.496810+00:00"
+    }
+  ],
+  "official_open": {
+    "bytes": 479796,
+    "product": "FM-1_8000013",
+    "title": "M-VAVE Open V13",
+    "source_url": "https://open.m-vave.com/assets/fm1/c35330f1cad641f38908a6269c7316fdaf4ffb8b1091a7b3282fa31b9be9fe74.bin",
+    "license": "GPL-3.0-only with vendor SDK exception and separate component terms",
+    "reason": "M-VAVE Open V13 is a separate firmware with a different project/sample memory layout. The companion has not qualified migration and rollback for that layout. Use a complete backup and the official Workbench after reviewing its instructions; this companion has not written the device.",
+    "sha256": "c35330f1cad641f38908a6269c7316fdaf4ffb8b1091a7b3282fa31b9be9fe74",
+    "recognized": true,
+    "installable": false,
+    "hardware_access": false,
+    "compatibility": "layout migration not qualified",
+    "package_entries": [
+      {
+        "name": "flash.bin",
+        "type": 0,
+        "index": 0,
+        "offset": 1024,
+        "bytes": 458752,
+        "padded_bytes": 458752,
+        "stored_crc_verified": true,
+        "sha256": "4088f54c304c91421c6e87ca756776a38f5e32d228302667e493abf9e456e188"
+      },
+      {
+        "name": "ota.bin",
+        "type": 100,
+        "index": 1,
+        "offset": 459776,
+        "bytes": 19969,
+        "padded_bytes": 20000,
+        "stored_crc_verified": true,
+        "sha256": "ef1f2db89b011fa53e71df363f0122de0ea896618c53fb53e8da676322004541"
+      }
+    ],
+    "application_headers": [
+      {
+        "name": "app_area_head",
+        "address": 33554720,
+        "bytes": 440699,
+        "flags": [
+          131,
+          255,
+          0
+        ]
+      },
+      {
+        "name": "app.bin",
+        "address": 288,
+        "bytes": 440028,
+        "flags": [
+          130,
+          255,
+          0
+        ]
+      },
+      {
+        "name": "cfg_tool.bin",
+        "address": 440316,
+        "bytes": 383,
+        "flags": [
+          130,
+          255,
+          0
+        ]
+      },
+      {
+        "name": "VM",
+        "address": 458752,
+        "bytes": 45056,
+        "flags": [
+          18,
+          129,
+          0
+        ]
+      },
+      {
+        "name": "PRCT",
+        "address": 0,
+        "bytes": 458752,
+        "flags": [
+          146,
+          130,
+          0
+        ]
+      },
+      {
+        "name": "BTIF",
+        "address": 503808,
+        "bytes": 4096,
+        "flags": [
+          146,
+          129,
+          1
+        ]
+      },
+      {
+        "name": "EXT_RESERVED",
+        "address": 32,
+        "bytes": 64,
+        "flags": [
+          147,
+          255,
+          1
+        ]
+      },
+      {
+        "name": "USER",
+        "address": 507904,
+        "bytes": 536576,
+        "flags": [
+          146,
+          129,
+          1
+        ]
+      }
+    ],
+    "application_sha256": "dcfe400d58306bebd51cd263218e0610c473b89612c19b522413040e50a4f009",
+    "flash_extent": 458752,
+    "supplied_boot_region_bytes": 16384,
+    "device_access": false
+  },
+  "published_v15": {
+    "bytes": 699956,
+    "product": "FM-1_015",
+    "title": "M-VAVE published Original V15",
+    "source_url": "https://github.com/m-vave/fm1_open/blob/b178ac43c25f010c60a878056fb5331fe693fd62/sdk/firmware/FM-1_015.fwsc",
+    "license": "Apache-2.0 resource grant; original component notices retained",
+    "reason": "This is the official published V15 image. Its application is 672 bytes larger than the original-device V15 layout supported by this companion. Installing it needs a separately tested layout migration; no device was written.",
+    "sha256": "db1642b2b6fa5c2cccb11ffd13878068bb28601678d3644049f99dc40e7edb8a",
+    "recognized": true,
+    "installable": false,
+    "hardware_access": false,
+    "compatibility": "layout migration not qualified",
+    "package_entries": [
+      {
+        "name": "flash.bin",
+        "type": 0,
+        "index": 0,
+        "offset": 1024,
+        "bytes": 602112,
+        "padded_bytes": 602112,
+        "stored_crc_verified": true,
+        "sha256": "c1068a403c04a6378a626afb66cc217f72d13f10aa200e983b7a9817cc1dac03"
+      },
+      {
+        "name": "info.log",
+        "type": 2,
+        "index": 1,
+        "offset": 603136,
+        "bytes": 0,
+        "padded_bytes": 0,
+        "stored_crc_verified": false,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "USR",
+        "type": 50,
+        "index": 2,
+        "offset": 603136,
+        "bytes": 73226,
+        "padded_bytes": 73248,
+        "stored_crc_verified": false,
+        "sha256": "627c1ad2e56312f970edd94b4a706303538fd2125d90bfe9656b886691501831"
+      },
+      {
+        "name": "isd_config.ini",
+        "type": 52,
+        "index": 3,
+        "offset": 676384,
+        "bytes": 3296,
+        "padded_bytes": 3296,
+        "stored_crc_verified": false,
+        "sha256": "cb5cc5994cd5efadcaa2712c909560d1df41a47a05f7f80c63a21a0f937900a8"
+      },
+      {
+        "name": "ota.bin",
+        "type": 100,
+        "index": 4,
+        "offset": 679680,
+        "bytes": 19969,
+        "padded_bytes": 20000,
+        "stored_crc_verified": true,
+        "sha256": "ef1f2db89b011fa53e71df363f0122de0ea896618c53fb53e8da676322004541"
+      },
+      {
+        "name": "script.ver",
+        "type": 251,
+        "index": 5,
+        "offset": 699680,
+        "bytes": 27,
+        "padded_bytes": 32,
+        "stored_crc_verified": false,
+        "sha256": "f07497b6844bae44314748ab2368267792d3da810601c81e98059f9e9ad85742"
+      },
+      {
+        "name": "blimit.bin",
+        "type": 161,
+        "index": 6,
+        "offset": 699712,
+        "bytes": 144,
+        "padded_bytes": 160,
+        "stored_crc_verified": false,
+        "sha256": "6c59d72b341ab24e6e54466937c9587fbfcff1f72eec7525148e14ae4bc5f093"
+      },
+      {
+        "name": "tail.bin",
+        "type": 255,
+        "index": 7,
+        "offset": 699872,
+        "bytes": 64,
+        "padded_bytes": 64,
+        "stored_crc_verified": false,
+        "sha256": "79d4bbc325be8b2f49492a9e8bf712e3cfe4e7c55e874dced1445ed65616843b"
+      }
+    ],
+    "application_headers": [
+      {
+        "name": "app_area_head",
+        "address": 33554720,
+        "bytes": 582235,
+        "flags": [
+          131,
+          255,
+          0
+        ]
+      },
+      {
+        "name": "app.bin",
+        "address": 288,
+        "bytes": 581564,
+        "flags": [
+          130,
+          255,
+          0
+        ]
+      },
+      {
+        "name": "cfg_tool.bin",
+        "address": 581852,
+        "bytes": 383,
+        "flags": [
+          130,
+          255,
+          0
+        ]
+      },
+      {
+        "name": "VM",
+        "address": 602112,
+        "bytes": 352256,
+        "flags": [
+          18,
+          128,
+          0
+        ]
+      },
+      {
+        "name": "PRCT",
+        "address": 0,
+        "bytes": 602112,
+        "flags": [
+          146,
+          130,
+          0
+        ]
+      },
+      {
+        "name": "BTIF",
+        "address": 954368,
+        "bytes": 4096,
+        "flags": [
+          146,
+          128,
+          0
+        ]
+      },
+      {
+        "name": "USR",
+        "address": 958464,
+        "bytes": 73728,
+        "flags": [
+          146,
+          129,
+          1
+        ]
+      }
+    ],
+    "application_sha256": "306e47065f35d7a7a05ada7f5dd092f6e770952054f33f0a86b75fd10ffe3203",
+    "flash_extent": 602112,
+    "supplied_boot_region_bytes": 16384,
+    "device_access": false
+  },
+  "qualified_device_v15_layout": {
+    "app_bytes": 580892,
+    "layout": {
+      "app_offset": 288,
+      "app_slot_bytes": 580892,
+      "area_bytes": 581563,
+      "cfg_tool_offset": 581180,
+      "cfg_tool_bytes": 383,
+      "cfg_offset": 581563,
+      "cfg_bytes": 2937,
+      "eq_offset": 581627,
+      "eq_bytes": 2873,
+      "eq_sha256": "697b4fd0a82dae4a80f83180101a61de7d9e1fc951188e671350b18403c97007"
+    },
+    "proprietary_dump_included": false,
+    "app_sha256": "c55278de362d375bf84d932ea7980da0c4cd8c4b7ebafb66cc914105656cfcdf"
+  },
+  "patch_interchange": {
+    "format": "DX7 VCED single / VMEM32 bank SysEx",
+    "single_bytes": 163,
+    "bank_bytes": 4104,
+    "fm_only": true,
+    "native_felucca_projects_supported": false,
+    "tests": {
+      "total": 7,
+      "failed": 0,
+      "actual_core_roundtrip": true
+    },
+    "device_access": false
+  }
+}

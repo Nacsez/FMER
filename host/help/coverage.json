@@ -1,0 +1,2707 @@
+{
+  "firmware": "FM-1_734",
+  "pages": 28,
+  "illustrated_pages": 28,
+  "figures": {
+    "index": [
+      {
+        "file": "panel-home.png",
+        "alt": "Home view",
+        "caption": "Home view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-home-four-tracks.png",
+        "alt": "Home four tracks view",
+        "caption": "Home four tracks view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-splash.png",
+        "alt": "Splash view",
+        "caption": "Splash view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "getting-started": [
+      {
+        "file": "app-banks.png",
+        "alt": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.",
+        "caption": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC. Actual browser capture."
+      },
+      {
+        "file": "app-editor.png",
+        "alt": "Companion Editor: canonical values, musical selectors, sliders and local sound audition.",
+        "caption": "Companion Editor: canonical values, musical selectors, sliders and local sound audition. Actual browser capture."
+      }
+    ],
+    "connection": [
+      {
+        "file": "app-unit.png",
+        "alt": "Your FM-1: explicit reads, destinations and verified transfers. Offline view.",
+        "caption": "Your FM-1: explicit reads, destinations and verified transfers. Offline view. Actual browser capture."
+      },
+      {
+        "file": "panel-usb-link.png",
+        "alt": "Usb link view",
+        "caption": "Usb link view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "library": [
+      {
+        "file": "feature-companion-library.svg",
+        "alt": "Companion library: annotated screen reference",
+        "caption": "Organize instruments and projects locally on your computer. Open for full-size view."
+      },
+      {
+        "file": "app-library.png",
+        "alt": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected.",
+        "caption": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected. Actual browser capture."
+      }
+    ],
+    "banks": [
+      {
+        "file": "feature-instrument-banks.svg",
+        "alt": "128 onboard instrument slots: annotated screen reference",
+        "caption": "64 editable DEFAULT slots and 64 independent USER slots. Open for full-size view."
+      },
+      {
+        "file": "app-banks.png",
+        "alt": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.",
+        "caption": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC. Actual browser capture."
+      },
+      {
+        "file": "panel-presets.png",
+        "alt": "Presets view",
+        "caption": "Presets view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-user-presets.png",
+        "alt": "User presets view",
+        "caption": "User presets view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "controls-42.svg",
+        "alt": "PRESETS physical control map",
+        "caption": "PRESETS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-43.svg",
+        "alt": "SAVE / INSTRUMENT physical control map",
+        "caption": "SAVE / INSTRUMENT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-44.svg",
+        "alt": "SAVE / PROJECT physical control map",
+        "caption": "SAVE / PROJECT: knob positions and page actions. Diagram from the audited panel map."
+      }
+    ],
+    "editor": [
+      {
+        "file": "feature-companion-banks.svg",
+        "alt": "Companion editing and banks: annotated screen reference",
+        "caption": "Edit visually, audition locally and choose explicit unit destinations. Open for full-size view."
+      },
+      {
+        "file": "app-editor.png",
+        "alt": "Companion Editor: canonical values, musical selectors, sliders and local sound audition.",
+        "caption": "Companion Editor: canonical values, musical selectors, sliders and local sound audition. Actual browser capture."
+      },
+      {
+        "file": "panel-focus.png",
+        "alt": "Focus view",
+        "caption": "Focus view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "fm": [
+      {
+        "file": "feature-algorithms.svg",
+        "alt": "FM algorithm diagrams: annotated screen reference",
+        "caption": "See how the six operators connect. Open for full-size view."
+      },
+      {
+        "file": "feature-fm-envelopes.svg",
+        "alt": "FM envelopes and scaling: annotated screen reference",
+        "caption": "Shape both loudness and harmonic movement. Open for full-size view."
+      },
+      {
+        "file": "feature-fm-synthesis.svg",
+        "alt": "Six-operator FM: annotated screen reference",
+        "caption": "Four-voice FM sound design with DX7-style voice exchange. Open for full-size view."
+      },
+      {
+        "file": "panel-algorithm-1.png",
+        "alt": "Algorithm 1 view",
+        "caption": "Algorithm 1 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-algorithm-5.png",
+        "alt": "Algorithm 5 view",
+        "caption": "Algorithm 5 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-fm-envelope.png",
+        "alt": "Fm envelope view",
+        "caption": "Fm envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-algorithm-2.png",
+        "alt": "FM algorithm 2",
+        "caption": "Algorithm 2: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-3.png",
+        "alt": "FM algorithm 3",
+        "caption": "Algorithm 3: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-4.png",
+        "alt": "FM algorithm 4",
+        "caption": "Algorithm 4: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-6.png",
+        "alt": "FM algorithm 6",
+        "caption": "Algorithm 6: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-7.png",
+        "alt": "FM algorithm 7",
+        "caption": "Algorithm 7: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-8.png",
+        "alt": "FM algorithm 8",
+        "caption": "Algorithm 8: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-9.png",
+        "alt": "FM algorithm 9",
+        "caption": "Algorithm 9: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-10.png",
+        "alt": "FM algorithm 10",
+        "caption": "Algorithm 10: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-11.png",
+        "alt": "FM algorithm 11",
+        "caption": "Algorithm 11: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-12.png",
+        "alt": "FM algorithm 12",
+        "caption": "Algorithm 12: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-13.png",
+        "alt": "FM algorithm 13",
+        "caption": "Algorithm 13: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-14.png",
+        "alt": "FM algorithm 14",
+        "caption": "Algorithm 14: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-15.png",
+        "alt": "FM algorithm 15",
+        "caption": "Algorithm 15: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-16.png",
+        "alt": "FM algorithm 16",
+        "caption": "Algorithm 16: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-17.png",
+        "alt": "FM algorithm 17",
+        "caption": "Algorithm 17: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-18.png",
+        "alt": "FM algorithm 18",
+        "caption": "Algorithm 18: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-19.png",
+        "alt": "FM algorithm 19",
+        "caption": "Algorithm 19: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-20.png",
+        "alt": "FM algorithm 20",
+        "caption": "Algorithm 20: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-21.png",
+        "alt": "FM algorithm 21",
+        "caption": "Algorithm 21: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-22.png",
+        "alt": "FM algorithm 22",
+        "caption": "Algorithm 22: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-23.png",
+        "alt": "FM algorithm 23",
+        "caption": "Algorithm 23: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-24.png",
+        "alt": "FM algorithm 24",
+        "caption": "Algorithm 24: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-25.png",
+        "alt": "FM algorithm 25",
+        "caption": "Algorithm 25: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-26.png",
+        "alt": "FM algorithm 26",
+        "caption": "Algorithm 26: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-27.png",
+        "alt": "FM algorithm 27",
+        "caption": "Algorithm 27: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-28.png",
+        "alt": "FM algorithm 28",
+        "caption": "Algorithm 28: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-29.png",
+        "alt": "FM algorithm 29",
+        "caption": "Algorithm 29: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-30.png",
+        "alt": "FM algorithm 30",
+        "caption": "Algorithm 30: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-31.png",
+        "alt": "FM algorithm 31",
+        "caption": "Algorithm 31: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "panel-algorithm-32.png",
+        "alt": "FM algorithm 32",
+        "caption": "Algorithm 32: actual operator routing drawn by firmware 734."
+      },
+      {
+        "file": "controls-02.svg",
+        "alt": "FM EDIT / TUNE physical control map",
+        "caption": "FM EDIT / TUNE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-03.svg",
+        "alt": "FM EDIT / SENSITIVITY physical control map",
+        "caption": "FM EDIT / SENSITIVITY: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-04.svg",
+        "alt": "FM EDIT / KEY SCALE physical control map",
+        "caption": "FM EDIT / KEY SCALE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-05.svg",
+        "alt": "FM EDIT / CURVE physical control map",
+        "caption": "FM EDIT / CURVE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-06.svg",
+        "alt": "FM EDIT / OP RATES physical control map",
+        "caption": "FM EDIT / OP RATES: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-07.svg",
+        "alt": "FM EDIT / OP LEVELS physical control map",
+        "caption": "FM EDIT / OP LEVELS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-08.svg",
+        "alt": "FM EDIT / PITCH RATES physical control map",
+        "caption": "FM EDIT / PITCH RATES: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-09.svg",
+        "alt": "FM EDIT / PITCH LEVELS physical control map",
+        "caption": "FM EDIT / PITCH LEVELS: knob positions and page actions. Diagram from the audited panel map."
+      }
+    ],
+    "va": [
+      {
+        "file": "feature-virtual-analog.svg",
+        "alt": "Virtual Analog: annotated screen reference",
+        "caption": "A second engine for direct oscillator, filter and envelope work. Open for full-size view."
+      },
+      {
+        "file": "panel-va-envelope.png",
+        "alt": "Va envelope view",
+        "caption": "Va envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "app-editor-va.png",
+        "alt": "Companion VA Editor: oscillator, filter and envelope controls.",
+        "caption": "Companion VA Editor: oscillator, filter and envelope controls. Actual browser capture."
+      },
+      {
+        "file": "controls-10.svg",
+        "alt": "VA EDIT physical control map",
+        "caption": "VA EDIT: knob positions and page actions. Diagram from the audited panel map."
+      }
+    ],
+    "effects": [
+      {
+        "file": "feature-fx-routing.svg",
+        "alt": "Reorder the effects chain: annotated screen reference",
+        "caption": "Choose the order in which the six stages process audio. Open for full-size view."
+      },
+      {
+        "file": "feature-drive-lfo.svg",
+        "alt": "Drive and LFO enable: annotated screen reference",
+        "caption": "Add saturation or enable the sound\u2019s stored modulation. Open for full-size view."
+      },
+      {
+        "file": "feature-chorus-phaser.svg",
+        "alt": "Chorus and phaser: annotated screen reference",
+        "caption": "Four named characters for each modulation effect. Open for full-size view."
+      },
+      {
+        "file": "feature-delay.svg",
+        "alt": "Free-time or tempo-synced delay: annotated screen reference",
+        "caption": "Dial milliseconds or choose a musical division. Open for full-size view."
+      },
+      {
+        "file": "feature-reverb.svg",
+        "alt": "Four reverb models: annotated screen reference",
+        "caption": "Room, Plate, Hall and Cloud share direct return and decay controls. Open for full-size view."
+      },
+      {
+        "file": "feature-filter-band.svg",
+        "alt": "Band-pass and HOME controls: annotated screen reference",
+        "caption": "The same controls remain in the same order. Open for full-size view."
+      },
+      {
+        "file": "feature-filter.svg",
+        "alt": "Filter and resonance: annotated screen reference",
+        "caption": "Low-pass, high-pass and band-pass with directional shading. Open for full-size view."
+      },
+      {
+        "file": "panel-effects-clean.png",
+        "alt": "Effects clean view",
+        "caption": "Effects clean view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-fx-chain.png",
+        "alt": "Signal chain: selected stage and its position in the processing order.",
+        "caption": "Signal chain: selected stage and its position in the processing order. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-home-filter-0.png",
+        "alt": "Low-pass fill extends left of cutoff.",
+        "caption": "Low-pass fill extends left of cutoff. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-home-filter-1.png",
+        "alt": "High-pass fill extends right of cutoff.",
+        "caption": "High-pass fill extends right of cutoff. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-home-filter-2.png",
+        "alt": "Band-pass fill surrounds cutoff.",
+        "caption": "Band-pass fill surrounds cutoff. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "controls-13.svg",
+        "alt": "FX / FILTER / SPACE physical control map",
+        "caption": "FX / FILTER / SPACE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-14.svg",
+        "alt": "FX / MODULATION physical control map",
+        "caption": "FX / MODULATION: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-15.svg",
+        "alt": "FX / SPACE SETTINGS physical control map",
+        "caption": "FX / SPACE SETTINGS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-16.svg",
+        "alt": "FX / SIGNAL CHAIN physical control map",
+        "caption": "FX / SIGNAL CHAIN: knob positions and page actions. Diagram from the audited panel map."
+      }
+    ],
+    "modulation": [
+      {
+        "file": "feature-lfo.svg",
+        "alt": "Engine-specific modulation: annotated screen reference",
+        "caption": "Stored motion settings for FM and VA instruments. Open for full-size view."
+      },
+      {
+        "file": "panel-glide.png",
+        "alt": "Glide view",
+        "caption": "Glide view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-fm-envelope.png",
+        "alt": "Fm envelope view",
+        "caption": "Fm envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-va-envelope.png",
+        "alt": "Va envelope view",
+        "caption": "Va envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "arp": [
+      {
+        "file": "feature-arp.svg",
+        "alt": "Eleven arpeggiator types: annotated screen reference",
+        "caption": "Turn held notes into a timed musical part. Open for full-size view."
+      },
+      {
+        "file": "panel-arp.png",
+        "alt": "Arp view",
+        "caption": "Arp view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-arp-exclusive.png",
+        "alt": "Arp exclusive view",
+        "caption": "Arp exclusive view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-arp-capacity.png",
+        "alt": "Arp capacity view",
+        "caption": "Arp capacity view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "controls-20.svg",
+        "alt": "ARP / TYPE/LATCH physical control map",
+        "caption": "ARP / TYPE/LATCH: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-21.svg",
+        "alt": "ARP / TIMING physical control map",
+        "caption": "ARP / TIMING: knob positions and page actions. Diagram from the audited panel map."
+      }
+    ],
+    "sequencer": [
+      {
+        "file": "feature-patterns.svg",
+        "alt": "Sixteen patterns per project: annotated screen reference",
+        "caption": "Build phrases from 1 to 64 steps and switch them in performance. Open for full-size view."
+      },
+      {
+        "file": "feature-recording.svg",
+        "alt": "Record notes or generated arps: annotated screen reference",
+        "caption": "A four-beat count-in leads into quantized recording. Open for full-size view."
+      },
+      {
+        "file": "panel-sequence.png",
+        "alt": "Sequence view",
+        "caption": "Sequence view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-record.png",
+        "alt": "Recording: four-beat count-in, quantization and Overdub/Replace.",
+        "caption": "Recording: four-beat count-in, quantization and Overdub/Replace. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-tracks-single.png",
+        "alt": "Tracks single view",
+        "caption": "Tracks single view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "controls-22.svg",
+        "alt": "SEQ / PERFORM physical control map",
+        "caption": "SEQ / PERFORM: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-23.svg",
+        "alt": "SEQ / SONG entries physical control map",
+        "caption": "SEQ / SONG entries: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-24.svg",
+        "alt": "SEQ / SONG setup physical control map",
+        "caption": "SEQ / SONG setup: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-25.svg",
+        "alt": "SEQ / PATTERNS physical control map",
+        "caption": "SEQ / PATTERNS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-26.svg",
+        "alt": "SEQ / STEP EDIT physical control map",
+        "caption": "SEQ / STEP EDIT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-27.svg",
+        "alt": "SEQ / NOTE EDIT physical control map",
+        "caption": "SEQ / NOTE EDIT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-28.svg",
+        "alt": "SEQ / COPY / EDIT physical control map",
+        "caption": "SEQ / COPY / EDIT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-29.svg",
+        "alt": "SEQ / RECORD physical control map",
+        "caption": "SEQ / RECORD: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-30.svg",
+        "alt": "SEQ / CHAIN MEMBERS physical control map",
+        "caption": "SEQ / CHAIN MEMBERS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-31.svg",
+        "alt": "SEQ / PLAY MODE physical control map",
+        "caption": "SEQ / PLAY MODE: knob positions and page actions. Diagram from the audited panel map."
+      }
+    ],
+    "pattern-edit": [
+      {
+        "file": "feature-copy-chain.svg",
+        "alt": "Copy sections and chain patterns: annotated screen reference",
+        "caption": "Reuse musical material and keep it moving. Open for full-size view."
+      },
+      {
+        "file": "feature-note-edit.svg",
+        "alt": "Edit notes, rests and ties: annotated screen reference",
+        "caption": "Refine a phrase without recording it again. Open for full-size view."
+      },
+      {
+        "file": "panel-sequence-bank4.png",
+        "alt": "Sequence bank4 view",
+        "caption": "Sequence bank4 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-patterns16.png",
+        "alt": "Patterns16 view",
+        "caption": "Patterns16 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-chain.png",
+        "alt": "Chain view",
+        "caption": "Chain view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "performance": [
+      {
+        "file": "feature-mixer.svg",
+        "alt": "Four-track performance mixer: annotated screen reference",
+        "caption": "One knob per track, with a clearly selected editing layer. Open for full-size view."
+      },
+      {
+        "file": "feature-playing-modes.svg",
+        "alt": "Playing modes: annotated screen reference",
+        "caption": "One instrument or four independent parts. Open for full-size view."
+      },
+      {
+        "file": "panel-mixer.png",
+        "alt": "Mixer view",
+        "caption": "Mixer view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-home-four-tracks.png",
+        "alt": "Home four tracks view",
+        "caption": "Home four tracks view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-four-track-fullscreen.png",
+        "alt": "Four track fullscreen view",
+        "caption": "Four track fullscreen view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "projects": [
+      {
+        "file": "feature-projects.svg",
+        "alt": "Onboard projects and saving: annotated screen reference",
+        "caption": "Keep a complete working arrangement on the instrument. Open for full-size view."
+      },
+      {
+        "file": "panel-project-save.png",
+        "alt": "Project save view",
+        "caption": "Project save view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "app-library.png",
+        "alt": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected.",
+        "caption": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected. Actual browser capture."
+      }
+    ],
+    "midi": [
+      {
+        "file": "feature-midi.svg",
+        "alt": "Wired MIDI and clock: annotated screen reference",
+        "caption": "Play, synchronize and control FMER from other instruments or a DAW. Open for full-size view."
+      },
+      {
+        "file": "panel-midi-output.png",
+        "alt": "Midi output view",
+        "caption": "Midi output view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-midi-clock.png",
+        "alt": "Midi clock view",
+        "caption": "Midi clock view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "controls-34.svg",
+        "alt": "GLO / MIDI INPUT physical control map",
+        "caption": "GLO / MIDI INPUT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-35.svg",
+        "alt": "GLO / MIDI OUTPUT physical control map",
+        "caption": "GLO / MIDI OUTPUT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-36.svg",
+        "alt": "GLO / MIDI CLOCK physical control map",
+        "caption": "GLO / MIDI CLOCK: knob positions and page actions. Diagram from the audited panel map."
+      }
+    ],
+    "backups": [
+      {
+        "file": "feature-companion-backup.svg",
+        "alt": "Backup and restore: annotated screen reference",
+        "caption": "Keep a recoverable copy before changing an installation. Open for full-size view."
+      },
+      {
+        "file": "app-backups.png",
+        "alt": "Backups: separate local Library export and complete unit musical-data snapshots.",
+        "caption": "Backups: separate local Library export and complete unit musical-data snapshots. Actual browser capture."
+      },
+      {
+        "file": "panel-restore.png",
+        "alt": "Restore view",
+        "caption": "Restore view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "firmware": [
+      {
+        "file": "feature-companion-install.svg",
+        "alt": "Offline firmware installation: annotated screen reference",
+        "caption": "Inspect, install and verify from one local Companion window. Open for full-size view."
+      },
+      {
+        "file": "app-firmware.png",
+        "alt": "Firmware: inspect the bundled installer before confirming a device write.",
+        "caption": "Firmware: inspect the bundled installer before confirming a device write. Actual browser capture."
+      }
+    ],
+    "workflows": [
+      {
+        "file": "workflow-safe-install.svg",
+        "alt": "Companion installation workflow: annotated screen reference",
+        "caption": "Stock firmware cannot provide FMER musical backups. Unknown layouts require diagnosis, not a forced write. Open for full-size view."
+      },
+      {
+        "file": "workflow-paired-usb.svg",
+        "alt": "Two-unit USB performance: annotated screen reference",
+        "caption": "One direct peer. No direct USB audio between units, USB hub mode or Bluetooth group support. Open for full-size view."
+      },
+      {
+        "file": "workflow-mode-workflow.svg",
+        "alt": "Choose the right playing mode: annotated screen reference",
+        "caption": "Entering/leaving4T stops playback. Ordinary page navigation and preset browsing do not change mode. Open for full-size view."
+      },
+      {
+        "file": "workflow-data-map.svg",
+        "alt": "What is saved where?: annotated screen reference",
+        "caption": "A project references track instruments. Moving a bank instrument can change projects that reference its slot. Open for full-size view."
+      },
+      {
+        "file": "workflow-sound-to-song.svg",
+        "alt": "From sound to arrangement: annotated screen reference",
+        "caption": "Tracks reference saved instrument slots. Save edited sounds before the project. Open for full-size view."
+      },
+      {
+        "file": "panel-record.png",
+        "alt": "Recording: four-beat count-in, quantization and Overdub/Replace.",
+        "caption": "Recording: four-beat count-in, quantization and Overdub/Replace. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-song.png",
+        "alt": "Song: four lanes on a shared timeline, with repeat blocks and transposition.",
+        "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "app-banks.png",
+        "alt": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.",
+        "caption": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC. Actual browser capture."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "file": "feature-battery.svg",
+        "alt": "Estimated battery percentage: annotated screen reference",
+        "caption": "A numeric estimate in the compact status header. Open for full-size view."
+      },
+      {
+        "file": "panel-global-mode.png",
+        "alt": "Global mode view",
+        "caption": "Global mode view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-estimated-battery.png",
+        "alt": "Estimated battery view",
+        "caption": "Estimated battery view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-legend.png",
+        "alt": "Legend view",
+        "caption": "Legend view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "app-feedback.png",
+        "alt": "Beta feedback form",
+        "caption": "Optional beta feedback and local diagnostic summary."
+      }
+    ],
+    "glossary": [
+      {
+        "file": "panel-algorithm-5.png",
+        "alt": "Algorithm 5 view",
+        "caption": "Algorithm 5 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-song.png",
+        "alt": "Song: four lanes on a shared timeline, with repeat blocks and transposition.",
+        "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-mixer.png",
+        "alt": "Mixer view",
+        "caption": "Mixer view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "limits": [
+      {
+        "file": "panel-tracks.png",
+        "alt": "Tracks view",
+        "caption": "Tracks view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-estimated-battery.png",
+        "alt": "Estimated battery view",
+        "caption": "Estimated battery view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "song": [
+      {
+        "file": "feature-song.svg",
+        "alt": "Song arrangements: annotated screen reference",
+        "caption": "Arrange patterns, transpositions and repeats on a shared timeline. Open for full-size view."
+      },
+      {
+        "file": "panel-song.png",
+        "alt": "Song: four lanes on a shared timeline, with repeat blocks and transposition.",
+        "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-song-setup.png",
+        "alt": "Song lane setup: LIVE/SONG, end behavior and entry insertion/deletion.",
+        "caption": "Song lane setup: LIVE/SONG, end behavior and entry insertion/deletion. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "shortcuts": [
+      {
+        "file": "feature-shortcuts.svg",
+        "alt": "Shortcuts / one sheet: annotated screen reference",
+        "caption": "Modifier gestures, navigation and performance commands. Open for full-size view."
+      },
+      {
+        "file": "feature-scopes.svg",
+        "alt": "Live visual feedback: annotated screen reference",
+        "caption": "Expand the display when the sound is the focus. Open for full-size view."
+      },
+      {
+        "file": "panel-shortcuts.png",
+        "alt": "Shortcuts view",
+        "caption": "Shortcuts view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-scope-only.png",
+        "alt": "Scope only view",
+        "caption": "Scope only view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "usb-link": [
+      {
+        "file": "feature-usb-link.svg",
+        "alt": "Direct USB instrument link: annotated screen reference",
+        "caption": "Connect two powered FMER units without a computer. Open for full-size view."
+      },
+      {
+        "file": "panel-usb-link.png",
+        "alt": "Usb link view",
+        "caption": "Usb link view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-midi-clock.png",
+        "alt": "Midi clock view",
+        "caption": "Midi clock view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "reference": [
+      {
+        "file": "app-editor.png",
+        "alt": "Companion Editor: canonical values, musical selectors, sliders and local sound audition.",
+        "caption": "Companion Editor: canonical values, musical selectors, sliders and local sound audition. Actual browser capture."
+      },
+      {
+        "file": "panel-fm-envelope.png",
+        "alt": "Fm envelope view",
+        "caption": "Fm envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      },
+      {
+        "file": "panel-va-envelope.png",
+        "alt": "Va envelope view",
+        "caption": "Va envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      }
+    ],
+    "licensing": [
+      {
+        "file": "fmer-foundations.svg",
+        "alt": "FMER software foundations and DX7 interchange boundaries",
+        "caption": "Original architecture diagram: hardware support, musical engines and file interchange have distinct responsibilities and licenses."
+      }
+    ],
+    "panel": [
+      {
+        "file": "controls-00.svg",
+        "alt": "HOME physical control map",
+        "caption": "HOME: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-01.svg",
+        "alt": "HOME / FOUR TRACKS physical control map",
+        "caption": "HOME / FOUR TRACKS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-02.svg",
+        "alt": "FM EDIT / TUNE physical control map",
+        "caption": "FM EDIT / TUNE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-03.svg",
+        "alt": "FM EDIT / SENSITIVITY physical control map",
+        "caption": "FM EDIT / SENSITIVITY: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-04.svg",
+        "alt": "FM EDIT / KEY SCALE physical control map",
+        "caption": "FM EDIT / KEY SCALE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-05.svg",
+        "alt": "FM EDIT / CURVE physical control map",
+        "caption": "FM EDIT / CURVE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-06.svg",
+        "alt": "FM EDIT / OP RATES physical control map",
+        "caption": "FM EDIT / OP RATES: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-07.svg",
+        "alt": "FM EDIT / OP LEVELS physical control map",
+        "caption": "FM EDIT / OP LEVELS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-08.svg",
+        "alt": "FM EDIT / PITCH RATES physical control map",
+        "caption": "FM EDIT / PITCH RATES: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-09.svg",
+        "alt": "FM EDIT / PITCH LEVELS physical control map",
+        "caption": "FM EDIT / PITCH LEVELS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-10.svg",
+        "alt": "VA EDIT physical control map",
+        "caption": "VA EDIT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-11.svg",
+        "alt": "FM ENV physical control map",
+        "caption": "FM ENV: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-12.svg",
+        "alt": "VA ENV physical control map",
+        "caption": "VA ENV: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-13.svg",
+        "alt": "FX / FILTER / SPACE physical control map",
+        "caption": "FX / FILTER / SPACE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-14.svg",
+        "alt": "FX / MODULATION physical control map",
+        "caption": "FX / MODULATION: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-15.svg",
+        "alt": "FX / SPACE SETTINGS physical control map",
+        "caption": "FX / SPACE SETTINGS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-16.svg",
+        "alt": "FX / SIGNAL CHAIN physical control map",
+        "caption": "FX / SIGNAL CHAIN: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-17.svg",
+        "alt": "FM LFO / FM MODULATION physical control map",
+        "caption": "FM LFO / FM MODULATION: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-18.svg",
+        "alt": "FM LFO / FM SYNC physical control map",
+        "caption": "FM LFO / FM SYNC: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-19.svg",
+        "alt": "VA LFO physical control map",
+        "caption": "VA LFO: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-20.svg",
+        "alt": "ARP / TYPE/LATCH physical control map",
+        "caption": "ARP / TYPE/LATCH: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-21.svg",
+        "alt": "ARP / TIMING physical control map",
+        "caption": "ARP / TIMING: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-22.svg",
+        "alt": "SEQ / PERFORM physical control map",
+        "caption": "SEQ / PERFORM: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-23.svg",
+        "alt": "SEQ / SONG entries physical control map",
+        "caption": "SEQ / SONG entries: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-24.svg",
+        "alt": "SEQ / SONG setup physical control map",
+        "caption": "SEQ / SONG setup: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-25.svg",
+        "alt": "SEQ / PATTERNS physical control map",
+        "caption": "SEQ / PATTERNS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-26.svg",
+        "alt": "SEQ / STEP EDIT physical control map",
+        "caption": "SEQ / STEP EDIT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-27.svg",
+        "alt": "SEQ / NOTE EDIT physical control map",
+        "caption": "SEQ / NOTE EDIT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-28.svg",
+        "alt": "SEQ / COPY / EDIT physical control map",
+        "caption": "SEQ / COPY / EDIT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-29.svg",
+        "alt": "SEQ / RECORD physical control map",
+        "caption": "SEQ / RECORD: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-30.svg",
+        "alt": "SEQ / CHAIN MEMBERS physical control map",
+        "caption": "SEQ / CHAIN MEMBERS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-31.svg",
+        "alt": "SEQ / PLAY MODE physical control map",
+        "caption": "SEQ / PLAY MODE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-32.svg",
+        "alt": "GLO / VOICE/TEMPO physical control map",
+        "caption": "GLO / VOICE/TEMPO: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-33.svg",
+        "alt": "GLO / MONO GLIDE physical control map",
+        "caption": "GLO / MONO GLIDE: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-34.svg",
+        "alt": "GLO / MIDI INPUT physical control map",
+        "caption": "GLO / MIDI INPUT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-35.svg",
+        "alt": "GLO / MIDI OUTPUT physical control map",
+        "caption": "GLO / MIDI OUTPUT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-36.svg",
+        "alt": "GLO / MIDI CLOCK physical control map",
+        "caption": "GLO / MIDI CLOCK: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-37.svg",
+        "alt": "GLO / USB LINK physical control map",
+        "caption": "GLO / USB LINK: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-38.svg",
+        "alt": "GLO / ICON LEGEND physical control map",
+        "caption": "GLO / ICON LEGEND: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-39.svg",
+        "alt": "GLO / SHORTCUTS physical control map",
+        "caption": "GLO / SHORTCUTS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-40.svg",
+        "alt": "GLO / INFO physical control map",
+        "caption": "GLO / INFO: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-41.svg",
+        "alt": "GLO / RESET/CLEAR physical control map",
+        "caption": "GLO / RESET/CLEAR: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-42.svg",
+        "alt": "PRESETS physical control map",
+        "caption": "PRESETS: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-43.svg",
+        "alt": "SAVE / INSTRUMENT physical control map",
+        "caption": "SAVE / INSTRUMENT: knob positions and page actions. Diagram from the audited panel map."
+      },
+      {
+        "file": "controls-44.svg",
+        "alt": "SAVE / PROJECT physical control map",
+        "caption": "SAVE / PROJECT: knob positions and page actions. Diagram from the audited panel map."
+      }
+    ]
+  },
+  "parameters": [
+    {
+      "id": 0,
+      "name": "OP6 Rate1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward envelope level1 after note-on;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 1,
+      "name": "OP6 Rate2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward level2 after stage1;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 2,
+      "name": "OP6 Rate3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward held level3;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 3,
+      "name": "OP6 Rate4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release speed toward level4 after note-off;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 4,
+      "name": "OP6 Level1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "First envelope destination. Carrier changes affect volume; modulator changes affect timbre.",
+      "location": "FM EDIT / OP LEVELS / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 5,
+      "name": "OP6 Level2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Second envelope destination, reached after level1.",
+      "location": "FM EDIT / OP LEVELS / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 6,
+      "name": "OP6 Level3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Sustained destination while the note is held.",
+      "location": "FM EDIT / OP LEVELS / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 7,
+      "name": "OP6 Level4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release destination; normally0 for a sound that fades to silence.",
+      "location": "FM EDIT / OP LEVELS / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 8,
+      "name": "OP6 Key breakpoint",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Keyboard split point for left/right level scaling; raw note code, not Hz.",
+      "location": "FM EDIT / KEY SCALE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 9,
+      "name": "OP6 Left key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength of output attenuation/boost below the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 10,
+      "name": "OP6 Right key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength above the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 11,
+      "name": "OP6 Left key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "0 negative linear;1 negative exponential;2 positive exponential;3 positive linear.",
+      "location": "FM EDIT / KEY SCALE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 12,
+      "name": "OP6 Right key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Same four curve codes, applied above the breakpoint.",
+      "location": "FM EDIT / CURVE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 13,
+      "name": "OP6 Rate scaling",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "Speeds the envelope at higher notes; larger values strengthen the effect.",
+      "location": "FM EDIT / SENSITIVITY / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 14,
+      "name": "OP6 Amplitude sensitivity",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "How strongly this operator responds to global amplitude modulation.",
+      "location": "FM EDIT / SENSITIVITY / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 15,
+      "name": "OP6 Velocity sensitivity",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "How much note velocity changes this operator level.",
+      "location": "FM EDIT / SENSITIVITY / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 16,
+      "name": "OP6 Output level",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Carrier loudness or modulation amount, depending on the routing. This is logarithmic, not a linear percentage.",
+      "location": "FM EDIT / TUNE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 17,
+      "name": "OP6 Frequency mode",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 ratio to the played note;1 fixed frequency.",
+      "location": "FM EDIT / SENSITIVITY / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 18,
+      "name": "OP6 Coarse frequency",
+      "minimum": 0,
+      "maximum": 31,
+      "description": "Ratio mode:0 means0.5,1..31 integer ratios. Fixed mode uses decade selection; fine adjusts within it.",
+      "location": "FM EDIT / TUNE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 19,
+      "name": "OP6 Fine frequency",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Additional frequency tuning; interpretation depends on ratio/fixed mode.",
+      "location": "FM EDIT / TUNE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 20,
+      "name": "OP6 Detune",
+      "minimum": 0,
+      "maximum": 14,
+      "description": "Raw7 is centered; lower/higher offsets detune down/up.",
+      "location": "FM EDIT / TUNE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP6."
+    },
+    {
+      "id": 21,
+      "name": "OP5 Rate1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward envelope level1 after note-on;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 22,
+      "name": "OP5 Rate2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward level2 after stage1;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 23,
+      "name": "OP5 Rate3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward held level3;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 24,
+      "name": "OP5 Rate4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release speed toward level4 after note-off;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 25,
+      "name": "OP5 Level1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "First envelope destination. Carrier changes affect volume; modulator changes affect timbre.",
+      "location": "FM EDIT / OP LEVELS / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 26,
+      "name": "OP5 Level2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Second envelope destination, reached after level1.",
+      "location": "FM EDIT / OP LEVELS / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 27,
+      "name": "OP5 Level3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Sustained destination while the note is held.",
+      "location": "FM EDIT / OP LEVELS / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 28,
+      "name": "OP5 Level4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release destination; normally0 for a sound that fades to silence.",
+      "location": "FM EDIT / OP LEVELS / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 29,
+      "name": "OP5 Key breakpoint",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Keyboard split point for left/right level scaling; raw note code, not Hz.",
+      "location": "FM EDIT / KEY SCALE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 30,
+      "name": "OP5 Left key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength of output attenuation/boost below the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 31,
+      "name": "OP5 Right key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength above the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 32,
+      "name": "OP5 Left key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "0 negative linear;1 negative exponential;2 positive exponential;3 positive linear.",
+      "location": "FM EDIT / KEY SCALE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 33,
+      "name": "OP5 Right key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Same four curve codes, applied above the breakpoint.",
+      "location": "FM EDIT / CURVE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 34,
+      "name": "OP5 Rate scaling",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "Speeds the envelope at higher notes; larger values strengthen the effect.",
+      "location": "FM EDIT / SENSITIVITY / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 35,
+      "name": "OP5 Amplitude sensitivity",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "How strongly this operator responds to global amplitude modulation.",
+      "location": "FM EDIT / SENSITIVITY / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 36,
+      "name": "OP5 Velocity sensitivity",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "How much note velocity changes this operator level.",
+      "location": "FM EDIT / SENSITIVITY / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 37,
+      "name": "OP5 Output level",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Carrier loudness or modulation amount, depending on the routing. This is logarithmic, not a linear percentage.",
+      "location": "FM EDIT / TUNE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 38,
+      "name": "OP5 Frequency mode",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 ratio to the played note;1 fixed frequency.",
+      "location": "FM EDIT / SENSITIVITY / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 39,
+      "name": "OP5 Coarse frequency",
+      "minimum": 0,
+      "maximum": 31,
+      "description": "Ratio mode:0 means0.5,1..31 integer ratios. Fixed mode uses decade selection; fine adjusts within it.",
+      "location": "FM EDIT / TUNE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 40,
+      "name": "OP5 Fine frequency",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Additional frequency tuning; interpretation depends on ratio/fixed mode.",
+      "location": "FM EDIT / TUNE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 41,
+      "name": "OP5 Detune",
+      "minimum": 0,
+      "maximum": 14,
+      "description": "Raw7 is centered; lower/higher offsets detune down/up.",
+      "location": "FM EDIT / TUNE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP5."
+    },
+    {
+      "id": 42,
+      "name": "OP4 Rate1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward envelope level1 after note-on;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 43,
+      "name": "OP4 Rate2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward level2 after stage1;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 44,
+      "name": "OP4 Rate3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward held level3;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 45,
+      "name": "OP4 Rate4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release speed toward level4 after note-off;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 46,
+      "name": "OP4 Level1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "First envelope destination. Carrier changes affect volume; modulator changes affect timbre.",
+      "location": "FM EDIT / OP LEVELS / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 47,
+      "name": "OP4 Level2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Second envelope destination, reached after level1.",
+      "location": "FM EDIT / OP LEVELS / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 48,
+      "name": "OP4 Level3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Sustained destination while the note is held.",
+      "location": "FM EDIT / OP LEVELS / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 49,
+      "name": "OP4 Level4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release destination; normally0 for a sound that fades to silence.",
+      "location": "FM EDIT / OP LEVELS / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 50,
+      "name": "OP4 Key breakpoint",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Keyboard split point for left/right level scaling; raw note code, not Hz.",
+      "location": "FM EDIT / KEY SCALE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 51,
+      "name": "OP4 Left key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength of output attenuation/boost below the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 52,
+      "name": "OP4 Right key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength above the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 53,
+      "name": "OP4 Left key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "0 negative linear;1 negative exponential;2 positive exponential;3 positive linear.",
+      "location": "FM EDIT / KEY SCALE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 54,
+      "name": "OP4 Right key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Same four curve codes, applied above the breakpoint.",
+      "location": "FM EDIT / CURVE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 55,
+      "name": "OP4 Rate scaling",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "Speeds the envelope at higher notes; larger values strengthen the effect.",
+      "location": "FM EDIT / SENSITIVITY / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 56,
+      "name": "OP4 Amplitude sensitivity",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "How strongly this operator responds to global amplitude modulation.",
+      "location": "FM EDIT / SENSITIVITY / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 57,
+      "name": "OP4 Velocity sensitivity",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "How much note velocity changes this operator level.",
+      "location": "FM EDIT / SENSITIVITY / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 58,
+      "name": "OP4 Output level",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Carrier loudness or modulation amount, depending on the routing. This is logarithmic, not a linear percentage.",
+      "location": "FM EDIT / TUNE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 59,
+      "name": "OP4 Frequency mode",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 ratio to the played note;1 fixed frequency.",
+      "location": "FM EDIT / SENSITIVITY / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 60,
+      "name": "OP4 Coarse frequency",
+      "minimum": 0,
+      "maximum": 31,
+      "description": "Ratio mode:0 means0.5,1..31 integer ratios. Fixed mode uses decade selection; fine adjusts within it.",
+      "location": "FM EDIT / TUNE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 61,
+      "name": "OP4 Fine frequency",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Additional frequency tuning; interpretation depends on ratio/fixed mode.",
+      "location": "FM EDIT / TUNE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 62,
+      "name": "OP4 Detune",
+      "minimum": 0,
+      "maximum": 14,
+      "description": "Raw7 is centered; lower/higher offsets detune down/up.",
+      "location": "FM EDIT / TUNE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP4."
+    },
+    {
+      "id": 63,
+      "name": "OP3 Rate1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward envelope level1 after note-on;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 64,
+      "name": "OP3 Rate2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward level2 after stage1;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 65,
+      "name": "OP3 Rate3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward held level3;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 66,
+      "name": "OP3 Rate4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release speed toward level4 after note-off;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 67,
+      "name": "OP3 Level1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "First envelope destination. Carrier changes affect volume; modulator changes affect timbre.",
+      "location": "FM EDIT / OP LEVELS / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 68,
+      "name": "OP3 Level2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Second envelope destination, reached after level1.",
+      "location": "FM EDIT / OP LEVELS / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 69,
+      "name": "OP3 Level3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Sustained destination while the note is held.",
+      "location": "FM EDIT / OP LEVELS / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 70,
+      "name": "OP3 Level4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release destination; normally0 for a sound that fades to silence.",
+      "location": "FM EDIT / OP LEVELS / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 71,
+      "name": "OP3 Key breakpoint",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Keyboard split point for left/right level scaling; raw note code, not Hz.",
+      "location": "FM EDIT / KEY SCALE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 72,
+      "name": "OP3 Left key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength of output attenuation/boost below the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 73,
+      "name": "OP3 Right key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength above the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 74,
+      "name": "OP3 Left key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "0 negative linear;1 negative exponential;2 positive exponential;3 positive linear.",
+      "location": "FM EDIT / KEY SCALE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 75,
+      "name": "OP3 Right key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Same four curve codes, applied above the breakpoint.",
+      "location": "FM EDIT / CURVE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 76,
+      "name": "OP3 Rate scaling",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "Speeds the envelope at higher notes; larger values strengthen the effect.",
+      "location": "FM EDIT / SENSITIVITY / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 77,
+      "name": "OP3 Amplitude sensitivity",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "How strongly this operator responds to global amplitude modulation.",
+      "location": "FM EDIT / SENSITIVITY / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 78,
+      "name": "OP3 Velocity sensitivity",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "How much note velocity changes this operator level.",
+      "location": "FM EDIT / SENSITIVITY / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 79,
+      "name": "OP3 Output level",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Carrier loudness or modulation amount, depending on the routing. This is logarithmic, not a linear percentage.",
+      "location": "FM EDIT / TUNE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 80,
+      "name": "OP3 Frequency mode",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 ratio to the played note;1 fixed frequency.",
+      "location": "FM EDIT / SENSITIVITY / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 81,
+      "name": "OP3 Coarse frequency",
+      "minimum": 0,
+      "maximum": 31,
+      "description": "Ratio mode:0 means0.5,1..31 integer ratios. Fixed mode uses decade selection; fine adjusts within it.",
+      "location": "FM EDIT / TUNE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 82,
+      "name": "OP3 Fine frequency",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Additional frequency tuning; interpretation depends on ratio/fixed mode.",
+      "location": "FM EDIT / TUNE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 83,
+      "name": "OP3 Detune",
+      "minimum": 0,
+      "maximum": 14,
+      "description": "Raw7 is centered; lower/higher offsets detune down/up.",
+      "location": "FM EDIT / TUNE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP3."
+    },
+    {
+      "id": 84,
+      "name": "OP2 Rate1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward envelope level1 after note-on;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 85,
+      "name": "OP2 Rate2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward level2 after stage1;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 86,
+      "name": "OP2 Rate3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward held level3;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 87,
+      "name": "OP2 Rate4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release speed toward level4 after note-off;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 88,
+      "name": "OP2 Level1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "First envelope destination. Carrier changes affect volume; modulator changes affect timbre.",
+      "location": "FM EDIT / OP LEVELS / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 89,
+      "name": "OP2 Level2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Second envelope destination, reached after level1.",
+      "location": "FM EDIT / OP LEVELS / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 90,
+      "name": "OP2 Level3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Sustained destination while the note is held.",
+      "location": "FM EDIT / OP LEVELS / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 91,
+      "name": "OP2 Level4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release destination; normally0 for a sound that fades to silence.",
+      "location": "FM EDIT / OP LEVELS / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 92,
+      "name": "OP2 Key breakpoint",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Keyboard split point for left/right level scaling; raw note code, not Hz.",
+      "location": "FM EDIT / KEY SCALE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 93,
+      "name": "OP2 Left key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength of output attenuation/boost below the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 94,
+      "name": "OP2 Right key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength above the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 95,
+      "name": "OP2 Left key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "0 negative linear;1 negative exponential;2 positive exponential;3 positive linear.",
+      "location": "FM EDIT / KEY SCALE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 96,
+      "name": "OP2 Right key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Same four curve codes, applied above the breakpoint.",
+      "location": "FM EDIT / CURVE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 97,
+      "name": "OP2 Rate scaling",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "Speeds the envelope at higher notes; larger values strengthen the effect.",
+      "location": "FM EDIT / SENSITIVITY / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 98,
+      "name": "OP2 Amplitude sensitivity",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "How strongly this operator responds to global amplitude modulation.",
+      "location": "FM EDIT / SENSITIVITY / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 99,
+      "name": "OP2 Velocity sensitivity",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "How much note velocity changes this operator level.",
+      "location": "FM EDIT / SENSITIVITY / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 100,
+      "name": "OP2 Output level",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Carrier loudness or modulation amount, depending on the routing. This is logarithmic, not a linear percentage.",
+      "location": "FM EDIT / TUNE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 101,
+      "name": "OP2 Frequency mode",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 ratio to the played note;1 fixed frequency.",
+      "location": "FM EDIT / SENSITIVITY / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 102,
+      "name": "OP2 Coarse frequency",
+      "minimum": 0,
+      "maximum": 31,
+      "description": "Ratio mode:0 means0.5,1..31 integer ratios. Fixed mode uses decade selection; fine adjusts within it.",
+      "location": "FM EDIT / TUNE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 103,
+      "name": "OP2 Fine frequency",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Additional frequency tuning; interpretation depends on ratio/fixed mode.",
+      "location": "FM EDIT / TUNE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 104,
+      "name": "OP2 Detune",
+      "minimum": 0,
+      "maximum": 14,
+      "description": "Raw7 is centered; lower/higher offsets detune down/up.",
+      "location": "FM EDIT / TUNE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP2."
+    },
+    {
+      "id": 105,
+      "name": "OP1 Rate1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward envelope level1 after note-on;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 106,
+      "name": "OP1 Rate2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward level2 after stage1;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 107,
+      "name": "OP1 Rate3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed toward held level3;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 108,
+      "name": "OP1 Rate4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release speed toward level4 after note-off;99 is fastest.",
+      "location": "FM EDIT / OP RATES / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 109,
+      "name": "OP1 Level1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "First envelope destination. Carrier changes affect volume; modulator changes affect timbre.",
+      "location": "FM EDIT / OP LEVELS / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 110,
+      "name": "OP1 Level2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Second envelope destination, reached after level1.",
+      "location": "FM EDIT / OP LEVELS / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 111,
+      "name": "OP1 Level3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Sustained destination while the note is held.",
+      "location": "FM EDIT / OP LEVELS / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 112,
+      "name": "OP1 Level4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Release destination; normally0 for a sound that fades to silence.",
+      "location": "FM EDIT / OP LEVELS / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 113,
+      "name": "OP1 Key breakpoint",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Keyboard split point for left/right level scaling; raw note code, not Hz.",
+      "location": "FM EDIT / KEY SCALE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 114,
+      "name": "OP1 Left key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength of output attenuation/boost below the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 115,
+      "name": "OP1 Right key depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Strength above the breakpoint.",
+      "location": "FM EDIT / KEY SCALE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 116,
+      "name": "OP1 Left key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "0 negative linear;1 negative exponential;2 positive exponential;3 positive linear.",
+      "location": "FM EDIT / KEY SCALE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 117,
+      "name": "OP1 Right key curve",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Same four curve codes, applied above the breakpoint.",
+      "location": "FM EDIT / CURVE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 118,
+      "name": "OP1 Rate scaling",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "Speeds the envelope at higher notes; larger values strengthen the effect.",
+      "location": "FM EDIT / SENSITIVITY / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 119,
+      "name": "OP1 Amplitude sensitivity",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "How strongly this operator responds to global amplitude modulation.",
+      "location": "FM EDIT / SENSITIVITY / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 120,
+      "name": "OP1 Velocity sensitivity",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "How much note velocity changes this operator level.",
+      "location": "FM EDIT / SENSITIVITY / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 121,
+      "name": "OP1 Output level",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Carrier loudness or modulation amount, depending on the routing. This is logarithmic, not a linear percentage.",
+      "location": "FM EDIT / TUNE / K1; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 122,
+      "name": "OP1 Frequency mode",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 ratio to the played note;1 fixed frequency.",
+      "location": "FM EDIT / SENSITIVITY / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 123,
+      "name": "OP1 Coarse frequency",
+      "minimum": 0,
+      "maximum": 31,
+      "description": "Ratio mode:0 means0.5,1..31 integer ratios. Fixed mode uses decade selection; fine adjusts within it.",
+      "location": "FM EDIT / TUNE / K2; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 124,
+      "name": "OP1 Fine frequency",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Additional frequency tuning; interpretation depends on ratio/fixed mode.",
+      "location": "FM EDIT / TUNE / K3; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 125,
+      "name": "OP1 Detune",
+      "minimum": 0,
+      "maximum": 14,
+      "description": "Raw7 is centered; lower/higher offsets detune down/up.",
+      "location": "FM EDIT / TUNE / K4; SELECT chooses operator on first six EDIT pages. Companion Editor / FM operators / OP1."
+    },
+    {
+      "id": 126,
+      "name": "Pitch rate1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed of global FM pitch-envelope stage1; higher values move faster.",
+      "location": "FM EDIT / PITCH RATES / K1; Editor / Pitch & LFO"
+    },
+    {
+      "id": 127,
+      "name": "Pitch rate2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed of global FM pitch-envelope stage2; higher values move faster.",
+      "location": "FM EDIT / PITCH RATES / K2; Editor / Pitch & LFO"
+    },
+    {
+      "id": 128,
+      "name": "Pitch rate3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed of global FM pitch-envelope stage3; higher values move faster.",
+      "location": "FM EDIT / PITCH RATES / K3; Editor / Pitch & LFO"
+    },
+    {
+      "id": 129,
+      "name": "Pitch rate4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Speed of global FM pitch-envelope stage4; higher values move faster.",
+      "location": "FM EDIT / PITCH RATES / K4; Editor / Pitch & LFO"
+    },
+    {
+      "id": 130,
+      "name": "Pitch level1",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Pitch destination for envelope stage1;50 is nominal pitch. These are native nonlinear pitch-envelope levels, not semitone values.",
+      "location": "FM EDIT / PITCH LEVELS / K1; Editor / Pitch & LFO"
+    },
+    {
+      "id": 131,
+      "name": "Pitch level2",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Pitch destination for envelope stage2;50 is nominal pitch. These are native nonlinear pitch-envelope levels, not semitone values.",
+      "location": "FM EDIT / PITCH LEVELS / K2; Editor / Pitch & LFO"
+    },
+    {
+      "id": 132,
+      "name": "Pitch level3",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Pitch destination for envelope stage3;50 is nominal pitch. These are native nonlinear pitch-envelope levels, not semitone values.",
+      "location": "FM EDIT / PITCH LEVELS / K3; Editor / Pitch & LFO"
+    },
+    {
+      "id": 133,
+      "name": "Pitch level4",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Pitch destination for envelope stage4;50 is nominal pitch. These are native nonlinear pitch-envelope levels, not semitone values.",
+      "location": "FM EDIT / PITCH LEVELS / K4; Editor / Pitch & LFO"
+    },
+    {
+      "id": 134,
+      "name": "FM algorithm",
+      "minimum": 0,
+      "maximum": 31,
+      "description": "Routing among six operators; raw0..31 corresponds to displayed algorithms1..32. Routing controls which operators are audible carriers. Some multi-operator feedback topologies remain unsupported and are labeled in the companion diagram.",
+      "location": "ALGORITHM encoder outside contextual pages; Editor / Sound"
+    },
+    {
+      "id": 135,
+      "name": "FM feedback",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "Strength of feedback on the effective feedback operator; higher values add harmonics and noise-like character.",
+      "location": "FM HOME K2; Editor / Sound"
+    },
+    {
+      "id": 136,
+      "name": "Oscillator key sync",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 free phase;1 reset phase with key-on. Affects attack consistency.",
+      "location": "FM LFO / FM SYNC K4; Editor / Sound"
+    },
+    {
+      "id": 137,
+      "name": "FM LFO speed",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Native0..99 speed scale, not Hz.",
+      "location": "FM LFO / FM MODULATION K2; Editor / Pitch & LFO"
+    },
+    {
+      "id": 138,
+      "name": "FM LFO delay",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Delay before modulation grows after note-on; native0..99 scale.",
+      "location": "FM LFO / FM SYNC K1; Editor / Pitch & LFO"
+    },
+    {
+      "id": 139,
+      "name": "FM pitch modulation depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Overall pitch modulation amount. Pitch sensitivity also affects the result.",
+      "location": "FM LFO / FM MODULATION K3; Editor / Pitch & LFO"
+    },
+    {
+      "id": 140,
+      "name": "FM amplitude modulation depth",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Overall amplitude modulation amount; each operator amplitude sensitivity must permit it.",
+      "location": "FM LFO / FM MODULATION K4; Editor / Pitch & LFO"
+    },
+    {
+      "id": 141,
+      "name": "FM LFO key sync",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 free-running LFO phase;1 synchronized phase at note-on.",
+      "location": "FM LFO / FM SYNC K3; Editor / Pitch & LFO"
+    },
+    {
+      "id": 142,
+      "name": "FM LFO wave",
+      "minimum": 0,
+      "maximum": 5,
+      "description": "0 triangle,1 saw down,2 saw up,3 square,4 sine,5 sample-and-hold.",
+      "location": "FM LFO / FM MODULATION K1; Editor / Pitch & LFO"
+    },
+    {
+      "id": 143,
+      "name": "FM pitch modulation sensitivity",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "Scales the response to global pitch modulation;0 disables that sensitivity.",
+      "location": "FM LFO / FM SYNC K2; Editor / Pitch & LFO"
+    },
+    {
+      "id": 144,
+      "name": "Transpose",
+      "minimum": 0,
+      "maximum": 48,
+      "description": "0..48 with24 as neutral. Offsets the patch in semitones.",
+      "location": "GLO / VOICE/TEMPO K4; Editor / Sound"
+    },
+    {
+      "id": 145,
+      "name": "Filter type",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "0 low-pass,1 high-pass,2 band-pass for the shared effects filter.",
+      "location": "FX / FILTER / SPACE, ALGORITHM; Editor / Effects"
+    },
+    {
+      "id": 146,
+      "name": "FX resonance",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Emphasizes frequencies around the shared filter cutoff;0..100 canonical amount.",
+      "location": "FX / FILTER / SPACE K2; Editor / Effects"
+    },
+    {
+      "id": 147,
+      "name": "Program LFO enable",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 bypasses program modulation;1 uses the existing FM or VA LFO settings. Turning it off retains those settings.",
+      "location": "FX / MODULATION K4; repeated LFO button; VA LFO K4; Editor / Effects or Pitch & LFO"
+    },
+    {
+      "id": 148,
+      "name": "Reverb model",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "0 Room;1 Plate;2 Hall;3 Cloud. Four different length/damping/modulation profiles of the shared eight-line FDN; changing model clears its tail.",
+      "location": "FX / SPACE SETTINGS K4; Editor / Effects"
+    },
+    {
+      "id": 149,
+      "name": "Delay model",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 Clean,1 Warm; changes delay character.",
+      "location": "Companion Editor / Effects; retained in sound and FX profiles. No dedicated panel selector in733 after modulation recipes replaced its earlier shortcut."
+    },
+    {
+      "id": 150,
+      "name": "Mono glide mode",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "0 off,1 legato between overlapping held notes,2 always between successive notes. Requires mono voice budget1.",
+      "location": "SEQ / PLAY MODE K2; GLO / MONO GLIDE K1; Editor / Sound"
+    },
+    {
+      "id": 151,
+      "name": "Glide time",
+      "minimum": 0,
+      "maximum": 2000,
+      "description": "Portamento duration in milliseconds,0..2000.",
+      "location": "SEQ / PLAY MODE K3; GLO / MONO GLIDE K2; Editor / Sound"
+    },
+    {
+      "id": 152,
+      "name": "Glide curve",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "0 linear,1 ease-in,2 ease-out contour.",
+      "location": "SEQ / PLAY MODE K4; GLO / MONO GLIDE K3; Editor / Sound"
+    },
+    {
+      "id": 153,
+      "name": "Sequencer mode",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 SINGLE with the working instrument,1 four mono tracks with saved instrument references.",
+      "location": "GLO / VOICE-TEMPO K1; SEQ / PLAY MODE K1; SELECT on PRESETS (1V/4V/4T also chooses voice budget); Companion Sound / Playing mode."
+    },
+    {
+      "id": 154,
+      "name": "Selected track",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "0..3 identifies T1..T4 for editing and recording.",
+      "location": "SEQ / PLAY MODE / ALGORITHM; mixer strip gestures also select a track."
+    },
+    {
+      "id": 155,
+      "name": "Track instrument reference",
+      "minimum": 0,
+      "maximum": 127,
+      "description": "Unit slot0..63 USER;64..127 DEFAULT. References a saved sound, not an embedded copy.",
+      "location": "MIXER PATCH layer; PRESETS browses sounds for the selected part; Editor / Patterns"
+    },
+    {
+      "id": 156,
+      "name": "Track level",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Local audio level0..100. Does not transmit MIDI CC7.",
+      "location": "SEQ / MIXER VOLUME layer, matching track knob; four-track HOME VOLUME layer; Editor / Patterns"
+    },
+    {
+      "id": 157,
+      "name": "Track mute",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 audible,1 muted; timeline continues and generated note ownership releases.",
+      "location": "SEQ / MIXER MUTE layer; four-track HOME MUTE layer; Editor / Patterns"
+    },
+    {
+      "id": 158,
+      "name": "Recording mode",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "0 step entry,1 looping overdub,2 one-pass replace. Overdub leaves untouched cells intact; played spans replace mono content.",
+      "location": "SEQ / RECORD K1; Editor / Patterns"
+    },
+    {
+      "id": 159,
+      "name": "Delay sync",
+      "minimum": 0,
+      "maximum": 7,
+      "description": "0 free milliseconds;1 quarter;2 dotted eighth;3 eighth;4 eighth triplet;5 sixteenth;6 sixteenth triplet;7 dotted quarter. Uses internal BPM or received MIDI clock. Delay capacity is20..1000ms; longer divisions cap visibly at MAX. Free milliseconds remain stored separately.",
+      "location": "FX / SPACE SETTINGS: ALGORITHM selects mode/division; K1 edits milliseconds in FREE, division otherwise. Companion Editor / FX."
+    },
+    {
+      "id": 160,
+      "name": "Engine",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 FM,1 VA. Selecting a preset loads that sound's engine.",
+      "location": "SELECT on HOME; Editor / Sound"
+    },
+    {
+      "id": 161,
+      "name": "VA waveform",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "0 sine,1 saw,2 square,3 triangle. One VA oscillator per voice. Noise (4) is a voice-local broadband source for percussion.",
+      "location": "VA EDIT K1 or ALGORITHM outside contextual pages; Editor / Sound"
+    },
+    {
+      "id": 162,
+      "name": "Shared cutoff",
+      "minimum": 20,
+      "maximum": 20000,
+      "description": "Cutoff of the shared filter,20..20000Hz. Companion slider is logarithmic.",
+      "location": "HOME K1 or FX / FILTER / SPACE K1; Editor / Effects"
+    },
+    {
+      "id": 163,
+      "name": "VA resonance",
+      "minimum": 0,
+      "maximum": 95,
+      "description": "Resonance of the per-voice VA low-pass filter,0..95.",
+      "location": "VA EDIT K3; Editor / Sound. HOME K2 edits the shared FX resonance instead."
+    },
+    {
+      "id": 164,
+      "name": "VA attack",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Envelope rise time0..10000 milliseconds.",
+      "location": "VA ENV K1; Editor / Sound"
+    },
+    {
+      "id": 165,
+      "name": "VA decay",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Time toward sustain level after attack,0..10000 milliseconds.",
+      "location": "VA ENV K2; Editor / Sound"
+    },
+    {
+      "id": 166,
+      "name": "VA sustain",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Held envelope level0..100 percent.",
+      "location": "VA ENV K3; Editor / Sound"
+    },
+    {
+      "id": 167,
+      "name": "VA release",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Fade time after note-off,0..10000 milliseconds.",
+      "location": "VA ENV K4; Editor / Sound"
+    },
+    {
+      "id": 168,
+      "name": "Drive",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Shared distortion amount0..100.",
+      "location": "FX / MODULATION K3; Editor / Effects"
+    },
+    {
+      "id": 169,
+      "name": "Chorus",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Shared chorus amount0..100.",
+      "location": "FX / MODULATION K1; Editor / Effects"
+    },
+    {
+      "id": 170,
+      "name": "Delay",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Shared delay return amount0..100; does not remove the dry instrument.",
+      "location": "SINGLE HOME K4 or FX / FILTER / SPACE K4; Editor / Effects"
+    },
+    {
+      "id": 171,
+      "name": "Delay time",
+      "minimum": 20,
+      "maximum": 1000,
+      "description": "Stored free delay interval20..1000 milliseconds. Used when Delay sync is FREE; synchronized divisions use current internal or received tempo and preserve this saved free value.",
+      "location": "FX / SPACE SETTINGS K1; Editor / Effects"
+    },
+    {
+      "id": 172,
+      "name": "Delay feedback",
+      "minimum": 0,
+      "maximum": 85,
+      "description": "Recirculation amount0..85 percent. Higher values create more repeats.",
+      "location": "FX / SPACE SETTINGS K2; Editor / Effects"
+    },
+    {
+      "id": 173,
+      "name": "Reverb",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Shared reverb return amount0..100.",
+      "location": "SINGLE HOME K3 or FX / FILTER / SPACE K3; Editor / Effects"
+    },
+    {
+      "id": 174,
+      "name": "Phaser",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Shared phaser amount0..100.",
+      "location": "FX / MODULATION K2; Editor / Effects"
+    },
+    {
+      "id": 175,
+      "name": "VA vibrato rate",
+      "minimum": 10,
+      "maximum": 1000,
+      "description": "10..1000 in hundredths of Hz:1 unit=0.01Hz.",
+      "location": "VA LFO K1; Editor / Pitch & LFO"
+    },
+    {
+      "id": 176,
+      "name": "VA vibrato depth",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Pitch deviation0..100 cents.100 cents is one semitone.",
+      "location": "VA LFO K2; Editor / Pitch & LFO"
+    },
+    {
+      "id": 177,
+      "name": "VA voice cutoff",
+      "minimum": 20,
+      "maximum": 18000,
+      "description": "Per-voice low-pass cutoff20..18000Hz, separate from shared effects filter.",
+      "location": "VA EDIT K2; Editor / Sound"
+    },
+    {
+      "id": 178,
+      "name": "Tempo",
+      "minimum": 20,
+      "maximum": 300,
+      "description": "Internal tempo20..300 beats per minute. External-clock operation follows received MIDI ticks.",
+      "location": "GLO / VOICE/TEMPO K2; ARP / TIMING K2; SEQ / PATTERNS K2; Editor / Arp & performance"
+    },
+    {
+      "id": 179,
+      "name": "Arpeggiator enabled",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 off,1 on; transforms held/latched notes into a timed pattern.",
+      "location": "Repeated ARP button; Editor / Arp & performance"
+    },
+    {
+      "id": 180,
+      "name": "Arp type",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "0 Up,1 Down,2 Exclusive,3 Played,4 Inclusive,5 Random,6 Repeat,7 Down exclusive,8 Down inclusive,9 Outside in. Strum (10) plays one ascending pass at RATE spacing and GATE length; a fresh key press rearms it. Octaves and latch apply. It does not loop while a chord is held.",
+      "location": "ARP / TYPE/LATCH K1; Editor / Arp & performance"
+    },
+    {
+      "id": 181,
+      "name": "Arp division",
+      "minimum": 1,
+      "maximum": 32,
+      "description": "Musical denominator1,2,4,8,16 or32; larger denominators produce shorter notes. Other integers are invalid.",
+      "location": "ARP / TIMING K1; Editor / Arp & performance"
+    },
+    {
+      "id": 182,
+      "name": "Arp octaves",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Range1..4 octaves across which held pitches expand.",
+      "location": "ARP / TYPE/LATCH K2; Editor / Arp & performance"
+    },
+    {
+      "id": 183,
+      "name": "Arp gate",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Note-on duration as0..100 percent of an arp interval.",
+      "location": "ARP / TIMING K3; Editor / Arp & performance"
+    },
+    {
+      "id": 184,
+      "name": "Arp latch",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 requires held keys;1 retains the note group after release.",
+      "location": "ARP / TYPE/LATCH K3; Editor / Arp & performance"
+    },
+    {
+      "id": 185,
+      "name": "Swing",
+      "minimum": 50,
+      "maximum": 75,
+      "description": "50 is straight; up to75 shifts alternate rhythmic events. Stored as a timing ratio, not an extra delay in milliseconds.",
+      "location": "ARP / TIMING K4; Editor / Arp & performance"
+    },
+    {
+      "id": 186,
+      "name": "Pattern length",
+      "minimum": 1,
+      "maximum": 64,
+      "description": "Active steps1..64; reducing length retains hidden steps in stored state.",
+      "location": "SEQ / PATTERNS K3; Editor / Patterns"
+    },
+    {
+      "id": 187,
+      "name": "Edit step",
+      "minimum": 0,
+      "maximum": 63,
+      "description": "Cursor0..63, constrained by current visible pattern length for panel editing.",
+      "location": "SEQ / STEP EDIT K1 or NOTE EDIT K1; Editor / Patterns"
+    },
+    {
+      "id": 188,
+      "name": "Step pitch",
+      "minimum": 0,
+      "maximum": 129,
+      "description": "MIDI notes0..127,REST128,TIE129. Tie continues a prior note; a rest stops it.",
+      "location": "SEQ / STEP EDIT K2 or NOTE EDIT K2; Editor / Patterns"
+    },
+    {
+      "id": 189,
+      "name": "Step velocity",
+      "minimum": 1,
+      "maximum": 127,
+      "description": "MIDI velocity1..127. Rest is a pitch sentinel, not velocity0.",
+      "location": "SEQ / STEP EDIT K3; Editor / Patterns"
+    },
+    {
+      "id": 190,
+      "name": "Step gate",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "1..100 percent of a step or final held-note step. Ties extend across steps.",
+      "location": "SEQ / STEP EDIT K4 or NOTE EDIT K4; Editor / Patterns"
+    },
+    {
+      "id": 191,
+      "name": "Voice budget",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "1..4 local voices in SINGLE. Locked at four total in 4TRK (one mono voice per track), and at one while single-instrument glide is active. Select SINGLE explicitly via GLO K1 or SEL+HOME. Turning glide off restores the previous single voice budget; imported glide uses four as its return value.",
+      "location": "GLO / VOICE-TEMPO K3; GLO / MONO GLIDE K4.1V/4V/4T shortcuts on PLAY MODE K1 or PRESETS SELECT. Locked in4TRK or active single glide."
+    },
+    {
+      "id": 192,
+      "name": "Arp triplets",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 straight division,1 triplet timing.",
+      "location": "ARP / TYPE/LATCH K4; Editor / Arp & performance"
+    },
+    {
+      "id": 193,
+      "name": "Receive channel",
+      "minimum": 0,
+      "maximum": 16,
+      "description": "0 omni;1..16 selects a MIDI input channel. This is distinct from the zero-based output base-channel setting.",
+      "location": "GLO / MIDI INPUT K1; Editor / Arp & performance"
+    },
+    {
+      "id": 194,
+      "name": "Reverb decay",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Reverb persistence0..100 canonical amount, not seconds.",
+      "location": "FX / SPACE SETTINGS K3; Editor / Effects"
+    },
+    {
+      "id": 195,
+      "name": "Pattern selection",
+      "minimum": 0,
+      "maximum": 15,
+      "description": "Editable pattern0..15. Live four-track pattern choices queue at each track's own boundary.",
+      "location": "SEQ / PATTERNS K1 or MIXER PATTERN layer; Editor / Patterns"
+    },
+    {
+      "id": 196,
+      "name": "Pattern chain enable",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0 stay on one pattern;1 advance through enabled chain members.",
+      "location": "SEQ / PATTERNS K4; Editor / Patterns"
+    },
+    {
+      "id": 197,
+      "name": "Chain membership",
+      "minimum": 1,
+      "maximum": 65535,
+      "description": "Nonempty16-bit membership mask1..65535; bit0 selects pattern0. This is a set in cyclic index order, not an arbitrary song repetition list.",
+      "location": "SEQ / CHAIN MEMBERS K1 cursor/K2 membership; Editor / Patterns"
+    }
+  ],
+  "panel_pages": 45,
+  "sources": {
+    "firmware/fm1/panel_model.h": "e485fc018f1d6b0fa443a90fb2b8afdca26d70593e8b0b33bfcc7776b56cb6cf",
+    "firmware/fm1/control_model.h": "cb72bdd7c76161e55d68eac1d574e6699269a7c074a0b9f33d7655a85550673e",
+    "tools/fm1_native_state_v11.py": "4c7b92c6ba2dba18522c100a5cda854e9e8ab38a899ece0f7d76d6b9547fb80e",
+    "docs/help/topics.json": "2bc8df02eeb0e7d7eb77a6c3ecd90ef643f65fdbfb40880ca5c6d121fd376f97",
+    "docs/help/figures.json": "05fcda68af9c8e60be4fa3d474a9240e2141458247eff751219254904a3f90e7",
+    "docs/help/parameters.json": "421297d9a3934a91c8f8f7b52df9e51bea521f7c960cc308f2ef20b7b1164824",
+    "docs/help/panel.json": "2e072328010954b73ceb874913d25b56cdc36bc7f69b1e51bb1027797a9ee5aa",
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "NOTICE": "0a0efe43cc232dfe2ee4e5e3d865bba599b89ec574d44459595b67ed76c73118",
+    "LICENSING.md": "1f66ab3271f10c23f20b05175f55d77668b56f19f9706c0e81987a11e52b36ce"
+  }
+}
