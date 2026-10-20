@@ -9,14 +9,14 @@ arrange songs and perform on the instrument. FMER Companion keeps your instrumen
 projects and backups organized locally, with a guided firmware installer and an
 illustrated offline handbook.
 
-**Current build: 734.** Pre-1.0, using the same numbered builds throughout testing.
+**Current firmware: 734-r2. Companion: 734 r3.** Pre-1.0, using the same numbered builds throughout testing.
 The repository is staged privately and its release is a draft for maintainer
 review. Public distribution awaits the remaining [release checks](docs/release/RELEASE_READINESS.md).
 
 ## Start here
 
 - [Downloads and release notes](https://github.com/Nacsez/FMER/releases):
-  Companion for Windows 10/11 x64, firmware-only `.fwsc`, source, PDFs and press pack.
+  Companion for Windows 10/11 x64, firmware-only `.fwsc`, default-sound catalog, source, PDFs and press pack.
 - [Install FMER](docs/release/INSTALLATION.md): extract the entire Companion ZIP,
   launch `FMER Companion.exe`, connect one unit and follow Firmware.
 - [Visual feature tour](docs/release/FEATURES.md): annotated screens for every major function.
@@ -57,7 +57,7 @@ screens use an isolated demonstration library. They are not physical LCD photogr
 Effects are shared across tracks. USB audio carries the combined mix, not four
 separate stems. Battery percentage is estimated. TRS MIDI is input-only and direct
 USB links support one peer. Bluetooth and macOS/Linux binaries are deferred.
-Automatic update downloading is not implemented.
+GitHub links provide manual software and sound-pack downloads; automatic downloading is not implemented. See [Companion updates and deployment](docs/release/COMPANION_R3.md).
 
 The installer checks the supported memory layout and preserves compatible
 identity/calibration regions. Unknown layouts are rejected. Stock patch backup,

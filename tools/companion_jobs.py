@@ -19,6 +19,7 @@ import fm1_package
 import hardware_bridge
 import library
 import release_firmware
+import compatible_firmware
 
 
 class Jobs:
@@ -29,7 +30,7 @@ class Jobs:
         return dict(platform=os.name,device_transport='Windows WinMM' if os.name=='nt' else 'Not yet packaged for this platform',
                     device_available=os.name=='nt',firmware='FMER734 native 11', firmware_identity='FM-1_734', native_version=11, voice_modes={'synth': '1-4 voices, one sound', 'tracks': '4 mono tracks, one voice each'},
                     individual_device_delete=False,project_names_on_unit=False,
-                    flash_scope='Install or reinstall FMER on an FM-1 with compatible memory layout and calibration. The existing application can differ.',
+                    flash_scope='Install FMER or a custom application using the reviewed935 updater and protected layout. The connected unit must pass layout/calibration checks; application behavior and library commands remain separate qualifications.',
                     bundled_firmware=release_firmware.available(),
                     library_local=True,help_offline=True)
 
@@ -46,11 +47,24 @@ class Jobs:
             # A recognized publisher asset is useful information, not permission
             # to rewrite a different flash layout. No install token is issued.
             return {**official,'limitation':official['reason'],'stock_restore':request.get('action')=='inspect_stock'}
-        report=companion_stock.prepare(raw).report if request.get('action')=='inspect_stock' else release_firmware.inspect_bytes(raw) or fm1_package.validate_package(raw)
+        if request.get('action')=='inspect_stock':
+            report=companion_stock.prepare(raw).report
+        else:
+            report=release_firmware.inspect_bytes(raw)
+            if report is None:
+                # Unknown files get a readable compatibility result. No legacy
+                # private-evidence lookup and no install token on rejection.
+                try:report=compatible_firmware.inspect_bytes(raw)
+                except ValueError as error:
+                    return dict(product='Selected firmware',installable=False,
+                        compatibility='Not compatible with this installer',
+                        limitation=str(error),package_sha256=hashlib.sha256(raw).hexdigest())
         token=uuid.uuid4().hex;directory=self.root/token;directory.mkdir(parents=True,exist_ok=False)
         path=directory/'package.fwsc';path.write_bytes(raw)
         report.update(inspection=token,installable=bool(report['runtime_preflight_qualified'] and os.name=='nt'),
                       limitation='Restores the supported original application only; device identity and calibration are preserved. This does not restore original user settings.' if report.get('stock_restore') else 'Checks the unit memory layout and calibration before replacing the application. Stock patch export is not supported. Keep power and USB connected.' if report.get('release_profile') else 'An unqualified or mismatched package cannot be installed. Development packages require their complete review evidence.')
+        if report.get('compatible_profile'):
+            report['limitation']='Custom firmware: updater and memory layout are compatible, but this application has not been tested as an FMER release. Back up all sounds and projects first. The application may interpret saved data differently, and Companion library management requires FMER 733 or 734. Install only firmware from a source you trust.'
         (directory/'inspection.json').write_bytes(library.canonical(report));self.packages[token]=(path,report)
         return report
 
@@ -73,13 +87,26 @@ class Jobs:
                 self.jobs[identifier]=job
             return deepcopy(self.jobs[identifier])
 
+    def backup(self,identifier):
+        job=self.status(identifier)
+        value=job.get('progress',{}).get('backup_path')
+        if not isinstance(value,str):raise ValueError('No pre-transfer backup is available for this operation')
+        path=Path(value).resolve()
+        root=(self.device.root/'device-logs').resolve()
+        if not path.is_relative_to(root) or path.name!='unit-backup.fmer-backup.json':
+            raise ValueError('Backup is outside the operation archive')
+        raw=path.read_bytes()
+        if len(raw)>library.MAX_FILE_BYTES:raise ValueError('Backup exceeds size limit')
+        value=library.strict_loads(raw);archive.validate(value)
+        return value
+
     def start(self,request):
         library.fields(request,{'action','request','inspection','confirmation'},'operation')
         library.choice(request.get('action'),{'device','install'},'operation')
         if request['action']=='device':
             req=request.get('request')
             if not isinstance(req,dict):raise ValueError('Missing device operation')
-            if req.get('action') not in {'probe','backup_all','restore_all','instrument_rename','instrument_copy','instrument_swap','pull','push','load','project_pull','project_push','project_load','project_save','catalog','project_catalog','record','stop_recording','battery_history','midi_read','midi_set','reset_defaults','reset_user','clear_user'}:raise ValueError('Unsupported device operation')
+            if req.get('action') not in {'probe','backup_all','restore_all','deploy_library','instrument_rename','instrument_copy','instrument_swap','pull','push','load','project_pull','project_push','project_load','project_save','catalog','project_catalog','record','stop_recording','battery_history','midi_read','midi_set','reset_defaults','reset_user','clear_user'}:raise ValueError('Unsupported device operation')
             if req['action']=='restore_all':archive.validate(req.get('backup'))
         else:
             selected=self.packages.get(request.get('inspection'))

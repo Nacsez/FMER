@@ -1,5 +1,8 @@
 """Musician-facing outcomes; raw exceptions remain in diagnostic records."""
 def explain(message, metadata=False):
+    if message.startswith('Transfer stopped after') or message.startswith('Slots verified but working state'):
+        return dict(title='Library transfer stopped',explanation=message,
+                    next_step='Keep the pre-transfer backup. Download it from this operation before deciding whether to restore or continue. Earlier verified slots may have changed; nothing is retried automatically.')
     if 'Multiple candidate instruments' in message:
         return dict(title='More than one FM-1 is connected',explanation='Companion cannot choose which instrument you intend to manage. The operation has stopped.',next_step='Leave only the intended FM-1 connected to this computer, then choose Check connection. Back up and update each unit separately.')
     if ('midiInOpen' in message or 'midiOutOpen' in message) and 'MMRESULT 7' in message:

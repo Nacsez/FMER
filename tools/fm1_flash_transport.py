@@ -6,7 +6,9 @@ AL-255/FM-1-RE ec832f281ca165a7d5e0722985f3acb1465046d5,
 docs/io/11-ota-protocol.md; Felucca 20c275e39f75fa820978032efaceddfc5283c8cb,
 tools/fm1_install.py. This independently implemented transport serves only an
 exact-hash-qualified historical development transition or an exact
-catalog-pinned release package.
+catalog-pinned release package or a custom application with the exact reviewed935
+updater and unchanged protected layout. Custom application behavior is not
+release-qualified.
 Importing opens no DLL, port or device. Origin identity and actual-app admission
 are separate gates.
 
@@ -165,11 +167,17 @@ def qualify_package(path: Path, expected_sha256: str, expected_loader_sha256: st
         raise UpdateError("Package exceeds size bound or differs from the expected SHA-256")
     try:
         import release_firmware
-        report = release_firmware.inspect_bytes(raw) or fm1_package.validate_package(raw)
-        product, image, files = fm1_package.decode_package(raw)
+        import compatible_firmware
+        report = release_firmware.inspect_bytes(raw)
+        if report is None:
+            try:
+                report = compatible_firmware.inspect_bytes(raw)
+            except ValueError:
+                report = fm1_package.validate_package(raw)
+        product, image, files = fm1_package.decode_package(raw, compatible_identity=bool(report.get('compatible_profile')))
     except (ValueError, IndexError, KeyError, OverflowError) as error:
         raise UpdateError(f"Package qualification failed: {error}") from error
-    if product not in SUPPORTED_TARGET_IDS or report["product"] != product or report["loader_sha256"] != expected_loader_sha256:
+    if (product not in SUPPORTED_TARGET_IDS and not report.get('compatible_profile')) or report["product"] != product or report["loader_sha256"] != expected_loader_sha256:
         raise UpdateError("Package product or loader differs from the qualified FMER Test01 build")
     start = files["flash.bin"]["offset"]
     report["loader_image_bytes"] = len(fm1_package.validate_loader(files["ota.bin"]["payload"]))
@@ -181,6 +189,9 @@ def qualify_package(path: Path, expected_sha256: str, expected_loader_sha256: st
 def update_identities(package) -> tuple[str, str, str]:
     """Return only reviewed origin/loader/target combinations; never a CLI override."""
     report = package.report
+    if report.get('compatible_profile'):
+        import compatible_firmware
+        return compatible_firmware.update_identities(package)
     if report.get('release_profile'):
         import release_firmware
         return release_firmware.update_identities(package)
@@ -657,11 +668,11 @@ def find_session(api, expected: str, journal, *, wait: float, transitional: str 
             try:
                 session.__enter__()
                 identity = session.identify()
-                compatible = expected == 'compatible-FM-1' and (re.fullmatch(r'FM-1_[0-9]{3}',identity) or identity=='ota-FM-1_935')
+                compatible = expected == 'compatible-FM-1' and (re.fullmatch(r'FM-1_[0-9]{3,8}',identity) or identity=='ota-FM-1_935')
                 if identity == expected or compatible or expected is None:
                     session.expected_loader_identity = expected if expected in SUPPORTED_LOADER_IDS else None
                     return session
-                if identity != transitional and not (transitional=='compatible-FM-1' and re.fullmatch(r'FM-1_[0-9]{3}',identity)):
+                if identity != transitional and not (transitional=='compatible-FM-1' and re.fullmatch(r'FM-1_[0-9]{3,8}',identity)):
                     raise UpdateError(f"Unexpected identity {identity!r}; expected {expected!r}")
             except IdentityTimeout:
                 failures = session.close()

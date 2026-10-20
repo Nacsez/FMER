@@ -1,7 +1,17 @@
+## Companion734 r3 - 20 October 2026
+
+Firmware is locked at734-r2. This Companion revision adds manual GitHub update
+links, clear name editing, selected set/PC-bank/project-bundle deployment and
+full pre-transfer backup with failure download. Imports merge sound packs into
+the local Library; hardware writes always require a reviewed destination list.
+A custom-application profile accepts only the reviewed935 updater and protected
+layout; applications themselves are not release-certified. See
+[the current contract](release/COMPANION_R3.md). Historical sections follow.
+
 ## Current 734 Companion — 19 October 2026
 
 The portable Windows10/11 x64 app contains its runtime, original defaults,
-firmware and offline Help. The visual guide now adds30 annotated feature sheets,
+firmware and offline Help. The visual guide now adds31 annotated feature sheets,
 five workflow diagrams and a shortcut sheet, reachable from the handbook sidebar.
 Source material and release drafts are in docs/release. No website or account is
 required; firmware files are bundled/local, not automatically downloaded.

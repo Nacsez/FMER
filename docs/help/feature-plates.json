@@ -1,6 +1,6 @@
 {
   "firmware": "FM-1_734",
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "capture_scope": "Actual production renderer with illustrative fixtures; actual isolated Companion browser captures; no physical display photographs",
   "features": [
     {
@@ -328,6 +328,16 @@
       ]
     },
     {
+      "slug": "companion-transfer",
+      "title": "Deploy sounds and projects",
+      "topic": "library",
+      "file": "feature-companion-transfer.svg",
+      "summary": "Review every destination before sending your set to the instrument.",
+      "frames": [
+        "app-transfer.png"
+      ]
+    },
+    {
       "slug": "sound-to-song",
       "title": "From sound to arrangement",
       "topic": "workflows",
@@ -380,7 +390,7 @@
     "firmware/fm1/ui.h": "105a54b3cb6d4cda10427bfefd167cb8a7654df30297b8fffeb5cce0d3c1777e",
     "firmware/fm1/panel_model.h": "e485fc018f1d6b0fa443a90fb2b8afdca26d70593e8b0b33bfcc7776b56cb6cf",
     "tools/feature_capture.cpp": "a34e49dfdadc21ffc330f50307f8fa3e0605cc874b5c4530afc884552a4457b6",
-    "tools/build_release_media.py": "9198c3b1102f234583cd9a3c156045d102bdafd5e065a4d75f4a2ecedc9baec4"
+    "tools/build_release_media.py": "b603c4e88376799f8063b3fc67f6ea5c19e8980148644cb1f29e946e91849bce"
   },
   "source_images": {
     "guide-glo-0.png": "4ad44d69c77e5e1198ec8046585ee0007550815b5469cd040f7806aed94fdcda",
@@ -429,9 +439,10 @@
     "guide-glo-3.png": "3897f132232e1d39c34172ca6d9765a8d852767e74b4224587d50c38a89cf61b",
     "guide-glo-4.png": "c345f4e6aa0ec1164e91dc4c935af3a8e6c7c8838526b69481448e7f18bc74d0",
     "guide-glo-5.png": "65b3ee614aebe045b505a1ddd88e0f4f85c32c1087cd8c9ee4131842abff65d8",
-    "app-library.png": "804beeedbca47bb299a0c55b74ece21a7232e89ce43c1580aaac5922d6deab40",
-    "app-editor.png": "acacd3e77f371b9418b42bd7876041d9fded88d61cfab429958fb6b11025c81a",
-    "app-backups.png": "64a7104edff2eb9a9526ef54783695974d8d75e0ae22d4edce24da09330b62fa",
-    "app-firmware.png": "2c4fe748f1f31b91328d4933e5fd6bc2921f699c203840449929dbdfe0fdfb22"
+    "app-library.png": "53119670e1d56aa677faab3cdc92aa0ab1937e2bb49c181cbfe741b50a4b9b8f",
+    "app-editor.png": "2f50f75728b846bd901cc24b51bfe6c6b098c0658611fb0d30d5c0a664582870",
+    "app-backups.png": "11de3b2db48a99d6e15a894918b44d3806f8b0982d6583ec5c39571f7a78a246",
+    "app-firmware.png": "ac74a0825d8998747a3d0fa5d137a17210cea8e4db1c47abac564bbcaa2c2a66",
+    "app-transfer.png": "e6c954eea3c1a0dd541ce87abc34405c72614582a37fe27c592651d4def626db"
   }
 }

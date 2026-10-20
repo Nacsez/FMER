@@ -25,6 +25,21 @@ def envelope(payload):
                 sha256=hashlib.sha256(library.canonical(payload)).hexdigest())
 
 
+def from_banks(state):
+    """Convert already validated PC banks to an import-only catalog envelope."""
+    now=datetime.now(timezone.utc).isoformat()
+    slots=[]
+    for index,entry in enumerate(state['slots']):
+        if entry is None:continue
+        slots.append(dict(id=str(uuid.uuid4()),kind='instrument',title=entry['name'],
+            collection='Imported Defaults' if index<64 else 'Imported User',
+            tags=[],notes='Imported PC bank slot '+str(index%64).zfill(2),
+            favorite=entry['favorite'],entry=deepcopy(entry),dependencies={},
+            created=now,updated=now,trashed=False))
+    return envelope(dict(format=FORMAT,version=1,capacity=CAPACITY,revision=0,
+                         slots=slots,undo_slots=None))
+
+
 class Catalog(library.PatchLibrary):
     def _empty(self):
         return dict(format=FORMAT, version=1, capacity=CAPACITY, revision=0, slots=[], undo_slots=None)

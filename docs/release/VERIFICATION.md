@@ -1,3 +1,20 @@
+## Companion734 r3 verification - 20 October 2026
+
+Firmware734-r2 and its updater are unchanged. No instrument was opened or flashed.
+The workspace suite completed1,086 Python cases (1,069 pass,17 explicit skips)
+and all34 compiled/host suites. All34 suites also pass from the fresh source
+export. The exported target/package build reproduces the exact locked FWSC;
+all42 independent loader checks pass. Eleven new boundary/transfer tests pass,
+including a validly repacked but unapproved updater rejection. The actual browser
+suite covers reviewed bank/set transfers, duplicate destinations, cancellation,
+bank-file imports with Undo, partial-write explanations and backup download.
+
+The37-sheet visual guide renders without script errors or text overflow.
+[Sanitized verification](companion-r3-verification.json) records the scope and
+source hashes. Portable ZIP lifecycle evidence is bound by the final asset manifest;
+no new third-party application or batch transfer on physical hardware is claimed.
+The owner's next Companion/hardware acceptance remains separate.
+
 # 734-r2 runtime release verification
 
 19 October 2026. This revision replaces the vendor runtime archives and private

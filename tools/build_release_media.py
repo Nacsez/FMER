@@ -90,7 +90,7 @@ FEATURES=[
   [('guide-glo-5','GLO / USB LINK','Choose PC, Master or Receiver','Master chooses Clock, Notes or Both')],
   ['Unplug PC cables before applying a direct-link role; connect the units with a USB data cable.','SEL applies. Each unit stays independently powered. One direct peer is supported.','Return to PC/NORMAL and press SEL before reconnecting Companion. Link roles reset at power-on.']),
  ('companion-library','Companion library','library','Organize instruments and projects locally on your computer.',
-  [('app-library','COMPANION / LIBRARY','Search and organize the catalog','Item details and reversible actions')],
+  [('app-library','COMPANION / LIBRARY','Search and organize the catalog','Name shown on the instrument')],
   ['Collections, tags, favorites, rename, duplicate, move and Trash/Undo.','PC library items are separate from the unit’s onboard banks and projects.','Import/export native FMER data and standard DX7 FM voices or32-voice banks.']),
  ('companion-banks','Companion editing and banks','editor','Edit visually, audition locally and choose explicit unit destinations.',
   [('app-editor','COMPANION / EDITOR','FM algorithm and working instrument','Sound, effects and sequencing tabs')],
@@ -101,6 +101,9 @@ FEATURES=[
  ('companion-install','Offline firmware installation','firmware','Inspect, install and verify from one local Companion window.',
   [('app-firmware','COMPANION / FIRMWARE','Inspect the selected firmware','Install only after compatibility checks')],
   ['Portable Windows10/11 x64 EXE; no Python installation or hosted service required.','Use bundled or local firmware files. The app does not automatically download updates.','Supported layouts are checked; progress and exportable logs remain visible. Unknown layouts are not force-flashed.']),
+ ('companion-transfer','Deploy sounds and projects','library','Review every destination before sending your set to the instrument.',
+  [('app-transfer','COMPANION / TRANSFER REVIEW','Saved instrument names','Choose explicit unit destinations')],
+  ['Send selected Library items, a PC bank or a project with embedded sounds.','A complete unit backup precedes all writes; every written slot is verified.','Playback stops. Working state is restored afterward; a failed batch retains its completed writes.']),
 ]
 
 SHORTCUTS=[
@@ -169,10 +172,11 @@ ANCHORS={
  'projects': [[(150,228),(120,156)],[(110,156),(120,128)]],
  'midi': [[(146,167),(153,216)],[(160,183),(140,60)]],
  'usb-link': [[(155,168),(145,191)]],
- 'companion-library': [[(112,49),(200,135)]],
+ 'companion-library': [[(112,39),(201,113)]],
  'companion-banks': [[(170,185),(170,108)]],
  'companion-backup': [[(160,73),(75,145)]],
- 'companion-install': [[(71,54),(65,115)]],
+ 'companion-install': [[(71,72),(65,155)]],
+ 'companion-transfer': [[(58,109),(150,112)]],
 }
 
 def clean(value):
@@ -234,7 +238,7 @@ def build(captures):
     for f in WORKFLOWS:
         name='workflow-'+f[0]+'.svg';(H/name).write_text(workflow(f),encoding='utf8');entries.append(dict(slug=f[0],title=f[1],topic='workflows',file=name,summary=f[3],frames=[]))
     (H/'feature-shortcuts.svg').write_text(cheatsheet(),encoding='utf8');entries.append(dict(slug='shortcuts-sheet',title='Shortcuts / one sheet',topic='shortcuts',file='feature-shortcuts.svg',summary='Modifier gestures, navigation and performance commands.',frames=[]))
-    manifest=dict(firmware='FM-1_734',date='2026-10-19',capture_scope='Actual production renderer with illustrative fixtures; actual isolated Companion browser captures; no physical display photographs',features=entries,
+    manifest=dict(firmware='FM-1_734',date='2026-10-20',capture_scope='Actual production renderer with illustrative fixtures; actual isolated Companion browser captures; no physical display photographs',features=entries,
        inputs={p:hashlib.sha256((R/p).read_bytes()).hexdigest() for p in ('firmware/fm1/ui.h','firmware/fm1/panel_model.h','tools/feature_capture.cpp','tools/build_release_media.py')},
        source_images={f:hashlib.sha256((H/f).read_bytes()).hexdigest() for e in entries for f in e['frames']})
     (R/'docs/help/feature-plates.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8')

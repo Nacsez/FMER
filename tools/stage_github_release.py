@@ -52,7 +52,7 @@ def press_pack(out):
         name=Path(e['file']).with_suffix('.png').name
         shutil.copy2(media/name,folder/'Infographics/PNG'/name)
     for p in media.glob('*.pdf'):shutil.copy2(p,folder/'PDF'/p.name)
-    for name in ('MARKETING_COPY.md','VIDEO_SCRIPTS.md','ARTWORK.md','INSTALLATION.md','RELEASE_NOTES_734.md'):
+    for name in ('MARKETING_COPY.md','VIDEO_SCRIPTS.md','ARTWORK.md','INSTALLATION.md','RELEASE_NOTES_734.md','COMPANION_R3.md'):
         p=R/'docs/release'/name;shutil.copy2(p,folder/'Copy'/name)
         (folder/'Copy'/(p.stem+'.html')).write_text(prose_html(p.read_text(encoding='utf8')),encoding='utf8')
     for name in ('LICENSE','LICENSING.md','NOTICE'):shutil.copy2(R/name,folder/name)
@@ -74,13 +74,21 @@ def stage(out,companion,source,rehearsal):
             if hashlib.sha256(z.read(n)).hexdigest()!=h:raise ValueError('Source manifest differs: '+n)
     out.mkdir(parents=True,exist_ok=False)
     shutil.copy2(companion,out/'FMER-Companion-734-Windows-x64.zip')
+    with zipfile.ZipFile(companion) as z:
+        root=z.namelist()[0].split('/')[0]+'/'
+        sounds=z.read(root+'Libraries/FMER Default Library.json')
+        from companion_shelf import Catalog
+        catalog=Catalog.__new__(Catalog)._unpack(json.loads(sounds))
+        if len(catalog['slots'])!=64 or any(i['kind']!='instrument' for i in catalog['slots']):
+            raise ValueError('Default sound download must contain the same 64 included instruments')
+        (out/'FMER-734-Default-Sounds.fmer-catalog.json').write_bytes(sounds)
     shutil.copy2(source,out/'FMER-734-Source.zip')
     shutil.copy2(R/'firmware/releases'/record['filename'],out/record['filename'])
     shutil.copy2(R/'docs/release/INSTALLATION.md',out/'INSTALLATION.md')
     for p in (R/'docs/release/media').glob('*.pdf'):shutil.copy2(p,out/p.name)
     press_pack(out)
     files={p.name:dict(sha256=sha(p),bytes=p.stat().st_size) for p in sorted(out.iterdir()) if p.is_file()}
-    dump(out/'release-manifest.json',dict(firmware=734,tag='build-734-r2',repository='Nacsez/FMER',draft=True,
+    dump(out/'release-manifest.json',dict(firmware=734,companion_revision=3,tag='build-734-r3',repository='Nacsez/FMER',draft=True,
         publication_authorized=False,runtime_license_basis='Included Newlib/LLVM source and notices; external compiler; see RUNTIME_REVIEW_734.md',
         source_manifest_sha256=hashlib.sha256(json.dumps(manifest,sort_keys=True).encode()).hexdigest(),
         firmware_package_sha256=record['package_sha256'],deployment_rehearsal_sha256=sha(rehearsal),

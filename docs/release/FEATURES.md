@@ -182,6 +182,12 @@ Inspect, install and verify from one local Companion window.
 
 ![Offline firmware installation](media/feature-companion-install.png)
 
+## Deploy sounds and projects
+
+Review every destination before sending your set to the instrument.
+
+![Deploy sounds and projects](media/feature-companion-transfer.png)
+
 ## From sound to arrangement
 
 Tracks reference saved instrument slots. Save edited sounds before the project.

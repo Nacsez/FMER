@@ -46,7 +46,8 @@ def _record(identifier):
     # packaging cannot silently inherit an older qualification.
     sources = r.get('source_files')
     mandatory = {'tools/release_firmware.py','tools/fm1_flash_transport.py',
-                 'tools/fm1_package.py','tools/hardware_bridge.py','tools/unit_endpoints.py'}
+                 'tools/fm1_package.py','tools/hardware_bridge.py','tools/unit_endpoints.py',
+                 'tools/compatible_firmware.py'}
     if not isinstance(sources,list) or not mandatory.issubset({s.get('path') for s in sources}):
         raise ValueError('Missing release transport source pins')
     for s in sources:

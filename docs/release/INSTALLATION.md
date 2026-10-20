@@ -67,3 +67,16 @@ Bluetooth, macOS/Linux binaries and four separate USB audio stems are deferred.
 The existing USB-audio endurance and heavy-load timing limitations are documented
 in the offline handbook. See [release readiness](RELEASE_READINESS.md) before
 making the draft public.
+
+## Companion updates, sound packs and custom applications
+
+The sidebar opens GitHub releases for manual downloads. Quit Companion before
+extracting a newer program ZIP into a new folder; your user-profile Library stays
+in place. Import the separate default-sound catalog in Library to add copies,
+then review explicit unit destinations before deployment.
+
+Companion734 r3 accepts custom applications with the exact reviewed935 updater
+and the same protected layout. It does not accept arbitrary FWSC updaters or
+change flash boundaries. Back up first; application behavior and saved-data
+compatibility are the firmware publisher's responsibility. See
+[the complete compatibility contract and deployment workflow](COMPANION_R3.md).

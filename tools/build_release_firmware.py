@@ -36,7 +36,7 @@ def build(candidate, out, loader_test, *, stage_only=False, toolchain_root=None)
     result=subprocess.run([str(loader_test.resolve()),str((out/filename).resolve()),str((out/'loader/loader.bin').resolve()),str((out/'device-head-fixture.bin').resolve())],capture_output=True,text=True)
     (out/'loader-tests.json').write_text(json.dumps(dict(command=result.args,returncode=result.returncode,stdout=result.stdout,stderr=result.stderr),indent=2))
     if result.returncode or 'passed' not in result.stdout.lower():raise ValueError('Independent loader qualification failed; inspect loader-tests.json')
-    sources=['tools/'+x+'.py' for x in ('release_firmware','fm1_flash_transport','fm1_package','hardware_bridge','unit_endpoints','companion_jobs','companion_stock')]
+    sources=['tools/'+x+'.py' for x in ('release_firmware','fm1_flash_transport','fm1_package','hardware_bridge','unit_endpoints','companion_jobs','companion_stock','compatible_firmware','companion_transfer')]
     entry=dict(id=release.PROFILE,title='FMER 734',filename=filename,
         product=release.TARGET,origin_identity='compatible-FM-1',loader_identity=release.LOADER,
         origin_app_sha256=release.ORIGIN_SHA,record_address=0xE7F00,

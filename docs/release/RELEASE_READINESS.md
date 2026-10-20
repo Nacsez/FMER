@@ -1,3 +1,12 @@
+## Companion734 r3 candidate - 20 October 2026
+
+The owner has locked firmware734-r2. This package revision changes Companion,
+Help and release assets only. New custom-application support is bounded to the
+reviewed935 updater and protected layout; the broader third-party installation
+matrix is not hardware-qualified. The next owner acceptance session is still
+required. Public visibility and release publication remain withheld.
+[Current workflows and limits](COMPANION_R3.md).
+
 # Release preparation — build 734
 
 19 October 2026. The owner authorized uploading the reviewed source and assets to
@@ -9,7 +18,7 @@ source, notices and Companion are refreshed together.
 | Area | Status |
 |---|---|
 | Feature specification | Reconciled against source: 11 arp types, Phaser, 32 song entries per lane, 64-step patterns and shared effects. |
-| Manual graphics | 30 annotated feature sheets, five workflow diagrams and one shortcuts sheet; production renderer/browser captures, with illustrative state identified. |
+| Manual graphics | 31 annotated feature sheets, five workflow diagrams and one shortcuts sheet; production renderer/browser captures, with illustrative state identified. |
 | Copy and video preparation | General descriptions, individual highlights, exact limits, eight video plans and short-form alternatives drafted. |
 | Help integration | Sheets appear in related offline handbook topics and a searchable visual gallery. Parameter/menu references remain available. |
 | Source/public metadata | Clean allowlisted export, public README/AGENTS, feedback template, ignore rules and file hashes; no existing private history exported. |

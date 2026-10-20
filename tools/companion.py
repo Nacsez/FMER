@@ -18,6 +18,7 @@ import companion_shelf
 import companion_jobs
 import companion_support
 import companion_archive
+import companion_transfer
 import companion_dx7
 from launch_companion import source_fingerprint
 
@@ -48,8 +49,11 @@ def handler_for(executable,root,legacy_root=None):
                 except (ValueError,OSError) as e:return self.send(400,library.canonical({'error':str(e)}))
             if self.path=='/api/capabilities':return self.send(200,library.canonical(jobs.capabilities()))
             if self.path.startswith('/api/jobs/'):
-                try:return self.send(200,library.canonical(jobs.status(self.path[len('/api/jobs/'):])) )
-                except ValueError as e:return self.send(404,library.canonical({'error':str(e)}))
+                try:
+                    value=self.path[len('/api/jobs/'):]
+                    result=jobs.backup(value[:-7]) if value.endswith('/backup') else jobs.status(value)
+                    return self.send(200,library.canonical(result))
+                except (ValueError,OSError) as e:return self.send(404,library.canonical({'error':str(e)}))
             if self.path.startswith('/help/'):
                 # Exact basename allowlist prevents traversal, encoded separators and local file disclosure.
                 name=self.path[len('/help/'):] or 'index.htm'
@@ -90,13 +94,17 @@ def handler_for(executable,root,legacy_root=None):
                     self.send(200,b'{"stopped":true}')
                     threading.Thread(target=self.server.shutdown,daemon=True).start()
                 return
-            if self.path not in ('/api/banks','/api/work','/api/device','/api/catalog','/api/jobs','/api/firmware','/api/restore-plan','/api/dx7'):return super().do_POST()
+            if self.path not in ('/api/banks','/api/work','/api/device','/api/catalog','/api/jobs','/api/firmware','/api/restore-plan','/api/transfer-plan','/api/dx7'):return super().do_POST()
             if not self.local_request():return self.send(403,b'{}')
             try:
                 size=int(self.headers.get('Content-Length','0'))
                 if not 0<size<=14*1024*1024:raise ValueError('Request size outside bound')
                 data=library.strict_loads(self.rfile.read(size))
-                if self.path=='/api/catalog':result=catalog.dispatch(data)
+                if self.path=='/api/catalog':
+                    if data.get('action')=='import_banks':
+                        library.fields(data,{'action','revision','backup'},'bank import')
+                        data={**data,'action':'import','backup':companion_shelf.from_banks(store._unpack(data.get('backup')))}
+                    result=catalog.dispatch(data)
                 elif self.path=='/api/dx7':
                     library.fields(data,{'action','raw','entries','collection'},'DX7 exchange')
                     if data.get('action')=='decode':
@@ -112,6 +120,9 @@ def handler_for(executable,root,legacy_root=None):
                 elif self.path=='/api/jobs':result=jobs.start(data)
                 elif self.path=='/api/firmware':result=jobs.inspect(data)
                 elif self.path=='/api/restore-plan':result=companion_archive.plan(data)
+                elif self.path=='/api/transfer-plan':
+                    library.fields(data,{'rows'},'transfer plan')
+                    result=companion_transfer.plan(data.get('rows'))
                 elif self.path=='/api/device':result=device.dispatch(data)
                 elif self.path=='/api/banks':result=store.dispatch(data)
                 else:

@@ -10,6 +10,7 @@ BRIDGES={bridge.IDENTITY:bridge,previous_bridge.IDENTITY:previous_bridge}
 import hardware_bridge
 import library
 import companion_archive as archive
+import companion_transfer as transfer
 
 ROOT=Path(__file__).resolve().parents[1]
 CONFIRM={'reset_defaults':('Reset to FMER Default',3),'reset_user':('Reset User Bank',4),'clear_user':('Clear User Bank',5)}
@@ -49,10 +50,14 @@ class Device:
         raise RuntimeError('Recorder did not reach a verified capture session; inspect '+str(log))
 
     def dispatch(self,request,progress=lambda *args,**kwargs:None):
-        library.fields(request,{'action','slot','raw','confirmation','settings','persist','battery_telemetry','backup','destination','name'},'device request')
+        library.fields(request,{'action','slot','raw','confirmation','settings','persist','battery_telemetry','backup','destination','name','rows'},'device request')
         action=request.get('action')
         library.choice(action,{'probe','catalog','pull','push','load','record','stop_recording','battery_history','midi_read','midi_set',
-            'project_catalog','project_pull','project_push','project_load','project_save','backup_all','restore_all','instrument_rename','instrument_copy','instrument_swap',*CONFIRM},'device action')
+            'project_catalog','project_pull','project_push','project_load','project_save','backup_all','restore_all','deploy_library','instrument_rename','instrument_copy','instrument_swap',*CONFIRM},'device action')
+        if action=='deploy_library':
+            plan=transfer.plan(request.get('rows'))
+            if request.get('confirmation')!=plan['confirmation']:
+                raise ValueError('Review and confirm these exact transfer destinations')
         if action=='restore_all':
             archive.validate(request.get('backup'))
             if request.get('confirmation')!='Restore populated unit slots':raise ValueError('Confirm Restore populated unit slots')
@@ -107,7 +112,7 @@ class Device:
                 progress('Preparing '+action.replace('_',' '),identity=identity,phase='prepare')
                 self.record_identity=identity
                 client=BRIDGES[identity].NativeBridge(session,journal);backups=self.root/'device-backups'
-                if action in ('backup_all','restore_all'):
+                if action in ('backup_all','restore_all','deploy_library'):
                     progress('Backing up the complete unit')
                     before=archive.capture(client,progress)
                     backup_path=journal.directory/'unit-backup.fmer-backup.json'
@@ -115,6 +120,7 @@ class Device:
                         stream.write(library.canonical(before));stream.flush();os.fsync(stream.fileno())
                     result.update(backup=before,backup_path=str(backup_path))
                     if action=='restore_all':result['restore']=archive.restore(client,request['backup'],backups,progress)
+                    elif action=='deploy_library':transfer.deploy(client,request['rows'],backups,progress,journal,result)
                 elif action in ('instrument_rename','instrument_copy','instrument_swap'):
                     source,_=client.read_slot(request['slot'])
                     bridge.native.save_backup(source,backups,device_identity=identity,source='Before companion organize instrument source')

@@ -806,7 +806,7 @@ def extract_elf(data: bytes, kind: str) -> tuple[bytes, dict]:
     return bytes(image), {"entry": address, "sections": report, "bytes": len(image)}
 
 
-def decode_package(raw: bytes) -> tuple[str, bytes, dict]:
+def decode_package(raw: bytes, *, compatible_identity=False) -> tuple[str, bytes, dict]:
     if not 1044 <= len(raw) <= 0x100000:
         raise ValueError("Invalid package extent")
     product, ended, logical = bytearray(), False, bytearray()
@@ -824,7 +824,7 @@ def decode_package(raw: bytes) -> tuple[str, bytes, dict]:
             product.append(ch)
     logical += raw[960:]
     product = product.decode("ascii")
-    if product not in SUPPORTED_PRODUCTS:
+    if product not in SUPPORTED_PRODUCTS and not (compatible_identity and __import__('re').fullmatch(r'FM-1_[0-9]{3,8}', product)):
         raise ValueError("Unexpected package identity")
     header = bytearray(logical[:64])
     enc(header, 0, 64)

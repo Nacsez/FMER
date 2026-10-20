@@ -46,6 +46,11 @@
     ],
     "library": [
       {
+        "file": "feature-companion-transfer.svg",
+        "alt": "Deploy sounds and projects: annotated screen reference",
+        "caption": "Review every destination before sending your set to the instrument. Open for full-size view."
+      },
+      {
         "file": "feature-companion-library.svg",
         "alt": "Companion library: annotated screen reference",
         "caption": "Organize instruments and projects locally on your computer. Open for full-size view."
@@ -2696,12 +2701,12 @@
     "firmware/fm1/panel_model.h": "e485fc018f1d6b0fa443a90fb2b8afdca26d70593e8b0b33bfcc7776b56cb6cf",
     "firmware/fm1/control_model.h": "cb72bdd7c76161e55d68eac1d574e6699269a7c074a0b9f33d7655a85550673e",
     "tools/fm1_native_state_v11.py": "4c7b92c6ba2dba18522c100a5cda854e9e8ab38a899ece0f7d76d6b9547fb80e",
-    "docs/help/topics.json": "91e58610e8ae7aee64cc0a5bf0897b61c12daa37d5ff4e295008d908dd3ff37a",
-    "docs/help/figures.json": "05fcda68af9c8e60be4fa3d474a9240e2141458247eff751219254904a3f90e7",
+    "docs/help/topics.json": "4a8f646bf10a7100df9c445bb997b1c59d6ab7952579b929211553990524d283",
+    "docs/help/figures.json": "51a59cbdae02b5f74b79266f338a7ce468d590ff0b0eb6eb412ff64df902ed7c",
     "docs/help/parameters.json": "421297d9a3934a91c8f8f7b52df9e51bea521f7c960cc308f2ef20b7b1164824",
     "docs/help/panel.json": "2e072328010954b73ceb874913d25b56cdc36bc7f69b1e51bb1027797a9ee5aa",
     "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
     "NOTICE": "9cb0b6b84a20dc8903284101bdd5332f5319fbdf0b440720e766c2428562075d",
-    "LICENSING.md": "791fcd0376d4fe8b4acdec6a37b462d3fe5a7457f38bb9f5ba38f840ca2eda7b"
+    "LICENSING.md": "d80a28a57c6d3becd1482e6cc46f221148fbef2c2f2147d431aaaceea0836479"
   }
 }

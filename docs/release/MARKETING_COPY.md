@@ -40,7 +40,7 @@ a direct USB link lets two powered FMER units perform together.
 
 FMER Companion runs locally on Windows 10/11 x64. Use it to organize sounds and
 projects, exchange standard DX7 FM voices, back up a supported installation,
-and install bundled or local firmware. The offline handbook includes annotated
+rename and deploy selected sounds or complete PC banks, and install bundled or compatible local firmware. The offline handbook includes annotated
 screens, workflows, a complete parameter reference and a one-page shortcut guide.
 
 ## Public testing invitation
@@ -84,6 +84,7 @@ tracker; code contributions require prior maintainer approval.
 | Two-unit USB link | Connect two powered FMER units directly over USB and choose clock, notes or both. | Start and stop a paired performance from the leader. |
 | Battery display | Read an estimated battery percentage in the header, with low-battery highlighting. | Show the status legend alongside the header. |
 | Companion library | Organize instruments and projects with collections, tags, favorites, duplicate, move and Trash/Undo. | Make a small set for a performance. |
+| Sound deployment | Rename a sound, review its destination, and deploy a selected set, a PC bank or a project with its embedded instruments. Backups and per-slot verification accompany the transfer. | Build and send a short performance set. |
 | DX7 interchange | Import and export standard DX7 FM voices and banks, with conversion limits made explicit. | Review an import and save a separate copy. |
 | Backup and restore | Keep dated musical backups for each supported FMER unit and review the restore scope before writing. | Show two clearly named backup archives. |
 | Local installation | Extract the portable Windows package and launch Companion. Firmware, original libraries and help are included. | Show the included-firmware inspection and progress flow. |
@@ -105,7 +106,7 @@ tracker; code contributions require prior maintainer approval.
 - USB audio is the combined mix; separate USB audio stems are not implemented.
 - Battery percentage is an estimate. Green indicates USB data connection, not
   measured charging current or guaranteed remaining runtime.
-- Companion uses bundled/local firmware; automatic update downloading is absent.
+- Companion links to GitHub for manual software/sound downloads; automatic downloading is absent. Custom firmware needs the exact reviewed935 updater and protected layout. Library management requires FMER733/734.
 - Installation checks supported layouts. Avoid “any firmware,” “all units,”
   “unbrickable,” “zero latency,” or other unqualified reliability claims.
 - Windows 10/11 x64 is the portable release target. No macOS/Linux binary is promised.

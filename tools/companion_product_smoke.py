@@ -136,6 +136,41 @@ def main():
             page.locator('#unitSlot').select_option('64');page.locator('#unitDestination').select_option('7');page.locator('#copyUnit').click();page.locator('#confirmApply').click();ready()
             assert requests[-1]['request']==dict(action='instrument_copy',slot=64,destination=7,confirmation='Apply unit instrument change')
             passed('Mock-only background device jobs, explicit destination, cancel sends no operation')
+            # Real review UI and validation endpoint; only device jobs are fake.
+            view('banks');before=len(requests)
+            page.locator('#bankSend').click();page.wait_for_selector('#transfer[open]')
+            assert page.locator('[data-transfer]').count()==1
+            assert page.locator('[data-transfer]').input_value()=='0'  # PC USER -> unit USER
+            page.locator('#transfer button[value=cancel]').click();ready()
+            assert len(requests)==before
+            page.locator('#pcBank').select_option('0');page.locator('#sendBank').click()
+            page.wait_for_selector('#transfer[open]');assert page.locator('[data-transfer]').count()==64
+            assert page.locator('[data-transfer="0"]').input_value()=='64'  # PC DEFAULT -> unit DEFAULT
+            page.locator('#transferBank').select_option('0');page.locator('#placeTransfer').click()
+            assert page.locator('[data-transfer="0"]').input_value()=='0'
+            assert page.locator('[data-transfer="63"]').input_value()=='63'
+            assert page.locator('#transferStart option').count()==1  # no bank overflow
+            page.locator('#transfer button[value=cancel]').click();ready()
+            page.locator('#bankSend').click();page.wait_for_selector('#transfer[open]')
+            page.locator('[data-transfer="0"]').select_option('12')
+            page.locator('#transfer button[value=review]').click();page.wait_for_selector('#confirm[open]')
+            assert 'USER 12' in page.locator('#confirmText').inner_text()
+            page.locator('#confirmApply').click();ready()
+            request=requests[-1]['request']
+            assert request['action']=='deploy_library' and request['rows'][0]['slot']==12
+            import companion_transfer
+            assert request['confirmation']==companion_transfer.plan(request['rows'])['confirmation']
+            view('library');page.locator('#selectAll').check();page.locator('#sendSelection').click()
+            page.wait_for_selector('#transfer[open]')
+            page.locator('[data-transfer="1"]').select_option('0')
+            before=len(requests);page.locator('#transfer button[value=review]').click()
+            page.wait_for_function('!busy')
+            assert 'same destination' in page.locator('#failure').inner_text()
+            assert len(requests)==before
+            page.evaluate("document.querySelector('#failure').textContent=''")
+            assert page.get_by_role('link',name='Updates & downloads').get_attribute('href')=='https://github.com/Nacsez/FMER/releases'
+            passed('Reviewed bank/set deployment, USER/DEFAULT mapping, cancellation, duplicate destinations and explicit GitHub links')
+            view('unit')
             import companion_errors
             outcome=companion_errors.explain('different memory layout or calibration',True)
             page.route('**/api/jobs/*',lambda route:route.fulfill(json=dict(state='failed',action='install',message='Stopped',error='technical mismatch',outcome=outcome,created=datetime.now(timezone.utc).isoformat())))
@@ -184,6 +219,27 @@ def main():
                 assert page.request.get(base+path).status==404
             assert page.request.post(base+'/api/catalog',headers={'Origin':'https://untrusted.example'},data={'action':'snapshot'}).status==403
             passed('Help traversal and cross-origin mutations rejected')
+            view('banks')
+            with page.expect_download() as download:page.locator('#backupBanks').click()
+            banks_file=out/'pc-banks.json';download.value.save_as(banks_file);ready()
+            view('library');count=page.evaluate('catalog.slots.length')
+            page.locator('#importCatalog').click();page.locator('#file').set_input_files(banks_file);ready()
+            assert page.evaluate('catalog.slots.length')==count+128
+            page.locator('#undoCatalog').click();ready();assert page.evaluate('catalog.slots.length')==count
+            passed('PC bank sound-pack import merges all 128 populated copies and one Undo restores the prior Library')
+            import companion_archive
+            native=page.evaluate('banks.slots[0].native')
+            saved=companion_archive.seal(dict(identity='FM-1_734',created=datetime.now(timezone.utc).isoformat(),
+                instruments=[native]*128,projects=[None]*16,live=native,midi=[0]*8))
+            page.route('**/api/jobs/*',lambda route:route.fulfill(json=dict(id='a'*32,state='failed',message='Stopped',progress=dict(backup_path='private saved backup'),outcome=companion_errors.explain('Transfer stopped after 1/2 verified slots. No automatic retry.'),created=datetime.now(timezone.utc).isoformat())))
+            page.route('**/api/jobs/*/backup',lambda route:route.fulfill(json=saved))
+            view('unit');page.locator('#readUnit').click();ready()
+            assert page.locator('#downloadJobBackup').is_visible()
+            assert '1/2 verified' in page.locator('#jobExplanation').inner_text()
+            with page.expect_download() as download:page.locator('#downloadJobBackup').click()
+            saved_file=out/'interrupted-transfer-backup.json';download.value.save_as(saved_file);ready()
+            assert json.loads(saved_file.read_text())==saved
+            passed('Interrupted deployment exposes readable partial completion and a direct pre-transfer backup download')
             view('library');page.set_viewport_size(dict(width=390,height=844));page.screenshot(path=str(out/'library-mobile.png'),full_page=True)
             assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth')
             for target in ('banks','unit','backups','firmware','feedback'):

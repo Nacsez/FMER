@@ -42,6 +42,11 @@
   ],
   "library": [
     {
+      "file": "feature-companion-transfer.svg",
+      "alt": "Deploy sounds and projects: annotated screen reference",
+      "caption": "Review every destination before sending your set to the instrument. Open for full-size view."
+    },
+    {
       "file": "feature-companion-library.svg",
       "alt": "Companion library: annotated screen reference",
       "caption": "Organize instruments and projects locally on your computer. Open for full-size view."
