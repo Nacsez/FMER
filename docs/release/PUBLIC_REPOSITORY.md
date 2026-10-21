@@ -27,7 +27,9 @@ sources and public configuration-data recipe are now included.
 
 Excluded: `.git` history, research corpus, private logs and AppData, device dumps,
 saved user libraries, personal recordings, build directories, ZIPs, executables,
-stock firmware/banks and firmware release binaries. The prepared source manifest
+stock firmware executables, private banks and firmware release binaries.
+The explicitly licensed public OEM V15 voice data and its notices are included;
+see COMPANION_R4.md for provenance and conversion limits. The prepared source manifest
 records exactly what is present. Dependency evidence is an explicit small list;
 there is no general export of `evidence/`.
 

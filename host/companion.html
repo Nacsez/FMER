@@ -41,7 +41,7 @@ const choices={145:['Low pass','High pass','Band pass'],147:['Off','On'],148:['R
 Object.assign(labels,{150:'Mono glide',151:'Glide time · ms',152:'Glide curve'});
 Object.assign(bounds,{150:[0,2],151:[0,2000],152:[0,2]});
 Object.assign(choices,{150:['Off','Legato','Always'],152:['Linear','Ease in','Ease out']});
-async function api(path,data){const r=await fetch(path,data?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}:{});const v=await r.json();if(!r.ok)throw Error(v.error||'Request failed');return v;}
+async function api(path,data){const r=await fetch(path,data?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}:{});const v=await r.json();if(!r.ok){const e=Error(v.error||'Request failed');e.status=r.status;throw e;}return v;}
 function error(e){$('#error').textContent=e.message;$('#busy').textContent='';}
 let actionBusy=false;
 function act(fn){return async()=>{
@@ -92,7 +92,17 @@ function fxChain(root){
 }
 function auditionControls(){const root=$('#auditionControls');root.replaceChildren();slider(root,'Audition MIDI note',entry.audition_note,0,127,v=>{entry.audition_note=v;changed(false);});slider(root,'Audition velocity',velocity,1,127,v=>{velocity=v;},false,false);}
 async function encoded(){names();return (await api('/api/work',{action:'encode',entry,state})).entry;}
-async function save(idx){const value=await encoded();banks=await api('/api/banks',{action:'save',revision:banks.revision,slot:idx,entry:value});workingDirty=false;$('#message').textContent='Saved '+value.name+' to '+(idx<64?'FMER Defaults':'User')+' '+idx%64;bank=idx<64?0:1;updateTabs();await load(idx);if(banks.warnings)$('#error').textContent=banks.warnings.join('\n');}
+async function save(idx){
+ const value=await encoded(),latest=await api('/api/banks');
+ // The outer bank manager and other tabs can change storage while this draft
+ // remains open. Advance unrelated revisions, but review a changed destination.
+ if(JSON.stringify(latest.slots[idx])!==JSON.stringify(banks.slots[idx])){
+  if(!await confirm('Saved destination changed','This slot now contains '+(latest.slots[idx]?.name||'an empty slot')+'. Replace it with your working sound '+value.name+'? Cancel keeps both your edits and the saved slot.'))return;
+ }
+ try{banks=await api('/api/banks',{action:'save',revision:latest.revision,slot:idx,entry:value});}
+ catch(e){if(e.status===409)throw Error('The banks changed again while saving. Your working edits are retained. Press Save again to review the current destination; nothing was overwritten.');throw e;}
+ workingDirty=false;$('#message').textContent='Saved '+value.name+' to '+(idx<64?'FMER Defaults':'User')+' '+idx%64;bank=idx<64?0:1;updateTabs();await load(idx);if(banks.warnings)$('#error').textContent=banks.warnings.join('\n');
+}
 function updateTabs(){$('#defaults').classList.toggle('active',bank===0);$('#user').classList.toggle('active',bank===1);list();}
 function confirm(title,text,dest=false){$('#confirmTitle').textContent=title;$('#confirmText').textContent=text;$('#destination').hidden=!dest;const dialog=$('#confirm');dialog.showModal();return new Promise(resolve=>{let done=false;const finish=v=>{if(done)return;done=true;dialog.close();resolve(v);};$('#confirmYes').onclick=()=>finish(true);$('#confirmNo').onclick=()=>finish(false);dialog.oncancel=e=>{e.preventDefault();finish(false);};});}
 function download(name,data,mime='application/json'){const blob=new Blob([data],{type:mime}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}

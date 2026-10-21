@@ -46,5 +46,15 @@ class StagingTests(unittest.TestCase):
     def test_different_standalone_firmware_rejected(self):
         self.files['firmware/releases/current.fwsc']=b'other firmware';self.make()
         with self.assertRaisesRegex(ValueError,'firmware differ'):self.check()
+    def test_release_revision_comes_from_delivered_package(self):
+        for revision in (5,6):
+            with zipfile.ZipFile(self.zip,'w') as z:
+                z.writestr('App/manifest.json',json.dumps({'companion_revision':revision}))
+            self.assertEqual(stage.companion_revision(self.zip),revision)
+    def test_missing_or_invalid_release_revision_rejected(self):
+        for revision in (None,True,0,'5'):
+            with zipfile.ZipFile(self.zip,'w') as z:
+                z.writestr('App/manifest.json',json.dumps({'companion_revision':revision}))
+            with self.assertRaisesRegex(ValueError,'revision required'):stage.companion_revision(self.zip)
 
 if __name__=='__main__':unittest.main()

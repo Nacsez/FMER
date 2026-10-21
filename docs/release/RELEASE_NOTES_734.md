@@ -1,25 +1,24 @@
 # FMER 734
 
-![FMER: six-operator FM, Virtual Analog and four-track performance](https://github.com/Nacsez/FMER/blob/build-734-r3/docs/release/media/fmer-overview.png?raw=true)
+![FMER: six-operator FM, Virtual Analog and four-track performance](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/media/fmer-overview.png?raw=true)
 
 FMER brings six-operator FM, Virtual Analog sound design and four-track performance
 to the M-VAVE FM-1, with an offline Companion for your sounds and projects.
-Build 734 is the current tested pre-1.0 build. This release remains a private
-draft until the maintainer finishes review and chooses to publish it.
+Build 734 is a pre-1.0 release for public testing and feedback.
 
 Revision 2 replaces precompiled vendor runtime libraries with source-built
 Newlib/LLVM routines. It adds 192 bytes of flash and no static RAM; synth,
 sequencer and menu code is unchanged. Configuration data now comes from the
 licensed public resource; no private device dump or opaque trailer is included.
-See [runtime review](https://github.com/Nacsez/FMER/blob/build-734-r3/docs/release/RUNTIME_REVIEW_734.md).
+See [runtime review](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/RUNTIME_REVIEW_734.md).
 
-Companion revision 3 keeps that exact firmware and adds reviewed multi-slot sound/project transfers, easier naming, GitHub update links and a separate default-sound download. Custom applications may use the reviewed935 updater and unchanged protected layout; unknown updaters/layouts remain blocked. See [Companion workflow and compatibility](https://github.com/Nacsez/FMER/blob/build-734-r3/docs/release/COMPANION_R3.md).
+Companion revision 5 keeps that exact firmware. It includes reviewed sound/project transfers, renaming, GitHub update links, 64 FMER defaults and all 128 OEM V15 voices as a separate library. It also fixes saving an edited sound after a PC-bank reset while preserving conflict checks and working edits. See [catalogs and compatibility](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/COMPANION_R4.md) and [the r5 save correction](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/COMPANION_R5_QA.md).
 
 ## Choose your download
 
 | Asset | What it contains |
 |---|---|
-| **FMER-Companion-734-Windows-x64.zip** | Extract-and-run Windows app, embedded runtime, firmware installer, 64 original sounds, library tools, offline Help and corresponding source. |
+| **FMER-Companion-734-Windows-x64.zip** | Extract-and-run Windows app, embedded runtime, firmware installer, 64 FMER defaults and 128 OEM V15 voices, library tools, offline Help and corresponding source. |
 | **fmer734-compatible-r2.fwsc** | Firmware alone, in FM-1 FWSC update format. Same bytes as Companion. Third-party installer caveats are in the installation guide. |
 | **FMER-734-Default-Sounds.fmer-catalog.json** | The same 64 original sounds as Companion; import to merge independent Library copies. |
 | **FMER-734-Source.zip** | Reviewed source tree, original splash, original patch recipes, build scripts and dependency notices. |
@@ -29,8 +28,8 @@ Companion revision 3 keeps that exact firmware and adds reviewed multi-slot soun
 | **FMER-734-Shortcuts.pdf** | One-page shortcut sheet. |
 | **INSTALLATION.md**, **SHA256SUMS.txt**, **release-manifest.json** | Installation instructions, exact download hashes and source/binary correspondence. |
 
-[Installation and compatibility](https://github.com/Nacsez/FMER/blob/build-734-r3/docs/release/INSTALLATION.md)
-· [Complete feature tour](https://github.com/Nacsez/FMER/blob/build-734-r3/docs/release/FEATURES.md)
+[Installation and compatibility](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/INSTALLATION.md)
+· [Complete feature tour](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/FEATURES.md)
 · [Feedback](https://github.com/Nacsez/FMER/issues/new/choose)
 
 ## Two engines, three playing modes
@@ -41,7 +40,7 @@ Companion revision 3 keeps that exact firmware and adds reviewed multi-slot soun
 - 1V glide, 4V polyphony, or four independent mono parts in 4T.
 - 64 editable DEFAULT instruments plus 64 USER slots; either engine in either bank.
 
-![FM sound design](https://github.com/Nacsez/FMER/blob/build-734-r3/docs/release/media/feature-fm-synthesis.png?raw=true)
+![FM sound design](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/media/feature-fm-synthesis.png?raw=true)
 
 ## Sound shaping and performance
 
@@ -50,7 +49,7 @@ Hall/Cloud reverb, beat-synced or millisecond delay, four chorus profiles, four
 phaser profiles and drive. Store your preferred chain. Keep LFO settings with
 each sound and toggle modulation directly.
 
-![FX routing](https://github.com/Nacsez/FMER/blob/build-734-r3/docs/release/media/feature-fx-routing.png?raw=true)
+![FX routing](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/media/feature-fx-routing.png?raw=true)
 
 ## Patterns, songs and live control
 
@@ -63,7 +62,7 @@ each sound and toggle modulation directly.
   sequencing remains available alongside live playing within the four-voice budget.
 - Next-bar launches, expanded waveforms and direct performance shortcuts.
 
-![Song mode](https://github.com/Nacsez/FMER/blob/build-734-r3/docs/release/media/feature-song.png?raw=true)
+![Song mode](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/media/feature-song.png?raw=true)
 
 ## Wired MIDI and local library management
 
@@ -75,7 +74,7 @@ Companion organizes local sounds/projects, imports and exports DX7 FM voices,
 backs up supported FMER units and installs compatible firmware. Everything runs
 on your computer; no cloud account or hosted page is required.
 
-![Companion library](https://github.com/Nacsez/FMER/blob/build-734-r3/docs/release/media/feature-companion-library.png?raw=true)
+![Companion library](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/media/feature-companion-library.png?raw=true)
 
 ## Testing and feedback
 
@@ -95,6 +94,6 @@ Original FMER software, defaults and splash are GPL-3.0-only. Felucca supplies
 incorporated board support; MSFA supplies the FM foundation; the updater derives
 from SLOOP. Their notices remain included. See LICENSE, LICENSING.md and NOTICE.
 
-**Maintainer review before publication:** linked vendor-runtime distribution/source
-terms remain unresolved. Keep this release draft and the repository private until
-that review is complete. No automatic publishing workflow is installed.
+OEM V15 voice data comes from the publisher's Apache-2.0 public resource, with source and notices included. It is separate from the 128 onboard destinations; FM conversion does not promise identical stock audio or FX. Community FM6 capture is a protocol-tested preview, not hardware-qualified support.
+
+Read the [release status and test scope](https://github.com/Nacsez/FMER/blob/build-734-r5/docs/release/RELEASE_READINESS.md). The earlier linked-runtime licensing issue was addressed in 734-r2; third-party notices and corresponding source are included.

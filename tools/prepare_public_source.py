@@ -12,7 +12,8 @@ FORBIDDEN_PARTS = {'.git', 'private', 'local', 'artifacts', '__pycache__', 'Depl
                    'FM1_Research_Corpus_2026-09-29'}
 FORBIDDEN_SUFFIXES = {'.rom', '.fwsc', '.exe', '.dll', '.wav', '.mp3', '.mp4', '.zip', '.pyc'}
 BUILD_EVIDENCE = {'evidence/target-toolchain.json', 'evidence/msfa-source.json',
-                  'evidence/python-portable-runtime.json', 'evidence/community-20261018.json'}
+                  'evidence/python-portable-runtime.json', 'evidence/community-20261018.json',
+                  'evidence/companion-community-20261020.json', 'evidence/companion-qa-20261021.json'}
 
 
 def allowed(name):

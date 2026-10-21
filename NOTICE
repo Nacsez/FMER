@@ -70,3 +70,10 @@ does not grant rights over a private unit dump or an unrelated sound bank.
 
 This NOTICE records provenance and attribution. It adds no restrictions to
 the licenses and makes no claim of upstream sponsorship or endorsement.
+OEM Patches — Original V15 (separate Companion sound pack)
+128 FM voices extracted from M-VAVE's public Original V15 recovery resource
+at m-vave/fm1_open b178ac43c25f010c60a878056fb5331fe693fd62. Apache-2.0.
+Copyright (c) 2026 M-VAVE and applicable component authors. See
+third_party/oem_v15/UPSTREAM-NOTICES.md and LICENSE-APACHE-2.0.txt.
+Modified by extraction and documented FMER import normalization; original
+packed voice data is retained. No endorsement or identical-sound claim.

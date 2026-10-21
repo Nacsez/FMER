@@ -1,3 +1,22 @@
+## Companion734 r5 candidate - 21 October 2026
+
+Fix editor saves after PC-bank resets or changes in another tab. Preserve drafts and unrelated slots, review changed destinations, and retain the backend revision check. Return to PC sound banks refreshes saved values. OEM/default catalogs and firmware734-r2 remain unchanged. See release/COMPANION_R5_QA.md.
+
+## Companion734 r4 candidate - 20 October 2026
+
+Library now offers Included & community sounds: 64 FMER defaults and all 128 OEM
+V15 FM voices, clearly separated and imported as editable catalog copies. No
+device or PC bank is changed by this import. Eleven OEM voices require disclosed
+DX7 range normalization. Public source data and Apache notices are included.
+
+Explicit read-only FM6 capture for recognized Felucca, SLOOP and JIANT editor
+protocols is a preview, tested with protocol simulations and real FMER conversion,
+not yet against installed community firmware. Unsupported firmware installation
+remains blocked; file recognition does not imply install compatibility. The tested
+original-device V15 recovery path remains available. Firmware stays at734-r2.
+See [implementation and limitations](release/COMPANION_R4.md). Existing private
+GitHub draft and r3 assets are unchanged pending review of this local candidate.
+
 ## Companion734 r3 - 20 October 2026
 
 Firmware is locked at734-r2. This Companion revision adds manual GitHub update

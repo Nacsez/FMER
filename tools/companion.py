@@ -20,6 +20,8 @@ import companion_support
 import companion_archive
 import companion_transfer
 import companion_dx7
+import companion_soundpacks
+import companion_community
 from launch_companion import source_fingerprint
 
 def handler_for(executable,root,legacy_root=None):
@@ -37,7 +39,7 @@ def handler_for(executable,root,legacy_root=None):
             if self.path=='/api/presence':
                 try:
                     ports=companion_device.hardware_bridge.WinMM().enumerate()
-                    names=lambda key:[x['name'] for x in ports[key] if 'FM-1' in x['name'] or 'FMER' in x['name']]
+                    names=lambda key:[x['name'] for x in ports[key] if 'FM-1' in x['name'] or 'FMER' in x['name'] or companion_community.ENDPOINT.fullmatch(x['name'])]
                     return self.send(200,library.canonical(dict(inputs=names('inputs'),outputs=names('outputs'))))
                 except Exception as error:return self.send(503,library.canonical({'error':str(error)}))
             if self.path=='/api/algorithms':return self.send(200,(sandbox.ROOT/'host/fm_algorithms.json').read_bytes())
@@ -47,6 +49,7 @@ def handler_for(executable,root,legacy_root=None):
             if self.path=='/api/catalog':
                 try:return self.send(200,library.canonical(catalog.snapshot()))
                 except (ValueError,OSError) as e:return self.send(400,library.canonical({'error':str(e)}))
+            if self.path=='/api/sound-packs':return self.send(200,library.canonical(companion_soundpacks.PACKS))
             if self.path=='/api/capabilities':return self.send(200,library.canonical(jobs.capabilities()))
             if self.path.startswith('/api/jobs/'):
                 try:
@@ -94,7 +97,7 @@ def handler_for(executable,root,legacy_root=None):
                     self.send(200,b'{"stopped":true}')
                     threading.Thread(target=self.server.shutdown,daemon=True).start()
                 return
-            if self.path not in ('/api/banks','/api/work','/api/device','/api/catalog','/api/jobs','/api/firmware','/api/restore-plan','/api/transfer-plan','/api/dx7'):return super().do_POST()
+            if self.path not in ('/api/banks','/api/work','/api/device','/api/catalog','/api/jobs','/api/firmware','/api/restore-plan','/api/transfer-plan','/api/dx7','/api/sound-packs','/api/community-import'):return super().do_POST()
             if not self.local_request():return self.send(403,b'{}')
             try:
                 size=int(self.headers.get('Content-Length','0'))
@@ -105,6 +108,12 @@ def handler_for(executable,root,legacy_root=None):
                         library.fields(data,{'action','revision','backup'},'bank import')
                         data={**data,'action':'import','backup':companion_shelf.from_banks(store._unpack(data.get('backup')))}
                     result=catalog.dispatch(data)
+                elif self.path=='/api/sound-packs':
+                    library.fields(data,{'id'},'sound pack')
+                    result=companion_soundpacks.prepare(data.get('id'),store.defaults,store.codec)
+                elif self.path=='/api/community-import':
+                    library.fields(data,{'archive'},'community capture import')
+                    result=companion_community.decode(data.get('archive'),store.defaults,store.codec)
                 elif self.path=='/api/dx7':
                     library.fields(data,{'action','raw','entries','collection'},'DX7 exchange')
                     if data.get('action')=='decode':

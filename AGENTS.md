@@ -39,4 +39,4 @@ The compiler is external; do not link or distribute unreviewed vendor archives.
 Do not promote vendor-reference builds or weaken installer preservation guards.
 Read docs/release/RUNTIME_REVIEW_734.md.
 
-Companion734 r3 accepts custom applications only with the exact reviewed935 updater and protected layout. Read docs/release/COMPANION_R3.md before changing admission. Preserve the distinction between transport compatibility and tested application behavior. Firmware734-r2 is the current release candidate; do not alter it for Companion-only work.
+Companion734 r5 accepts custom applications only with the exact reviewed935 updater and protected layout. Read docs/release/COMPANION_R3.md before changing admission. Preserve the distinction between transport compatibility and tested application behavior. Read docs/release/COMPANION_R4.md for OEM data provenance and preview-only community capture, and COMPANION_R5_QA.md for the editor-save correction. Firmware734-r2 is the current release candidate; do not alter it for Companion-only work.

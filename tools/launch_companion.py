@@ -13,6 +13,9 @@ def source_fingerprint():
         digest.update(path.encode());digest.update((ROOT/path).read_bytes())
     for path in sorted((ROOT/'host/help').glob('*')):
         if path.is_file():digest.update(path.name.encode());digest.update(path.read_bytes())
+    for name in ('tools/companion_community.py','tools/companion_soundpacks.py','host/firmware_compatibility.json','third_party/oem_v15/voices.json'):
+        path=ROOT/name
+        digest.update(name.encode());digest.update(path.read_bytes())
     return digest.hexdigest()
 
 def health(port):

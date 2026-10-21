@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Baud Girl 102",
+    "product": "FM-1_102",
+    "sha256": "7b169a69b30570581d0ebc7b44851e3e08898d2956ade155363bcf18fac5c348",
+    "bytes": 859700,
+    "reason": "This recognized publisher package uses a different memory/storage layout. Migration, backup and return to FMER are not qualified; no installation is offered."
+  },
+  {
+    "title": "Felucca 1.6.1",
+    "product": "FM-1_916",
+    "sha256": "dff3a38f7e5b9833e15aba322558c9485e9e422e3ff813c616c91b3584a2d909",
+    "bytes": 610090,
+    "reason": "This recognized publisher package uses a different updater and application/configuration layout. Companion cannot install it until forward migration, native backup and return to FMER are qualified. Use its publisher installer for now. FM6 DX7 file exchange is available; the separate community voice reader does not grant firmware installation permission."
+  },
+  {
+    "title": "JIANT v0.9.17-98a04cf",
+    "product": "FM-1_900",
+    "sha256": "ea4a0ca881c9c336cbf1f33dce5da40c60237c82d4e8707740c70b915f681b87",
+    "bytes": 610113,
+    "reason": "This recognized publisher package uses a different updater and application/configuration layout. Companion cannot install it until forward migration, native backup and return to FMER are qualified. Use its publisher installer for now. FM6 DX7 file exchange is available; the separate community voice reader does not grant firmware installation permission."
+  },
+  {
+    "title": "SLOOP 2.7.1",
+    "product": "FM-1_900",
+    "sha256": "7c9d269d15d1c1a48e0ebada7ffa2c2aa196c19d51056fd3f760d322322b335f",
+    "bytes": 610035,
+    "reason": "This recognized publisher package uses a different updater and application/configuration layout. Companion cannot install it until forward migration, native backup and return to FMER are qualified. Use its publisher installer for now. FM6 DX7 file exchange is available; the separate community voice reader does not grant firmware installation permission."
+  },
+  {
+    "title": "X0X 1.1.0",
+    "product": "FM-1_9010100",
+    "sha256": "a0c29deb930c65f1d40b5691b7d673f861418b438b7e65027cb9c671e6f44f5b",
+    "bytes": 609684,
+    "reason": "This recognized publisher package uses a different memory/storage layout. Migration, backup and return to FMER are not qualified; no installation is offered."
+  },
+  {
+    "title": "M-VAVE Open V14",
+    "product": "FM-1_8000014",
+    "sha256": "7e7b6d260163cdf9d716f7fab44f19be600edeffcd390de74370b83c917fd0c6",
+    "bytes": 492084,
+    "reason": "This recognized publisher package uses a different memory/storage layout. Migration, backup and return to FMER are not qualified; no installation is offered."
+  }
+]

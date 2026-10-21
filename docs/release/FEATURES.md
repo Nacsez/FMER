@@ -218,6 +218,14 @@ Stock firmware cannot provide FMER musical backups. Unknown layouts require diag
 
 ![Companion installation workflow](media/workflow-safe-install.png)
 
+## Included sound catalogs
+
+Companion includes 64 FMER default instruments and all 128 OEM V15 FM voices as
+separate Library catalogs. Import, audition, rename and review destinations before
+deploying. This does not expand the 128 onboard slots. OEM conversion does not
+promise stock-identical sound; source attribution and normalization notes are
+included. [Catalog and community-capture details](COMPANION_R4.md).
+
 ## Shortcuts / one sheet
 
 Modifier gestures, navigation and performance commands.

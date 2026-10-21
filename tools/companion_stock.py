@@ -3,6 +3,8 @@ Proprietary images are not bundled. Format and fixed application digest are
 checked offline; existing portable loader repeats layout/calibration admission.
 """
 import hashlib
+import json
+from pathlib import Path
 import fm1_package as p
 import fm1_flash_transport as t
 import release_firmware as release
@@ -30,6 +32,9 @@ def known_file_info(raw):
     """Recognize exact public files for human-readable, read-only inspection."""
     if not isinstance(raw,bytes) or len(raw)>2*1024*1024:return None
     digest=hashlib.sha256(raw).hexdigest();record=OFFICIAL_FILES.get(digest)
+    if record is None:
+        profiles=json.loads((Path(__file__).resolve().parents[1]/'host/firmware_compatibility.json').read_text(encoding='utf8'))
+        record=next((r for r in profiles if r['sha256']==digest),None)
     if record is None or len(raw)!=record['bytes']:return None
     return dict(record,sha256=digest,recognized=True,installable=False,
                 hardware_access=False,compatibility='layout migration not qualified')

@@ -106,7 +106,7 @@ class Jobs:
         if request['action']=='device':
             req=request.get('request')
             if not isinstance(req,dict):raise ValueError('Missing device operation')
-            if req.get('action') not in {'probe','backup_all','restore_all','deploy_library','instrument_rename','instrument_copy','instrument_swap','pull','push','load','project_pull','project_push','project_load','project_save','catalog','project_catalog','record','stop_recording','battery_history','midi_read','midi_set','reset_defaults','reset_user','clear_user'}:raise ValueError('Unsupported device operation')
+            if req.get('action') not in {'community_capture','probe','backup_all','restore_all','deploy_library','instrument_rename','instrument_copy','instrument_swap','pull','push','load','project_pull','project_push','project_load','project_save','catalog','project_catalog','record','stop_recording','battery_history','midi_read','midi_set','reset_defaults','reset_user','clear_user'}:raise ValueError('Unsupported device operation')
             if req['action']=='restore_all':archive.validate(req.get('backup'))
         else:
             selected=self.packages.get(request.get('inspection'))

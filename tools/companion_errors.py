@@ -1,5 +1,8 @@
 """Musician-facing outcomes; raw exceptions remain in diagnostic records."""
 def explain(message, metadata=False):
+    if 'community' in message.lower() or 'FM6' in message:
+        return dict(title='Community voice capture could not finish',explanation=message,
+                    next_step='No firmware or patch write was requested. Check the supported family in Help, connect one unit and leave its controls untouched. Export the operation record if the read still fails.')
     if message.startswith('Transfer stopped after') or message.startswith('Slots verified but working state'):
         return dict(title='Library transfer stopped',explanation=message,
                     next_step='Keep the pre-transfer backup. Download it from this operation before deciding whether to restore or continue. Earlier verified slots may have changed; nothing is retried automatically.')

@@ -1,6 +1,6 @@
 # FMER 734 — writing drafts
 
-19 October 2026. Copy for owner review, based on the implemented 734 feature set.
+21 October 2026. Copy for owner review, based on firmware 734-r2 and Companion r5.
 Use the same build number for public testing; no separate beta firmware line is
 introduced. Add the actual repository/download link after publication is approved.
 
@@ -40,7 +40,7 @@ a direct USB link lets two powered FMER units perform together.
 
 FMER Companion runs locally on Windows 10/11 x64. Use it to organize sounds and
 projects, exchange standard DX7 FM voices, back up a supported installation,
-rename and deploy selected sounds or complete PC banks, and install bundled or compatible local firmware. The offline handbook includes annotated
+rename and deploy selected sounds or complete PC banks, and install bundled or compatible local firmware. Companion also includes all 128 OEM V15 voices in a separate, labeled sound catalog for audition and conversion. These do not expand the instrument's 128 onboard slots. The offline handbook includes annotated
 screens, workflows, a complete parameter reference and a one-page shortcut guide.
 
 ## Public testing invitation

@@ -10,7 +10,7 @@ Test whatever interests you. Unused categories may remain blank: companion usabi
 
 ## Compatibility boundaries
 
-The installer identifies the device and verifies the supported flash layout and calibration. Different application versions can be admitted; arbitrary hardware or firmware compatibility is not established. An unknown updater/layout is a reason to stop and export a record, not to force a flash. Restoring stock is not a universal workaround for an unverified layout. Alternative firmware catalog management is deferred.
+The installer identifies the device and verifies the supported flash layout and calibration. Different application versions can be admitted; arbitrary hardware or firmware compatibility is not established. An unknown updater/layout is a reason to stop and export a record, not to force a flash. Restoring stock is not a universal workaround for an unverified layout. Read-only community FM6 capture is a protocol-tested preview; native projects, samples and universal migration remain unsupported. See docs/release/COMPANION_R4.md.
 
 Restore Original Firmware accepts a supported user-provided V15 image; stock payloads are not distributed with FMER. It restores the application while preserving device-specific data; it is not a full factory-settings reset.
 

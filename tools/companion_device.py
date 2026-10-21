@@ -11,6 +11,7 @@ import hardware_bridge
 import library
 import companion_archive as archive
 import companion_transfer as transfer
+import companion_community as community
 
 ROOT=Path(__file__).resolve().parents[1]
 CONFIRM={'reset_defaults':('Reset to FMER Default',3),'reset_user':('Reset User Bank',4),'clear_user':('Clear User Bank',5)}
@@ -52,7 +53,7 @@ class Device:
     def dispatch(self,request,progress=lambda *args,**kwargs:None):
         library.fields(request,{'action','slot','raw','confirmation','settings','persist','battery_telemetry','backup','destination','name','rows'},'device request')
         action=request.get('action')
-        library.choice(action,{'probe','catalog','pull','push','load','record','stop_recording','battery_history','midi_read','midi_set',
+        library.choice(action,{'community_capture','probe','catalog','pull','push','load','record','stop_recording','battery_history','midi_read','midi_set',
             'project_catalog','project_pull','project_push','project_load','project_save','backup_all','restore_all','deploy_library','instrument_rename','instrument_copy','instrument_swap',*CONFIRM},'device action')
         if action=='deploy_library':
             plan=transfer.plan(request.get('rows'))
@@ -93,6 +94,7 @@ class Device:
         with self.lock._lock():
             resume=self.recorder is not None and self.recorder.poll() is None
             self.stop_recording()
+            if action=='community_capture':resume=False
             if action=='record':self.capture_battery=request.get('battery_telemetry',False)
             if action=='stop_recording':return dict(recording=False,path=str(self.capture) if self.capture else None)
             stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')+'-'+uuid.uuid4().hex[:8]
@@ -100,6 +102,15 @@ class Device:
             session=None;result=dict(success=False,action=action,identity=bridge.IDENTITY)
             try:
                 progress('Connecting to FM-1',phase='connect')
+                if action=='community_capture':
+                    result.update(community.perform(hardware_bridge.WinMM(),journal,self.executable,progress))
+                    return result
+                if action=='probe':
+                    api=hardware_bridge.WinMM();ports=api.enumerate()
+                    if any(community.ENDPOINT.fullmatch(row['name']) for row in ports['inputs']):
+                        if any(bridge.transport.PORT_NAME.fullmatch(row['name']) for row in ports['inputs']):
+                            raise ValueError('Connect only the unit you want to manage; FMER and community units are both present')
+                        result.update(community.probe(api,journal));return result
                 session=bridge.transport.find_session(hardware_bridge.WinMM(),None,journal,wait=8,retry_identity_timeout=True)
                 identity=session.verified_identity
                 result['identity']=identity

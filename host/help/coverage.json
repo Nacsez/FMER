@@ -1,7 +1,7 @@
 {
   "firmware": "FM-1_734",
-  "pages": 28,
-  "illustrated_pages": 28,
+  "pages": 29,
+  "illustrated_pages": 29,
   "figures": {
     "index": [
       {
@@ -1107,6 +1107,18 @@
         "file": "controls-44.svg",
         "alt": "SAVE / PROJECT physical control map",
         "caption": "SAVE / PROJECT: knob positions and page actions. Diagram from the audited panel map."
+      }
+    ],
+    "community": [
+      {
+        "file": "app-sound-sources.png",
+        "alt": "Included sound packs and community FM6 capture controls",
+        "caption": "Included & community sounds: add the separate FMER or OEM catalog, or read available FM6 voices without changing firmware."
+      },
+      {
+        "file": "app-library.png",
+        "alt": "FMER Companion Library with collections and instrument details",
+        "caption": "Library collections keep FMER defaults, OEM Patches and imported community sounds separate. Open Included & community sounds to add or read a collection."
       }
     ]
   },
@@ -2701,12 +2713,12 @@
     "firmware/fm1/panel_model.h": "e485fc018f1d6b0fa443a90fb2b8afdca26d70593e8b0b33bfcc7776b56cb6cf",
     "firmware/fm1/control_model.h": "cb72bdd7c76161e55d68eac1d574e6699269a7c074a0b9f33d7655a85550673e",
     "tools/fm1_native_state_v11.py": "4c7b92c6ba2dba18522c100a5cda854e9e8ab38a899ece0f7d76d6b9547fb80e",
-    "docs/help/topics.json": "4a8f646bf10a7100df9c445bb997b1c59d6ab7952579b929211553990524d283",
-    "docs/help/figures.json": "51a59cbdae02b5f74b79266f338a7ce468d590ff0b0eb6eb412ff64df902ed7c",
+    "docs/help/topics.json": "df465151fc9d482f106a3cd277ec3551dced35463f6f504863312e87d0990034",
+    "docs/help/figures.json": "fd7f360e37f741d55368926e5f60ad67be9f260af85b95df917f440b42b3272b",
     "docs/help/parameters.json": "421297d9a3934a91c8f8f7b52df9e51bea521f7c960cc308f2ef20b7b1164824",
     "docs/help/panel.json": "2e072328010954b73ceb874913d25b56cdc36bc7f69b1e51bb1027797a9ee5aa",
     "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
-    "NOTICE": "9cb0b6b84a20dc8903284101bdd5332f5319fbdf0b440720e766c2428562075d",
-    "LICENSING.md": "d80a28a57c6d3becd1482e6cc46f221148fbef2c2f2147d431aaaceea0836479"
+    "NOTICE": "074981bb8d5eab23735b58a1a12ebf6bfbac98be39f6cebc5246595af5799be4",
+    "LICENSING.md": "dd7602314ba7eae27f1c1e0f5aaabf3f029a79904374c7582ebda0e74447a8c7"
   }
 }

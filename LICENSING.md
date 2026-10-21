@@ -8,6 +8,12 @@ release or replace the distribution checks below.
 
 ## Scope
 
+Companion's separate **OEM Patches — V15** collection contains 128 packed FM
+voices extracted from the explicitly Apache-2.0-licensed public Original V15
+recovery resource. These are not GPL-relicensed FMER defaults or private dump
+contents. Original data, extraction provenance, normalization disclosures and
+complete notices accompany them in third_party/oem_v15. See its README.md.
+
 The grant covers original FMER software in `core/`, `firmware/fm1/`, `hal/`,
 `ui/`, `host/`, `tools/`, `packaging/` and `tests/`, including its original help
 prose, build scripts, original code-drawn interface graphics and generated

@@ -364,7 +364,7 @@
     {
       "file": "feature-drive-lfo.svg",
       "alt": "Drive and LFO enable: annotated screen reference",
-      "caption": "Add saturation or enable the sound\u2019s stored modulation. Open for full-size view."
+      "caption": "Add saturation or enable the sound’s stored modulation. Open for full-size view."
     },
     {
       "file": "feature-chorus-phaser.svg",
@@ -1103,6 +1103,18 @@
       "file": "controls-44.svg",
       "alt": "SAVE / PROJECT physical control map",
       "caption": "SAVE / PROJECT: knob positions and page actions. Diagram from the audited panel map."
+    }
+  ],
+  "community": [
+    {
+      "file": "app-sound-sources.png",
+      "alt": "Included sound packs and community FM6 capture controls",
+      "caption": "Included & community sounds: add the separate FMER or OEM catalog, or read available FM6 voices without changing firmware."
+    },
+    {
+      "file": "app-library.png",
+      "alt": "FMER Companion Library with collections and instrument details",
+      "caption": "Library collections keep FMER defaults, OEM Patches and imported community sounds separate. Open Included & community sounds to add or read a collection."
     }
   ]
 }

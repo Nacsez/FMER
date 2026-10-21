@@ -9,9 +9,8 @@ arrange songs and perform on the instrument. FMER Companion keeps your instrumen
 projects and backups organized locally, with a guided firmware installer and an
 illustrated offline handbook.
 
-**Current firmware: 734-r2. Companion: 734 r3.** Pre-1.0, using the same numbered builds throughout testing.
-The repository is staged privately and its release is a draft for maintainer
-review. Public distribution awaits the remaining [release checks](docs/release/RELEASE_READINESS.md).
+**Current firmware: 734-r2. Companion candidate: 734 r5.** Pre-1.0, using the same numbered builds throughout testing.
+Read the [release status and test scope](docs/release/RELEASE_READINESS.md) before installing.
 
 ## Start here
 
@@ -57,7 +56,7 @@ screens use an isolated demonstration library. They are not physical LCD photogr
 Effects are shared across tracks. USB audio carries the combined mix, not four
 separate stems. Battery percentage is estimated. TRS MIDI is input-only and direct
 USB links support one peer. Bluetooth and macOS/Linux binaries are deferred.
-GitHub links provide manual software and sound-pack downloads; automatic downloading is not implemented. See [Companion updates and deployment](docs/release/COMPANION_R3.md).
+GitHub links provide manual software and sound-pack downloads; automatic downloading is not implemented. Companion includes 64 FMER defaults and 128 separately labeled OEM V15 voices. See [Companion sound catalogs and compatibility](docs/release/COMPANION_R4.md) and [save-workflow QA correction](docs/release/COMPANION_R5_QA.md).
 
 The installer checks the supported memory layout and preserves compatible
 identity/calibration regions. Unknown layouts are rejected. Stock patch backup,
@@ -92,7 +91,9 @@ official project; this participation policy does not restrict GPL rights.
 Original FMER code, Companion, default instruments and splash are **GPL-3.0-only**.
 Keep [LICENSE](LICENSE), [LICENSING.md](LICENSING.md), [NOTICE](NOTICE) and dependency
 notices. Felucca supplies board support, MSFA the FM foundation, and SLOOP the updater
-foundation. No private device dumps, stock banks or compiler binaries are included.
+foundation. No private device dumps, stock firmware executables or compiler binaries are included.
+The separate OEM V15 voice catalog uses the publisher's Apache-2.0 public data
+and retains its source attribution and notices.
 
 734-r2 replaces vendor runtime archives with included Newlib/LLVM source while
 keeping the musical application unchanged. The public configuration-data recipe

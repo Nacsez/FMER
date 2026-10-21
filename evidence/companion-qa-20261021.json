@@ -1,0 +1,277 @@
+{
+  "date": "2026-10-21",
+  "input_files": 959,
+  "input_manifest_sha256": "97c382d3a26d7ab922994f2a59eeb36501fa48be3d7b26b9e7e26fe817b97520",
+  "recent_jobs": [
+    {
+      "operation": "install",
+      "state": "complete",
+      "started": "2026-10-21T01:46:19.079285+00:00",
+      "duration_seconds": 23.993,
+      "error": null
+    },
+    {
+      "operation": "backup_all",
+      "state": "complete",
+      "started": "2026-10-21T01:48:29.021007+00:00",
+      "duration_seconds": 76.566,
+      "error": null
+    },
+    {
+      "operation": "restore_all",
+      "state": "complete",
+      "started": "2026-10-21T01:51:02.528320+00:00",
+      "duration_seconds": 941.678,
+      "error": null
+    }
+  ],
+  "historical_jobs": 26,
+  "latest_launcher_stderr_bytes": 0,
+  "old_startup_error_build": "733.2",
+  "companion_revision_identifiable": false,
+  "firmware_sha256": "a953cd928543a333b9065e911b8b452757fce71944d4344cc8cb7c0e1b4e5e41",
+  "install_scope": "FMER734 reinstallation; not a new stock-to-FMER qualification",
+  "live_identity": "FM-1_734",
+  "live_unit": "Amethyst (owner attribution and previously observed physical USB location)",
+  "device_writes_this_review": false,
+  "comparison": {
+    "instruments": true,
+    "projects": true,
+    "working_state": true,
+    "midi": true,
+    "fx_default": true
+  },
+  "raw_differences": {
+    "instruments": {
+      "source_generation": 128,
+      "controls": 128
+    },
+    "projects": {
+      "source_generation": 1
+    }
+  },
+  "normalization": "Instrument-only projection clears non-sound record-mode control158 from1 to0; source_generation changes on restore. No other saved instrument fields differ. Project differs only by source_generation.",
+  "populated": {
+    "instruments": 128,
+    "projects": 1
+  },
+  "source_backup_sha256": "fde3f10ad2664a0154f1faef23744388117dad56816545e7ec90c74e3e2246a8",
+  "live_backup_sha256": "2dfe1d1b9b3345cbed59ab9a92ebd719fd538c53fa8f188fb6aefa436c105011",
+  "diagnostics_before": {
+    "audio_halves": 12307164,
+    "maximum_render_us": 1816,
+    "overruns": 0,
+    "midi_overflows": 0,
+    "rejected_messages": 0,
+    "active_voices": 0,
+    "startup_heap_bytes": 226480,
+    "flash_jedec": 8740884,
+    "audio_paused": 0,
+    "dsp_init_failed": 0,
+    "retained_crash_count": 0,
+    "engine": 0,
+    "algorithm": 18,
+    "va_wave": 1,
+    "cutoff_hz": 2106,
+    "delay_percent": 67,
+    "attack_ms": 5,
+    "release_ms": 200,
+    "gain_q10": 496,
+    "octave_plus3": 3,
+    "voice_limit": 4,
+    "stolen_voices": 78,
+    "load_sheds": 0,
+    "maximum_event_us": 137,
+    "maximum_dsp_us": 1704,
+    "last_render_us": 851,
+    "lcd_strips": 4700,
+    "maximum_lcd_us": 4748,
+    "lcd_timeouts": 0,
+    "controls_generation": 1,
+    "controls_applied": 1,
+    "maximum_render_voices": 4,
+    "maximum_render_engine": 0,
+    "last_event_us": 4,
+    "last_dsp_us": 806,
+    "minimum_half_period_us": 2839,
+    "maximum_half_period_us": 2962
+  },
+  "diagnostics_after": {
+    "audio_halves": 12336700,
+    "maximum_render_us": 1816,
+    "overruns": 0,
+    "midi_overflows": 0,
+    "rejected_messages": 0,
+    "active_voices": 0,
+    "startup_heap_bytes": 226480,
+    "flash_jedec": 8740884,
+    "audio_paused": 0,
+    "dsp_init_failed": 0,
+    "retained_crash_count": 0,
+    "engine": 0,
+    "algorithm": 18,
+    "va_wave": 1,
+    "cutoff_hz": 2106,
+    "delay_percent": 67,
+    "attack_ms": 5,
+    "release_ms": 200,
+    "gain_q10": 496,
+    "octave_plus3": 3,
+    "voice_limit": 4,
+    "stolen_voices": 78,
+    "load_sheds": 0,
+    "maximum_event_us": 137,
+    "maximum_dsp_us": 1704,
+    "last_render_us": 853,
+    "lcd_strips": 4700,
+    "maximum_lcd_us": 4748,
+    "lcd_timeouts": 0,
+    "controls_generation": 1,
+    "controls_applied": 1,
+    "maximum_render_voices": 4,
+    "maximum_render_engine": 0,
+    "last_event_us": 3,
+    "last_dsp_us": 809,
+    "minimum_half_period_us": 2839,
+    "maximum_half_period_us": 2962
+  },
+  "renders": [
+    {
+      "scenario": "chord",
+      "engine": "FMER-VA",
+      "peak": 0.278113394976,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    },
+    {
+      "scenario": "chord",
+      "engine": "MSFA",
+      "peak": 0.340290904045,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    },
+    {
+      "scenario": "note",
+      "engine": "FMER-VA",
+      "peak": 0.120539881289,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    },
+    {
+      "scenario": "note",
+      "engine": "MSFA",
+      "peak": 0.127446770668,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    },
+    {
+      "scenario": "chord",
+      "engine": "MSFA",
+      "peak": 0.347383022308,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    },
+    {
+      "scenario": "note",
+      "engine": "MSFA",
+      "peak": 0.11534820497,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    },
+    {
+      "scenario": "chord",
+      "engine": "MSFA",
+      "peak": 0.340290904045,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    },
+    {
+      "scenario": "arp",
+      "engine": "MSFA",
+      "peak": 0.134912982583,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    },
+    {
+      "scenario": "note",
+      "engine": "MSFA",
+      "peak": 0.11534820497,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    },
+    {
+      "scenario": "sequence",
+      "engine": "MSFA",
+      "peak": 0.134912982583,
+      "active_voices_end": 0,
+      "clipped_samples": 0,
+      "fx_clipped_samples": 0,
+      "fx_sanitized_samples": 0,
+      "rejected_events": 0,
+      "tail_truncated": false
+    }
+  ],
+  "save_conflicts": 6,
+  "save_conflict_revision": {
+    "expected": 0,
+    "current": 2
+  },
+  "status": "Companion r5 save regression and product browser checks passed; final offline/portable verification recorded by separate delivery receipt",
+  "limits": [
+    "No new acoustic/USB audio stream test",
+    "No new Bluetooth or community firmware qualification",
+    "No independent binary readback; exact installation hash comes from returned Companion journal",
+    "Separate r4 build number not retained in returned startup logs"
+  ],
+  "fix": "Companion734 r5; firmware734-r2 unchanged",
+  "regression": {
+    "checks": [
+      "Two outer bank resets do not strand an edited sound at revision zero",
+      "Unrelated concurrent bank changes survive saving the working sound",
+      "Changed destination requires review; cancel retains draft and saved target",
+      "Save-time race refuses overwrite, retains draft and requires review on retry; outer bank view refreshes"
+    ],
+    "errors": [],
+    "hardware_access": false,
+    "status": "passed"
+  },
+  "live_journal_sha256": "795490b035ca162c131e969c5fac302f5b1c4cb31ec6d1f68f3fd96cf06f528a",
+  "product_smoke": "artifacts/companion-product/20261021T114726/report.json",
+  "delivery_receipt": "evidence/companion-r5-delivery-20261021.json"
+}

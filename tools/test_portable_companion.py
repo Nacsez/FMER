@@ -39,6 +39,13 @@ def test(archive,out):
         banks=api('/api/banks');assert len(banks['slots'])==128
         assert banks['slots'][:64]==banks['slots'][64:]
         passed('One-click EXE starts with minimal PATH; fresh original DEFAULT and USER banks, empty private catalog')
+        oem=api('/api/sound-packs',dict(id='oem-v15'))
+        assert oem['count']==128 and len(oem['normalized_slots'])==11
+        assert api('/api/banks')==banks and api('/api/catalog')['slots']==[]
+        assert (app/'Libraries/OEM Patches - V15.json').is_file()
+        for name in ('voices.json','UPSTREAM-NOTICES.md','LICENSE-APACHE-2.0.txt'):
+            assert (app/'third_party/oem_v15'/name).is_file()
+        passed('All 128 OEM V15 voices prepare offline with bundled codec and notices; review leaves banks and catalog unchanged')
         caps=api('/api/capabilities');release=next(x for x in caps['bundled_firmware'] if x['available'])
         report=api('/api/firmware',dict(action='inspect',release=release['id']))
         assert report['installable'] and not report['hardware_qualified']

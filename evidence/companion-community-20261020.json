@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-20",
+  "firmware": {
+    "identity": "FM-1_734",
+    "unchanged": true,
+    "sha256": "a953cd928543a333b9065e911b8b452757fce71944d4344cc8cb7c0e1b4e5e41"
+  },
+  "oem": {
+    "voices": 128,
+    "source": "Public Original V15 recovery resource",
+    "source_sha256": "db1642b2b6fa5c2cccb11ffd13878068bb28601678d3644049f99dc40e7edb8a",
+    "resource_crc16": "E3BC",
+    "bank_sha256": "ecad0b8620f9d784d46c8da1e3c5de02c40214649ed8dec218026431046aad25",
+    "matches_pristine_citrine_bank": true,
+    "normalized_slots": [
+      23,
+      36,
+      47,
+      77,
+      85,
+      110,
+      115,
+      116,
+      117,
+      120,
+      124
+    ],
+    "license": "Apache-2.0",
+    "private_payload_distributed": false
+  },
+  "community": {
+    "reader_commands": [
+      1,
+      68,
+      70
+    ],
+    "physical_capture_qualified": false,
+    "alternate_installations_qualified": false
+  },
+  "amethyst": {
+    "success": true,
+    "saved_data": {
+      "instruments": true,
+      "projects": true,
+      "midi": true,
+      "fx_default": true
+    },
+    "working_state": true,
+    "initially_preserved": true,
+    "scope": "Production Companion job FMER734 to supported original-device V15 to unchanged FMER734; no public V15 migration claim",
+    "harness_failure": "Earlier verification helper called nonexistent midi_set after preservation checks. No MIDI settings change was needed; final read confirms original settings."
+  },
+  "citrine": "Backed up; no write performed",
+  "sources": {
+    "third_party/oem_v15/voices.json": "f7883f68a2f1759e5478f772b74dcc88e3ead76d63d7289fe932c4e6b1c8d642",
+    "third_party/oem_v15/UPSTREAM-NOTICES.md": "c37b0de889ed570764f5e6699c22d699fbea7b22813ec302e19e26755318461b",
+    "third_party/oem_v15/LICENSE-APACHE-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "tools/extract_oem_v15.py": "b157491b4eeb45867b38f3f53cfd12a3224b38f5cc858fbb13ef59d2e18f8656",
+    "tools/companion_community.py": "489940ecd9013dbda5adce7b89171e710d2ff4b2e84d067b493da1f471aea023",
+    "tools/companion_soundpacks.py": "8b0487314de1ae780e5be3b79475d20866d666d1a341fb7c5ec94872acaa07d2"
+  },
+  "verification": {
+    "status": "component verification passed; final portable artifact tested separately by its SHA-256",
+    "workspace_check": {
+      "tests": 1100,
+      "skipped": 19,
+      "passed": true,
+      "run": "20261020T220441.456634Z-check-15e160fd"
+    },
+    "ctest": {
+      "tests": 34,
+      "passed": true
+    },
+    "browser_product": true,
+    "browser_soundpacks": true,
+    "initial_portable_checks": 10,
+    "clean_machine": false,
+    "failed_initial_test_run_retained": true
+  },
+  "publication": false,
+  "remote_draft_unchanged": true,
+  "backup_hashes": {
+    "Amethyst": "112c14e92906c397b78f6ac5968dda6139983119477d0dbee81f1bde467cc592",
+    "Citrine": "ab8bdea9f816dbff963d1de07ebf7ba3edae5480af43634b6674b1e64b3264c0"
+  }
+}

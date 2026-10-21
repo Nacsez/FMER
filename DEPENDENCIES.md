@@ -1,3 +1,18 @@
+## 2026-10-20 - OEM V15 sound resource
+
+Added only128 packed FM voices from the pinned Apache-2.0 public OriginalV15 resource, with complete publisher notices under third_party/oem_v15. No private dump or third-party executable is bundled. The original FMER parser/adapter uses the already-reviewed Felucca/SLOOP/JIANT protocol references; no new runtime dependency or upstream script executes.
+
+## 2026-10-20 - Community research inputs, no product dependency change
+
+105 public source/page/package acquisitions are pinned in
+evidence/community-compatibility-20261020.json. Complete third-party payloads
+remain ignored and are not bundled. Only inspected pure FM6 codec excerpts from
+three hash-pinned GPL editor sources were executed in an offline Node harness;
+no installer/build script, hardware code or factory bank ran. No upstream code
+was integrated into Companion or firmware. Node is a research prerequisite only.
+Publisher binary asset/component rights require separate review before bundling;
+preserve the recorded per-project notices instead of inferring a blanket license.
+
 ## 2026-10-19 ? Source-built runtime734-r2
 
 Newlib2.2.0 and LLVM compiler-rt4.0.1:49 unmodified source units plus local

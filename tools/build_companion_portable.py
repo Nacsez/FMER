@@ -5,7 +5,7 @@ from pathlib import Path
 import argparse,ast,hashlib,json,shutil,subprocess,zipfile,os,uuid
 import companion_bank as bank
 import companion_shelf as shelf
-import library,release_firmware
+import library,release_firmware,companion_soundpacks
 ROOT=Path(__file__).resolve().parents[1]
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -33,7 +33,9 @@ def defaults(out,executable):
         shelf.Catalog.validate_item(item);items.append(item)
     catalog=dict(format=shelf.FORMAT,version=1,capacity=shelf.CAPACITY,revision=0,slots=items,undo_slots=None)
     (folder/'FMER Default Library.json').write_bytes(library.canonical(shelf.envelope(catalog)))
-    (folder/'README.txt').write_text('All 64 original FMER defaults, licensed GPL-3.0-only. These are original FMER instruments, not stock/proprietary banks. Editable source recipes are core/factory_presets.cpp in Corresponding Source.zip; see LICENSE and LICENSING.md. Recording music with FMER does not by itself place your music under GPL. Import the Library file to merge catalog copies. Import the Banks file from Library to merge copies, or use Restore PC banks only when you intend to replace both PC banks. Fresh installations already initialize both banks with these sounds. No unit is modified by importing local files.\n',encoding='utf8')
+    oem=companion_soundpacks.prepare('oem-v15',entries,library.PatchCodec(executable,lambda *a,**k:None))
+    (folder/'OEM Patches - V15.json').write_bytes(library.canonical(oem['catalog']))
+    (folder/'README.txt').write_text('OEM Patches - V15.json contains all 128 original V15 FM voices from the public M-VAVE recovery resource (Apache-2.0). Original data and notices are in third_party/oem_v15. Eleven imports are range-normalized, with changes listed in Notes. This is a separate sound pack, not an FMER bank replacement.\n\nAll 64 original FMER defaults, licensed GPL-3.0-only. These are original FMER instruments, not stock/proprietary banks. Editable source recipes are core/factory_presets.cpp in Corresponding Source.zip; see LICENSE and LICENSING.md. Recording music with FMER does not by itself place your music under GPL. Import the Library file to merge catalog copies. Import the Banks file from Library to merge copies, or use Restore PC banks only when you intend to replace both PC banks. Fresh installations already initialize both banks with these sounds. No unit is modified by importing local files.\n',encoding='utf8')
 
 def source_archive(out):
     paths=[]
@@ -41,7 +43,10 @@ def source_archive(out):
         paths += [p for p in (ROOT/name).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix.lower() in ('.c','.cc','.cpp','.h','.hpp','.s','.ld','.inc','.in','.py','.html','.htm','.css','.js','.json','.cmake','.patch','.cs','.md','.txt') and not p.name.endswith('QUALIFICATION.json') and 'qualifications' not in p.parts]
     paths += [ROOT/name for name in ('CMakeLists.txt','LICENSE','LICENSING.md','NOTICE','CONTRIBUTING.md','DEPENDENCIES.md','docs/SOURCE_BUILD.md','docs/DESIGN.md','docs/COMPANION_PRODUCT.md','docs/COMPANION_RELEASE_733.md','evidence/target-toolchain.json','evidence/msfa-source.json','evidence/python-portable-runtime.json')]
     paths += [ROOT/name for name in ('docs/research/2026-10-18-community-interoperability.md','evidence/community-20261018.json')]
+    paths += [ROOT/'evidence/companion-community-20261020.json']
+    paths += [ROOT/'evidence/companion-qa-20261021.json']
     paths += [ROOT/'third_party/runtime/newlib/COPYING.NEWLIB']
+    paths += [p for p in (ROOT/'third_party/oem_v15').iterdir() if p.is_file()]
     paths += [ROOT/'packaging/PUBLIC.gitignore',ROOT/'packaging/PUBLIC.gitattributes']
     # Explicit owner GPL-3.0-only grant, 2026-10-19; see docs/release/ARTWORK.md.
     # Include the original raster source, not only its generated firmware header.
@@ -81,6 +86,7 @@ def build(out):
     for p in (ROOT/'host').iterdir():
         if p.is_file() and p.suffix in ('.html','.js','.css','.json'):shutil.copy2(p,out/'host'/p.name)
     shutil.copytree(ROOT/'host/help',out/'host/help')
+    shutil.copytree(ROOT/'third_party/oem_v15',out/'third_party/oem_v15')
     (out/'Help.html').write_text('<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=host/help/index.htm"><title>FMER Handbook</title><a href="host/help/index.htm">Open the offline handbook</a>',encoding='utf8')
     (out/'bin').mkdir();host=ROOT/'artifacts/build/host/host/Release/fmer_host.exe';shutil.copy2(host,out/'bin/fmer_host.exe')
     defaults(out,host)
@@ -112,8 +118,8 @@ def build(out):
     source_archive(out)
     csc=Path(os.environ['WINDIR'])/'Microsoft.NET/Framework64/v4.0.30319/csc.exe'
     subprocess.run([str(csc),'/nologo','/target:winexe','/reference:System.Windows.Forms.dll','/out:'+str(out/'FMER Companion.exe'),str(ROOT/'packaging/Launcher.cs')],check=True)
-    (out/'READ ME FIRST.txt').write_text('FMER Companion 734 - Windows x64\n\nExtract ALL files, then double-click FMER Companion.exe. Keep this folder together. No separate Python install, account or internet connection is needed. The application opens in your browser on this computer.\n\nConnect one powered-on FM-1. Use Check connection at the top right. Stock firmware is detected, but its instrument backup commands are unavailable; open Firmware to install FMER. Back up existing FMER instruments/projects before reinstalling. The installer checks compatible hardware, memory layout and calibration rather than requiring identical application code. Different layouts remain unsupported. Keep USB and power connected and controls untouched while the progress banner is active. A failed transfer is not completion; read its message and export diagnostics.\n\nThe new updater can resume the included firmware when its record and compatibility remain verifiable. Other update modes or a damaged bootloader need a separate recovery procedure. Custom applications require the exact reviewed935 updater and protected layout; other packages need the publisher installer.\n\nHelp.html opens the offline handbook. Libraries contains 64 original FMER instruments and PC-bank backups. Your library and logs live separately under %LOCALAPPDATA%/FMER/Companion. Stock patches and private unit dumps are not included.\n\nWindows10/11 x64, Intel/AMD. Unsigned application; Windows may show a reputation warning. Original FMER firmware, Companion and default instruments are GPL-3.0-only. Keep LICENSE, LICENSING.md, NOTICE, included dependency notices and source archive.\n',encoding='utf8')
-    manifest=dict(product='FMER Companion 734',companion_revision=3,scope='Windows x64 portable companion',python=pin['version'],firmware_included=True,source_archive=True,files={p.relative_to(out).as_posix():sha(p) for p in sorted(out.rglob('*')) if p.is_file()})
+    (out/'READ ME FIRST.txt').write_text('FMER Companion 734 - Windows x64\n\nExtract ALL files, then double-click FMER Companion.exe. Keep this folder together. No separate Python install, account or internet connection is needed. The application opens in your browser on this computer.\n\nConnect one powered-on FM-1. Use Check connection at the top right. Stock firmware is detected, but its instrument backup commands are unavailable; open Firmware to install FMER. Back up existing FMER instruments/projects before reinstalling. The installer checks compatible hardware, memory layout and calibration rather than requiring identical application code. Different layouts remain unsupported. Keep USB and power connected and controls untouched while the progress banner is active. A failed transfer is not completion; read its message and export diagnostics.\n\nThe new updater can resume the included firmware when its record and compatibility remain verifiable. Other update modes or a damaged bootloader need a separate recovery procedure. Custom applications require the exact reviewed935 updater and protected layout; other packages need the publisher installer.\n\nHelp.html opens the offline handbook. Libraries contains 64 original FMER instruments, 128 OEM V15 voices and PC-bank backups. Your library and logs live separately under %LOCALAPPDATA%/FMER/Companion. OEM Patches includes 128 voices from the licensed public V15 resource; private unit dumps are not included.\n\nWindows10/11 x64, Intel/AMD. Unsigned application; Windows may show a reputation warning. Original FMER firmware, Companion and default instruments are GPL-3.0-only. Keep LICENSE, LICENSING.md, NOTICE, included dependency notices and source archive.\n',encoding='utf8')
+    manifest=dict(product='FMER Companion 734',companion_revision=5,scope='Windows x64 portable companion',python=pin['version'],firmware_included=True,source_archive=True,files={p.relative_to(out).as_posix():sha(p) for p in sorted(out.rglob('*')) if p.is_file()})
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8')
     zip_path=out.parent/(out.name+'.zip')
     with zipfile.ZipFile(zip_path,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as archive:

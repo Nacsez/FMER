@@ -1,7 +1,7 @@
 # Installing FMER 734
 
 Download files only from [Nacsez/FMER releases](https://github.com/Nacsez/FMER/releases).
-This release is currently staged privately as a draft for owner review.
+Firmware 734-r2 and Companion 734 r5 are the current candidate downloads.
 
 ## Companion: the qualified installation workflow
 
@@ -60,7 +60,8 @@ interoperability; no upstream installer was used to write a unit during this pas
 Supported installations preserve protected boot/identity/calibration regions.
 Back up saved sounds and projects before changing firmware. Original-firmware
 restore requires a separately supplied supported image; no private stock ROM,
-stock bank or universal recovery file is distributed here. Returning to a stock
+private stock bank or universal recovery file is distributed here. The included
+OEM V15 voice catalog is separately licensed public patch data, not a recovery image. Returning to a stock
 application is not a promise of restoring all stock settings.
 
 Bluetooth, macOS/Linux binaries and four separate USB audio stems are deferred.
@@ -75,8 +76,15 @@ extracting a newer program ZIP into a new folder; your user-profile Library stay
 in place. Import the separate default-sound catalog in Library to add copies,
 then review explicit unit destinations before deployment.
 
-Companion734 r3 accepts custom applications with the exact reviewed935 updater
+Companion734 r5 accepts custom applications with the exact reviewed935 updater
 and the same protected layout. It does not accept arbitrary FWSC updaters or
 change flash boundaries. Back up first; application behavior and saved-data
 compatibility are the firmware publisher's responsibility. See
-[the complete compatibility contract and deployment workflow](COMPANION_R3.md).
+[the compatibility contract](COMPANION_R3.md) and [current catalog/firmware matrix](COMPANION_R4.md).
+
+Library includes 64 FMER defaults and all 128 OEM V15 voices as separate catalogs.
+Import copies locally, audition or rename them, then review onboard destinations
+before transferring. Importing a catalog does not overwrite a device. The r5
+editor refreshes PC-bank revisions before saving and asks before replacing a
+destination that changed while you were editing. Community FM6 capture remains
+a protocol-tested preview; it is not a complete alternate-firmware backup.

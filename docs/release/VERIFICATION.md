@@ -1,3 +1,15 @@
+# Current Companion 734 r5 verification
+
+21 October 2026. Firmware remains the exact 734-r2 package. The returned-PC
+installation, backup and restore succeeded; the stale PC-bank save issue was
+reproduced and corrected. See [r5 QA](COMPANION_R5_QA.md). The workspace regression
+completed 1,101 Python cases with 19 explicit skips; browser coverage includes
+conflicting saves, cancellation and preservation of edits. The portable package
+passes 11 extraction/lifecycle/content checks, including all 128 OEM voices.
+The current draft manifest binds the final package to its exact rehearsal hash.
+No hardware is accessed during this publication preparation. Historical results
+below describe their dated builds and are not new test claims.
+
 ## Companion734 r3 verification - 20 October 2026
 
 Firmware734-r2 and its updater are unchanged. No instrument was opened or flashed.

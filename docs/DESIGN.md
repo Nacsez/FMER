@@ -1,3 +1,11 @@
+## Editor save conflicts - 21 October 2026
+
+Refresh saved bank metadata without replacing the working draft. Unrelated slot changes do not prevent saving. A changed destination shows its current name and requires explicit replacement confirmation; Cancel preserves both. A save-time race keeps the draft and gives a retry instruction, never silently retries a write. Opening PC sound banks refreshes its saved view.
+
+## Companion sound sources - 20 October 2026
+
+Library has Included & community sounds: separate64-sound FMER and128-sound OEM imports, plus explicit read-only community capture. Imports require review, preserve PC banks/device data, retain provenance and support one Undo. Complete duplicate pack imports are inert; partial duplicates need confirmation. Captures use existing progress and diagnostic export. No hardware access on page load; unsupported conversion/write scopes are stated.
+
 ## 734 visual field guide — 19 October 2026
 
 Manual plates use the actual240×240 production LCD renderer with labeled

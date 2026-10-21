@@ -1,15 +1,6 @@
-## Companion734 r3 candidate - 20 October 2026
-
-The owner has locked firmware734-r2. This package revision changes Companion,
-Help and release assets only. New custom-application support is bounded to the
-reviewed935 updater and protected layout; the broader third-party installation
-matrix is not hardware-qualified. The next owner acceptance session is still
-required. Public visibility and release publication remain withheld.
-[Current workflows and limits](COMPANION_R3.md).
-
 # Release preparation — build 734
 
-19 October 2026. The owner authorized uploading the reviewed source and assets to
+Updated 21 October 2026. The owner authorized uploading the reviewed source and assets to
 the private Nacsez/FMER repository and creating a draft release. The repository
 must remain private and the release unpublished for owner review. 734-r2 keeps the wire identity and700-series system, but replaces vendor runtime
 archives with the reviewed source build. The exact tested package, corresponding
@@ -23,12 +14,30 @@ source, notices and Companion are refreshed together.
 | Help integration | Sheets appear in related offline handbook topics and a searchable visual gallery. Parameter/menu references remain available. |
 | Source/public metadata | Clean allowlisted export, public README/AGENTS, feedback template, ignore rules and file hashes; no existing private history exported. |
 | Extracted target source | Source-built runtime and public configuration inputs reproduce the exact 734-r2 application and FWSC; all 34 extracted-tree CTest suites and 42 loader checks pass. External compiler/headers required. |
-| Firmware and radio | Source-built734-r2 tested on Amethyst; Citrine retained as734-r1 reference. Bluetooth first after release and primary feedback; not advertised as working. |
+| Firmware and radio | Firmware734-r2 remains locked; Amethyst has a verified V15/FMER round trip and returned-PC reinstall. Bluetooth first after release and primary feedback; not advertised as working. |
 | Automated verification | Full workspace regression passes; live Amethyst comparison and preservation pass. See VERIFICATION.md and the exact portable rehearsal referenced by the release manifest. |
 | Publication | Nacsez/FMER: private upload and draft release authorized; public visibility and publication reserved for owner review. |
 | Original splash artwork | Owner confirmed ownership and GPL-3.0-only permission on 19 October; original PNG, generator and source notice included in both source packages. |
 
-## Gates before public binary distribution
+## Final owner review
+
+Current draft: **firmware 734-r2 / Companion 734 r5**, tag **build-734-r5**.
+The r5 package corrects stale editor saves after resetting PC banks; it includes
+the r4 OEM V15 catalog and capability-gated community FM6 capture preview.
+Read [returned-PC QA](COMPANION_R5_QA.md) and [catalog scope](COMPANION_R4.md).
+
+- Test r5 on the second computer: edit a sound, reset PC banks, then save the
+  edited sound. A changed destination must require review; cancel must preserve
+  edits and saved data. The automated regression passes; owner acceptance remains.
+- Review the download table, screenshots, compatibility limits and feedback form.
+- Make the repository public and publish the draft only when satisfied. These
+  are separate GitHub actions, reserved for the owner. No workflow publishes it.
+
+The preparation audit checks package/source correspondence, release hashes,
+repository privacy, draft state and source-mirror synchronization. It does not
+requalify hardware, unknown firmware migration or a clean Windows installation.
+
+## Licensing and qualification boundaries
 
 The owner has selected GPL-3.0-only for original FMER firmware, Companion and
 default instruments and the original splash artwork. Dependency notices remain in
