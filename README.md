@@ -10,7 +10,7 @@ projects and backups organized locally, with a guided firmware installer and an
 illustrated offline handbook.
 
 **Current firmware: 734-r2. Companion candidate: 734 r5.** Pre-1.0, using the same numbered builds throughout testing.
-Read the [release status and test scope](docs/release/RELEASE_READINESS.md) before installing.
+Read the [release status and test scope](docs/release/RELEASE_READINESS.md) for context.
 
 ## Start here
 
