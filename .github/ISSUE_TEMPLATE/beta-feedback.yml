@@ -1,6 +1,7 @@
 name: Beta feedback
 description: Report your FMER testing experience; all test areas are optional.
 title: "[Beta] "
+labels: ["feedback", "triage"]
 body:
   - type: markdown
     attributes:
@@ -9,12 +10,25 @@ body:
     id: versions
     attributes:
       label: Versions and setup
-      description: Companion/firmware versions, OS, starting firmware and connections.
+      description: Full Companion footer version (for example 734 r5), firmware, OS, starting firmware and connections. The diagnostic export may show only 734.
+  - type: checkboxes
+    id: areas
+    attributes:
+      label: Areas tried (optional)
+      options:
+        - label: Companion and library
+        - label: Installation or recovery
+        - label: Sounds, engines or playing modes
+        - label: FX or arpeggiator
+        - label: Sequencer, Song or mixer
+        - label: Saving and recall
+        - label: MIDI or USB audio
+        - label: Standalone use, battery or navigation
   - type: textarea
     id: experience
     attributes:
       label: What did you test and how did it go?
-      description: Companion UX, flashing, FMER UX, navigation, sounds, FX, arp, sequencer, voice modes, MIDI, or anything else. Skip untested areas.
+      description: Positive results are useful too. Mention approximate session length and skip untested areas.
   - type: textarea
     id: reproduction
     attributes:

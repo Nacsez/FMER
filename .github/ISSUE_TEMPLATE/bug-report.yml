@@ -1,0 +1,44 @@
+name: Bug report
+description: Report a specific problem with installation, Companion or the instrument.
+title: "[Bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Describe one problem when practical. Do not attach ROM dumps, entire AppData folders or private banks. Please review diagnostic exports before sharing."
+  - type: input
+    id: build
+    attributes:
+      label: Firmware and Companion versions
+      description: Include the full Companion footer version, such as 734 r5; the diagnostic export may show only 734.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Main area
+      options:
+        - Installation or recovery
+        - Companion or library
+        - Saving or recall
+        - Synth engines or sound
+        - Effects
+        - Arpeggiator
+        - Sequencer or Song
+        - Playing modes or navigation
+        - MIDI or USB audio
+        - Battery or power
+        - Other or unsure
+  - type: textarea
+    id: setup
+    attributes:
+      label: Setup
+      description: Windows version, starting firmware if installing, mode (1V/4V/4T), connections and clock source where relevant.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected result and actual result
+      description: Include how often it happens and any workaround. A short reproduction is more useful than a large unreviewed log dump.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reviewed diagnostics or media
+      description: Optional Companion Beta feedback export (JSON or ZIP), screenshots or video. State whether data was lost or installation failed; do not try a force flash.

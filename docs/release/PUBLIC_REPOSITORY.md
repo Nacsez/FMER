@@ -2,7 +2,7 @@
 
 The owner supplied `https://github.com/Nacsez/FMER.git` on 19 October 2026 and
 authorized a **private** upload plus a **draft** release. Public visibility and
-release publication remain withheld. The local checkout in `FMER GitHub/` is the
+release publication were withheld until the owner published build-734-r5 on21 October2026. The repository is now public. Keep published tags/assets immutable and preserve the separate source-only mirror workflow for future updates. The local checkout in `FMER GitHub/` is the
 remote's source mirror; the original development repository retains private
 history separately. Do not push its historical branches or tags to GitHub.
 

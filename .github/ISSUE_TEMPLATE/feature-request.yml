@@ -1,0 +1,23 @@
+name: Workflow or feature suggestion
+description: Describe a musical workflow you would like to improve.
+title: "[Workflow] "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Suggestions and testing are welcome. Code contributions require prior maintainer permission. Bluetooth is being investigated and is not supported in the current release."
+  - type: textarea
+    id: workflow
+    attributes:
+      label: What are you trying to do?
+      description: Describe the musical task and where the current workflow gets in the way.
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested behavior and alternatives
+      description: Optional; an example is useful even if you do not know how it should be implemented.
+  - type: input
+    id: setup
+    attributes:
+      label: Current build and setup
+      description: Firmware, Companion revision and relevant instruments or software.

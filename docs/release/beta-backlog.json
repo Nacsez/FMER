@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "as_of": "2026-10-21",
+  "baseline": {
+    "firmware": "734-r2",
+    "companion": "734 r5",
+    "tag": "build-734-r5"
+  },
+  "public_issues_at_review": 0,
+  "items": [
+    {
+      "id": "BETA-001",
+      "area": "companion",
+      "kind": "diagnostics",
+      "priority": "P2",
+      "status": "confirmed",
+      "title": "Include exact Companion package revision in feedback export",
+      "evidence": "tools/companion_support.py summary returns companion=734; r5 footer has the revision.",
+      "next": "Add a single source of release identity and regression coverage in the next Companion candidate; preserve published r5.",
+      "acceptance": "Export distinguishes revisions and separates target firmware from actually observed device identity.",
+      "origin": "maintainer evidence review; not a public user report",
+      "issue_url": null
+    },
+    {
+      "id": "BETA-002",
+      "area": "companion",
+      "kind": "acceptance",
+      "priority": "P2",
+      "status": "needs-owner-test",
+      "title": "Separate-PC acceptance of r5 editor save after bank reset",
+      "evidence": "Automated save/cancel/race tests pass; no explicit owner result after r5.",
+      "next": "Test edit, PC-bank reset, save confirmation/cancel and reopen on the separate computer.",
+      "acceptance": "Draft, unrelated slots and canceled destination remain preserved; confirmed save reloads correctly.",
+      "origin": "maintainer evidence review; not a public user report",
+      "issue_url": null
+    },
+    {
+      "id": "BETA-003",
+      "area": "audio",
+      "kind": "qualification",
+      "priority": "P1",
+      "status": "needs-measurement",
+      "title": "Qualify sustained combined-load audio reserve",
+      "evidence": "Historical combined-load peaks exceeded the2176us reserve target; latest short r2 readback is not a worst-case radio/audio test.",
+      "next": "Run a repeatable four-track/FX/dense-MIDI/active-display load matrix with exact setup.",
+      "acceptance": "No overruns/stuck notes; measured reserve, stack and queue peaks reviewed; no hidden feature reductions.",
+      "origin": "maintainer evidence review; not a public user report",
+      "issue_url": null
+    },
+    {
+      "id": "BETA-004",
+      "area": "midi",
+      "kind": "qualification",
+      "priority": "P2",
+      "status": "needs-measurement",
+      "title": "Extend USB audio and paired MIDI endurance coverage",
+      "evidence": "Short capture, paired owner testing and MIDI checks exist; no complete new two-hour matrix.",
+      "next": "Two-hour Windows/DAW and direct-peer sessions; log ports, clocks, reconnects and sound continuity.",
+      "acceptance": "No unexplained dropout, drift, duplicated traffic or reconnect-induced stuck notes.",
+      "origin": "maintainer evidence review; not a public user report",
+      "issue_url": null
+    },
+    {
+      "id": "BETA-005",
+      "area": "power",
+      "kind": "qualification",
+      "priority": "P2",
+      "status": "collecting-evidence",
+      "title": "Refine battery estimate and loaded low-power behavior",
+      "evidence": "Percentage remains an estimate; historical owner-reported low-power symptoms require ongoing measurement.",
+      "next": "Collect ordinary-use discharge/charge observations across units; keep USB state distinct from measured charging current.",
+      "acceptance": "Document estimate limits and investigate repeatable reset/flicker symptoms without pretending percentage is a fuel gauge.",
+      "origin": "maintainer evidence review; not a public user report",
+      "issue_url": null
+    },
+    {
+      "id": "BLE-001",
+      "area": "bluetooth",
+      "kind": "feature-research",
+      "priority": "P2",
+      "status": "blocked",
+      "title": "Complete radio-runtime contract before physical BLE inclusion",
+      "evidence": "Transport fits; scheduler/IRQ, reusable allocation, full-stack memory and distribution remain unresolved.",
+      "next": "Execute gate B0 in BLUETOOTH_PLAN.md; isolate research from the public build.",
+      "acceptance": "All B0-B6 gates pass before claiming the corresponding pair/group capability.",
+      "origin": "maintainer evidence review; not a public user report",
+      "issue_url": null
+    }
+  ]
+}

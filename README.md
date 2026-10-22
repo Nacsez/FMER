@@ -9,7 +9,7 @@ arrange songs and perform on the instrument. FMER Companion keeps your instrumen
 projects and backups organized locally, with a guided firmware installer and an
 illustrated offline handbook.
 
-**Current firmware: 734-r2. Companion candidate: 734 r5.** Pre-1.0, using the same numbered builds throughout testing.
+**Current release: firmware 734-r2 / Companion 734 r5.** Pre-1.0, using the same numbered builds throughout testing.
 Read the [release status and test scope](docs/release/RELEASE_READINESS.md) for context.
 
 ## Start here
@@ -22,7 +22,9 @@ Read the [release status and test scope](docs/release/RELEASE_READINESS.md) for 
 - [Feature overview PDF](docs/release/media/FMER-734-Feature-Overview.pdf),
   [full visual manual](docs/release/media/FMER-734-Visual-Guide.pdf) and
   [one-page shortcuts](docs/release/media/FMER-734-Shortcuts.pdf).
-- [Feedback and bug reports](https://github.com/Nacsez/FMER/issues/new/choose).
+- [Feedback and bug reports](https://github.com/Nacsez/FMER/issues/new/choose):
+  [what to include](docs/release/BETA_FEEDBACK.md), [roadmap toward 1.0](docs/release/ROADMAP.md)
+  and [Bluetooth engineering plan](docs/release/BLUETOOTH_PLAN.md).
 
 No Python installation, cloud account or hosted web page is required for the
 portable Windows app. Extract the ZIP before launching it; keep its files together.

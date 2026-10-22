@@ -1,6 +1,6 @@
 # Testing and feedback
 
-Public testing and feedback are welcome when the maintainer publishes a beta. The owner retains directorship of the official project. Code-contributor status is reserved: outside pull requests require explicit prior maintainer permission; unsolicited pull requests are not the beta feedback channel. Please open an issue using the Beta feedback form. This contribution policy does not alter applicable software-license rights.
+Public testing and feedback are welcome. The owner published build-734-r5 on 21 October 2026. Read [the feedback guide](docs/release/BETA_FEEDBACK.md) and [roadmap](docs/release/ROADMAP.md). The owner retains directorship of the official project. Code-contributor status is reserved: outside pull requests require explicit prior maintainer permission; unsolicited pull requests are not the beta feedback channel. Please open an issue using the Beta feedback form. This contribution policy does not alter applicable software-license rights.
 
 Download the companion ZIP from a published GitHub release, extract everything, launch FMER Companion.exe, connect one powered-on FM-1, inspect the included firmware and install. Keep power and USB connected until Complete. The portable Windows x64 package includes its dependencies and offline help. Raw firmware is for a compatible update interface, not a whole-ROM programmer.
 
@@ -14,6 +14,6 @@ The installer identifies the device and verifies the supported flash layout and 
 
 Restore Original Firmware accepts a supported user-provided V15 image; stock payloads are not distributed with FMER. It restores the application while preserving device-specific data; it is not a full factory-settings reset.
 
-## Current release gate
+## Release and development boundary
 
-Original FMER firmware, Companion and original default patches are GPL-3.0-only; see [LICENSING.md](LICENSING.md), [LICENSE](LICENSE) and [NOTICE](NOTICE). Existing third-party licenses remain effective. Maintainer-only official development does not restrict recipients' GPL rights to modify, fork or redistribute. Beta preparation remains private until final source/provenance and redistribution checks are complete and publication is authorized.
+Original FMER firmware, Companion and original default patches are GPL-3.0-only; see [LICENSING.md](LICENSING.md), [LICENSE](LICENSE) and [NOTICE](NOTICE). Existing third-party licenses remain effective. Maintainer-only official development does not restrict recipients' GPL rights to modify, fork or redistribute. Published tags and asset bytes remain fixed. New candidates require their own verification and maintainer publication decision; ordinary development or feedback is not permission to replace a release. Bluetooth remains unsupported pending its separate engineering gates.

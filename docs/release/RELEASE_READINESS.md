@@ -1,10 +1,10 @@
 # Release preparation — build 734
 
-Updated 21 October 2026. The owner authorized uploading the reviewed source and assets to
-the private Nacsez/FMER repository and creating a draft release. The repository
-must remain private and the release unpublished for owner review. 734-r2 keeps the wire identity and700-series system, but replaces vendor runtime
-archives with the reviewed source build. The exact tested package, corresponding
-source, notices and Companion are refreshed together.
+Public release checked21 October 2026: the owner made Nacsez/FMER public and
+published build-734-r5 at18:19:44 UTC. It contains firmware734-r2 and Companion734 r5.
+The release is pre-1.0 in project scope, although its GitHub prerelease flag is off.
+Published asset/tag bytes remain fixed. Development and feedback now follow the
+[beta workflow](BETA_FEEDBACK.md) and [1.0 roadmap](ROADMAP.md).
 
 | Area | Status |
 |---|---|
@@ -16,26 +16,21 @@ source, notices and Companion are refreshed together.
 | Extracted target source | Source-built runtime and public configuration inputs reproduce the exact 734-r2 application and FWSC; all 34 extracted-tree CTest suites and 42 loader checks pass. External compiler/headers required. |
 | Firmware and radio | Firmware734-r2 remains locked; Amethyst has a verified V15/FMER round trip and returned-PC reinstall. Bluetooth first after release and primary feedback; not advertised as working. |
 | Automated verification | Full workspace regression passes; live Amethyst comparison and preservation pass. See VERIFICATION.md and the exact portable rehearsal referenced by the release manifest. |
-| Publication | Nacsez/FMER: private upload and draft release authorized; public visibility and publication reserved for owner review. |
+| Publication | Nacsez/FMER and build-734-r5 are public; future release publishing remains the owner's decision. |
 | Original splash artwork | Owner confirmed ownership and GPL-3.0-only permission on 19 October; original PNG, generator and source notice included in both source packages. |
 
-## Final owner review
+## Current acceptance and next work
 
-Current draft: **firmware 734-r2 / Companion 734 r5**, tag **build-734-r5**.
-The r5 package corrects stale editor saves after resetting PC banks; it includes
-the r4 OEM V15 catalog and capability-gated community FM6 capture preview.
-Read [returned-PC QA](COMPANION_R5_QA.md) and [catalog scope](COMPANION_R4.md).
+The publication audit verified all11 downloaded assets, source/tag synchronization,
+34 extracted-source suites,42 loader checks,11 portable-package checks and exact
+firmware reproduction. Publishing is not evidence that every remaining acceptance
+item passed. Separate-PC reset/edit/save acceptance has not been explicitly
+reported since the r5 fix; keep that item open until it is observed.
 
-- Test r5 on the second computer: edit a sound, reset PC banks, then save the
-  edited sound. A changed destination must require review; cancel must preserve
-  edits and saved data. The automated regression passes; owner acceptance remains.
-- Review the download table, screenshots, compatibility limits and feedback form.
-- Make the repository public and publish the draft only when satisfied. These
-  are separate GitHub actions, reserved for the owner. No workflow publishes it.
-
-The preparation audit checks package/source correspondence, release hashes,
-repository privacy, draft state and source-mirror synchronization. It does not
-requalify hardware, unknown firmware migration or a clean Windows installation.
+The r5 package includes the r4 OEM V15 catalog and capability-gated community FM6
+capture preview. Read [returned-PC QA](COMPANION_R5_QA.md) and
+[catalog scope](COMPANION_R4.md). Track public reports without silently expanding
+compatibility or radio claims. No device was accessed by the publication audit.
 
 ## Licensing and qualification boundaries
 
