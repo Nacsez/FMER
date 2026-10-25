@@ -11,6 +11,7 @@
 #include "performance_commands.h"
 #include "modulation_profiles.h"
 #include "factory_presets.hpp"
+#include "spectrum_defaults.hpp"
 #include "memory_layout.h"
 #include <algorithm>
 #include <cmath>
@@ -33,11 +34,16 @@ fmer::Patch patch;
 fmer::VaParameters va;
 fmer::Pattern pattern;
 fmer_controls_t controls{};
+// Single audio-owner validation memo. This is separate from live controls:
+// sequencer/panel paths can update those between requests. Only values already
+// accepted by the canonical validator may bypass a repeated range check.
+fmer_controls_t validated_controls{};
+bool validated_controls_known{};
 uint16_t fx_order{},fx_default{};
 uint8_t modulation[2]{};
 // Bank Select is scoped to transport and channel; USB and TRS cannot steal banks.
 uint8_t midi_bank[2][16][2]{};
-uint16_t poly_resume{4};
+uint16_t poly_resume{6};
 float scratch[block_capacity],dry_bus[block_capacity];
 uint8_t quiet_frame[block_capacity];
 bool countin_quiet{},arp_capture{},preview_previous{};
@@ -459,7 +465,7 @@ extern "C" int fmer_dsp_init(void) {
     patch = fmer::make_init_patch();
     va = fmer::VaParameters{};
     va.cutoff_hz = 18000.f;
-    if (!synth->init() || !synth->set_voice_budget(4) || !synth->set_patch(patch) ||
+    if (!synth->init() || !synth->set_voice_budget(6) || !synth->set_patch(patch) ||
         !synth->set_va_parameters(va) || !effects->init()) return 0;
     for (uint32_t id = 0; id < fmer::kParameterCount; ++id) controls.value[id] = patch.vced[id];
     controls.value[FMER_GLIDE_MS]=150;controls.value[FMER_TRACK_SOUND]=64;controls.value[FMER_TRACK_LEVEL]=100;
@@ -480,7 +486,7 @@ extern "C" int fmer_dsp_init(void) {
     controls.value[FMER_TEMPO] = 120;
     controls.value[FMER_ARP_RATE] = 16; controls.value[FMER_ARP_OCTAVES] = 1;
     controls.value[FMER_ARP_GATE] = 75; controls.value[FMER_ARP_SWING] = 50;
-    controls.value[FMER_SEQ_LENGTH] = 16; controls.value[FMER_VOICE_BUDGET] = 4;
+    controls.value[FMER_SEQ_LENGTH] = 16; controls.value[FMER_VOICE_BUDGET] = 6;
     controls.value[FMER_REVERB_DECAY] = 50;
     controls.value[FMER_SEQ_CHAIN_MASK] = 1;
     // Original FMER demonstration; user step edits remain RAM-only.
@@ -688,9 +694,10 @@ static int apply_controls(const fmer_controls_t* requested,bool allow_fx_fast_pa
     const bool resync=!allow_fx_fast_path || !instrument_controls_synced;
     bool patch_changed=resync,va_changed=resync,glide_changed=resync,fx_changed=false;
     bool engine_changed=resync,lfo_changed=resync;
-    bool fx_only=allow_fx_fast_path && instrument_controls_synced && !parts_mode();
+    bool fx_only=allow_fx_fast_path && instrument_controls_synced;
     for (uint32_t id = 0; id < FMER_PARAM_COUNT; ++id) {
-        if (!fmer_control_valid(id, requested->value[id])) return 0;
+        if ((!validated_controls_known || validated_controls.value[id]!=requested->value[id]) &&
+            !fmer_control_valid(id, requested->value[id])) return 0;
         if(requested->value[id]!=controls.value[id]) {
             const bool is_fx=shared_fx_control(id);fx_changed=fx_changed||is_fx;
             if(!is_fx)fx_only=false;
@@ -703,6 +710,7 @@ static int apply_controls(const fmer_controls_t* requested,bool allow_fx_fast_pa
         }
     }
     if (requested->value[FMER_SEQ_STEP] >= requested->value[FMER_SEQ_LENGTH]) return 0;
+    validated_controls=*requested;validated_controls_known=true;
     // A pure shared-FX edit cannot change note snapshots, instrument settings or
     // sequencer ownership. Keep their validated state intact while using the
     // identical FX setter/CC conversion as the full path. Imports opt out.
@@ -735,13 +743,13 @@ static int apply_controls(const fmer_controls_t* requested,bool allow_fx_fast_pa
     if(adjusted.value[FMER_SEQ_MODE])adjusted.value[FMER_VOICE_BUDGET]=4;
     else if(adjusted.value[FMER_GLIDE_MODE]) {
         if(resync || mode_changed || !controls.value[FMER_GLIDE_MODE])
-            poly_resume=adjusted.value[FMER_VOICE_BUDGET]>1?adjusted.value[FMER_VOICE_BUDGET]:4;
+            poly_resume=adjusted.value[FMER_VOICE_BUDGET]>1?adjusted.value[FMER_VOICE_BUDGET]:6;
         adjusted.value[FMER_VOICE_BUDGET]=1;
     } else if(!resync && controls.value[FMER_GLIDE_MODE] && !controls.value[FMER_SEQ_MODE] &&
               adjusted.value[FMER_VOICE_BUDGET]<=1u)
         // An ordinary Glide Off retains the current mono budget in its request,
         // so restore remembered polyphony. An explicit nonmono budget in the
-        // same transaction (4V mode wheel/hotkey/companion) takes precedence.
+        // same transaction (6V mode wheel/hotkey/companion) takes precedence.
         adjusted.value[FMER_VOICE_BUDGET]=poly_resume;
     requested=&adjusted;
     if(mode_changed){fmer_dsp_panic();checked(synth->set_parts_enabled(false));}
@@ -904,7 +912,13 @@ extern "C" int fmer_dsp_original_default(uint32_t index,uint8_t* wire) {
     c[FMER_ATTACK]=static_cast<uint16_t>(p.attack_ms);c[FMER_DECAY]=static_cast<uint16_t>(p.decay_ms);
     c[FMER_SUSTAIN]=static_cast<uint16_t>(p.sustain*100.f+.5f);c[FMER_RELEASE]=static_cast<uint16_t>(p.release_ms);
     c[FMER_LFO_RATE]=static_cast<uint16_t>(p.lfo_rate_hz*100.f+.5f);c[FMER_LFO_DEPTH]=static_cast<uint16_t>(p.lfo_depth_cents);
+    const auto& original=fmer_spectrum_defaults[index];
+    std::copy_n(original.vced,155,state.vced);
+    for(uint32_t i=0;i<145;++i)c[i]=state.vced[i];
+    std::copy_n(original.controls,33,c+145);c[FMER_REVERB_DECAY]=original.controls[33];
+    c[FMER_VOICE_BUDGET]=6;std::copy_n(original.modulation,2,state.modulation);
     state.preset_id=static_cast<uint16_t>(index);state.length=16;fmer_native_track_defaults(&state);
+    c[FMER_DELAY_SYNC]=original.controls[14];std::copy_n(original.modulation,2,state.modulation);
     std::fill_n(state.pitch,64,128);std::fill_n(state.velocity,64,100);std::fill_n(state.gate,64,75);
     for(auto& pat:state.patterns){pat.length=16;std::fill_n(pat.pitch,64,128);std::fill_n(pat.velocity,64,100);std::fill_n(pat.gate,64,75);}
     return fmer_native_encode(&state,wire,FMER_NATIVE_BYTES)==FMER_NATIVE_OK;
@@ -1242,7 +1256,7 @@ extern "C" void fmer_dsp_get_activity(fmer_activity_state_t* out) {
         (multi_playback()?multi->running():sequencer->running()) && ((ticks ? ticks - 1 : 0) % 24u) < 4u;
 }
 extern "C" int fmer_dsp_voice_budget(uint32_t limit) {
-    if (!synth || limit < 1 || limit > 4) return 0;
+    if (!synth || limit < 1 || limit > 6) return 0;
     if(!parts_mode() && controls.value[FMER_GLIDE_MODE])limit=1;
     if(!synth->set_voice_budget(limit))return 0;
     if (controls.value[FMER_VOICE_BUDGET] != limit) {instrument_controls_synced=false;state_modified();}
@@ -1317,7 +1331,14 @@ extern "C" void fmer_dsp_render(int32_t* stereo, uint32_t frames, uint32_t gain)
         if(ms!=synced_delay_ms){checked(effects->set_parameters(next));synced_delay_ms=ms;pattern_modified();}
     }else if(!controls.value[FMER_DELAY_SYNC])synced_delay_ms=0;
     const auto before=effects->meters();
+#if defined(FMER_DEVICE) && !defined(_MSC_VER)
+    // pi32v2 direct calls cannot span every RAM/XIP pair. Use the compiler's
+    // normal indirect member ABI once per block, not a hand-encoded branch.
+    auto volatile process = &fmer::Effects::process;
+    (effects->*process)(scratch,frames);
+#else
     effects->process(scratch,frames);
+#endif
     const auto after=effects->meters();
     const uint64_t delta[4]={after.guarded_samples-before.guarded_samples,
         after.sanitized_samples-before.sanitized_samples,after.clipped_samples-before.clipped_samples,

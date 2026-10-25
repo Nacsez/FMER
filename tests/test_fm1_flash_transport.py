@@ -607,6 +607,27 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(journal.events[-1]["event"], "identity_timeout")
         self.assertTrue(journal.events[-1]["retry_allowed"])
 
+    def test_discovery_logs_visible_ports_and_refuses_missing_pairs_without_opening(self):
+        cases=[({'inputs':[], 'outputs':[]},'no_ports'),
+               ({'inputs':[dict(id=0,name='Other synth')], 'outputs':[]},'unrecognized_ports'),
+               ({'inputs':[caps_row()], 'outputs':[]},'incomplete_pair')]
+        for ports,reason in cases:
+            api,journal=Mock(),RecordJournal();api.target_location=None;api.enumerate.return_value=ports
+            with self.subTest(reason=reason),patch.object(updater,'MidiSession') as session:
+                with self.assertRaisesRegex(updater.UpdateError,'discovery:'+reason):
+                    updater.find_session(api,None,journal,wait=0)
+                session.assert_not_called()
+            self.assertEqual(journal.events[0]['event'],'discovery_ports')
+            self.assertEqual(journal.events[-1]['reason'],reason)
+            self.assertEqual(journal.events[-1]['visible_ports']['inputs'],[{k:r[k] for k in ('id','name')} for r in ports['inputs']])
+
+    def test_unchanged_discovery_ports_are_not_logged_every_poll(self):
+        api,journal=Mock(),RecordJournal();api.target_location=None
+        api.enumerate.return_value={'inputs':[], 'outputs':[]}
+        with patch.object(updater.time,'monotonic',side_effect=[0,0,0,1]),patch.object(updater.time,'sleep'):
+            with self.assertRaises(updater.UpdateError):updater.find_session(api,None,journal,wait=1)
+        self.assertEqual([e['event'] for e in journal.events],['discovery_ports','discovery_timeout'])
+
     def test_identity_retry_refuses_wrong_identity_other_errors_and_failed_cleanup(self):
         for failure, identity, cleanup, retries in (
                 (None, "ota-FM-1_999", [], True),
@@ -645,7 +666,9 @@ class TransportTests(unittest.TestCase):
                 updater.find_session(api, updater.LOADER_ID, journal, wait=45, retry_identity_timeout=True)
         self.assertLessEqual(clock[0], 47)
         self.assertGreaterEqual(clock[0], 45)
-        self.assertEqual(len(journal.events), len(sessions))
+        self.assertEqual(len([e for e in journal.events if e['event']=='identity_timeout']), len(sessions))
+        self.assertEqual(journal.events[-1]['event'], 'discovery_timeout')
+        self.assertEqual(journal.events[-1]['reason'], 'identity_timeout')
         for session in sessions:
             session.close.assert_called_once()
 

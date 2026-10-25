@@ -781,8 +781,53 @@ void mono_stack_priority_cleanup_and_capacity() {
     require(!(s.part_activity(2).gated_notes[1]&(1u<<20)) && s.part_activity(1).active_voices==1,"part panic clears its stack without disturbing other parts");
 }
 
+
+void replacement_continuity_and_chunking() {
+    for(auto engine:{fmer::SynthEngine::fm,fmer::SynthEngine::va}) {
+        fmer::Synth whole,split;
+        fmer::PartParameters p;p.engine=engine;p.patch=quick_patch();
+        p.va.waveform=fmer::VaWaveform::sine;p.va.cutoff_hz=18000;p.va.resonance=0;
+        p.va.attack_ms=2;p.va.decay_ms=0;p.va.sustain=1;p.va.release_ms=200;p.lfo_enabled=false;
+        for(auto* s:{&whole,&split}) {
+            require(s->set_voice_budget(4)&&s->configure_part(0,p)&&s->set_parts_enabled(true),"valid continuity fixture");
+            s->part_note_on(0,0,60,100,3);
+        }
+        std::array<float,4096>a{},b{};
+        whole.render(a.data(),3031);split.render(b.data(),3031);
+        require(a==b,"initial attack identical before any replacement");
+        float last=a[3030];
+        for(unsigned event=0;event<9;++event) {
+            const unsigned pitch=64+event;
+            for(auto* s:{&whole,&split}) {
+                if(event==4)s->part_note_off(0,0,67,3); // returns to the held predecessor
+                else s->part_note_on(0,0,pitch,100,3);
+            }
+            whole.render(a.data(),257);
+            for(unsigned i=0;i<257;++i)split.render(b.data()+i,1);
+            require(std::abs(a[0]-last)<.00001f,"replacement/held-return starts continuously at prior output");
+            for(unsigned i=0;i<257;++i)require(std::abs(a[i]-b[i])<.000001f,"declick is independent of render chunking");
+            last=a[256];
+        }
+        whole.panic();whole.render(a.data(),257);
+        require(std::all_of(a.begin(),a.begin()+257,[](float x){return x==0;}),"panic leaves no correction tail");
+    }
+    // Polyphonic exhaustion also reuses active/released slots. Compare the
+    // event boundary against the unmodified next sample, isolating that slot.
+    fmer::Synth stolen,reference;
+    fmer::VaParameters va;va.waveform=fmer::VaWaveform::sine;va.cutoff_hz=18000;va.resonance=0;va.attack_ms=2;va.decay_ms=0;va.sustain=1;
+    for(auto* s:{&stolen,&reference}) {
+        require(s->set_voice_budget(6)&&s->set_engine(fmer::SynthEngine::va)&&s->set_va_parameters(va),"valid six-voice continuity fixture");
+        for(unsigned n=0;n<6;++n)s->note_on(0,48+n*2,100,3);
+    }
+    std::array<float,4096>a{},b{};stolen.render(a.data(),3031);reference.render(b.data(),3031);
+    stolen.note_on(0,79,100,3);stolen.render(a.data(),1);reference.render(b.data(),1);
+    require(stolen.stats().active_voices==6 && stolen.stats().stolen_voices==1,"six-voice capacity remains bounded");
+    require(std::abs(a[0]-b[0])<.003f,"capacity steal removes the abrupt old-voice drop");
+}
+
 int main() {
     try {
+        replacement_continuity_and_chunking();
         basics_and_pitch();
         direct_msfa_reference();
         exhaustive_sine_and_kernel_reference();

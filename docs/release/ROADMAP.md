@@ -8,6 +8,11 @@ pre-1.0 under the owner's existing numbered-build policy.
 
 ## Work order
 
+Owner direction, 22 October: reserve the wider promotional push for the stable
+release. [Stable-release outreach](STABLE_RELEASE_OUTREACH.md) retains verified
+directories, community/press contacts, proposed actions and installer checks.
+No submissions or messages are scheduled or sent automatically.
+
 | Lane | Immediate work | Completion evidence |
 |---|---|---|
 | Public feedback | Use the three issue forms and [triage process](BETA_FEEDBACK.md); group duplicates and record positive coverage | Reproduction, affected build and a traceable disposition for each report |

@@ -26,7 +26,7 @@ def allowed(name):
             ('acquired' not in p.parts or name.startswith('third_party/acquired/fm1-target-review/community/felucca/')))
 
 
-def prepare(out):
+def prepare(out,firmware=734):
     out=out.resolve();out.mkdir(parents=True,exist_ok=False)
     with tempfile.TemporaryDirectory(prefix='fmer-source-') as tmp:
         build_companion_portable.source_archive(Path(tmp))
@@ -41,7 +41,7 @@ def prepare(out):
     shutil.copy2(R/'packaging/PUBLIC_README.md',out/'README.md')
     shutil.copy2(R/'packaging/PUBLIC_AGENTS.md',out/'AGENTS.md')
     paths=sorted(p for p in out.rglob('*') if p.is_file())
-    manifest=dict(format='FMER-PUBLIC-SOURCE',firmware=734,publication=False,
+    manifest=dict(format='FMER-PUBLIC-SOURCE',firmware=firmware,publication=False,
         gates='See docs/release/RELEASE_READINESS.md; preparation is not distribution clearance.',
         files={p.relative_to(out).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in paths})
     (out/'SOURCE_MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n')
@@ -53,4 +53,5 @@ def prepare(out):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True)
-    prepare(p.parse_args().out)
+    p.add_argument('--firmware',type=int,choices=(734,735),default=734)
+    args=p.parse_args();prepare(args.out,args.firmware)

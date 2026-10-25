@@ -3,13 +3,14 @@
 #include <cstdint>
 #include <cstring>
 #include <limits>
+#include "target_hot.hpp"
 
 namespace fmer {
 // IEEE binary32 has a finite value exactly when its exponent is not all ones.
 // Preserve subnormals and both zero signs; reject every NaN payload and infinity.
 // Explicit bit copy avoids the target libc's general classification call in
 // per-sample guards, without aliasing assumptions or weakening fault recovery.
-inline bool finite_float(float value) noexcept {
+FMER_SAMPLE_INLINE bool finite_float(float value) noexcept {
     static_assert(sizeof(float) == sizeof(std::uint32_t) &&
                   std::numeric_limits<float>::is_iec559, "requires IEEE binary32");
     std::uint32_t bits;

@@ -19,7 +19,7 @@ except ImportError:
     import target_probe as probe
 
 ROOT = Path(__file__).resolve().parents[1]
-WIRE_IDENTITY = "FM-1_734"
+WIRE_IDENTITY = "FM-1_735"
 DSP_OPTIMIZED_SOURCES = frozenset(("core/synth.cpp", "core/effects.cpp", "core/performance.cpp", "core/multitrack.cpp", "firmware/fm1/dsp_adapter.cpp"))
 
 
@@ -124,9 +124,9 @@ static void fm1__frame(void)
 
 '''
     text=text[:start]+frame+text[end:]
-    text=text.replace('static uint8_t fm1__tick_col,', '#include "led_pwm.h"\nstatic uint8_t fm1_led_half[FM1_NCOL],fm1_led_phase;\nstatic uint8_t fm1__tick_col,')
-    text=text.replace('lit = fm1_led[p],', 'lit = fmer_led_scan_mask(fm1_led[p],fm1_led_half[p],fm1_led_phase),')
-    text=text.replace('fm1__led_lines(fm1_led[n]);', 'if(n==0u)fm1_led_phase^=1u;\n    fm1__led_lines(fmer_led_scan_mask(fm1_led[n],fm1_led_half[n],fm1_led_phase));')
+    text=text.replace('static uint8_t fm1__tick_col,', '#include "led_pwm.h"\nstatic uint8_t fm1_led_half[FM1_NCOL],fm1_led_three_quarter[FM1_NCOL],fm1_led_phase;\nstatic uint8_t fm1__tick_col,')
+    text=text.replace('lit = fm1_led[p],', 'lit = fmer_led_scan_mask(fm1_led[p],fm1_led_half[p],fm1_led_three_quarter[p],fm1_led_phase),')
+    text=text.replace('fm1__led_lines(fm1_led[n]);', 'if(n==0u)fm1_led_phase=(fm1_led_phase+1u)&3u;\n    fm1__led_lines(fmer_led_scan_mask(fm1_led[n],fm1_led_half[n],fm1_led_three_quarter[n],fm1_led_phase));')
     return text.encode('utf8')
 
 

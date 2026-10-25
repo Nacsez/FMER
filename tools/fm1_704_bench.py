@@ -140,12 +140,12 @@ def set_octave(bench, wanted):
         raise RuntimeError("Octave restoration exceeded physical bounds")
 
 
-def parameter_bounds(identifier, *, parameter_count=193, fx=False, workstation=False, projects=False,sync=False,polish=False):
+def parameter_bounds(identifier, *, parameter_count=193, fx=False, workstation=False, projects=False,sync=False,polish=False,six_voice=False):
     if type(parameter_count) is not int or parameter_count not in (193, 195, 198):
         raise ValueError("Unsupported canonical registry count")
     if sync:
         if not projects or not workstation or not fx:raise ValueError('Sync requires full722 registry')
-        return (telemetry.native_v8 if polish else telemetry.native_v7).control_bounds(identifier)
+        return (telemetry.native_v12 if six_voice else telemetry.native_v8 if polish else telemetry.native_v7).control_bounds(identifier)
     if projects and not workstation:raise ValueError('Projects require workstation controls')
     if projects and identifier in (158,195,197):return telemetry.native_v5.control_bounds(identifier)
     if workstation and parameter_count!=198:raise ValueError('Workstation registry requires198 controls')
@@ -171,8 +171,8 @@ def parameter_bounds(identifier, *, parameter_count=193, fx=False, workstation=F
     return minima.get(identifier, 0), maxima.get(identifier, 100)
 
 
-def parameter_packet(identifier, value, *, parameter_count=193, fx=False, workstation=False, projects=False,sync=False,polish=False):
-    low, high = parameter_bounds(identifier, parameter_count=parameter_count,fx=fx,workstation=workstation,projects=projects,sync=sync,polish=polish)
+def parameter_packet(identifier, value, *, parameter_count=193, fx=False, workstation=False, projects=False,sync=False,polish=False,six_voice=False):
+    low, high = parameter_bounds(identifier, parameter_count=parameter_count,fx=fx,workstation=workstation,projects=projects,sync=sync,polish=polish,six_voice=six_voice)
     if type(value) is not int or not low <= value <= high or (identifier == 181 and value & (value - 1)):
         raise ValueError("Parameter exceeds canonical bounds")
     return PREFIX + bytes([7, identifier & 127, identifier >> 7,
@@ -298,7 +298,7 @@ class Bench:
             result.extend(telemetry.parse_controls(telemetry.request(
                 self.session, telemetry.controls_request(start, count=self.parameter_count), "bench_control_read"),
                 start, parameter_count=self.parameter_count,fx=self.identity in telemetry.FX_IDENTITIES,
-                workstation=self.identity in telemetry.WORKSTATION_IDENTITIES,projects=self.identity in telemetry.PROJECT_IDENTITIES,sync=self.identity in telemetry.SYNC_IDENTITIES,polish=self.identity in (telemetry.POLISH_IDENTITY,telemetry.WORKFLOW_IDENTITY,telemetry.ROUTING_IDENTITY)))
+                workstation=self.identity in telemetry.WORKSTATION_IDENTITIES,projects=self.identity in telemetry.PROJECT_IDENTITIES,sync=self.identity in telemetry.SYNC_IDENTITIES,six_voice=self.identity==telemetry.POLYPHONY_IDENTITY,polish=self.identity in (telemetry.POLISH_IDENTITY,telemetry.WORKFLOW_IDENTITY,telemetry.ROUTING_IDENTITY)))
         after = self.performance()
         consistent = (before["controls_generation"] == after["controls_generation"] and
                       before["performance_revision"] == after["performance_revision"] and
@@ -310,7 +310,7 @@ class Bench:
 
     def set(self, identifier, value):
         self.echo(parameter_packet(identifier, value, parameter_count=self.parameter_count,fx=self.identity in telemetry.FX_IDENTITIES,
-                                   workstation=self.identity in telemetry.WORKSTATION_IDENTITIES,projects=self.identity in telemetry.PROJECT_IDENTITIES,sync=self.identity in telemetry.SYNC_IDENTITIES,polish=self.identity in (telemetry.POLISH_IDENTITY,telemetry.WORKFLOW_IDENTITY,telemetry.ROUTING_IDENTITY)), "bench_parameter_write")
+                                   workstation=self.identity in telemetry.WORKSTATION_IDENTITIES,projects=self.identity in telemetry.PROJECT_IDENTITIES,sync=self.identity in telemetry.SYNC_IDENTITIES,six_voice=self.identity==telemetry.POLYPHONY_IDENTITY,polish=self.identity in (telemetry.POLISH_IDENTITY,telemetry.WORKFLOW_IDENTITY,telemetry.ROUTING_IDENTITY)), "bench_parameter_write")
         deadline = time.monotonic() + 2
         while time.monotonic() < deadline:
             state = self.performance()
@@ -319,7 +319,7 @@ class Bench:
                 page = telemetry.parse_controls(telemetry.request(
                     self.session, telemetry.controls_request(identifier, count=self.parameter_count), "bench_parameter_readback"),
                     identifier, parameter_count=self.parameter_count,fx=self.identity in telemetry.FX_IDENTITIES,
-                    workstation=self.identity in telemetry.WORKSTATION_IDENTITIES,projects=self.identity in telemetry.PROJECT_IDENTITIES,sync=self.identity in telemetry.SYNC_IDENTITIES,polish=self.identity in (telemetry.POLISH_IDENTITY,telemetry.WORKFLOW_IDENTITY,telemetry.ROUTING_IDENTITY))
+                    workstation=self.identity in telemetry.WORKSTATION_IDENTITIES,projects=self.identity in telemetry.PROJECT_IDENTITIES,sync=self.identity in telemetry.SYNC_IDENTITIES,six_voice=self.identity==telemetry.POLYPHONY_IDENTITY,polish=self.identity in (telemetry.POLISH_IDENTITY,telemetry.WORKFLOW_IDENTITY,telemetry.ROUTING_IDENTITY))
                 if page[0] != value:
                     raise RuntimeError(f"Parameter {identifier} readback {page[0]} != {value}")
                 return

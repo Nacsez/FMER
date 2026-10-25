@@ -16,7 +16,7 @@
 #define FELUCCA_OTA 1
 #define FELUCCA_CDC 0
 #define FELUCCA_UAC 1
-#define FELUCCA_ID "FM-1_734"
+#define FELUCCA_ID "FM-1_735"
 #define RING_PUBLISH() __asm__ volatile("csync" ::: "memory")
 #include "fm1_time.h"
 #include "fm1_sys.h"
@@ -60,7 +60,7 @@ static int32_t abuf[HALF_WORDS * 2] __attribute__((aligned(16)));
 static int32_t q15[HALF_WORDS];
 static volatile uint32_t gain = 256u, engine, cutoff = 20000u, delay_mix;
 static volatile uint32_t algorithm, va_wave = 1u, attack_ms = 5u, release_ms = 200u;
-static volatile uint32_t requested_budget = 4u;
+static volatile uint32_t requested_budget = 6u;
 static const uint32_t cutoff_steps[] = {20,30,45,67,100,150,220,330,470,680,1000,1500,2200,3300,4700,6800,10000,15000,20000};
 static uint32_t cutoff_position = 18u;
 static const uint32_t envelope_steps[] = {0,2,5,10,20,50,100,200,500,1000,2000,5000,10000};
@@ -388,6 +388,7 @@ static void lights(void)
     memcpy(fm1_led,frame.lit,sizeof frame.lit);
     memcpy(fm1_led_dim,frame.dim,sizeof frame.dim);
     memcpy(fm1_led_half,frame.half,sizeof frame.half);
+    memcpy(fm1_led_three_quarter,frame.three_quarter,sizeof frame.three_quarter);
     irq_restore(f);
     led_state=next;led_frame=frame;led_active_voices=voices;led_updated_ms=now;
     if(!++led_generation)led_generation=1u;
@@ -400,7 +401,7 @@ static void screen(void)
     char patch_name[11];
     uint32_t start=fm1_ticks(),elapsed,f;
     memset(&state,0,sizeof state);
-    state.build=734; state.engine=engine; state.algorithm=algorithm; state.va_wave=va_wave;
+    state.build=735; state.engine=engine; state.algorithm=algorithm; state.va_wave=va_wave;
     state.battery_raw=battery_raw;state.battery_valid=battery_valid && fm1_ms-battery_success_ms<5000u;state.battery_percent=battery_percent;
     state.gain=gain; state.octave=octave; state.voices=diag.voices; state.voice_limit=diag.voice_limit;
     state.render_us=diag.max_us; state.overruns=diag.overruns; state.shed=diag.sheds;
@@ -610,11 +611,11 @@ void fm1_alnk0_irq(void)
          * enters protective pause, preserving USB/update service. */
         if (late || observed>2800u || fm1_audio_free_half()!=half) {
             diag.overruns++; trace_event(FMER_TRACE_FAULT,1,(int32_t)diag.overruns,requested_budget);
-            if(requested_budget>1u) {
+            if(requested_budget>1u && !applied_controls.value[FMER_SEQ_MODE] &&
+               fmer_dsp_voice_budget(requested_budget-1u)) {
                 requested_budget--;controls.value[FMER_VOICE_BUDGET]=(uint16_t)requested_budget;
                 /* Apply the bounded reduction before main can reconcile its
                  * canonical state from the audio snapshot captured above. */
-                fmer_dsp_voice_budget(requested_budget);
                 applied_controls.value[FMER_VOICE_BUDGET]=(uint16_t)requested_budget;
                 diag.voice_limit=fmer_dsp_voice_limit();diag.voices=fmer_dsp_active();diag.stolen=fmer_dsp_stolen();
                 diag.sheds++;severe_streak=0;
@@ -859,7 +860,7 @@ static void companion_service(const uint8_t *p,uint32_t n)
          * diagnostic generation/applied counters prove audio-owner adoption. */
         fmer_controls_t base,next;capture_controls(&base);next=base;
         if(p[6]>1u || p[7]>3u || p[8]>18u || p[9]>100u ||
-           p[10]>12u || p[11]>12u || p[12]<1u || p[12]>4u) {
+           p[10]>12u || p[11]>12u || p[12]<1u || p[12]>6u) {
             diag.rejected++; ota_frame_done(); return;
         }
         next.value[FMER_ENGINE]=p[6];next.value[FMER_VA_WAVE]=p[7];

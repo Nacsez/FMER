@@ -1,5 +1,12 @@
 [
   {
+    "title": "M-VAVE Original V16 (21 October 2026)",
+    "product": "FM-1_016",
+    "sha256": "d017fb65e70aca97ee29d944470c3515a74581df5c0576bf70de917c7b2b61d5",
+    "bytes": 718196,
+    "reason": "This is the official V16 package. It replaces the boot region and changes the application and saved-data layout. The released Companion updater cannot safely install it or migrate V16 back to FMER. Use a complete backup and the manufacturer's update procedure; recognition here does not authorize a write. V16's DX7 bank exports can be imported as FM voices; projects, FX and global settings are not converted."
+  },
+  {
     "title": "Baud Girl 102",
     "product": "FM-1_102",
     "sha256": "7b169a69b30570581d0ebc7b44851e3e08898d2956ade155363bcf18fac5c348",

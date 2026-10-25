@@ -20,6 +20,8 @@ import hardware_bridge
 import library
 import release_firmware
 import compatible_firmware
+import companion_loadouts
+import companion_install_loadout
 
 
 class Jobs:
@@ -28,7 +30,7 @@ class Jobs:
 
     def capabilities(self):
         return dict(platform=os.name,device_transport='Windows WinMM' if os.name=='nt' else 'Not yet packaged for this platform',
-                    device_available=os.name=='nt',firmware='FMER734 native 11', firmware_identity='FM-1_734', native_version=11, voice_modes={'synth': '1-4 voices, one sound', 'tracks': '4 mono tracks, one voice each'},
+                    device_available=os.name=='nt',firmware='FMER735 native 12', firmware_identity='FM-1_735', native_version=12, voice_modes={'synth': '1-6 voices, one sound', 'tracks': '4 mono tracks, one voice each'},
                     individual_device_delete=False,project_names_on_unit=False,
                     flash_scope='Install FMER or a custom application using the reviewed935 updater and protected layout. The connected unit must pass layout/calibration checks; application behavior and library commands remain separate qualifications.',
                     bundled_firmware=release_firmware.available(),
@@ -89,7 +91,7 @@ class Jobs:
 
     def backup(self,identifier):
         job=self.status(identifier)
-        value=job.get('progress',{}).get('backup_path')
+        value=job.get('backup_path') or job.get('progress',{}).get('backup_path')
         if not isinstance(value,str):raise ValueError('No pre-transfer backup is available for this operation')
         path=Path(value).resolve()
         root=(self.device.root/'device-logs').resolve()
@@ -101,9 +103,15 @@ class Jobs:
         return value
 
     def start(self,request):
-        library.fields(request,{'action','request','inspection','confirmation'},'operation')
+        library.fields(request,{'action','request','inspection','confirmation','loadout','unit_profile'},'operation')
+        unit=None
+        if request.get('unit_profile'):
+            if not hasattr(self,'units'):raise ValueError('Named unit profiles are unavailable')
+            selected_unit=self.units.get(request['unit_profile'])
+            unit=dict(id=selected_unit['id'],name=selected_unit['name'],hardware_identity_verified=False)
         library.choice(request.get('action'),{'device','install'},'operation')
         if request['action']=='device':
+            if request.get('loadout') is not None:raise ValueError('Loadout installation requires a firmware job')
             req=request.get('request')
             if not isinstance(req,dict):raise ValueError('Missing device operation')
             if req.get('action') not in {'community_capture','probe','backup_all','restore_all','deploy_library','instrument_rename','instrument_copy','instrument_swap','pull','push','load','project_pull','project_push','project_load','project_save','catalog','project_catalog','record','stop_recording','battery_history','midi_read','midi_set','reset_defaults','reset_user','clear_user'}:raise ValueError('Unsupported device operation')
@@ -112,11 +120,16 @@ class Jobs:
             selected=self.packages.get(request.get('inspection'))
             if not selected or not selected[1]['installable']:raise ValueError('Select a qualified firmware package first')
             if request.get('confirmation')!='Install '+selected[1]['product']:raise ValueError('Confirm the exact firmware target')
+            if request.get('loadout') is not None:
+                if selected[1].get('release_profile') not in __import__('release_firmware').PROFILE_FORMATS:raise ValueError('Automatic loadouts require the included FMER release, not stock or custom firmware')
+                checked=companion_loadouts.bank_assignment(request['loadout'])
+                if request['loadout'].get('confirmation')!=checked['plan']['confirmation']:raise ValueError('Confirm the reviewed loadout')
         with self.guard:
             if self.closing:raise library.LibraryConflict('Companion is closing. Reopen it to continue.')
             if self.active is not None:raise library.LibraryConflict('A device operation is already running')
             identifier=uuid.uuid4().hex
             job=dict(id=identifier,action=request['action'],state='running',message='Preparing operation',operation=request.get('request',{}).get('action',request['action']),progress={},created=datetime.now(timezone.utc).isoformat(),result=None,error=None)
+            if unit:job['unit_profile']=unit
             self.jobs[identifier]=job;self.active=identifier;self._save(job)
             threading.Thread(target=self._run,args=(identifier,deepcopy(request)),daemon=True).start()
             return deepcopy(job)
@@ -125,7 +138,12 @@ class Jobs:
         def progress(message,**details):
             with self.guard:
                 self.jobs[identifier].update(message=message,progress=details)
+                if details.get('backup_path'):self.jobs[identifier]['backup_path']=details['backup_path']
                 if details.get('identity'):self.jobs[identifier]['identity']=details['identity']
+                if details.get('discovery'):
+                    history=self.jobs[identifier].setdefault('diagnostics',{}).setdefault('discovery',[])
+                    history.append(deepcopy(details['discovery']))
+                    del history[:-8]
                 self._save(self.jobs[identifier])
         try:
             if request['action']=='device':result=self.device.dispatch(request['request'],progress)
@@ -140,6 +158,8 @@ class Jobs:
                     last_progress=[0.0]
                     def update_progress(event,**values):
                         if event=='identity':progress('Connected to '+values['identity'],identity=values['identity'])
+                        elif event in ('discovery_ports','discovery_timeout'):
+                            progress('Checking the FM-1 USB MIDI connection',discovery=dict(event=event,**values))
                         elif event=='compatibility_metadata':progress('Device compatibility details collected',metadata=values['metadata'])
                         elif event=='metadata_page':
                             with self.guard:self.jobs[identifier].setdefault('diagnostics',{}).setdefault('metadata_pages',[]).append(values)
@@ -151,9 +171,19 @@ class Jobs:
                                      done=values['covered_required_bytes'],total=values['required_bytes'],unit='bytes',stage=values['stage'])
                     journal=flash.Journal(self.root/identifier/'flash',progress=update_progress)
                     try:
-                        if report.get('stock_restore'):companion_stock.perform(hardware_bridge.WinMM(),path.read_bytes(),journal)
+                        loadout_result=None
+                        if request.get('loadout') is not None or package.report.get('release_profile'):
+                            def checkpoint(value):
+                                with self.guard:
+                                    self.jobs[identifier]['result']=deepcopy(value)
+                                    if value.get('backup_path'):self.jobs[identifier]['backup_path']=value['backup_path']
+                                    self._save(self.jobs[identifier])
+                            loadout_result=companion_install_loadout.run(hardware_bridge.WinMM(),package,journal,request.get('loadout'),
+                                self.device.root/'device-logs'/identifier,progress,checkpoint)
+                        elif report.get('stock_restore'):companion_stock.perform(hardware_bridge.WinMM(),path.read_bytes(),journal)
                         else:flash.perform_update(hardware_bridge.WinMM(),package,journal)
                         result=dict(success=True,firmware=report['product'],package_sha256=report['package_sha256'],journal=str(journal.directory))
+                        if loadout_result is not None:result.update(loadout_result)
                     finally:journal.close()
             with self.guard:self.jobs[identifier].update(state='complete',message='Operation complete',result=result)
         except Exception as e:
@@ -162,4 +192,9 @@ class Jobs:
             with self.guard:
                 job=self.jobs[identifier]
                 if job['state']=='failed':job['outcome']=companion_errors.explain(job.get('error',''),bool(job.get('progress',{}).get('metadata')))
+                if job['state']=='failed' and (job.get('result') or {}).get('firmware_installed'):
+                    count=len(job['result'].get('completed',[]))
+                    job['outcome']=dict(title='FMER installed; loadout needs attention',
+                        explanation=f'Firmware installation completed, but the full operation did not finish. {count} instrument writes were verified. '+str(job.get('error','')),
+                        next_step='Download the backup and operation record. Check the connection, then review the installed bank before explicitly sending the profile again. Firmware does not need to be reinstalled.')
                 self.jobs[identifier]['finished']=datetime.now(timezone.utc).isoformat();self.active=None;self._save(self.jobs[identifier])

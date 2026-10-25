@@ -36,8 +36,8 @@
       "bytes": 6838,
       "upstream_git_blob_sha1": "88364cf9073e1e2cde2d8a2e087a77b2e941384e",
       "upstream_blob_verified": true,
-      "local_sha256": "ef8f3488b1513238b1ea952224fe6bb9702b1ee17b273fdc712652186ce24a62",
-      "local_bytes": 8372,
+      "local_sha256": "7b5713d93ecd5d1e4fa389cc132e8e3db6e74eb91caa7c2ffad703e287711517",
+      "local_bytes": 9006,
       "modified": true,
       "origin": "upstream",
       "license": "Apache-2.0"
@@ -49,8 +49,8 @@
       "bytes": 1754,
       "upstream_git_blob_sha1": "96213097916e32eaf1bab1da8c1ac7244e85789e",
       "upstream_blob_verified": true,
-      "local_sha256": "678acddd8c1544069a80200a3c0e2f37777c7d6e2a7eae662575dedc3221dea6",
-      "local_bytes": 2492,
+      "local_sha256": "cb4411ad1aad5e02c181998871daa7faf02584cb4c30bde6164973a3016ff793",
+      "local_bytes": 2673,
       "modified": true,
       "origin": "upstream",
       "license": "Apache-2.0"
@@ -318,15 +318,15 @@
     {
       "path": "README.md",
       "origin": "fmer-integration-metadata",
-      "local_sha256": "0a7c03db3b35a149d2e5c8f54fca6d0df6c94dc3c2cf3dd1f24c346230398ab3",
-      "local_bytes": 4762,
+      "local_sha256": "5c8e1cc46962baa406b19153b4c440181847c2a5dbfe81024084bd1a8d6bc489",
+      "local_bytes": 5537,
       "license": "project documentation; no distribution license assigned"
     },
     {
       "path": "fmer-port.patch",
       "origin": "fmer-integration-metadata",
-      "local_sha256": "f999a2fc4bcb2923b221c7edf42ead0ee6b401f6621ca1ff4e87207aaa619112",
-      "local_bytes": 15326,
+      "local_sha256": "d79ddec0f64051e78d9c044321934c4137ebe15fa197f31af054ee770d73af5f",
+      "local_bytes": 16724,
       "license": "Apache-2.0 derived patch"
     }
   ],
@@ -403,7 +403,8 @@
       "FMER_DEVICE single-owner compiler barrier; host retains atomic fence (2026-10-05)",
       "FMER original per-operator AMD/AMS logarithmic attenuation, 0/1/2/4 octaves at AMD99; not a measured DX7 curve; Q24 block processing and exact zero-depth bypass (2026-10-06,707)",
       "FMER ratio-only Q24 portamento shift preserves fixed oscillators, envelope/phase/feedback and initial key/velocity scaling; no added MSFA state (2026-10-11,719)",
-      "Exact signed32 sine delta interpolation with proven 1686515169 maximum product; full64 operator products narrowed before defined modulo output accumulation; exhaustive phase/kernel and bit-exact PCM regression (2026-10-11,719)"
+      "Exact signed32 sine delta interpolation with proven 1686515169 maximum product; full64 operator products narrowed before defined modulo output accumulation; exhaustive phase/kernel and bit-exact PCM regression (2026-10-11,719)",
+      "Startup-only fine-tuning cache computed with the original target double-log/floor expression; bounded 100-entry lookup on note attacks, unchanged fallback and Q24 results (2026-10-24,735 CPU pass)"
     ]
   }
 }

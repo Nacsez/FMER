@@ -12,7 +12,7 @@ class Native9Tests(unittest.TestCase):
         from fm1_native_bridge_v22 import NativeBridge
         from tests.test_fm1_native_bridge_v14 import Journal
         from copy import deepcopy
-        source=current._legacy(companion_bank.native._legacy(companion_bank.decode_record(fixture()['native'])))
+        source=current._legacy(companion_bank.native.v11._legacy(companion_bank.native._legacy(companion_bank.decode_record(fixture()['native']))))
         source['controls'][150]=2;source['controls'][191]=3
         raw=native.encode(source);effective=native.runtime_state(source)
         self.assertEqual(effective['controls'][191],1)
@@ -43,7 +43,7 @@ class Native9Tests(unittest.TestCase):
         # Use deterministic profile fixture through the current public factory
         # provider; no library file or device access.
         from tests import test_companion as fixtures
-        state=current._legacy(companion_bank.native._legacy(companion_bank.decode_record(fixtures.fixture()['native'])))
+        state=current._legacy(companion_bank.native.v11._legacy(companion_bank.native._legacy(companion_bank.decode_record(fixtures.fixture()['native']))))
         state['fx_order']=719
         raw=native.encode(state)
         self.assertEqual(len(raw),3728)

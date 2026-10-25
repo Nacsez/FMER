@@ -9,7 +9,8 @@ import os
 import threading
 import time
 from companion_lifecycle import BrowserLeases
-from http.server import HTTPServer
+from companion_http import CompanionHTTPServer, serialize_handlers
+from companion_startup import StartupLog
 import companion_bank as bank
 import library
 import sandbox
@@ -22,6 +23,8 @@ import companion_transfer
 import companion_dx7
 import companion_soundpacks
 import companion_community
+import companion_loadouts
+import companion_units
 from launch_companion import source_fingerprint
 
 def handler_for(executable,root,legacy_root=None):
@@ -29,13 +32,18 @@ def handler_for(executable,root,legacy_root=None):
     device=companion_device.Device(executable,root)
     catalog=companion_shelf.Catalog(Path(root)/'catalog',executable)
     jobs=companion_jobs.Jobs(device,Path(root)/'operations')
+    loadouts=companion_loadouts.Profiles(Path(root)/'loadouts',executable,store.defaults)
+    units=companion_units.Units(Path(root)/'units',executable,loadouts)
+    jobs.units=units
     source=source_fingerprint()
+    startup=StartupLog(root)
     leases=BrowserLeases()
     parent=sandbox.handler_for(executable,Path(root)/'legacy-library' if legacy_root is None else legacy_root)
     class Handler(parent):
         def do_GET(self):
             if self.path=='/api/support':return self.send(200,library.canonical(companion_support.summary(Path(root)/'operations')))
             if not self.local_request():return self.send(403,b'{}')
+            if self.path=='/api/startup-report':return self.send(200,library.canonical(startup.report(source)))
             if self.path=='/api/presence':
                 try:
                     ports=companion_device.hardware_bridge.WinMM().enumerate()
@@ -43,13 +51,19 @@ def handler_for(executable,root,legacy_root=None):
                     return self.send(200,library.canonical(dict(inputs=names('inputs'),outputs=names('outputs'))))
                 except Exception as error:return self.send(503,library.canonical({'error':str(error)}))
             if self.path=='/api/algorithms':return self.send(200,(sandbox.ROOT/'host/fm_algorithms.json').read_bytes())
-            if self.path=='/api/health':return self.send(200,library.canonical(dict(app='FMER Companion 734',workspace=str(sandbox.ROOT),pid=os.getpid(),data_root=str(Path(root).resolve()),profile=bank.PROFILE,source=source)))
+            if self.path=='/api/health':return self.send(200,library.canonical(dict(app='FMER Companion 735',workspace=str(sandbox.ROOT),pid=os.getpid(),data_root=str(Path(root).resolve()),profile=bank.PROFILE,source=source)))
             if self.path=='/':return self.send(200,(sandbox.ROOT/'host/companion_app.html').read_bytes(),'text/html; charset=utf-8')
             if self.path=='/editor':return self.send(200,(sandbox.ROOT/'host/companion.html').read_bytes(),'text/html; charset=utf-8')
             if self.path=='/api/catalog':
                 try:return self.send(200,library.canonical(catalog.snapshot()))
                 except (ValueError,OSError) as e:return self.send(400,library.canonical({'error':str(e)}))
             if self.path=='/api/sound-packs':return self.send(200,library.canonical(companion_soundpacks.PACKS))
+            if self.path=='/api/loadouts':
+                try:return self.send(200,library.canonical(loadouts.snapshot()))
+                except (ValueError,OSError) as e:return self.send(400,library.canonical({'error':str(e)}))
+            if self.path=='/api/units':
+                try:return self.send(200,library.canonical(units.snapshot()))
+                except (ValueError,OSError) as e:return self.send(400,library.canonical({'error':str(e)}))
             if self.path=='/api/capabilities':return self.send(200,library.canonical(jobs.capabilities()))
             if self.path.startswith('/api/jobs/'):
                 try:
@@ -65,7 +79,7 @@ def handler_for(executable,root,legacy_root=None):
                 if not path.is_file():return self.send(404,b'{}')
                 mime={'.htm':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.json':'application/json','.png':'image/png','.svg':'image/svg+xml','.txt':'text/plain; charset=utf-8'}[path.suffix]
                 return self.send(200,path.read_bytes(),mime)
-            if self.path in ('/companion_app.js','/companion_app.css'):
+            if self.path in ('/companion_app.js','/companion_loadouts.js','/companion_units.js','/companion_app.css'):
                 return self.send(200,(sandbox.ROOT/'host'/self.path[1:]).read_bytes(),'text/javascript' if self.path.endswith('.js') else 'text/css')
             if self.path=='/lab':return self.send(200,(sandbox.ROOT/'host/sandbox.html').read_bytes(),'text/html; charset=utf-8')
             if self.path.startswith('/auditions/'):
@@ -80,6 +94,14 @@ def handler_for(executable,root,legacy_root=None):
                 except (ValueError,OSError) as e:return self.send(400,library.canonical({'error':str(e)}))
             return super().do_GET()
         def do_POST(self):
+            if self.path=='/api/startup':
+                if not self.local_request():return self.send(403,b'{}')
+                try:
+                    size=int(self.headers.get('Content-Length','0'))
+                    if not 0<size<=4096:raise ValueError('Invalid startup diagnostic size')
+                    startup.record(library.strict_loads(self.rfile.read(size)))
+                    return self.send(200,b'{}')
+                except (ValueError,TypeError,OSError):return self.send(400,b'{}')
             if self.path=='/api/browser':
                 if not self.local_request():return self.send(403,b'{}')
                 try:
@@ -93,17 +115,22 @@ def handler_for(executable,root,legacy_root=None):
                 with jobs.guard:
                     if jobs.active:return self.send(409,library.canonical({'error':'Wait for the current device operation before quitting.'}))
                     jobs.closing=True
+                    self.server.application_closing=True
                     device.stop_recording()
                     self.send(200,b'{"stopped":true}')
                     threading.Thread(target=self.server.shutdown,daemon=True).start()
                 return
-            if self.path not in ('/api/banks','/api/work','/api/device','/api/catalog','/api/jobs','/api/firmware','/api/restore-plan','/api/transfer-plan','/api/dx7','/api/sound-packs','/api/community-import'):return super().do_POST()
+            if self.path not in ('/api/banks','/api/work','/api/device','/api/catalog','/api/jobs','/api/firmware','/api/restore-plan','/api/transfer-plan','/api/dx7','/api/sound-packs','/api/community-import','/api/loadouts','/api/loadout-plan','/api/loadout-banks-plan','/api/units'):return super().do_POST()
             if not self.local_request():return self.send(403,b'{}')
             try:
                 size=int(self.headers.get('Content-Length','0'))
                 if not 0<size<=14*1024*1024:raise ValueError('Request size outside bound')
                 data=library.strict_loads(self.rfile.read(size))
-                if self.path=='/api/catalog':
+                if self.path=='/api/units':result=units.dispatch(data)
+                elif self.path=='/api/loadouts':result=loadouts.dispatch(data)
+                elif self.path=='/api/loadout-banks-plan':result=companion_loadouts.bank_assignment(data)['plan']
+                elif self.path=='/api/loadout-plan':result=companion_loadouts.deployment(data)['plan']
+                elif self.path=='/api/catalog':
                     if data.get('action')=='import_banks':
                         library.fields(data,{'action','revision','backup'},'bank import')
                         data={**data,'action':'import','backup':companion_shelf.from_banks(store._unpack(data.get('backup')))}
@@ -165,7 +192,7 @@ def handler_for(executable,root,legacy_root=None):
     Handler.device_owner=device
     Handler.browser_leases=leases
     Handler.jobs=jobs
-    return Handler
+    return serialize_handlers(Handler)
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--port',type=int,default=8787);p.add_argument('--library-root',type=Path,default=Path(os.environ.get('FMER_DATA_DIR',sandbox.ROOT/'local/companion709')));p.add_argument('--legacy-library-root',type=Path,default=sandbox.LIBRARY);p.add_argument('--config',default='Release',choices=('Debug','Release'));a=p.parse_args()
@@ -179,7 +206,7 @@ def main():
         instance.seek(0)
         try:msvcrt.locking(instance.fileno(),msvcrt.LK_NBLCK,1)
         except OSError:raise RuntimeError('Another companion owns this Library. Quit it before starting another server.')
-    server=HTTPServer(('127.0.0.1',a.port),handler_for(executable,a.library_root,a.legacy_library_root))
+    server=CompanionHTTPServer(('127.0.0.1',a.port),handler_for(executable,a.library_root,a.legacy_library_root))
     print(f'FMER companion: http://127.0.0.1:{server.server_port}/ (local workspace; explicit device transfers)',flush=True)
     def watch_tabs():
         while True:
@@ -192,7 +219,11 @@ def main():
     try:server.serve_forever()
     except KeyboardInterrupt:pass
     finally:
-        server.RequestHandlerClass.device_owner.stop_recording()
-        server.server_close()
-        if instance:instance.close()
+        # Finish any current library/render request before releasing the shared
+        # data-root lock. Queued connections must not mutate after shutdown.
+        with server.RequestHandlerClass.application_guard:
+            server.application_closing=True
+            server.RequestHandlerClass.device_owner.stop_recording()
+            server.server_close()
+            if instance:instance.close()
 if __name__=='__main__':main()

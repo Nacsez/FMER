@@ -34,7 +34,11 @@ def main(argv=None):
         getattr(mm,name).argtypes=[c.c_void_p,c.POINTER(Header),c.c_uint]
     for name in ('waveInStart','waveInStop','waveInReset','waveInClose'):getattr(mm,name).argtypes=[c.c_void_p]
     def check(result,operation):
-        if result:raise RuntimeError(f'{operation}: MMRESULT{result}')
+        if result:
+            message=c.create_unicode_buffer(256)
+            mm.waveInGetErrorTextW(result,message,len(message))
+            hint='; the process may lack audio-device access: retry the same endpoint from an authorized desktop process before diagnosing firmware' if operation=='waveInOpen' and result==1 else ''
+            raise RuntimeError(f'{operation}: MMRESULT{result}: {message.value}{hint}')
     try:
         check(mm.waveInOpen(c.byref(handle),matching[0]['index'],c.byref(fmt),0,0,0),'waveInOpen')
         for i in range(8):

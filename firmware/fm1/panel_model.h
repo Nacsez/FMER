@@ -98,7 +98,7 @@ static void fmer_panel_section_home(fmer_panel_t *s,uint32_t button,const fmer_c
     fmer_panel_navigate(s);
 }
 static const char *fmer_panel_mode_name(const fmer_controls_t *c)
-{ return c->value[FMER_SEQ_MODE]?"4T":c->value[FMER_VOICE_BUDGET]==1u?"1V":c->value[FMER_VOICE_BUDGET]==2u?"2V":c->value[FMER_VOICE_BUDGET]==3u?"3V":"4V"; }
+{ return c->value[FMER_SEQ_MODE]?"4T":c->value[FMER_VOICE_BUDGET]==1u?"1V":c->value[FMER_VOICE_BUDGET]==2u?"2V":c->value[FMER_VOICE_BUDGET]==3u?"3V":c->value[FMER_VOICE_BUDGET]==4u?"4V":c->value[FMER_VOICE_BUDGET]==5u?"5V":"6V"; }
 static int fmer_panel_mode_edit(fmer_panel_t *s,fmer_controls_t *c,int32_t delta)
 {
     uint32_t mode=c->value[FMER_SEQ_MODE]?2u:c->value[FMER_VOICE_BUDGET]==1u?0u:1u,next;
@@ -108,7 +108,7 @@ static int fmer_panel_mode_edit(fmer_panel_t *s,fmer_controls_t *c,int32_t delta
     next=delta<0?(uint32_t)(-delta)>mode?0u:mode-(uint32_t)(-delta):(uint32_t)delta>2u-mode?2u:mode+(uint32_t)delta;
     if(next==mode)return 0;
     c->value[FMER_SEQ_MODE]=(uint16_t)(next==2u);
-    c->value[FMER_VOICE_BUDGET]=(uint16_t)(next==0u?1u:4u);
+    c->value[FMER_VOICE_BUDGET]=(uint16_t)(next==0u?1u:next==2u?4u:6u);
     c->value[FMER_GLIDE_MODE]=(uint16_t)(next==0u?c->value[FMER_GLIDE_MODE]?c->value[FMER_GLIDE_MODE]:1u:0u);
     fmer_panel_navigate(s);return 1;
 }
@@ -256,7 +256,7 @@ static uint32_t fmer_panel_button(fmer_panel_t *s,uint32_t button,fmer_controls_
     uint32_t family=FMER_PANEL_FAMILIES;
     if(button==8u && s->fine_adjust) {
         c->value[FMER_SEQ_MODE]=(uint16_t)!c->value[FMER_SEQ_MODE];
-        if(!c->value[FMER_SEQ_MODE]){c->value[FMER_GLIDE_MODE]=0;c->value[FMER_VOICE_BUDGET]=4;}
+        if(!c->value[FMER_SEQ_MODE]){c->value[FMER_GLIDE_MODE]=0;c->value[FMER_VOICE_BUDGET]=6;}else c->value[FMER_VOICE_BUDGET]=4;
         s->family=FMER_PANEL_HOME;s->scope_only=0;fmer_panel_navigate(s);return 0;
     }
     if(button==8u && s->family==FMER_PANEL_HOME) {
@@ -332,25 +332,16 @@ static void fmer_panel_shortcut(fmer_panel_t *s,fmer_controls_t *c,uint32_t acti
 {
     s->scope_only=0;s->family=action<2u?FMER_PANEL_SEQ:FMER_PANEL_HOME;
     if(action<2u){c->value[FMER_SEQ_MODE]=1;s->page[FMER_PANEL_SEQ]=action?4u:8u;}
-    else {c->value[FMER_SEQ_MODE]=0;c->value[FMER_GLIDE_MODE]=action==2u?1u:0u;c->value[FMER_VOICE_BUDGET]=action==2u?1u:4u;}
+    else {c->value[FMER_SEQ_MODE]=0;c->value[FMER_GLIDE_MODE]=action==2u?1u:0u;c->value[FMER_VOICE_BUDGET]=action==2u?1u:6u;}
     fmer_panel_navigate(s);
 }
-/* Stable MIDI IDs from707 stay unchanged while banks present32FM/32VA. */
-static uint32_t fmer_panel_factory_id(uint32_t bank,uint32_t index)
-{ return bank?index<8u?index+8u:index+32u:index<8u?index:index+8u; }
-static uint32_t fmer_panel_factory_index(uint32_t bank,uint32_t id)
-{ return bank?id<16u?id-8u:id-32u:id<8u?id:id-8u; }
+/* Both64-slot banks may freely mix FM and VA instruments. */
 static void fmer_panel_audition(fmer_panel_t *s)
 { s->audition_slot=s->preset_candidate+(s->preset_bank==2u?0u:64u);s->audition_request=1; }
 static void fmer_panel_browse(fmer_panel_t *s,int32_t delta)
 {
-    uint32_t index=s->preset_bank==2u?s->preset_candidate:fmer_panel_factory_index(s->preset_bank,s->preset_candidate);
-    /* A single128-slot ring makes every bank discoverable from PRESETS. The
-     * legacy factory program IDs remain stable on disk and over MIDI. */
-    index=fmer_panel_wrap(index+s->preset_bank*32u,delta,128u);
-    s->preset_bank=index<32u?0u:index<64u?1u:2u;
-    index-=s->preset_bank*32u;
-    s->preset_candidate=s->preset_bank==2u?index:fmer_panel_factory_id(s->preset_bank,index);
+    uint32_t index=fmer_panel_wrap(s->preset_candidate+(s->preset_bank==2u?64u:0u),delta,128u);
+    s->preset_bank=index<64u?0u:2u;s->preset_candidate=index%64u;
     s->family=FMER_PANEL_PRESETS;fmer_panel_navigate(s);fmer_panel_audition(s);
 }
 static int fmer_panel_encoder(fmer_panel_t *s,uint32_t encoder,int32_t delta,fmer_controls_t *c,uint32_t now)
@@ -371,8 +362,8 @@ static int fmer_panel_encoder(fmer_panel_t *s,uint32_t encoder,int32_t delta,fme
         if(encoder!=0u)fmer_panel_navigate(s);return 0;
     }
     if(s->family==FMER_PANEL_PRESETS && encoder>=2u && encoder<=5u) {
-        if(encoder==2u){s->preset_bank=fmer_panel_wrap(s->preset_bank,delta,3u);
-            s->preset_candidate=s->preset_bank==2u?s->save_slot:fmer_panel_factory_id(s->preset_bank,0u);fmer_panel_navigate(s);fmer_panel_audition(s);}
+        if(encoder==2u){s->preset_bank=fmer_panel_wrap(s->preset_bank==2u?1u:0u,delta,2u)?2u:0u;
+            s->preset_candidate=s->preset_bank==2u?s->save_slot:0u;fmer_panel_navigate(s);fmer_panel_audition(s);}
         return 0;
     }
     if(s->family==FMER_PANEL_SAVE && encoder>=2u && encoder<=5u) {
@@ -511,7 +502,7 @@ static const char *fmer_panel_page_name(const fmer_panel_t *s,const fmer_control
     case FMER_PANEL_SEQ:{static const char *const pages[]={"STEP EDIT","PATTERNS","CHAIN MEMBERS","PLAY MODE","PERFORM","RECORD","NOTE EDIT","COPY / EDIT","SONG"};return pages[p];}
     case FMER_PANEL_GLO:{static const char *const pages[]={"VOICE/TEMPO","MONO GLIDE","MIDI INPUT","MIDI OUTPUT","MIDI CLOCK","USB LINK","ICON LEGEND","SHORTCUTS","INFO","RESET/CLEAR"};return pages[p];}
     case FMER_PANEL_SAVE:return s->save_scope?"PROJECT":"INSTRUMENT";
-    case FMER_PANEL_PRESETS:return s->preset_bank==2u?"USER SOUNDS":s->preset_bank?"VA DEFAULTS":"FM DEFAULTS";
+    case FMER_PANEL_PRESETS:return s->preset_bank==2u?"BANK B SOUNDS":"BANK A SOUNDS";
     default:return c->value[FMER_ENGINE]?"VA SOUND":"FM SOUND";
     }
 }

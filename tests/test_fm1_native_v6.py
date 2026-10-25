@@ -50,5 +50,5 @@ class NativeV6Tests(unittest.TestCase):
                 src=Path(tmp)/'in';out=Path(tmp)/'out';src.write_bytes(raw)
                 result=subprocess.run([str(probe),'--roundtrip',str(src),str(out)],capture_output=True,timeout=10)
                 self.assertEqual(result.returncode,0,result.stderr)
-                import fm1_native_state_v11 as current
+                import fm1_native_state_v12 as current
                 self.assertEqual(current.decode(out.read_bytes()),current.decode_compatible(raw))

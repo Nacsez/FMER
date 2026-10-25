@@ -1,3 +1,37 @@
+## Companion startup recovery - 24 October 2026
+
+Show a compact loading panel until workspace initialization finishes. The same
+panel gives plain-language recovery and direct Reload, diagnostic export and
+Help links when scripts or initialization fail. These links must work without
+the main UI script. Keep details in an optional downloaded JSON record, never
+as the primary error. Preserve any running hardware operation during reload.
+Load the sound editor only when opened; normal navigation stays responsive.
+
+## Development735 final refinements - 24 October 2026
+
+Bank A and Bank B are equally editable 64-instrument destinations; stable wire
+addresses remain unchanged. Factory/user are storage implementation terms, not
+navigation categories. Included profiles group sounds by musical category across
+FM and VA; personal profile order stays under user control. My instruments keeps
+16 local named setups with independent loadout references and Library collection
+labels, without pretending these names identify physical USB devices.
+
+Octave feedback must be distinct from ready glow at the first shift: half,
+three-quarter and full scan duty for one, two and three octaves, in either
+direction. Held/recent button feedback overrides these masks at full brightness.
+
+## Companion loadout profiles - 23 October 2026
+
+Instrument loadouts is a dedicated workspace: immutable included A?D/Classic,
+independent editable copies, ordered64-slot grid with full pink selection outline,
+searchable replacement picker, direct move controls, local audition and Undo.
+Name/notes save explicitly; slot edits commit one gesture at a time. DEFAULT
+and USER each have their own profile selector and Keep unchanged choice. The
+same selectors appear during installation and standalone bank deployment.
+Confirmation names both bank choices and warns that project references remain
+fixed. Phase progress, downloadable backups and explicit partial-write outcomes
+remain visible. Source-native numeric slots00?63 stay visible. Reuse CADER colors.
+
 ## Editor save conflicts - 21 October 2026
 
 Refresh saved bank metadata without replacing the working draft. Unrelated slot changes do not prevent saving. A changed destination shows its current name and requires explicit replacement confirmation; Cancel preserves both. A save-time race keeps the draft and gives a retry instruction, never silently retries a write. Opening PC sound banks refreshes its saved view.

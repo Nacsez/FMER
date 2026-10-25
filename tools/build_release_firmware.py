@@ -1,6 +1,6 @@
 """Build the compatibility-checked installer from reviewed public inputs.
-A public160-byte stock-compatible descriptor permits stage1 parsing. Private
-unit dumps and protected-head bytes are neither required nor distributed.
+Public descriptors permit stage1 parsing; the self-describing variant adds only
+generated decoding metadata. No private unit head or boot executable is needed.
 """
 from pathlib import Path
 import argparse, hashlib, json, subprocess
@@ -10,7 +10,7 @@ import build_fm1_candidate as candidate_builder
 import build_public_image
 R=Path(__file__).resolve().parents[1]
 
-def build(candidate, out, loader_test, *, stage_only=False, toolchain_root=None):
+def build(candidate, out, loader_test, *, stage_only=False, toolchain_root=None, package_format=release.LEGACY_FORMAT):
     out.mkdir(parents=True, exist_ok=False)
     report=json.loads((candidate/'report.json').read_text())
     elf=candidate/'fm1.elf'
@@ -26,18 +26,21 @@ def build(candidate, out, loader_test, *, stage_only=False, toolchain_root=None)
     app,details=p.extract_elf(elf.read_bytes(),'app')
     lock=json.loads((R/'evidence/target-toolchain.json').read_text())
     ota=p.build_loader(out/'loader',toolchain_root or R/lock['toolchain']['local_root'],lock,p.CITRINE_TEMPLATE,stock_v15=True,portable=True)
-    flash=release.distribution_head()+build_public_image.application_region(app)
+    flash=release.distribution_head(package_format)+build_public_image.application_region(app)
     raw=p.ufw(flash,ota,release.TARGET)
-    filename='fmer734-compatible-r2.fwsc'
+    modern=package_format==release.METADATA_FORMAT
+    filename='fmer735-compatible-r9.fwsc' if modern else 'fmer735-legacy-r1.fwsc'
+    if not modern:raise ValueError('735 requires the self-describing package format')
     (out/filename).write_bytes(raw);(out/'app.bin').write_bytes(app)
-    # The deployed file intentionally has no boot/identity head. Supply the
+    # The deployed file intentionally has no boot executable/identity. Supply the
     # simulated device's existing head separately to the independent C test.
     (out/'device-head-fixture.bin').write_bytes(build_public_image.device_head_fixture())
     result=subprocess.run([str(loader_test.resolve()),str((out/filename).resolve()),str((out/'loader/loader.bin').resolve()),str((out/'device-head-fixture.bin').resolve())],capture_output=True,text=True)
     (out/'loader-tests.json').write_text(json.dumps(dict(command=result.args,returncode=result.returncode,stdout=result.stdout,stderr=result.stderr),indent=2))
     if result.returncode or 'passed' not in result.stdout.lower():raise ValueError('Independent loader qualification failed; inspect loader-tests.json')
-    sources=['tools/'+x+'.py' for x in ('release_firmware','fm1_flash_transport','fm1_package','hardware_bridge','unit_endpoints','companion_jobs','companion_stock','compatible_firmware','companion_transfer')]+['host/firmware_compatibility.json']
-    entry=dict(id=release.PROFILE,title='FMER 734',filename=filename,
+    sources=['tools/'+x+'.py' for x in ('release_firmware','fm1_flash_transport','fm1_package','hardware_bridge','unit_endpoints','companion_jobs','companion_stock','compatible_firmware','companion_transfer','companion_loadouts','companion_install_loadout')]+['host/firmware_compatibility.json']
+    entry=dict(id=release.NEXT_PROFILE if modern else release.PROFILE,
+        title='FMER 735 · six voices / Spectrum',filename=filename,package_format=package_format,
         product=release.TARGET,origin_identity='compatible-FM-1',loader_identity=release.LOADER,
         origin_app_sha256=release.ORIGIN_SHA,record_address=0xE7F00,
         qualification='offline-qualified-first-install-preview',package_sha256=release.digest(raw),
@@ -48,8 +51,14 @@ def build(candidate, out, loader_test, *, stage_only=False, toolchain_root=None)
     # package. The staged catalog uses exactly the same admission checks.
     destination=out if stage_only else R/'firmware/releases'
     destination.mkdir(exist_ok=True)
+    if (destination/filename).exists() and (destination/filename).read_bytes()!=raw:
+        raise ValueError('Refusing to replace an existing firmware revision with different bytes')
     (destination/filename).write_bytes(raw)
-    (destination/'catalog.json').write_text(json.dumps(dict(schema=1,releases=[entry]),indent=2)+'\n',encoding='utf8')
+    records=[] if stage_only else [r for r in release.catalog() if r['id']!=entry['id']]
+    for record in records:
+        record['source_files']=[dict(path=s['path'],sha256=release.digest((R/s['path']).read_bytes())) for s in record['source_files']]
+    records.append(entry)
+    (destination/'catalog.json').write_text(json.dumps(dict(schema=1,releases=records),indent=2)+'\n',encoding='utf8')
     original_catalog=release.CATALOG
     try:
         if stage_only:release.CATALOG=str((out/'catalog.json').resolve())
@@ -65,4 +74,5 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--candidate',type=Path,required=True);parser.add_argument('--out',type=Path,required=True);parser.add_argument('--loader-test',type=Path,required=True)
     parser.add_argument('--stage-only',action='store_true',help='Write an isolated candidate/catalog; leave the bundled release unchanged')
     parser.add_argument('--toolchain-root',type=Path,help='Separately obtained pinned compiler/headers; no vendor runtime archives required')
-    args=parser.parse_args();build(args.candidate,args.out,args.loader_test,stage_only=args.stage_only,toolchain_root=args.toolchain_root)
+    parser.add_argument('--package-format',choices=(release.LEGACY_FORMAT,release.METADATA_FORMAT),default=release.METADATA_FORMAT,help='Legacy reproduces the published r2; self-describing builds the next package revision')
+    args=parser.parse_args();build(args.candidate,args.out,args.loader_test,stage_only=args.stage_only,toolchain_root=args.toolchain_root,package_format=args.package_format)

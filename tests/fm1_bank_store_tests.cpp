@@ -17,6 +17,9 @@ static std::array<uint8_t,FMER_BANK_PAIR_V3> legacy_pair(const Wire& a,const Wir
   std::array<uint8_t,2176> old{};std::copy_n(words[side]->begin(),2127,old.begin());std::memcpy(old.data(),"FMERNAT4",8);
   fmer_native_wr16(old.data()+32+FMER_VA_WAVE*2,std::min<uint16_t>(3,fmer_native_rd16(old.data()+32+FMER_VA_WAVE*2)));
   fmer_native_wr16(old.data()+32+FMER_ARP_ORDER*2,std::min<uint16_t>(9,fmer_native_rd16(old.data()+32+FMER_ARP_ORDER*2)));
+  fmer_native_wr16(old.data()+32+FMER_VOICE_BUDGET*2,4);
+  fmer_native_wr16(old.data()+32+FMER_DELAY_SYNC*2,0);
+  fmer_native_wr16(old.data()+32+FMER_REVERB_MODEL*2,std::min<uint16_t>(1,fmer_native_rd16(old.data()+32+FMER_REVERB_MODEL*2)));
   fmer_native_wr16(old.data()+8,4);fmer_native_wr16(old.data()+12,2176);old[26]=8;std::memcpy(old.data()+2127,"TRK1",4);
   for(unsigned t=0;t<4;t++){auto src=words[side]->data()+FMER_NATIVE_PADDING+4+6*t;auto dst=old.data()+2131+5*t;dst[0]=src[0];dst[1]=src[1];dst[2]=src[3];dst[3]=src[4];dst[4]=src[5];}
   fmer_native_wr32(old.data()+28,fmer_native_crc_n(old.data(),old.size()));check(!fmer_native_validate(old.data(),old.size()),"genuine719 legacy fixture");
@@ -95,7 +98,7 @@ int main(int argc,char** argv){
  // switches to defaults+empty projects; all65old records can then be reclaimed.
  Nor old;for(unsigned cell=67;cell<73;cell++)old.bytes[fmer_store_address(cell)]=0;bank_mount(b,s,old);for(unsigned g=0;g<64;g++){auto p=legacy_pair(originals[(2*g)%64],originals[(2*g+1)%64],g);check(!fmer_store_save(&s,g,p.data(),p.size()),"seed full719 catalog");}
  uint8_t meta[32]={0};std::memcpy(meta,"FMERBNK2",8);meta[17]=1;std::memcpy(meta+18,midi.value,8);check(!fmer_store_save(&s,64,meta,32),"legacy MIDI metadata");
- auto legacy_expected=originals[63];fmer_native_wr16(legacy_expected.data()+32+FMER_RECORD_MODE*2,2);fmer_native_wr32(legacy_expected.data()+28,fmer_native_crc(legacy_expected.data()));
+ auto legacy_expected=originals[63];fmer_native_wr16(legacy_expected.data()+32+FMER_VOICE_BUDGET*2,4);fmer_native_wr16(legacy_expected.data()+32+FMER_DELAY_SYNC*2,0);fmer_native_wr16(legacy_expected.data()+32+FMER_REVERB_MODEL*2,std::min<uint16_t>(1,fmer_native_rd16(legacy_expected.data()+32+FMER_REVERB_MODEL*2)));legacy_expected[FMER_NATIVE_PADDING+38]=legacy_expected[FMER_NATIVE_PADDING+39]=0;fmer_native_wr16(legacy_expected.data()+32+FMER_RECORD_MODE*2,2);fmer_native_wr32(legacy_expected.data()+28,fmer_native_crc(legacy_expected.data()));
  bank_mount(b,s,old);const auto before=old.bytes;check(b.layout==2&&load(b,s,127)==legacy_expected,"legacy entire snapshot decoded to16patterns");check(fmer_bank_save(&b,&s,0,varied.data())==FMER_STORE_NOT_READY&&old.bytes==before,"legacy remains read-only until explicit initialization");
  Nor probe=old;bank_mount(b,s,probe);probe.mutations=0;check(!fmer_bank_initialize(&b,&s),"layout initialization probe");
  for(unsigned cut=0;cut<=probe.mutations;cut++){

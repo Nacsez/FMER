@@ -1,6 +1,35 @@
 --- a/src/dx7note.cc
 +++ b/src/dx7note.cc
-@@ -74,7 +74,8 @@
+@@ -44,3 +44,18 @@
++// FMER: compute the original rounded expression once before audio starts.
++// Using the same target math library preserves its exact Q24 tuning values;
++// ordinary note attacks need no software double logarithm for each operator.
++static int32_t fine_tuning[100];
++static bool fine_tuning_ready;
++static int32_t fine_tuning_value(int fine) {
++  return (int32_t)floor(24204406.323123 * log(1 + 0.01 * fine) + 0.5);
++}
++void Dx7Note::init_tuning() {
++  if (fine_tuning_ready) return;
++  for (int fine = 0; fine < 100; ++fine)
++    fine_tuning[fine] = fine_tuning_value(fine);
++  fine_tuning_ready = true;
++}
++
+ int32_t osc_freq(int midinote, int mode, int coarse, int fine, int detune) {
+   // TODO: pitch randomization
+   int32_t logfreq;
+@@ -49,7 +64,8 @@
+     logfreq += coarsemul[coarse & 31];
+     if (fine) {
+       // (1 << 24) / log(2)
+-      logfreq += (int32_t)floor(24204406.323123 * log(1 + 0.01 * fine) + 0.5);
++      logfreq += fine_tuning_ready && (unsigned)fine < 100u
++          ? fine_tuning[fine] : fine_tuning_value(fine);
+     }
+     // This was measured at 7.213Hz per count at 9600Hz, but the exact
+     // value is somewhat dependent on midinote. Close enough for now.
+@@ -74,7 +90,8 @@
  int ScaleVelocity(int velocity, int sensitivity) {
    int clamped_vel = max(0, min(127, velocity));
    int vel_value = velocity_data[clamped_vel >> 1] - 239;
@@ -10,7 +39,7 @@
    return scaled_vel;
  }
  
-@@ -129,6 +130,8 @@
+@@ -129,6 +146,8 @@
  };
  
  void Dx7Note::init(const char patch[156], int midinote, int velocity) {
@@ -19,7 +48,7 @@
    int rates[4];
    int levels[4];
    for (int op = 0; op < 6; op++) {
-@@ -151,7 +154,8 @@
+@@ -151,7 +170,8 @@
  #ifdef VERBOSE
      cout << op << ": " << level_scaling << " " << outlevel << endl;
  #endif
@@ -29,7 +58,7 @@
      outlevel += ScaleVelocity(velocity, patch[off + 15]);
      outlevel = max(0, outlevel);
      int rate_scaling = ScaleRate(midinote, patch[off + 13]);
-@@ -166,6 +170,14 @@
+@@ -166,6 +186,14 @@
      // cout << op << " freq: " << freq << endl;
      params_[op].phase = 0;
      params_[op].gain[1] = 0;
@@ -44,7 +73,7 @@
    }
    for (int i = 0; i < 4; i++) {
      rates[i] = patch[126 + i];
-@@ -182,18 +194,28 @@
+@@ -182,18 +210,28 @@
  void Dx7Note::compute(int32_t *buf, int32_t lfo_val, int32_t lfo_delay,
    const Controllers *ctrls) {
    int32_t pitchmod = pitchenv_.getsample();
@@ -75,7 +104,7 @@
      int32_t gain = Exp2::lookup(level - (14 * (1 << 24)));
      //int32_t gain = pow(2, 10 + level * (1.0 / (1 << 24)));
      params_[op].freq = Freqlut::lookup(basepitch_[op] + pitchmod);
-@@ -209,3 +231,8 @@
+@@ -209,3 +247,8 @@
    }
  }
  
@@ -86,17 +115,20 @@
 +
 --- a/src/dx7note.h
 +++ b/src/dx7note.h
-@@ -29,7 +29,8 @@
+@@ -29,7 +29,11 @@
  
  class Dx7Note {
   public:
 -  void init(const char patch[128], int midinote, int velocity);
++  // FMER: startup-only shared table; call before notes/threads/interrupts.
++  // Without this call, oscillator tuning retains the original calculation.
++  static void init_tuning();
 +  // FMER: correct the historical declaration; implementation reads VCED.
 +  void init(const char patch[156], int midinote, int velocity);
  
    // Note: this _adds_ to the buffer. Interesting question whether it's
    // worth it...
-@@ -37,6 +38,15 @@
+@@ -37,6 +41,15 @@
      const Controllers *ctrls);
  
    void keyup();
@@ -112,7 +144,7 @@
  
    // TODO: parameter changes
  
-@@ -57,6 +67,9 @@
+@@ -57,6 +70,9 @@
    int algorithm_;
    int pitchmoddepth_;
    int pitchmodsens_;

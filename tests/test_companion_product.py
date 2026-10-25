@@ -9,6 +9,8 @@ import tempfile
 import threading
 import time
 import unittest
+from urllib.parse import urlsplit
+from html import unescape
 from unittest.mock import Mock,patch
 from tests.test_companion import fixture
 import companion_archive as archive
@@ -168,6 +170,22 @@ class JobTests(unittest.TestCase):
         identifier='a'*32;self.service._save(dict(id=identifier,state='running'))
         result=self.service.status(identifier);self.assertEqual(result['state'],'interrupted');self.device.dispatch.assert_not_called()
         with self.assertRaises(ValueError):self.service.status('../elsewhere')
+
+    def test_failed_connection_exports_bounded_discovery_history(self):
+        def operation(req,progress):
+            for i in range(12):
+                progress('Checking connection',discovery=dict(event='discovery_ports',visible_ports={'inputs':[{'id':i,'name':'Other synth'}],'outputs':[]}))
+            progress('Still checking',phase='connect')
+            raise RuntimeError('Timed out waiting for None; [discovery:unrecognized_ports]')
+        self.device.dispatch.side_effect=operation
+        job=self.service.start(dict(action='device',request=dict(action='probe')))
+        result=self.wait(job['id'])
+        self.assertEqual(result['state'],'failed')
+        history=result['diagnostics']['discovery']
+        self.assertEqual(len(history),8)
+        self.assertEqual(history[0]['visible_ports']['inputs'][0]['id'],4)
+        self.assertIn('connection not found',result['outcome']['title'])
+        self.assertEqual(jobs.Jobs(self.device,self.root).status(job['id'])['diagnostics'],result['diagnostics'])
     def test_closing_server_refuses_new_device_work(self):
         self.service.closing=True
         with self.assertRaises(library.LibraryConflict):self.service.start(dict(action='device',request=dict(action='probe')))
@@ -202,6 +220,11 @@ class HelpTests(unittest.TestCase):
             if not name.endswith('.htm'):continue
             for href in re.findall(r'href=[\"\']([^\"\']+)',content):
                 if href=='/':continue
+                url=urlsplit(unescape(href))
+                if url.scheme:
+                    self.assertEqual(url.scheme,'https',(name,href))
+                    self.assertTrue(url.netloc,(name,href))
+                    continue
                 target,_,anchor=href.partition('#')
                 if target.endswith(('.png','.svg')):
                     self.assertTrue((help_builder.R/'host/help'/target).is_file(),(name,href));continue

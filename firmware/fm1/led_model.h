@@ -21,7 +21,8 @@
 enum {
     FMER_LED_COLUMNS=11, FMER_LED_KEYS=41,
     FMER_LED_PLAY_GREEN=(8u<<3)|1u, FMER_LED_NO_POSITION=0xffu,
-    FMER_LED_OFF=0, FMER_LED_DIM=1, FMER_LED_LIT=2, FMER_LED_HALF=3
+    FMER_LED_OFF=0, FMER_LED_DIM=1, FMER_LED_LIT=2, FMER_LED_HALF=3,
+    FMER_LED_THREE_QUARTER=4
 };
 typedef struct {
     uint32_t family, physical_buttons, physical_keys, fine_adjust;
@@ -37,7 +38,7 @@ typedef struct {
     uint32_t active_pitch[4], gated_pitch[4];
 } fmer_led_state_t;
 typedef struct {
-    uint8_t lit[FMER_LED_COLUMNS], dim[FMER_LED_COLUMNS], half[FMER_LED_COLUMNS];
+    uint8_t lit[FMER_LED_COLUMNS], dim[FMER_LED_COLUMNS], half[FMER_LED_COLUMNS], three_quarter[FMER_LED_COLUMNS];
 } fmer_led_frame_t;
 
 /* Packed column / row-bit address. IDs 0..13 are physical buttons and
@@ -56,7 +57,8 @@ static void fmer_led_put_position(fmer_led_frame_t *out,uint32_t pos,uint32_t le
 {
     uint32_t col=pos>>3,row=pos&7u;
     if(col>=FMER_LED_COLUMNS || row<1u || row>4u) return;
-    if(level==FMER_LED_LIT){out->lit[col]|=(uint8_t)(1u<<row);out->half[col]&=(uint8_t)~(1u<<row);}
+    if(level==FMER_LED_LIT){out->lit[col]|=(uint8_t)(1u<<row);out->half[col]&=(uint8_t)~(1u<<row);out->three_quarter[col]&=(uint8_t)~(1u<<row);}
+    else if(level==FMER_LED_THREE_QUARTER && (!(out->lit[col]&(1u<<row)) || (out->half[col]&(1u<<row)))){out->lit[col]|=(uint8_t)(1u<<row);out->half[col]&=(uint8_t)~(1u<<row);out->three_quarter[col]|=(uint8_t)(1u<<row);}
     else if(level==FMER_LED_HALF && !(out->lit[col]&(1u<<row))){out->lit[col]|=(uint8_t)(1u<<row);out->half[col]|=(uint8_t)(1u<<row);}
     else if(level==FMER_LED_DIM) out->dim[col]|=(uint8_t)(1u<<row);
 }
@@ -66,7 +68,7 @@ static uint32_t fmer_led_key_level(const fmer_led_frame_t *frame,uint32_t id)
 {
     uint32_t pos=fmer_led_key_position(id),col=pos>>3,mask=1u<<(pos&7u);
     if(col>=FMER_LED_COLUMNS) return FMER_LED_OFF;
-    return (frame->half[col]&mask)?FMER_LED_HALF:(frame->lit[col]&mask)?FMER_LED_LIT:(frame->dim[col]&mask)?FMER_LED_DIM:FMER_LED_OFF;
+    return (frame->half[col]&mask)?FMER_LED_HALF:(frame->three_quarter[col]&mask)?FMER_LED_THREE_QUARTER:(frame->lit[col]&mask)?FMER_LED_LIT:(frame->dim[col]&mask)?FMER_LED_DIM:FMER_LED_OFF;
 }
 
 static void fmer_led_render(const fmer_led_state_t *s,uint32_t now_ms,fmer_led_frame_t *out)
@@ -83,8 +85,9 @@ static void fmer_led_render(const fmer_led_state_t *s,uint32_t now_ms,fmer_led_f
     if(s->family<FMER_PANEL_FAMILIES)
         fmer_led_put_key(out,family_button[s->family],
             s->family==FMER_PANEL_ARP?FMER_LED_DIM:FMER_LED_LIT);
-    if(s->octave) {uint32_t oct=(uint32_t)(s->octave<0?-s->octave:s->octave);
-        fmer_led_put_key(out,s->octave<0?0:1,oct==1?FMER_LED_DIM:oct==2?FMER_LED_HALF:FMER_LED_LIT);}
+    if(s->octave>=-3 && s->octave<=3 && s->octave) {uint32_t oct=(uint32_t)(s->octave<0?-s->octave:s->octave);
+        /* First shift must stand out from the unshifted ready glow. */
+        fmer_led_put_key(out,s->octave<0?0:1,oct==1?FMER_LED_HALF:oct==2?FMER_LED_THREE_QUARTER:FMER_LED_LIT);}
     if(s->fine_adjust) fmer_led_put_key(out,3,FMER_LED_LIT);
 
     if(!failed) {

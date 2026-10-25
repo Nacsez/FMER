@@ -20,7 +20,7 @@ def plan(rows):
         bank.BankLibrary.validate_entry(row.get('entry'))
         # Upgrade and validate every byte before any hardware call.
         bank.native.encode(bank.decode_record(row['entry']['native']))
-        label = ('USER' if slot < 64 else 'DEFAULT')+' '+str(slot % 64).zfill(2) if kind == 'instrument' else 'Project '+str(slot).zfill(2)
+        label = ('Bank B' if slot < 64 else 'Bank A')+' '+str(slot % 64).zfill(2) if kind == 'instrument' else 'Project '+str(slot).zfill(2)
         result.append(dict(kind=kind, slot=slot, name=row['entry']['name'], destination=label))
     sha = hashlib.sha256(library.canonical(rows)).hexdigest()
     return dict(rows=result, count=len(result), sha256=sha, confirmation='Deploy '+sha,

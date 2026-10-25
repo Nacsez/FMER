@@ -1,5 +1,16 @@
 # Selected Google MSFA engine
 
+The 2026-10-24 CPU pass adds `Dx7Note::init_tuning`, called by FMER's existing
+once-only table initialization before audio starts. It computes all100 fine
+tuning offsets with the original double-log/floor expression and the same
+runtime library. Notes reuse those exact Q24 integers. The uninitialized and
+out-of-range fallback remains the original calculation. This uses404 bytes of
+static state, adds no callback allocation, and preserves ratio/fixed frequency,
+coarse tuning and detune behavior. The regression compares12,288,000 complete
+frequency combinations before/after initialization, plus repeated initialization
+and fallback. The local patch/lock identify both changed dependency files;
+upstream hashes, commit, copyright and Apache-2.0 notices remain unchanged.
+
 Original project: <https://github.com/google/music-synthesizer-for-android>
 
 Pinned commit: `f67d41d313b7dc85f6fb99e79e515cc9d208cfff` (2017-09-13).

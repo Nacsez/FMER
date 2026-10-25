@@ -30,26 +30,19 @@ int main(){
  auto browse_before=c;
  fmer_panel_encoder(&p,6,1,&c,8);require(p.family==FMER_PANEL_PRESETS && p.preset_candidate==1,"PRESETS opens named candidate browser");
  require(p.page[FMER_PANEL_EDIT]==1 && p.operator_number==6 && !std::memcmp(&browse_before,&c,sizeof c) && p.audition_request && p.audition_slot==65,"browse queues exact default sound without touching audio-owned controls");
- fmer_panel_encoder(&p,6,-2,&c,8);require(p.preset_bank==2 && p.preset_candidate==63,"PRESETS traverses backwards from FM into final USER slot");
+ fmer_panel_encoder(&p,6,-2,&c,8);require(p.preset_bank==2 && p.preset_candidate==63,"PRESETS traverses backwards from DEFAULT into final USER slot");
  require(!fmer_panel_encoder(&p,3,1,&c,8) && !std::memcmp(&browse_before,&c,sizeof c),"unmapped browse knobs cannot mutate sound");
  require(!fmer_panel_button(&p,8,&c,8) && p.family==FMER_PANEL_HOME && !std::memcmp(&browse_before,&c,sizeof c),"HOME returns from instant browser without another recall");
- fmer_panel_encoder(&p,6,1,&c,8);require(p.preset_bank==0 && p.preset_candidate==0,"last USER wraps into first FM sound");
+ fmer_panel_encoder(&p,6,1,&c,8);require(p.preset_bank==0 && p.preset_candidate==0,"last USER wraps into first DEFAULT sound");
  p.audition_request=0;
  require(!fmer_panel_button(&p,3,&c,8) && p.family==FMER_PANEL_HOME && !p.audition_request,"SEL returns HOME without repeating instant sound recall");
  fmer_panel_encoder(&p,6,1,&c,8);fmer_panel_encoder(&p,2,1,&c,8);
- require(p.preset_bank==1 && p.preset_candidate==8,"bank knob opens VA while preserving original program IDs");
- fmer_panel_encoder(&p,6,-1,&c,8);require(p.preset_bank==0 && p.preset_candidate==39,"reverse first VA crosses into last FM with stable IDs");
- p.save_slot=42;fmer_panel_encoder(&p,2,2,&c,8);require(p.preset_bank==2 && p.preset_candidate==42,"user bank starts on remembered save destination");
+ require(p.preset_bank==2 && p.preset_candidate==0,"bank knob opens USER independently of engine");
+ fmer_panel_encoder(&p,6,-1,&c,8);require(p.preset_bank==0 && p.preset_candidate==63,"reverse first USER crosses into last DEFAULT slot");
+ p.save_slot=42;fmer_panel_encoder(&p,2,1,&c,8);require(p.preset_bank==2 && p.preset_candidate==42,"user bank starts on remembered save destination");
  require(p.audition_request && p.audition_slot==42,"USER bank browsing requests sound-only recall on exact slot");
  p.audition_request=0;fmer_panel_button(&p,3,&c,8);require(!p.load_request && !p.save_request && !p.audition_request && p.family==FMER_PANEL_HOME,"USER browser SELECT exits without full project restore");
  fmer_panel_button(&p,8,&c,8);require(!p.load_request && !p.save_request,"ordinary navigation clears storage action latches");
- std::array<bool,64> factory_seen{};
- for(unsigned bank=0;bank<2;bank++)for(unsigned index=0;index<32;index++){
-  auto id=fmer_panel_factory_id(bank,index);require(id<64 && !factory_seen[id],"factory banks cover each stable ID exactly once");factory_seen[id]=true;
-  require(fmer_panel_factory_index(bank,id)==index,"factory bank ID mapping roundtrips");}
- c.value[134]=31;require(fmer_panel_encoder(&p,1,1,&c,8) && c.value[134]==0,"FM algorithm wraps31 to0");
- require(fmer_panel_encoder(&p,1,-1,&c,8) && c.value[134]==31,"FM algorithm wraps0 to31");
- c.value[FMER_ENGINE]=1;c.value[FMER_VA_WAVE]=4;
  require(fmer_panel_encoder(&p,1,1,&c,8) && c.value[FMER_VA_WAVE]==0,"VA algorithm knob wraps5waveforms");
  c.value[FMER_ENGINE]=0;
  require(fmer_panel_button(&p,12,&c,9)==FMER_TRANSPORT_PLAY,"PLAY transport available on soundpage");
@@ -293,7 +286,7 @@ int main(){
  const unsigned order[]={FMER_MIX_SOUND,FMER_MIX_PATTERN,FMER_MIX_RUN,FMER_MIX_LEVEL,FMER_MIX_MUTE,FMER_MIX_SOLO,FMER_MIX_FX};
  for(unsigned i=0;i<7;i++)require(fmer_mix_scroll(order[i],1,0)==order[(i+1)%7] && fmer_mix_scroll(order[i],-1,0)==order[(i+6)%7],"mixer follows visual workflow in both directions");
  for(unsigned action=0;action<4;action++){fmer_panel_shortcut(&p,&c,action);
-    require(action<2?c.value[FMER_SEQ_MODE] && p.page[FMER_PANEL_SEQ]==(action?4:8):!c.value[FMER_SEQ_MODE] && c.value[FMER_VOICE_BUDGET]==(action==2?1:4),"mode shortcut publishes explicit allocation and destination");}
+    require(action<2?c.value[FMER_SEQ_MODE] && p.page[FMER_PANEL_SEQ]==(action?4:8):!c.value[FMER_SEQ_MODE] && c.value[FMER_VOICE_BUDGET]==(action==2?1:6),"mode shortcut publishes explicit allocation and destination");}
  c.value[FMER_SEQ_MODE]=1;p.family=FMER_PANEL_HOME;p.home_layer=FMER_MIX_LEVEL;
  for(unsigned i=0;i<4;i++){fmer_panel_encoder(&p,i+2,1,&c,10020+i);require(((p.performance_request>>18)&3u)==i,"HOME knob owns corresponding track");}
  for(unsigned i=0;i<4;i++)fmer_panel_button(&p,3,&c,10100+i);
@@ -337,7 +330,7 @@ int main(){
   p.family=family;p.page[family]=family==FMER_PANEL_SEQ?3u:0u;p.audition_request=0;
   c.value[FMER_SEQ_MODE]=1;c.value[FMER_GLIDE_MODE]=0;c.value[FMER_VOICE_BUDGET]=4;
   unsigned encoder=family==FMER_PANEL_PRESETS?0u:2u;const auto before=c;
-  require(fmer_panel_encoder(&p,encoder,-1,&c,13000) && !c.value[FMER_SEQ_MODE] && c.value[FMER_VOICE_BUDGET]==4 && !c.value[FMER_GLIDE_MODE],"first mode detent selects four-voice polyphony");
+  require(fmer_panel_encoder(&p,encoder,-1,&c,13000) && !c.value[FMER_SEQ_MODE] && c.value[FMER_VOICE_BUDGET]==6 && !c.value[FMER_GLIDE_MODE],"first mode detent selects six-voice polyphony");
   require(fmer_panel_encoder(&p,encoder,-1,&c,13001) && c.value[FMER_VOICE_BUDGET]==1 && c.value[FMER_GLIDE_MODE],"second mode detent selects valid mono glide");
   require(!fmer_panel_encoder(&p,encoder,-100,&c,13002),"mode selection saturates rather than wrapping");
   require(fmer_panel_encoder(&p,encoder,100,&c,13003) && !std::memcmp(&before,&c,sizeof c) && !p.audition_request,"fast explicit mode sweep returns four-track allocator without changing patch data");

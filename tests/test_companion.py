@@ -5,7 +5,6 @@ All writes target TemporaryDirectory, never the owner's companion workspace.
 import base64
 from copy import deepcopy
 import hashlib
-from http.server import HTTPServer
 import json
 import os
 from pathlib import Path
@@ -21,6 +20,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 import companion_bank as bank
 import companion
+from companion_http import CompanionHTTPServer as HTTPServer
 import library
 import sandbox
 
@@ -154,7 +154,7 @@ class ActualCompanionTests(unittest.TestCase):
             self.assertEqual(r.headers['Cache-Control'],'no-store');return json.load(r)
     def test_all64_valid_seeded_sounds_have_correct_engine_and_full_native_state(self):
         s=self.request('/api/banks');self.assertEqual(s['slots'],self.profile*2)
-        self.assertEqual(sum(bank.decode_record(e['native'])['controls'][160] for e in self.profile),32)
+        self.assertEqual(sum(bank.decode_record(e['native'])['controls'][160] for e in self.profile),28)
         self.assertEqual(len({e['native'] for e in self.profile}),64)
     def test_http_save_restart_reset_scopes_and_cross_origin_refusal(self):
         e=deepcopy(self.profile[63]);e['favorite']=True
@@ -162,10 +162,34 @@ class ActualCompanionTests(unittest.TestCase):
         with self.assertRaises(HTTPError) as caught:self.request('/api/banks',dict(action='clear_user',revision=1,confirmation='Clear User Bank'),'https://elsewhere.invalid')
         self.assertEqual(caught.exception.code,403)
         self.assertEqual(self.request('/api/banks')['slots'][64],e)
+    def test_browser_startup_diagnostics_export_and_origin_guard(self):
+        event=dict(event='script_load_error',detail='/companion_app.js',browser='Regression browser')
+        self.request('/api/startup',event)
+        report=self.request('/api/startup-report')
+        self.assertEqual(report['events'][-1]['detail'],event['detail'])
+        self.assertEqual(report['format'],'FMER-STARTUP-DIAGNOSTICS')
+        for path,data in (('/api/startup',event),('/api/startup-report',None)):
+            with self.assertRaises(HTTPError) as caught:self.request(path,data,'https://elsewhere.invalid')
+            self.assertEqual(caught.exception.code,403)
+        self.assertEqual(self.request('/api/startup-report'),report)
+        self.assertFalse((self.root/'banks/library.json').exists())
+
+    def test_simultaneous_bank_saves_keep_revision_conflict_and_data(self):
+        from concurrent.futures import ThreadPoolExecutor
+        e=deepcopy(self.profile[0]);e['favorite']=True
+        self.request('/api/banks')
+        def save(slot):
+            try:return self.request('/api/banks',dict(action='save',revision=0,slot=slot,entry=e))['revision']
+            except HTTPError as error:return error.code
+        with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(save,(64,65)))
+        self.assertEqual(sorted(results),[1,409])
+        snapshot=self.request('/api/banks')
+        self.assertEqual(snapshot['revision'],1)
+        self.assertEqual(sum(snapshot['slots'][i]['favorite'] for i in (64,65)),1)
     def test_actual_audition_uses_va_envelope_and_budget_and_preserves_saved_state(self):
-        e=deepcopy(self.profile[63]);s=bank.decode_record(e['native']);s['controls'][167]=777
+        e=deepcopy(next(e for e in self.profile if bank.decode_record(e['native'])['controls'][160]==1));s=bank.decode_record(e['native']);s['controls'][167]=777
         r=self.request('/api/work',dict(action='audition',entry=e,state=s,scenario='chord',velocity=110))
-        self.assertEqual(r['voice_limit'],4);self.assertEqual(r['clipped_samples'],0);self.assertGreater(r['rms'],.001)
+        self.assertEqual(r['voice_limit'],6);self.assertEqual(r['clipped_samples'],0);self.assertGreater(r['rms'],.001)
         records=list((self.root/'audio').glob('*/process.json'));self.assertEqual(len(records),1)
         process=json.loads(records[0].read_text());self.assertIn('release_ms=777',process['argv'])
         self.assertEqual(process['input']['vced'],s['vced']);self.assertFalse((self.root/'banks/library.json').exists())
@@ -175,7 +199,7 @@ class ActualCompanionTests(unittest.TestCase):
         self.assertFalse((self.root/'banks/library.json').exists())
 
     def test_dx7_http_inspection_and_roundtrip_leave_library_unchanged(self):
-        entry=self.profile[0]
+        entry=next(e for e in self.profile if bank.decode_record(e['native'])['controls'][160]==0)
         exported=self.request('/api/dx7',dict(action='export',entries=[entry]))
         self.assertEqual(len(base64.b64decode(exported['raw'])),163)
         decoded=self.request('/api/dx7',dict(action='decode',raw=exported['raw'],collection='Community FM'))
@@ -188,7 +212,7 @@ class ActualCompanionTests(unittest.TestCase):
         self.assertEqual(self.request('/api/catalog',dict(action='undo',revision=imported['revision']))['slots'],[])
         bad=bytearray(base64.b64decode(exported['raw']));bad[-2]^=1
         with self.assertRaises(HTTPError):self.request('/api/dx7',dict(action='decode',raw=base64.b64encode(bad).decode()))
-        with self.assertRaises(HTTPError):self.request('/api/dx7',dict(action='export',entries=[self.profile[8]]))
+        with self.assertRaises(HTTPError):self.request('/api/dx7',dict(action='export',entries=[next(e for e in self.profile if bank.decode_record(e['native'])['controls'][160]==1)]))
         with self.assertRaises(HTTPError) as caught:self.request('/api/dx7',dict(action='export',entries=[entry]),'https://elsewhere.invalid')
         self.assertEqual(caught.exception.code,403)
 

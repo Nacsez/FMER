@@ -2,7 +2,7 @@
 This is not a clean VM or a physical Amethyst installation qualification.
 """
 from pathlib import Path
-import argparse,hashlib,json,os,subprocess,time,urllib.request,zipfile
+import argparse,hashlib,json,os,socket,subprocess,time,urllib.request,zipfile
 R=Path(__file__).resolve().parents[1]
 def test(archive,out):
     out=out.resolve();archive=archive.resolve()
@@ -11,6 +11,9 @@ def test(archive,out):
     app=next(p for p in (out/'Extracted app with spaces').iterdir() if p.is_dir())
     data=out/'Isolated User Data'
     env=dict(os.environ,FMER_DATA_DIR=str(data.resolve()),PATH=os.environ['WINDIR']+';'+os.environ['WINDIR']+'/System32',PYTHONPATH='',PYTHONHOME='')
+    # Do not inherit heartbeats from an owner's existing tab on8787..8796.
+    with socket.socket() as reservation:
+        reservation.bind(('127.0.0.1',0));env['FMER_PORT']=str(reservation.getsockname()[1])
     checks=[];url=None
     def passed(label):checks.append(label);print(label,flush=True)
     def api(path,body=None):
@@ -33,12 +36,16 @@ def test(archive,out):
         if result.returncode:raise RuntimeError(result.stderr)
         passed('Bundled Python imports ctypes, SSL, sockets, companion and transport without installed Python')
         child,url=launch();child.wait(timeout=20)
-        assert api('/api/health')['app']=='FMER Companion 734'
+        assert api('/api/health')['app']==manifest['product']
         assert api('/api/health')['data_root']==str(data.resolve())
         assert api('/api/catalog')['slots']==[]
         banks=api('/api/banks');assert len(banks['slots'])==128
         assert banks['slots'][:64]==banks['slots'][64:]
         passed('One-click EXE starts with minimal PATH; fresh original DEFAULT and USER banks, empty private catalog')
+        from companion_startup_smoke import check_browser_startup
+        check_browser_startup(url,out/'browser')
+        api('/api/browser',dict(tab='portable-rehearsal'))
+        passed('Extracted EXE serves working Edge controls, lazy editor, and recoverable startup errors')
         oem=api('/api/sound-packs',dict(id='oem-v15'))
         assert oem['count']==128 and len(oem['normalized_slots'])==11
         assert api('/api/banks')==banks and api('/api/catalog')['slots']==[]
@@ -49,7 +56,33 @@ def test(archive,out):
         caps=api('/api/capabilities');release=next(x for x in caps['bundled_firmware'] if x['available'])
         report=api('/api/firmware',dict(action='inspect',release=release['id']))
         assert report['installable'] and not report['hardware_qualified']
+        if manifest['product']=='FMER Companion 735' or manifest.get('companion_revision',0)>=6:
+            assert release['id']==('fm1-compatible-to-735-r9' if manifest['product']=='FMER Companion 735' else 'fm1-compatible-to-734-r3')
+            formats=set()
+            for item in caps['bundled_firmware']:
+                assert item['available']
+                inspected=api('/api/firmware',dict(action='inspect',release=item['id']))
+                assert inspected['installable'] and not inspected['head_written']
+                assert inspected['app_write_range']==[0x4000,0x93000]
+                formats.add(inspected['package_format'])
+            assert formats=={'application-only-v1','self-describing-v1'}
         passed('Bundled first-install inspection succeeds without private dumps, SDK or old development packages')
+        if manifest['product']=='FMER Companion 735' or manifest.get('companion_revision',0)>=7:
+            loadouts=api('/api/loadouts')
+            assert len(loadouts['included'])==5 and len(loadouts['sounds'])==192 and loadouts['slots']==[]
+            a=api('/api/loadouts',dict(action='export',id='A'));b=api('/api/loadouts',dict(action='export',id='B'))
+            plan=api('/api/loadout-banks-plan',dict(default=a,user=b))
+            assert plan['count']==128 and [r['slot'] for r in plan['rows']]==list(range(64,128))+list(range(64))
+            copied=api('/api/loadouts',dict(action='copy',revision=loadouts['revision'],id='A',title='Portable set'))
+            assert copied['slots'][0]['title']=='Portable set'
+            passed('Included 192 sounds, five profiles, independent bank plans and personal profile saves work offline')
+        if manifest['product']=='FMER Companion 735':
+            units=api('/api/units');assert units['slots']==[] and units['capacity']==16
+            units=api('/api/units',dict(action='save',revision=units['revision'],profile=dict(id='new',name='Portable Malachite',notes='',collection='Malachite sounds',default=copied['slots'][0]['id'],user='B')))
+            first=units['slots'][0]
+            units=api('/api/units',dict(action='save',revision=units['revision'],profile=dict(id='new',name='Portable Citrine',notes='',collection='Citrine sounds',default='C',user='D')))
+            assert units['slots'][0]==first and units['slots'][1]['default']=='C'
+            passed('Named instrument setups retain independent A/B assignments and collections with bundled runtime')
         coverage=json.loads((app/'host/help/coverage.json').read_text())
         for slug,items in coverage['figures'].items():
             for name in [slug+'.htm']+[x['file'] for x in items]:
@@ -73,6 +106,8 @@ def test(archive,out):
         (data/'launch.json').unlink()
         child,url=launch();child.wait(timeout=20)
         assert len(api('/api/catalog')['slots'])==64
+        if manifest['product']=='FMER Companion 735' or manifest.get('companion_revision',0)>=7:assert api('/api/loadouts')['slots'][0]['title']=='Portable set'
+        if manifest['product']=='FMER Companion 735':assert api('/api/units')['slots']==units['slots']
         passed('Quit and relaunch preserve the per-user Library independently of the program folder')
         # An idle old build must be replaced gracefully, without Task Manager.
         old_pid=api('/api/health')['pid']

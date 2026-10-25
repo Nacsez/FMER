@@ -220,7 +220,7 @@ static void fmer_ui_describe(uint32_t row,const fmer_ui_state_t *s,fmer_ui_row_t
         if(row==1)fmer_ui_text(r->first,"PLAY MODE");
         if(row==2){fmer_ui_text(r->first,fmer_panel_mode_name(c));r->scale=3;r->color=FMER_UI_GREEN;}
         if(row==3){if(c->value[FMER_SEQ_MODE]){p=fmer_ui_text(r->first,"4 MONO PARTS / T");fmer_ui_number(p,c->value[FMER_SEQ_TRACK]+1u);}else fmer_ui_text(r->first,c->value[FMER_VOICE_BUDGET]==1u?"ONE SOUND / MONO":"ONE SOUND / CHORDS");}
-        if(row==4)fmer_ui_text(r->first,"K1: 1V > 4V > 4T");
+        if(row==4)fmer_ui_text(r->first,"K1: 1V > 6V > 4T");
         if(row==5){fmer_ui_text(r->first,"4T CHANGE STOPS");r->color=FMER_UI_MUTED;}
         if(row>=6u){
             id=fmer_panel_knob_id(panel,row-6u,c);
@@ -334,7 +334,7 @@ static void fmer_ui_describe(uint32_t row,const fmer_ui_state_t *s,fmer_ui_row_t
         return;
     }
     if(family==FMER_PANEL_GLO && page==FMER_GLO_HOTKEYS && row>=2u) {
-        static const char *const lines[]={"SEL+SEQ  SONG","HOME+SEQ MIXER","SEL+HOME 4T/4V","ENV+HOME GLIDE","LFO+HOME POLY","SEL+PLAY TRACK BAR","SEL+2PLAY ALL BAR","SEL+FX SET DEFAULT"};
+        static const char *const lines[]={"SEL+SEQ  SONG","HOME+SEQ MIXER","SEL+HOME 4T/6V","ENV+HOME GLIDE","LFO+HOME POLY","SEL+PLAY TRACK BAR","SEL+2PLAY ALL BAR","SEL+FX SET DEFAULT"};
         fmer_ui_text(r->first,lines[row-2u]);r->color=FMER_UI_INK;return;
     }
     if(family==FMER_PANEL_SEQ && page==7u && row>=2u) {
@@ -398,14 +398,14 @@ static void fmer_ui_describe(uint32_t row,const fmer_ui_state_t *s,fmer_ui_row_t
 
     if(row>=6) {
         if(family==FMER_PANEL_PRESETS) {
-            if(row==6){p=fmer_ui_text(r->first,"1 BANK ");fmer_ui_text(p,panel->preset_bank==2u?"USER":panel->preset_bank?"VA":"FM");}
+            if(row==6){p=fmer_ui_text(r->first,"1 BANK ");fmer_ui_text(p,panel->preset_bank==2u?"B":"A");}
             if(row==7){p=fmer_ui_text(r->first,"SELECT MODE ");fmer_ui_text(p,fmer_panel_mode_name(c));r->color=FMER_UI_GREEN;return;}
             if(row==8)fmer_ui_text(r->first,"SAVE TO KEEP EDITS");
             if(row==9)fmer_ui_text(r->first,"HOME: PLAY / EDIT");
             r->color=FMER_UI_MUTED;return;
         }
         if(family==FMER_PANEL_SAVE) {
-            if(row==6){p=fmer_ui_text(r->first,"1 SLOT ");p=fmer_ui_number(p,panel->save_slot);if(!panel->save_scope)fmer_ui_text(p,panel->save_bank?" 2 DEFAULT":" 2 USER");}
+            if(row==6){p=fmer_ui_text(r->first,"1 SLOT ");p=fmer_ui_number(p,panel->save_slot);if(!panel->save_scope)fmer_ui_text(p,panel->save_bank?" 2 A":" 2 B");}
             if(row==7)fmer_ui_text(r->first,panel->save_action?"SEL LOAD + STOP":s->user_slot_present?"SEL REPLACE + STOP":"SEL SAVE + STOP");
             if(row==8)fmer_ui_text(r->first,panel->save_action?"3 ACTION LOAD":"3 ACTION SAVE");
             if(row==9)fmer_ui_text(r->first,panel->save_scope?"4 SCOPE PROJECT":"4 SCOPE SOUND");
@@ -495,7 +495,7 @@ static void fmer_ui_describe(uint32_t row,const fmer_ui_state_t *s,fmer_ui_row_t
     }
     if(family==FMER_PANEL_PRESETS) {
         if(row==2){fmer_ui_text(r->first,panel->preset_bank==2u && !s->user_slot_present?"EMPTY":s->candidate_name?s->candidate_name:"PRESET");r->scale=3;}
-        if(row==3){p=fmer_ui_text(r->first,panel->preset_bank==2u?"USER SLOT ":panel->preset_bank?"VA SLOT ":"FM SLOT ");fmer_ui_number(p,panel->preset_candidate);}
+        if(row==3){p=fmer_ui_text(r->first,panel->preset_bank==2u?"BANK B SLOT ":"BANK A SLOT ");fmer_ui_number(p,panel->preset_candidate);}
         if(row==4)fmer_ui_text(r->first,"PRESETS: BROWSE");
         if(row==5){fmer_ui_text(r->first,panel->preset_bank==2u && !s->user_slot_present?"EMPTY - SKIPPED":"PLAY KEYS TO HEAR");r->color=FMER_UI_MUTED;}
         return;
@@ -574,7 +574,7 @@ static void fmer_ui_describe(uint32_t row,const fmer_ui_state_t *s,fmer_ui_row_t
         }
     }
     if(!popup && family==FMER_PANEL_SAVE) {
-        if(row==2){p=fmer_ui_text(r->first,panel->save_scope?"PROJECT ":panel->save_bank?"DEFAULT ":"USER ");fmer_ui_number(p,panel->save_slot);r->scale=!panel->save_scope && panel->save_bank?2:3;}
+        if(row==2){p=fmer_ui_text(r->first,panel->save_scope?"PROJECT ":panel->save_bank?"BANK A ":"BANK B ");fmer_ui_number(p,panel->save_slot);r->scale=3;}
         if(row==3)fmer_ui_text(r->first,s->user_slot_present && s->user_slot_name?s->user_slot_name:"EMPTY SLOT");
         if(row==4)fmer_ui_text(r->first,panel->save_scope?"SOUND / SEQ / SONG":"INSTRUMENT ONLY");
         if(row==5){
@@ -589,9 +589,9 @@ static void fmer_ui_describe(uint32_t row,const fmer_ui_state_t *s,fmer_ui_row_t
     }
     if(!popup && family==FMER_PANEL_GLO && page==FMER_GLO_RESET) {
         uint32_t action=panel->reset_choice==4u?12u:panel->reset_choice==3u?10u:panel->reset_choice+3u;
-        if(row==2)fmer_ui_text(r->first,panel->reset_choice==0?"RESET TO FMER":panel->reset_choice==1?"RESET USER BANK":panel->reset_choice==2?"CLEAR USER BANK":panel->reset_choice==3?"CLEAR PROJECTS":"ORIGINAL FX ROUTE");
-        if(row==3)fmer_ui_text(r->first,panel->reset_choice==0?"DEFAULT":panel->reset_choice==1?"64 ORIGINAL COPIES":panel->reset_choice==2?"64 EMPTY SLOTS":panel->reset_choice==3?"16 EMPTY PROJECTS":"RESET FX DEFAULT");
-        if(row==4)fmer_ui_text(r->first,panel->reset_choice>=3?"SOUNDS UNCHANGED":panel->reset_choice==0?"USER UNCHANGED":"DEFAULT UNCHANGED");
+        if(row==2)fmer_ui_text(r->first,panel->reset_choice==0?"RESET BANK A":panel->reset_choice==1?"RESET BANK B":panel->reset_choice==2?"CLEAR BANK B":panel->reset_choice==3?"CLEAR PROJECTS":"ORIGINAL FX ROUTE");
+        if(row==3)fmer_ui_text(r->first,panel->reset_choice==0?"FMER ORIGINALS":panel->reset_choice==1?"64 ORIGINAL COPIES":panel->reset_choice==2?"64 EMPTY SLOTS":panel->reset_choice==3?"16 EMPTY PROJECTS":"RESET FX DEFAULT");
+        if(row==4)fmer_ui_text(r->first,panel->reset_choice>=3?"SOUNDS UNCHANGED":panel->reset_choice==0?"BANK B UNCHANGED":"BANK A UNCHANGED");
         if(row==5)fmer_ui_text(r->first,s->store_busy?(s->storage_action==action?"RESETTING WAIT":"STORE BUSY WAIT"):panel->reset_armed?"SEL CONFIRM RESET":s->storage_action==action?(s->storage_result?"RESET FAILED":"RESET COMPLETE"):"1 ACTION  SEL ARM");
         return;
     }

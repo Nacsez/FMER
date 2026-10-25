@@ -12,7 +12,7 @@ static uint32_t native_main_owner,native_quiet_started;
 static uint32_t native_last_import_id,native_last_import_result;
 static uint32_t keys_previous,mi_r,mi_w,requested_budget;
 static struct {uint32_t notes;} fm1_in;
-static struct {uint32_t voice_limit,controls_applied,ready=1,safe_mode,in_audio,voices,stolen;} diag;
+static struct {uint32_t voice_limit,controls_applied,ready=1,safe_mode,in_audio,voices,stolen,overruns,sheds;} diag;
 static uint32_t controls_generation,patch_ready,parameter_ready,audition_pending,transport_read,transport_write,native_live_generation;
 static uint32_t midi_pending,panic_request,midi_in_overflow,updating,engine,algorithm,va_wave,cutoff,delay_mix,attack_ms,release_ms;
 static uint32_t native_preset_id,native_sound_dirty;
@@ -24,6 +24,8 @@ static fmer_activity_state_t activity_pending;
 static fmer_pattern_state_t pattern_pending;
 static int32_t q15[256],abuf[512];
 static uint32_t FM1_ALNK_CON0=0x800,previous_start,stop_count;
+static uint32_t severe_streak;
+static uint32_t fm1_audio_free_half(){return 0;}
 static uint32_t fake_ticks,fm1_ms,timer_last,input_scans,uac_calls,usb_calls,uart_calls,recover_calls;
 static uint32_t trace_kind,trace_result,trace_apply,trace_quiet;
 static bool inject_key;
@@ -152,6 +154,17 @@ int main()
  check(requested_budget==2 && fmer_dsp_voice_limit()==2,"stale main one-voice mirror cannot undo restored polyphony");
  check(fmer_dsp_voice_budget(1),"simulate existing bounded overload shed");sync_audio_budget();
  check(requested_budget==1 && fmer_dsp_voice_limit()==1,"production mirror still retains overload protection");
+ auto budget_controls=controls;budget_controls.value[FMER_SEQ_MODE]=0;budget_controls.value[FMER_GLIDE_MODE]=0;budget_controls.value[FMER_VOICE_BUDGET]=6;
+ check(fmer_dsp_apply_controls(&budget_controls),"prepare overload polyphony");fmer_dsp_get_controls(&applied_controls);sync_audio_budget();
+ const auto sheds=diag.sheds;production_overload(1,2700,0);
+ check(diag.sheds==sheds+1 && requested_budget==5 && fmer_dsp_voice_limit()==5 && applied_controls.value[FMER_VOICE_BUDGET]==5,"accepted overload reduction updates canonical mirrors and count");
+ budget_controls.value[FMER_SEQ_MODE]=1;budget_controls.value[FMER_VOICE_BUDGET]=4;
+ check(fmer_dsp_apply_controls(&budget_controls),"prepare four-track overload protection");fmer_dsp_get_controls(&applied_controls);sync_audio_budget();
+ const auto parts_sheds=diag.sheds;production_overload(1,2700,0);
+ check(diag.sheds==parts_sheds && requested_budget==4 && fmer_dsp_voice_limit()==4 && applied_controls.value[FMER_VOICE_BUDGET]==4,"4T overload cannot report a refused shed or publish an invalid budget");
+ production_overload(1,2700,0);production_overload(1,2700,0);
+ check(diag.safe_mode && panic_request,"persistent unsheddable overload reaches protective pause");
+ diag.safe_mode=0;panic_request=0;
  const auto usb=usb_calls;for(unsigned i=0;i<10;++i)fm1_timer5_irq();check(usb_calls>usb,"deferred timer MIDI service resumes after ownership release");
  std::printf("FMER native board integration PASS: exact production source %s;quiet adoption, budget/state publication, both stale guards, timer producer exclusion and post-claim key preservation\n",FMER_NATIVE_BOARD_SOURCE_SHA256);
 }

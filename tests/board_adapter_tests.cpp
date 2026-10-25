@@ -278,7 +278,7 @@ static void sixteen_pattern_queue_chain_and_native() {
 static void activity_snapshots(const fmer_controls_t& defaults) {
     static_assert(sizeof(fmer_activity_state_t)==40,"bounded C activity snapshot");
     fmer_dsp_panic(); require(fmer_dsp_apply_controls(&defaults),"activity baseline restored");
-    auto c=snapshot(); c.value[FMER_ENGINE]=1; c.value[FMER_ATTACK]=0;
+    auto c=snapshot(); c.value[FMER_VOICE_BUDGET]=4;c.value[FMER_ENGINE]=1; c.value[FMER_ATTACK]=0;
     c.value[FMER_DECAY]=0; c.value[FMER_SUSTAIN]=100; c.value[FMER_RELEASE]=100;
     require(fmer_dsp_apply_controls(&c),"activity release fixture applied");
     for(uint8_t note:{0,31,64,127}) fmer_dsp_midi(0x90,note,100,1);
@@ -436,6 +436,23 @@ static void pattern_snapshots(const fmer_controls_t& defaults) {
 static void performance_controls(const fmer_controls_t& defaults) {
     fmer_dsp_panic();
     require(fmer_dsp_apply_controls(&defaults), "initial canonical defaults validate");
+    // Repeated invalid edits must not become accepted by a warm validation
+    // memo, and rejecting one must leave every other native value unchanged.
+    for(unsigned id=0;id<FMER_PARAM_COUNT;++id) {
+        if(fmer_control_valid(id,65535))continue;
+        auto bad=defaults;bad.value[id]=65535;
+        const auto before=native_snapshot();
+        for(unsigned repeat=0;repeat<2;++repeat)
+            require(!fmer_dsp_apply_controls(&bad),"repeated out-of-range edit rejected");
+        require(native_values_equal(before,native_snapshot()),"rejected cached edit preserves native state");
+    }
+    auto cross=defaults;cross.value[FMER_SEQ_LENGTH]=16;cross.value[FMER_SEQ_STEP]=15;
+    require(fmer_dsp_apply_controls(&cross),"valid cursor warms individual value checks");
+    cross.value[FMER_SEQ_LENGTH]=8;cross.value[FMER_SEQ_STEP]=7;
+    require(fmer_dsp_apply_controls(&cross),"second valid cursor updates memo");
+    cross.value[FMER_SEQ_STEP]=15;
+    require(!fmer_dsp_apply_controls(&cross),"cached legal values still obey cross-field constraints");
+    require(fmer_dsp_apply_controls(&defaults),"restore defaults after validation memo checks");
     auto invalid = defaults; invalid.value[159] = 8;
     require(!fmer_dsp_apply_controls(&invalid), "reserved edit refused");
     invalid = defaults; invalid.value[FMER_ATTACK] = 10001; invalid.value[FMER_ENGINE] = 1;
@@ -515,7 +532,7 @@ static void performance_controls(const fmer_controls_t& defaults) {
         fmer_dsp_midi(0x90,36,100,1); fmer_dsp_midi(0x90,40,100,1); fmer_dsp_midi(0x90,43,100,1);
         const auto notes_before=performance().emitted_notes;
         audio(10000,128);
-        require(performance().emitted_notes>notes_before && fmer_dsp_active()<=4,"every arp order runs bounded notes");
+        require(performance().emitted_notes>notes_before && fmer_dsp_active()<=fmer_dsp_voice_limit(),"every arp order runs bounded notes");
         fmer_dsp_midi(0xb0,120,0,1); audio(5000);
         require(performance().arp_held==0 && fmer_dsp_active()==0,"all sound off clears each arp mode");
     }
@@ -523,9 +540,9 @@ static void performance_controls(const fmer_controls_t& defaults) {
     fmer_dsp_panic();set(FMER_ARP_ORDER,6);tapped_count=0;
     fmer_dsp_midi(0x90,36,100,1);fmer_dsp_midi(0x90,40,100,1);fmer_dsp_midi(0x90,43,100,1);
     audio(128);fmer_dsp_panic();
-    require(tapped_count==8,"tap emits four admitted Repeat attacks and four matching releases only");
-    for(uint32_t i=0;i<4;++i)require(tapped[i].source==5 && tapped[i].status==0x90 &&
-            tapped[i+4].status==0x80 && tapped[i].note==tapped[i+4].note,"tap never emits orphan dropped-note releases");
+    const auto admitted=fmer_dsp_voice_limit();require(tapped_count==2*admitted,"tap emits only admitted Repeat attacks and matching releases");
+    for(uint32_t i=0;i<admitted;++i)require(tapped[i].source==5 && tapped[i].status==0x90 &&
+            tapped[i+admitted].status==0x80 && tapped[i].note==tapped[i+admitted].note,"tap never emits orphan dropped-note releases");
     fmer_dsp_set_event_tap(nullptr);
 
     fmer_dsp_panic(); set(FMER_RECORD_MODE,0);set(FMER_SEQ_LENGTH,4); set(FMER_SEQ_STEP,0);
@@ -610,8 +627,8 @@ int main() {
         require(initial_audio==audio(2048),"canonical boot FM readback reproduces the actual initial DSP sound");
         fmer_dsp_panic();
         pattern_snapshots(defaults);
-        require(fmer_dsp_voice_limit() == 4, "board advertises conservative four-voice budget");
-        require(!fmer_dsp_voice_budget(0) && !fmer_dsp_voice_budget(5) && !fmer_dsp_voice_budget(13),"board budget outside1..4 refused");
+        require(fmer_dsp_voice_limit() == 6, "board advertises six-voice budget");
+        require(!fmer_dsp_voice_budget(0) && !fmer_dsp_voice_budget(7) && !fmer_dsp_voice_budget(13),"board budget outside1..6 refused");
         require(!fmer_dsp_voice_controls(5,5,200) && !fmer_dsp_voice_controls(1,10001,200) &&
                 !fmer_dsp_voice_controls(1,5,10001),"invalid VA controls refused");
         require(fmer_dsp_voice_controls(4,5,200),"VA noise waveform accepted");
@@ -644,7 +661,7 @@ int main() {
         fmer_dsp_panic(); fmer_dsp_render(stereo.data(),128,1024);
         require(std::all_of(stereo.begin(),stereo.begin()+256,[](int32_t x){return x==0;}),"panic clears audio and tails");
         for(uint8_t note=60;note<68;++note)fmer_dsp_midi(0x90,note,100,1);
-        require(fmer_dsp_active()==4 && fmer_dsp_stolen()==4,"excess board notes steal within advertised budget");
+        require(fmer_dsp_active()==6 && fmer_dsp_stolen()==2,"excess board notes steal within advertised budget");
         require(fmer_dsp_voice_budget(3) && fmer_dsp_active()==3 && fmer_dsp_stolen()==5,
                 "overload mitigation reduces voices without silencing all sound");
         fmer_dsp_render(stereo.data(),128,1024);

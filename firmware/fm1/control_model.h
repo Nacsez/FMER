@@ -77,7 +77,7 @@ static uint32_t fmer_control_max(uint32_t id) {
  case FMER_SEQ_CHAIN_MASK:return 65535;
  case FMER_MIDI_CHANNEL:return 16;
  case FMER_ARP_RATE:return 32;
- case FMER_ARP_OCTAVES: case FMER_VOICE_BUDGET:return 4;
+ case FMER_ARP_OCTAVES:return 4;case FMER_VOICE_BUDGET:return 6;
  case FMER_ARP_SWING:return 75;
  case FMER_SEQ_LENGTH:return 64;
  case FMER_SEQ_STEP:return 63;

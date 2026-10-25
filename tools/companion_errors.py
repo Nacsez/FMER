@@ -1,5 +1,18 @@
 """Musician-facing outcomes; raw exceptions remain in diagnostic records."""
 def explain(message, metadata=False):
+    # Discovery means locating the physical unit, not reading its sound bank.
+    # Keep transition failures separate: absence alone cannot prove whether a
+    # previous write completed, so never recommend a blind reset/reflash here.
+    if 'Timed out waiting for ota-FM-1_' in message:
+        return dict(title='The updater did not reconnect', explanation='Companion could not verify the FM-1 updater after the connection changed. Installation has not been confirmed complete.', next_step='Keep the unit powered on. Wait for the operation to stop, then use Export operation record. Note what the unit screen shows; do not erase banks or repeatedly restart installation.')
+    if 'Timed out waiting for FM-1_' in message:
+        return dict(title='The expected firmware was not detected', explanation='Companion could not verify the expected firmware identity. This does not tell us whether an earlier transfer finished.', next_step='Keep the unit powered on and export the operation record after the operation stops. Include what its screen shows before trying another installation.')
+    if '[discovery:identity_timeout]' in message or '[discovery:transitional_identity]' in message or message=='Identity reply timed out':
+        return dict(title='FM-1 MIDI ports found, but no usable firmware reply', explanation='Windows exposes both MIDI ports, but Companion could not verify a supported reply. This is a device connection check, not a missing instrument bank.', next_step='Close other music apps and any other Companion instance, then choose Check connection. If FMER is in USB Master mode, select GLO > USB LINK > PC/NORMAL and press SEL. If it still fails, export the operation record and include the firmware shown on the unit.')
+    if '[discovery:incomplete_pair]' in message:
+        return dict(title='Only one FM-1 MIDI port is available', explanation='Companion needs both the FM-1 MIDI input and output. Windows currently exposes only one matching side.', next_step='After the operation stops, reconnect one powered-on FM-1 directly with a USB data cable and choose Check connection. Close other MIDI apps. If it persists, export the operation record; do not reset the instrument banks.')
+    if '[discovery:no_ports]' in message or '[discovery:unrecognized_ports]' in message or 'Timed out waiting for None;' in message or 'Timed out waiting for compatible-FM-1;' in message:
+        return dict(title='FM-1 USB MIDI connection not found', explanation='Companion could not locate a usable FM-1 MIDI connection. This refers to the physical unit, not its instrument presets. Charging or USB audio alone does not establish MIDI connectivity.', next_step='Connect one powered-on FM-1 directly using a USB data cable, close other MIDI apps, and choose Check connection. On FMER, leave USB Master mode using GLO > USB LINK > PC/NORMAL, then SEL. If it still fails, export the operation record and include the firmware shown on the unit; other firmware may use an unrecognized MIDI name.')
     if 'community' in message.lower() or 'FM6' in message:
         return dict(title='Community voice capture could not finish',explanation=message,
                     next_step='No firmware or patch write was requested. Check the supported family in Help, connect one unit and leave its controls untouched. Export the operation record if the read still fails.')

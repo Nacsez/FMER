@@ -28,6 +28,12 @@ are editable representations. Changes to these instruments may be saved and
 shared under the same license. Importing someone else's instrument does not
 relicense it. User-authored patches and projects remain their authors' work.
 
+The192 original FMER Expressions instruments and their four proposed loadouts
+are also GPL-3.0-only. Their preferred editable source is
+`tools/sound_collection_fm.py` and `tools/sound_collection_va.py`; generated
+native/catalog/SysEx copies preserve that license. These independently authored
+recipes do not include the separately restricted V16 bank.
+
 Playing FMER, recording a performance or rendering audio does not by itself
 require the resulting music to use GPL. The GPL does not claim independent
 compositions or recordings merely because FMER produced their sound.

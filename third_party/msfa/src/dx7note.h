@@ -29,6 +29,9 @@
 
 class Dx7Note {
  public:
+  // FMER: startup-only shared table; call before notes/threads/interrupts.
+  // Without this call, oscillator tuning retains the original calculation.
+  static void init_tuning();
   // FMER: correct the historical declaration; implementation reads VCED.
   void init(const char patch[156], int midinote, int velocity);
 

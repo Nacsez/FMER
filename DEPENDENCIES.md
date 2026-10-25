@@ -284,3 +284,41 @@ license/provenance and immutable corpus pins remain unchanged.
 No new upstream synth, preset bank, font or audio sample was adopted. Original709.1 recipes and the compact bank implementation are workspace source. The existing pinned loader differs from708 only in its expected application identity and original-app digest; independent binary comparison and33 unchanged loader tests passed. PROVENANCE.json and exact package/source qualification bind these changes. Proprietary calibration/template bytes and device backups remain local artifacts. Existing license obligations and unresolved distribution terms are unchanged.
 
 [709 guide](docs/FM1_709.md) contains current scope and evidence.
+
+
+## 2026-10-22: original V16 research
+
+Pinned official V16 is research-only, not integrated or distributed: 718196 bytes, SHA256 d017fb65e70aca97ee29d944470c3515a74581df5c0576bf70de917c7b2b61d5. Extractor executes no downloaded code. Publisher binary, ROM backups and 128 extracted voices remain ignored/private. Existing V15 voice licensing does not establish V16 rights. [V16 investigation](docs/research/STOCK_V16_2026-10-22.md).
+
+
+## 2026-10-22: V16 provenance refresh
+
+Read-only upstream audit pins m-vave/fm1_open at4c7496daac04a95ff10d1afdcc8f9ead2dbabc41, notice SHA256 c10451a1c0b368ec926e86b9296eb0c96c790d4d4768ad07e91b09ca9ea4bfa5. No acquired code executed or linked. Factory generator still pins licensed V15; V16 bank rights remain unresolved. One parameter-identical V15 BASS2/V16 DISCOBASS voice can be sourced from the existing licensed V15 data. Acquisition receipts: evidence/v16-groundwork-20261022.json.
+
+## 2026-10-22: optional sound-library analysis dependency
+
+The Expressions builder uses the already-installed **NumPy2.4.3** only for
+host-side WAV/spectrum measurements. Installed metadata reports
+`BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0`; its distribution license
+files were inspected locally. No NumPy code/binary is bundled in the review
+ZIP, Companion or firmware. The portable listening page uses browser-native
+WAV playback and has no new runtime dependency. Reproducing measurement needs
+NumPy2.4.3 in addition to the existing compiled shared-core renderer. No package
+was downloaded or installed in this pass. Original recipe sources are GPL-3.0-only;
+research pages supply concepts only, not copied patch data.
+
+
+## 2026-10-22: FM-1 emulator research acquisition
+
+Pinned joakimeriksson/fm1-emu at db8d472e62f35d18e392e3abc66474daed65ffe9 (MIT). Source and license retained under ignored artifacts; only the inspected standalone Rust package module was compiled. Public website WASM ran in an isolated browser. No dependency was installed or integrated into FMER; no upstream build scripts ran.
+
+[Investigation and evidence](docs/research/FM1_EMULATOR_COMPATIBILITY_2026-10-22.md).
+# 24 October 2026: MSFA fine-tuning cache
+
+No new dependency. The selected MSFA port now precomputes its original100
+fine-tuning logarithms once before audio, using the same target runtime and
+integer rounding. Original upstream `.cc`/`.h` bytes were reconstructed from
+the existing port patch and verified against their pinned upstream SHA-256
+before regenerating that patch. Only local hashes and the audit change record
+were updated. Original license, notices, commit and upstream hashes are retained.
+See [port notes](third_party/msfa/README.md) and [CPU report](docs/release/CPU_735.md).

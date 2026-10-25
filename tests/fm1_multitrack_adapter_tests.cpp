@@ -125,20 +125,20 @@ void navigation_keeps_single_song_playable() {
     c=controls();fmer_panel_encoder(&panel,0,-1,&c,1000);apply(c);
     check(performance().running && performance().seq_position==position && controls().value[FMER_VOICE_BUDGET]==1,"4V to1V keeps the single-instrument song running at its current step");
     c=controls();fmer_panel_encoder(&panel,0,1,&c,1001);apply(c);
-    check(performance().running && performance().seq_position==position && controls().value[FMER_VOICE_BUDGET]==4,"1V to4V preserves transport rather than restarting the song");
+    check(performance().running && performance().seq_position==position && controls().value[FMER_VOICE_BUDGET]==6,"1V to6V preserves transport rather than restarting the song");
 }
 void explicit_mode_wheel_audio() {
     reset();restore(scene());const auto saved=native();fmer_panel_t panel;fmer_panel_init(&panel);panel.family=FMER_PANEL_PRESETS;
     auto c=controls();check(fmer_panel_encoder(&panel,0,-1,&c,1)!=0,"mode wheel exits4T");apply(c);
-    check(!controls().value[FMER_SEQ_MODE] && controls().value[FMER_VOICE_BUDGET]==4,"mode wheel reconciles four-voice DSP allocator");
-    for(unsigned n:{60u,64u,67u,71u})fmer_dsp_midi(0x90,n,100,3);
-    check(render(256)>.001 && fmer_dsp_active()==4,"four-voice wheel choice plays physical-source chord");fmer_dsp_panic();
+    check(!controls().value[FMER_SEQ_MODE] && controls().value[FMER_VOICE_BUDGET]==6,"mode wheel reconciles six-voice DSP allocator");
+    for(unsigned n:{60u,64u,67u,71u,74u,77u})fmer_dsp_midi(0x90,n,100,3);
+    check(render(256)>.001 && fmer_dsp_active()==6,"six-voice wheel choice plays physical-source chord");fmer_dsp_panic();
     c=controls();check(fmer_panel_encoder(&panel,0,-1,&c,2)!=0,"mode wheel enters1V");apply(c);
     check(!controls().value[FMER_SEQ_MODE] && controls().value[FMER_VOICE_BUDGET]==1 && controls().value[FMER_GLIDE_MODE]==1,"mono wheel choice is valid legato allocation");
     for(unsigned n:{60u,64u})fmer_dsp_midi(0x90,n,100,3);
     check(render(256)>.001 && fmer_dsp_active()==1,"mono wheel choice renders one glide voice");fmer_dsp_panic();
-    c=controls();check(fmer_panel_encoder(&panel,0,1,&c,3)!=0,"mode wheel restores4V");apply(c);
-    check(controls().value[FMER_VOICE_BUDGET]==4 && !controls().value[FMER_GLIDE_MODE],"leaving1V restores four voices despite automatic glide memory");
+    c=controls();check(fmer_panel_encoder(&panel,0,1,&c,3)!=0,"mode wheel restores6V");apply(c);
+    check(controls().value[FMER_VOICE_BUDGET]==6 && !controls().value[FMER_GLIDE_MODE],"leaving1V restores six voices despite automatic glide memory");
     c=controls();check(fmer_panel_encoder(&panel,0,1,&c,4)!=0,"mode wheel restores4T");apply(c);
     fmer_dsp_transport(FMER_TRANSPORT_PLAY);check(render(256)>.001 && fmer_dsp_active()==4,"return to4T plays every saved part");
     check(!std::memcmp(saved.tracks,native().tracks,sizeof saved.tracks),"mode round trip preserves saved track instruments, patterns and mixer state");
@@ -148,18 +148,18 @@ void explicit_poly_choice_overrides_glide_resume() {
         reset();auto s=scene();s.controls.value[FMER_SEQ_MODE]=0;s.controls.value[FMER_GLIDE_MODE]=0;
         s.controls.value[FMER_VOICE_BUDGET]=(uint16_t)previous;restore(s);set(FMER_GLIDE_MODE,1);
         check(controls().value[FMER_VOICE_BUDGET]==1,"normal glide toggle remembers prior polyphony and admits one voice");
-        fmer_panel_t panel;fmer_panel_init(&panel);auto c=controls();unsigned expected=4;
+        fmer_panel_t panel;fmer_panel_init(&panel);auto c=controls();unsigned expected=6;
         if(path==0){c.value[FMER_GLIDE_MODE]=0;expected=previous;}
-        else if(path==1){panel.family=FMER_PANEL_PRESETS;check(fmer_panel_encoder(&panel,0,1,&c,0)!=0,"preset mode wheel explicitly requests4V");}
-        else if(path==2){panel.family=FMER_PANEL_SEQ;panel.page[panel.family]=3;check(fmer_panel_encoder(&panel,2,1,&c,0)!=0,"sequencer mode wheel explicitly requests4V");}
-        else if(path==3){panel.family=FMER_PANEL_GLO;panel.page[panel.family]=FMER_GLO_VOICE;check(fmer_panel_encoder(&panel,2,1,&c,0)!=0,"global mode wheel explicitly requests4V");}
+        else if(path==1){panel.family=FMER_PANEL_PRESETS;check(fmer_panel_encoder(&panel,0,1,&c,0)!=0,"preset mode wheel explicitly requests6V");}
+        else if(path==2){panel.family=FMER_PANEL_SEQ;panel.page[panel.family]=3;check(fmer_panel_encoder(&panel,2,1,&c,0)!=0,"sequencer mode wheel explicitly requests6V");}
+        else if(path==3){panel.family=FMER_PANEL_GLO;panel.page[panel.family]=FMER_GLO_VOICE;check(fmer_panel_encoder(&panel,2,1,&c,0)!=0,"global mode wheel explicitly requests6V");}
         else if(path==4)fmer_panel_shortcut(&panel,&c,3);
         else if(path==5){panel.fine_adjust=1;fmer_panel_button(&panel,8,&c,0);apply(c);c=controls();fmer_panel_button(&panel,8,&c,1);}
         else {c.value[FMER_GLIDE_MODE]=0;c.value[FMER_VOICE_BUDGET]=(uint16_t)(previous==2?3:2);expected=c.value[FMER_VOICE_BUDGET];}
         apply(c);const auto actual=controls();
         check(!actual.value[FMER_SEQ_MODE] && !actual.value[FMER_GLIDE_MODE] && actual.value[FMER_VOICE_BUDGET]==expected,
             "explicit nonmono choice overrides glide resume; an ordinary off toggle alone restores previous budget");
-        for(unsigned n:{60u,64u,67u,71u})fmer_dsp_midi(0x90,n,100,3);
+        for(unsigned n:{60u,64u,67u,71u,74u,77u})fmer_dsp_midi(0x90,n,100,3);
         check(render(256)>.001 && fmer_dsp_active()==expected,"reconciled budget controls the actual audible allocator");
     }
 }

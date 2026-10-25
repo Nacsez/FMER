@@ -6,12 +6,17 @@
 #include <cstring>
 static void check(bool ok,const char *why){if(!ok){std::fprintf(stderr,"FAIL: %s\n",why);std::exit(1);}}
 static void select(unsigned step){fmer_controls_t c;fmer_dsp_get_controls(&c);c.value[FMER_SEQ_STEP]=(uint16_t)step;check(fmer_dsp_apply_controls(&c),"select real stored step");}
+static void malformed_snapshot(fmer_controls_t* c){fmer_dsp_get_controls(c);c->value[FMER_ATTACK]=65535;}
 int main(){
  check(fmer_dsp_init(),"real adapter initializes");
  fmer_controls_t step_mode;fmer_dsp_get_controls(&step_mode);step_mode.value[FMER_RECORD_MODE]=0;
  check(fmer_dsp_apply_controls(&step_mode),"explicit STEP mode for untimed mailbox recording tests");
  fmer_controls_t base,next,canonical;fmer_dsp_get_controls(&base);next=canonical=base;
  uint32_t dirty[FMER_CONTROL_WORDS]{},changed[FMER_CONTROL_WORDS]{};
+ const auto before_bad_snapshot=fmer_dsp_state_generation();
+ check(!fmer_control_adopt(&canonical,dirty,malformed_snapshot,fmer_dsp_apply_controls),"non-dirty malformed snapshot is rejected by canonical DSP validator");
+ fmer_controls_t after_bad_snapshot;fmer_dsp_get_controls(&after_bad_snapshot);
+ check(!memcmp(&base,&after_bad_snapshot,sizeof base) && before_bad_snapshot==fmer_dsp_state_generation(),"invalid merged state never commits");
  // main copies budget4; an audio interrupt sheds to3 before an unrelated edit
  // publishes. The stale copied4 is not an instruction to undo the shed.
  canonical.value[FMER_VOICE_BUDGET]=3;next.value[FMER_CUTOFF]=2200;

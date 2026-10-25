@@ -163,7 +163,9 @@ void target_phaser_reference_accuracy() {
             for(float& memory:state){const float output=a*wet+memory;memory=wet-a*output;
                 if(std::abs(memory)<1e-20f)memory=0;wet=output;}
             phase+=p.phaser_rate_hz/44100.f;if(phase>=1.f)phase-=1.f;
-            expected[i]+=mix*(wet-expected[i]);
+            // The musical mix control spans 0..50% wet, as documented by
+            // EffectParameters. The reference must use that same gain.
+            expected[i]+=(.5f*mix)*(wet-expected[i]);
             require(std::abs(expected[i])<.9f,"reference input stays below output knee");
         }
         p.phaser_rate_hz=rate;p.phaser_depth=depth;

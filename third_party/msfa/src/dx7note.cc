@@ -41,6 +41,21 @@ const int32_t coarsemul[] = {
   81503396, 82323963, 83117622
 };
 
+// FMER: compute the original rounded expression once before audio starts.
+// Using the same target math library preserves its exact Q24 tuning values;
+// ordinary note attacks need no software double logarithm for each operator.
+static int32_t fine_tuning[100];
+static bool fine_tuning_ready;
+static int32_t fine_tuning_value(int fine) {
+  return (int32_t)floor(24204406.323123 * log(1 + 0.01 * fine) + 0.5);
+}
+void Dx7Note::init_tuning() {
+  if (fine_tuning_ready) return;
+  for (int fine = 0; fine < 100; ++fine)
+    fine_tuning[fine] = fine_tuning_value(fine);
+  fine_tuning_ready = true;
+}
+
 int32_t osc_freq(int midinote, int mode, int coarse, int fine, int detune) {
   // TODO: pitch randomization
   int32_t logfreq;
@@ -49,7 +64,8 @@ int32_t osc_freq(int midinote, int mode, int coarse, int fine, int detune) {
     logfreq += coarsemul[coarse & 31];
     if (fine) {
       // (1 << 24) / log(2)
-      logfreq += (int32_t)floor(24204406.323123 * log(1 + 0.01 * fine) + 0.5);
+      logfreq += fine_tuning_ready && (unsigned)fine < 100u
+          ? fine_tuning[fine] : fine_tuning_value(fine);
     }
     // This was measured at 7.213Hz per count at 9600Hz, but the exact
     // value is somewhat dependent on midinote. Close enough for now.

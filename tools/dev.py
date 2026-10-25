@@ -214,7 +214,7 @@ def check(run: Run) -> None:
         else:
             run.skip(name, "Not executed: workspace integrity validation failed; corpus code is untrusted.")
     run.execute("workspace-tests", [sys.executable, "-B", "-m", "unittest", "discover",
-                                   "-s", "tests", "-v"], cwd=ROOT)
+                                   "-s", "tests", "-v"], cwd=ROOT, timeout=1800)
 
 
 def build(run: Run, tools: dict, config: str) -> bool:

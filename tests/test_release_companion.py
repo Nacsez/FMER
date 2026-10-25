@@ -52,7 +52,7 @@ class ReleaseAdmission(unittest.TestCase):
             with tempfile.TemporaryDirectory() as tmp:
                 file=Path(tmp)/'preview.fwsc';file.write_bytes(self.raw)
                 qualified=transport.qualify_package(file,self.record['package_sha256'],self.record['loader_sha256'])
-                self.assertEqual(transport.update_identities(qualified),('compatible-FM-1',release.LOADER,release.TARGET))
+                self.assertEqual(transport.update_identities(qualified),('compatible-FM-1',release.LOADER,'FM-1_734'))
     def test_changed_bytes_are_never_release_admitted(self):
         raw=bytearray(self.raw);raw[5000]^=1
         self.assertIsNone(release.inspect_bytes(raw))

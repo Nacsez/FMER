@@ -91,8 +91,8 @@ static int fmer_bank_sound_unpack(const uint8_t in[FMER_BANK_SOUND],uint8_t *wir
  if(in[7]>='2' && fmer_native_rd16(in+277)>=720u)return 0;
  if(in[7]=='3' && (in[279]>3u || in[280]>3u))return 0;
  for(i=in[7]=='3'?281u:in[7]=='2'?279u:277u;i<FMER_BANK_SOUND;i++)if(in[i])return 0;
- memset(wire,0,FMER_NATIVE_BYTES);memcpy(wire,"FMERNATB",8);
- fmer_native_wr16(wire+8,11);fmer_native_wr16(wire+10,32);fmer_native_wr16(wire+12,FMER_NATIVE_BYTES);
+ memset(wire,0,FMER_NATIVE_BYTES);memcpy(wire,"FMERNATC",8);
+ fmer_native_wr16(wire+8,12);fmer_native_wr16(wire+10,32);fmer_native_wr16(wire+12,FMER_NATIVE_BYTES);
  memcpy(wire+16,in+8,6);fmer_native_wr16(wire+22,198);fmer_native_wr16(wire+24,155);wire[26]=16;wire[27]=64;
  memcpy(wire+FMER_NATIVE_VCED,in+16,155);memcpy(wire+32+145*2,in+171,106);
  for(i=0;i<145;i++)fmer_native_wr16(wire+32+i*2,in[16+i]);

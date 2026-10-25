@@ -1,6 +1,6 @@
 """Real browser and HTTP product checks. Isolated library; hardware blocked."""
 from datetime import datetime,timezone
-from http.server import HTTPServer
+from companion_http import CompanionHTTPServer as HTTPServer
 import hashlib
 import json
 from pathlib import Path
@@ -8,6 +8,7 @@ import threading
 import traceback
 from unittest.mock import patch
 import companion
+import companion_bank
 import launch_companion
 import sandbox
 from playwright.sync_api import sync_playwright
@@ -29,11 +30,13 @@ def main():
             assert page.request.get(base+'/api/health').json()['app']==launch_companion.APP
             assert launch_companion.health(server.server_port)
             page.route('**/api/presence',lambda route:route.fulfill(json={'inputs':['FM-1 Midi'],'outputs':['FM-1 Midi']}))
-            assert 'FMER Companion 734' in page.locator('footer').inner_text()
-            assert page.request.get(base+'/api/capabilities').json()['firmware_identity']=='FM-1_734'
+            assert 'FMER Companion 735' in page.locator('footer').inner_text()
+            assert page.request.get(base+'/api/capabilities').json()['firmware_identity']=='FM-1_735'
             assert 'Make room' in page.locator('#content').inner_text()
             assert page.locator('#connection').inner_text()=='Check connection'
-            view('banks');page.locator('#bankArchive').click();ready();view('library')
+            view('banks')
+            fm_slot=next(i for i,e in enumerate(companion_bank.profile(sandbox.find_executable('Release'))) if companion_bank.decode_record(e['native'])['controls'][160]==0)
+            page.locator('#pcSlot').select_option(str(fm_slot));page.locator('#bankArchive').click();ready();view('library')
             assert page.locator('[data-focus]').count()==1
             page.locator('[data-focus]').click();page.locator('#itemTitle').fill('Stage Bass <safe>');page.locator('#itemName').fill('STAGE BASS')
             page.locator('#itemCollection').fill('Night set');page.locator('#itemTags').fill('bass, performance');page.locator('#itemFavorite').check();page.locator('#saveDetails').click();ready()
@@ -73,15 +76,15 @@ def main():
             assert inner.locator('[aria-label="Voices"]').count()==0
             assert inner.locator('[aria-label="Mono glide"]').input_value()=='1'
             inner.locator('[aria-label="Playing mode"]').select_option('1')
-            assert inner.locator('[aria-label="Voices"]').input_value()=='4'
+            assert inner.locator('[aria-label="Voices"]').input_value()=='6'
             inner.locator('[aria-label="Voices"]').press('End')
             inner.locator('[aria-label="Voices"]').press('ArrowLeft')
             assert inner.locator('[aria-label="Playing mode"]').input_value()=='3'
-            assert '3V' in inner.locator('[aria-label="Playing mode"] option:checked').inner_text()
+            assert '5V' in inner.locator('[aria-label="Playing mode"] option:checked').inner_text()
             inner.locator('[aria-label="Voices"]').press('ArrowLeft')
-            assert '2V' in inner.locator('[aria-label="Playing mode"] option:checked').inner_text()
+            assert '4V' in inner.locator('[aria-label="Playing mode"] option:checked').inner_text()
             inner.locator('[aria-label="Playing mode"]').select_option('1')
-            assert inner.locator('[aria-label="Voices"]').input_value()=='4'
+            assert inner.locator('[aria-label="Voices"]').input_value()=='6'
 
             page.locator('#captureKind').select_option('project');page.locator('#captureEditor').click();ready()
             assert page.locator('#extractSounds').count()==1
@@ -154,7 +157,7 @@ def main():
             page.locator('#bankSend').click();page.wait_for_selector('#transfer[open]')
             page.locator('[data-transfer="0"]').select_option('12')
             page.locator('#transfer button[value=review]').click();page.wait_for_selector('#confirm[open]')
-            assert 'USER 12' in page.locator('#confirmText').inner_text()
+            assert 'Bank B 12' in page.locator('#confirmText').inner_text()
             page.locator('#confirmApply').click();ready()
             request=requests[-1]['request']
             assert request['action']=='deploy_library' and request['rows'][0]['slot']==12
@@ -182,6 +185,15 @@ def main():
             assert 'review the message below' not in page.locator('#jobSafety').inner_text().lower()
             page.screenshot(path=str(out/'compatibility-message.png'),full_page=True)
             passed('Human explanation and next action are visible; raw JSON stays collapsed and export is direct')
+            outcome=companion_errors.explain('Timed out waiting for None; [discovery:no_ports]')
+            page.locator('#readUnit').click();ready()
+            assert page.locator('#jobReason').inner_text()=='FM-1 USB MIDI connection not found'
+            assert 'not its instrument presets' in page.locator('#jobExplanation').inner_text()
+            assert 'PC/NORMAL' in page.locator('#jobNext').inner_text()
+            assert page.locator('#downloadJob').is_visible()
+            assert page.locator('#jobRecord').get_attribute('open') is None
+            page.screenshot(path=str(out/'connection-discovery-message.png'),full_page=True)
+            passed('Device discovery failure names USB MIDI, distinguishes presets and gives recovery plus export')
             view('firmware');assert page.locator('#installFirmware').is_disabled()
             package=sandbox.ROOT/'artifacts/development-721/package-release1/fmer-candidate.fwsc'
             if package.exists():
@@ -229,7 +241,7 @@ def main():
             passed('PC bank sound-pack import merges all 128 populated copies and one Undo restores the prior Library')
             import companion_archive
             native=page.evaluate('banks.slots[0].native')
-            saved=companion_archive.seal(dict(identity='FM-1_734',created=datetime.now(timezone.utc).isoformat(),
+            saved=companion_archive.seal(dict(identity='FM-1_735',created=datetime.now(timezone.utc).isoformat(),
                 instruments=[native]*128,projects=[None]*16,live=native,midi=[0]*8))
             page.route('**/api/jobs/*',lambda route:route.fulfill(json=dict(id='a'*32,state='failed',message='Stopped',progress=dict(backup_path='private saved backup'),outcome=companion_errors.explain('Transfer stopped after 1/2 verified slots. No automatic retry.'),created=datetime.now(timezone.utc).isoformat())))
             page.route('**/api/jobs/*/backup',lambda route:route.fulfill(json=saved))

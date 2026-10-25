@@ -38,6 +38,8 @@ def main(argv=None):
     raw = args.source.read_bytes()
     source = raw.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
     body = extract(source)
+    overload = block(source, "        if (late || observed>2800u || fm1_audio_free_half()!=half) {")
+    body += "\nstatic void production_overload(uint32_t late,uint32_t observed,uint32_t half) {\n" + overload + " else severe_streak=0;\n}\n"
     digest = hashlib.sha256(raw).hexdigest()
     generated = '#define FMER_NATIVE_BOARD_SOURCE_SHA256 "' + digest + '"\n' + body + "\n"
     args.output.parent.mkdir(parents=True, exist_ok=True)

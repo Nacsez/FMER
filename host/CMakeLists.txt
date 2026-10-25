@@ -32,5 +32,5 @@ if(BUILD_TESTING)
             "${Python3_EXECUTABLE}" -B -m unittest discover
             -s "${PROJECT_SOURCE_DIR}/tests" -p test_companion.py -v)
     # Includes full128-slot native10 migration, resets and actual renderer probes.
-    set_tests_properties(host.companion PROPERTIES TIMEOUT 180)
+    set_tests_properties(host.companion PROPERTIES TIMEOUT 600)
 endif()

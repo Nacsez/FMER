@@ -12,7 +12,7 @@ import fm1_native_state_v10 as native
 
 class Native10Tests(unittest.TestCase):
     def state(self):
-        state=companion_bank.native._legacy(companion_bank.decode_record(fixture()['native']))
+        state=companion_bank.native.v11._legacy(companion_bank.native._legacy(companion_bank.decode_record(fixture()['native'])))
         for t,lane in enumerate(state['song']):
             lane.update(enabled=True,loop=bool(t%2),length=32)
             for r,row in enumerate(lane['entries']):

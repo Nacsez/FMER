@@ -28,10 +28,10 @@ class DeviceTests(unittest.TestCase):
     def test_previous_native11_device_still_backed_up_before_upgrade(self):
         session=Mock();session.verified_identity='FM-1_733';session.close.return_value=[]
         client=Mock();client.list_slots.return_value={'slots':[]}
-        with patch.object(device.hardware_bridge,'WinMM'),patch.object(device.bridge.transport,'find_session',return_value=session),patch.object(device.previous_bridge,'NativeBridge',return_value=client) as old,patch.object(device.bridge,'NativeBridge') as latest:
+        with patch.object(device.hardware_bridge,'WinMM'),patch.object(device.bridge.transport,'find_session',return_value=session),patch.dict(device.LEGACY_CLIENTS,{'FM-1_733':Mock(return_value=client)}) as old,patch.object(device.bridge,'NativeBridge') as latest:
             self.assertTrue(self.service.dispatch({'action':'probe'})['can_manage'])
             self.service.dispatch({'action':'catalog'})
-            old.assert_called_once_with(session,unittest.mock.ANY)
+            old['FM-1_733'].assert_called_once_with(session,unittest.mock.ANY)
             latest.assert_not_called();client.list_slots.assert_called_once()
             self.assertEqual(self.service.record_identity,'FM-1_733')
 
@@ -77,7 +77,7 @@ class DeviceTests(unittest.TestCase):
         with patch.object(device.hardware_bridge,'WinMM'),patch.object(device.bridge.transport,'find_session',return_value=session),patch.object(device.bridge,'NativeBridge',return_value=client):
             self.service.dispatch(dict(action='push',slot=64,raw=encoded,confirmation='Replace device slot 64'))
         converted=client.push_slot.call_args.args[0]
-        self.assertEqual(converted[:8],b'FMERNATB')
+        self.assertEqual(converted[:8],b'FMERNATC')
         self.assertEqual(device.bridge.native.decode(converted),device.bridge.native.decode_compatible(wire))
         self.assertEqual(base64.b64decode(encoded),wire);session.close.assert_called_once()
 

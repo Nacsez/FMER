@@ -1,5 +1,6 @@
 #include "effects.hpp"
 #include "finite_float.hpp"
+#include "target_hot.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -20,7 +21,7 @@ constexpr unsigned tank_lengths[4][8] = {
 constexpr unsigned diffuser_lengths[4] = {149,211,263,293};
 // Explicit fixed-size bit copies avoid library calls under the audited target
 // toolchain's -fno-builtin policy; no aliasing or union-punning assumptions.
-std::uint32_t float_bits(float value) noexcept {
+FMER_SAMPLE_INLINE std::uint32_t float_bits(float value) noexcept {
     std::uint32_t bits;
 #if defined(FMER_DEVICE)
     __builtin_memcpy(&bits, &value, sizeof(bits));
@@ -29,7 +30,7 @@ std::uint32_t float_bits(float value) noexcept {
 #endif
     return bits;
 }
-float bits_float(std::uint32_t bits) noexcept {
+FMER_SAMPLE_INLINE float bits_float(std::uint32_t bits) noexcept {
     float value;
 #if defined(FMER_DEVICE)
     __builtin_memcpy(&value, &bits, sizeof(value));
@@ -38,8 +39,8 @@ float bits_float(std::uint32_t bits) noexcept {
 #endif
     return value;
 }
-float magnitude(float value) noexcept { return bits_float(float_bits(value)&0x7fffffffu); }
-float output_knee(float x) noexcept {
+FMER_SAMPLE_INLINE float magnitude(float value) noexcept { return bits_float(float_bits(value)&0x7fffffffu); }
+FMER_SAMPLE_INLINE float output_knee(float x) noexcept {
     const float a = magnitude(x);
     if (a <= .9f) return x;
     const float excess = a - .9f;
@@ -56,7 +57,7 @@ float output_knee(float x) noexcept {
 // library, allocation, data-dependent loop or native half-FPU is required.
 static_assert(sizeof(float) == sizeof(std::uint32_t) &&
               std::numeric_limits<float>::is_iec559, "delay requires binary32 floats");
-std::uint16_t store_delay(float value) noexcept {
+FMER_SAMPLE_INLINE std::uint16_t store_delay(float value) noexcept {
     const std::uint32_t bits=float_bits(value);
     const auto sign = static_cast<std::uint16_t>((bits >> 16) & 0x8000u);
     const unsigned exponent = (bits >> 23) & 0xffu;
@@ -70,7 +71,7 @@ std::uint16_t store_delay(float value) noexcept {
     return static_cast<std::uint16_t>(sign | std::min(rounded, 0x7bffu));
 }
 
-float delay_sample(std::uint16_t value) noexcept {
+FMER_SAMPLE_INLINE float delay_sample(std::uint16_t value) noexcept {
     const unsigned exponent = (value >> 10) & 0x1fu;
     const unsigned mantissa = value & 0x3ffu;
     if (!exponent) {
@@ -82,12 +83,12 @@ float delay_sample(std::uint16_t value) noexcept {
     return bits_float(bits);
 }
 
-float delay_sample(float value) noexcept { return value; }
+FMER_SAMPLE_INLINE float delay_sample(float value) noexcept { return value; }
 
 #if defined(FMER_DEVICE)
 // Target FPU is single precision. These bounded original approximations avoid
 // per-sample transcendental calls; desktop reference processing is unchanged.
-float modulation_sine(float phase) noexcept {
+FMER_SAMPLE_INLINE float modulation_sine(float phase) noexcept {
     float quadrant = phase * 4.0f;
     const bool negative = quadrant >= 2.0f;
     if (negative) quadrant -= 2.0f;
@@ -107,7 +108,7 @@ float modulation_sine(float phase) noexcept {
 // boundaries; its absolute error is bounded by 2e-6 and |a| stays below .983.
 // This avoids generic powf/tanf range reduction eight times per128-frame
 // block. Phase accumulation and the existing32-sample interpolation remain.
-float phaser_coefficient_target(float exponent) noexcept {
+FMER_SAMPLE_INLINE float phaser_coefficient_target(float exponent) noexcept {
     const int octave = static_cast<int>(exponent + 3.5f) - 3;
     const float z = (exponent - static_cast<float>(octave)) * .6931471805599453f;
     const float exponential = 1.f + z * (1.f + z * (.5f + z * (1.f/6.f +
@@ -119,22 +120,22 @@ float phaser_coefficient_target(float exponent) noexcept {
         square * (17.f/315.f + square * (62.f/2835.f + square * (1382.f/155925.f)))));
     return (tangent - 1.f) / (tangent + 1.f);
 }
-float soft_clip(float input) noexcept {
+FMER_SAMPLE_INLINE float soft_clip(float input) noexcept {
     if (input >= 3.0f) return 1.0f;
     if (input <= -3.0f) return -1.0f;
     const float square = input * input;
     return input * (27.0f + square) / (27.0f + 9.0f * square);
 }
 #else
-float modulation_sine(float phase) noexcept { return std::sin(2.0f * pi * phase); }
-float soft_clip(float input) noexcept { return std::tanh(input); }
+FMER_SAMPLE_INLINE float modulation_sine(float phase) noexcept { return std::sin(2.0f * pi * phase); }
+FMER_SAMPLE_INLINE float soft_clip(float input) noexcept { return std::tanh(input); }
 #endif
 
 bool in_range(float value, float lo, float hi) noexcept {
     return std::isfinite(value) && value >= lo && value <= hi;
 }
 
-float quiet(float value) noexcept {
+FMER_SAMPLE_INLINE float quiet(float value) noexcept {
     // Avoid denormal state without changing the dry bypass signal.
     // IEEE magnitude ordering gives the same threshold including NaNs,
     // infinities and signed zero, with one integer comparison per state.
@@ -142,7 +143,7 @@ float quiet(float value) noexcept {
 }
 
 template<typename Sample, std::size_t Size>
-float read_delay(const std::array<Sample, Size>& buffer, std::size_t write,
+FMER_SAMPLE_INLINE float read_delay(const std::array<Sample, Size>& buffer, std::size_t write,
                  std::size_t filled, float distance) noexcept {
     float position = static_cast<float>(write) - distance;
     if (position < 0) position += static_cast<float>(Size);
@@ -212,7 +213,7 @@ struct Effects::Impl {
     unsigned phaser_control_left{};
 #endif
 
-    void clear(EffectKind kind) noexcept {
+    FMER_SAMPLE_INLINE void clear(EffectKind kind) noexcept {
         switch (kind) {
         case EffectKind::filter: filter_state = filter_state2 = 0; break;
         // Invalidate rings instead of clearing ~125KB from an audio callback.
@@ -336,6 +337,7 @@ struct Effects::Impl {
             const float coefficient = coefficient_at(phaser_phase);
 #endif
             float wet = input;
+            FMER_FIXED_UNROLL
             for (float& state : phaser_state) {
                 const float output = coefficient * wet + state;
                 state = quiet(wet - coefficient * output);
@@ -348,6 +350,7 @@ struct Effects::Impl {
         case EffectKind::reverb: {
             if (p.reverb == 0) return input;
             float injection=input;
+            FMER_FIXED_UNROLL
             for(unsigned i=0;i<4;++i) {
                 auto& pos=diffuse_position[i]; auto& filled=diffuse_filled[i];
                 const float old=pos<filled?diffusers[i][pos]:0.f;
@@ -375,6 +378,9 @@ struct Effects::Impl {
                 tank_control_left=32;
             }
             --tank_control_left;
+            // These fixed-size lines keep their original accumulation order.
+            // Constant indices avoid repeated address/loop work on pi32v2.
+            FMER_FIXED_UNROLL
             for(unsigned i=0;i<8;++i) {
                 const unsigned newer=(tank_position+2048-tank_distance[i])&2047u;
                 const unsigned older=(newer+2047)&2047u;
@@ -394,6 +400,7 @@ struct Effects::Impl {
             butterfly(0,1);butterfly(2,3);butterfly(4,5);butterfly(6,7);
             butterfly(0,2);butterfly(1,3);butterfly(4,6);butterfly(5,7);
             butterfly(0,4);butterfly(1,5);butterfly(2,6);butterfly(3,7);
+            FMER_FIXED_UNROLL
             for(unsigned i=0;i<8;++i)
                 tank[i][tank_position]=quiet(injection*.3535533906f+
                     mixed[i]*.3535533906f*tank_gain[i]);
@@ -485,7 +492,7 @@ bool Effects::set_parameters(const EffectParameters& parameters) noexcept {
 
 EffectParameters Effects::parameters() const noexcept { return impl_->parameters; }
 
-void Effects::process(float* mono, std::size_t frames) noexcept {
+FMER_DSP_HOT void Effects::process(float* mono, std::size_t frames) noexcept {
     if (!mono && frames != 0) { ++impl_->counters.rejected_buffers; return; }
     if(frames) impl_->started=true;
     std::array<float,6> peaks{};

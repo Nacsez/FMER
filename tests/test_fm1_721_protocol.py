@@ -26,6 +26,6 @@ class Protocol721Tests(unittest.TestCase):
         with patch.object(capture.transport.MidiSession,'_send'):
             for identity in capture.SUPPORTED_IDENTITIES:
                 session.expected_identity=session.verified_identity=identity
-                if identity in ('FM-1_721','FM-1_722','FM-1_723','FM-1_724','FM-1_725','FM-1_726','FM-1_727','FM-1_728','FM-1_729','FM-1_730','FM-1_731','FM-1_733','FM-1_734'):session._send(bridge.usb_audio_request(),'read stream counters')
+                if identity in ('FM-1_721','FM-1_722','FM-1_723','FM-1_724','FM-1_725','FM-1_726','FM-1_727','FM-1_728','FM-1_729','FM-1_730','FM-1_731','FM-1_733','FM-1_734','FM-1_735'):session._send(bridge.usb_audio_request(),'read stream counters')
                 else:
                     with self.assertRaises(capture.CaptureError):session._send(bridge.usb_audio_request(),'unsupported counters')

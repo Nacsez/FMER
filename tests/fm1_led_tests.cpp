@@ -14,9 +14,9 @@ static unsigned at(const fmer_led_frame_t &f,unsigned col,unsigned row){return (
 static void clean(const fmer_led_frame_t &f){for(unsigned col=0;col<11;col++){unsigned allowed=col<9?0x1eu:0x1cu;require(!(f.lit[col]&f.dim[col]),"full and dim frame bits do not overlap");require(!((f.lit[col]|f.dim[col])&~allowed),"no encoder, unknown or nonexistent LED addressed");}}
 static void no_keys(const fmer_led_frame_t &f,unsigned level=FMER_LED_DIM){for(unsigned id=14;id<41;id++)require(fmer_led_key_level(&f,id)==level,"unowned note key uses ready glow or fault darkness");}
 int main(){
- for(unsigned mask=0;mask<32;mask++)require(fmer_led_scan_mask(30,mask,0)==30 && fmer_led_scan_mask(30,mask,1)==(30&~mask),"half-bright scan never changes other emitters");
+ for(unsigned mask=0;mask<32;mask++)require(fmer_led_scan_mask(30,mask,0,0)==30 && fmer_led_scan_mask(30,mask,0,1)==(30&~mask),"half-bright scan never changes other emitters");
  fmer_led_frame_t f{};auto s=state();fmer_led_render(&s,0,&f);fmer_led_frame_t blank{};
- require(sizeof(fmer_led_frame_t)==33 && !std::memcmp(f.lit,blank.lit,sizeof f.lit),"ready glow never claims an active note");no_keys(f);
+ require(sizeof(fmer_led_frame_t)==44 && !std::memcmp(f.lit,blank.lit,sizeof f.lit),"ready glow never claims an active note");no_keys(f);
  const int matrix[4][11]={{5,11,4,10,3,9,2,8,-1,-1,-1},{34,35,36,37,38,40,39,13,7,6,12},{23,24,25,26,27,28,29,30,31,32,33},{0,1,15,14,17,16,19,18,20,21,22}};
  unsigned seen=0;for(unsigned row=1;row<=4;row++)for(unsigned col=0;col<11;col++)if(matrix[row-1][col]>=0){
   auto id=(unsigned)matrix[row-1][col];require(fmer_led_key_position(id)==((col<<3)|row),"each ID maps to audited matrix coordinates");
@@ -41,7 +41,15 @@ int main(){
  s.physical_buttons=0;fmer_led_render(&s,0,&f);require(fmer_led_key_level(&f,9)==FMER_LED_LIT,"SAVE stays selected without implying a write");
  for(int octave=-3;octave<=3;octave++){
   s=state();s.octave=octave;fmer_led_render(&s,0,&f);
-  require(fmer_led_key_level(&f,0)==(octave<0?(octave==-1?FMER_LED_DIM:octave==-2?FMER_LED_HALF:FMER_LED_LIT):FMER_LED_DIM) && fmer_led_key_level(&f,1)==(octave>0?(octave==1?FMER_LED_DIM:octave==2?FMER_LED_HALF:FMER_LED_LIT):FMER_LED_DIM),"octave shows direction, zero dark");
+  require(fmer_led_key_level(&f,0)==(octave<0?(octave==-1?FMER_LED_HALF:octave==-2?FMER_LED_THREE_QUARTER:FMER_LED_LIT):FMER_LED_DIM) && fmer_led_key_level(&f,1)==(octave>0?(octave==1?FMER_LED_HALF:octave==2?FMER_LED_THREE_QUARTER:FMER_LED_LIT):FMER_LED_DIM),"octave shows three increasing levels above neutral ready glow");
+  if(octave){
+   unsigned key=octave<0?0:1,pos=fmer_led_key_position(key),col=pos>>3,mask=1u<<(pos&7u),on=0;
+   for(unsigned phase=0;phase<4;phase++)on+=(fmer_led_scan_mask(f.lit[col],f.half[col],f.three_quarter[col],phase)&mask)!=0;
+   unsigned distance=(unsigned)(octave<0?-octave:octave);
+   require(on==distance+1u,"first, second and third octave drive two, three and four matrix frames out of four");
+   s.physical_buttons=1u<<key;fmer_led_render(&s,0,&f);
+   require(fmer_led_key_level(&f,key)==FMER_LED_LIT && !(f.half[col]&mask) && !(f.three_quarter[col]&mask),"held octave button overrides every dimming mask");
+  }
   for(unsigned i=0;i<27;i++){s=state();s.octave=octave;note(s,(unsigned)(53+(int)i+12*octave),true);fmer_led_render(&s,0,&f);
    for(unsigned k=0;k<27;k++)require(fmer_led_key_level(&f,14+k)==(k==i?FMER_LED_LIT:FMER_LED_DIM),"active pitch maps exactly within the current octave, including word boundaries");clean(f);}
  }

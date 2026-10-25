@@ -1,3 +1,12 @@
+# Current source milestone:735 / Companion r11
+
+The owner authorized a source push and unpublished draft on October24,2026 after
+successful second-computer testing. See [735 release notes](RELEASE_NOTES_735.md),
+[installation](INSTALLATION_735.md) and [returned QA](COMPANION_R11_QA.md).
+The exact tested Companion ZIP and firmware735-r9 are retained. Publication is
+reserved for the owner. Published734-r5 remains unchanged. The table below is
+historical734 evidence and must not be treated as a new735 qualification.
+
 # Release preparation — build 734
 
 Public release checked21 October 2026: the owner made Nacsez/FMER public and

@@ -12,8 +12,8 @@ BG='#070709';PANEL='#101014';INK='#f5f7fa';MUTED='#b6bbc6';GREEN='#76ff53';PINK=
 # Exact image names and pixel anchors. Text is maintained alongside its source.
 FEATURES=[
  ('playing-modes','Playing modes','performance','One instrument or four independent parts.',
-  [('guide-glo-0','GLO / VOICE-TEMPO','K1 selects 1V, 4V or 4T','Voices follows the active allocation'),('guide-mono-glide','GLO / MONO GLIDE','Choose Legato or Always','Set glide time and contour')],
-  ['1V: mono instrument with glide. 4V: four voices shared by one instrument.','4T: four mono tracks with separate instrument references.','Use GLO K1 or SEQ / PLAY MODE K1. Entering or leaving 4T stops playback.']),
+  [('guide-glo-0','GLO / VOICE-TEMPO','K1 selects 1V, 6V or 4T','Voices follows the active allocation'),('guide-mono-glide','GLO / MONO GLIDE','Choose Legato or Always','Set glide time and contour')],
+  ['1V: mono instrument with glide. 6V: six voices shared by one instrument.','4T: four mono tracks with separate instrument references.','Use GLO K1 or SEQ / PLAY MODE K1. Entering or leaving 4T stops playback.']),
  ('fm-synthesis','Six-operator FM','fm','Four-voice FM sound design with DX7-style voice exchange.',
   [('guide-fm-edit-0','EDIT / TUNE','SELECT chooses the operator','K1–K4 edit level and frequency'),('guide-fm-edit-4','EDIT / OP RATES','Operator envelope rates','Each knob edits one stage')],
   ['Six operators, 32 algorithms, feedback and detailed rate/level envelopes.','ALGORITHM changes the current FM sound; SAVE retains the edit.','Standard DX7 voice/bank import is available in Companion; exact DX7 emulation is not claimed.']),
@@ -26,9 +26,9 @@ FEATURES=[
  ('virtual-analog','Virtual Analog','va','A second engine for direct oscillator, filter and envelope work.',
   [('guide-va-edit','EDIT / VA','Waveform and voice filter','Cutoff and resonance are separate'),('guide-va-env','ENV / VA','Envelope shape','Attack, decay, sustain and release')],
   ['Choose sine, saw, square, triangle or noise.','The voice filter is distinct from the reorderable shared FX filter.','Use ENV for amplitude shaping and LFO for stored modulation.']),
- ('instrument-banks','128 onboard instrument slots','banks','64 editable DEFAULT slots and 64 independent USER slots.',
+ ('instrument-banks','128 onboard instrument slots','banks','64 editable Bank A slots and 64 independent Bank B slots.',
   [('guide-presets','PRESETS','Bank and sound selection','PRESETS crosses all banks'),('guide-save-instrument','SAVE / INSTRUMENT','Choose bank and destination','SEL confirms Save or Load')],
-  ['The supplied DEFAULT bank contains 32 FM and 32 VA sounds.','Either engine can occupy either bank; USER starts with independent default copies.','Reset to FMER Default affects DEFAULT only. Reset User Bank and Clear User Bank are separate.']),
+  ['Spectrum contains 36 FM and 28 VA sounds; all 62 survey favorites are included.','Either engine can occupy either bank; Bank B starts with independent default copies.','Reset to FMER Default affects Bank A only. Reset User Bank and Clear User Bank are separate.']),
  ('filter','Filter and resonance','effects','Low-pass, high-pass and band-pass with directional shading.',
   [('guide-filter-0','FX / LOW PASS','Low frequencies pass below cutoff','Frequency and resonance'),('guide-filter-1','FX / HIGH PASS','High frequencies pass above cutoff','The fill direction reverses')],
   ['FX page1: K1 cutoff, K2 resonance; ALGORITHM chooses filter type.','Frequency uses a logarithmic control scale with actual Hz visible.','Resonance emphasizes the region around cutoff; it is not a second frequency.']),
@@ -94,7 +94,7 @@ FEATURES=[
   ['Collections, tags, favorites, rename, duplicate, move and Trash/Undo.','PC library items are separate from the unit’s onboard banks and projects.','Import/export native FMER data and standard DX7 FM voices or32-voice banks.']),
  ('companion-banks','Companion editing and banks','editor','Edit visually, audition locally and choose explicit unit destinations.',
   [('app-editor','COMPANION / EDITOR','FM algorithm and working instrument','Sound, effects and sequencing tabs')],
-  ['Sliders, musical selectors and a gesture-level Undo support detailed editing.','64 DEFAULT and64 USER PC slots are separate from hardware storage until transferred.','Opening a unit instrument preserves the editor arrangement; loading a project replaces it.']),
+  ['Sliders, musical selectors and a gesture-level Undo support detailed editing.','64 Bank A and64 Bank B PC slots are separate from hardware storage until transferred.','Opening a unit instrument preserves the editor arrangement; loading a project replaces it.']),
  ('companion-backup','Backup and restore','backups','Keep a recoverable copy before changing an installation.',
   [('app-backups','COMPANION / BACKUPS','Library export and unit backup','Choose the explicit restore scope')],
   ['Complete supported-FMER backups include musical banks, projects, working state, MIDI and personal FX default.','Keep dated archives per named instrument. Manage one connected unit at a time.','Restore is a verified overlay: empty source slots do not silently erase destination slots.']),
@@ -121,19 +121,19 @@ SHORTCUTS=[
  ('Hold SEL + double-press PLAY','Queue all tracks for the next16-step bar'),
  ('NOTE EDIT: ALGORITHM / SEL','Move the logical note in time / delete it'),
  ('NOTE EDIT: hold SEL + turn pitch down/up','Insert Rest / Tie'),
- ('PRESETS / GLO K1','Browse sounds across banks / choose1V,4V,4T'),
+ ('PRESETS / GLO K1','Browse sounds across banks / choose1V,6V,4T'),
  ('SAVE: choose scope, slot, action → SEL','Confirm instrument or project Save/Load'),
 ]
 
 WORKFLOWS=[
  ('sound-to-song','From sound to arrangement',[
- ('01 / CHOOSE','Select1V,4V or4T in GLO. Browse with PRESETS.'),('02 / DESIGN','EDIT, ENV, LFO and FX shape the working instrument.'),('03 / SAVE SOUND','SAVE / Instrument. Choose bank and slot; confirm SEL.'),
+ ('01 / CHOOSE','Select1V,6V or4T in GLO. Browse with PRESETS.'),('02 / DESIGN','EDIT, ENV, LFO and FX shape the working instrument.'),('03 / SAVE SOUND','SAVE / Instrument. Choose bank and slot; confirm SEL.'),
  ('04 / RECORD','Choose pattern and length. REC uses Step, Overdub or Replace.'),('05 / ARRANGE','Assign track sounds and patterns. Add Song repeats and transpose.'),('06 / PRESERVE','Save Project. Back up the unit in Companion.')], 'Tracks reference saved instrument slots. Save edited sounds before the project.'),
  ('data-map','What is saved where?',[
- ('INSTRUMENT BANKS','64 DEFAULT +64 USER. Each slot can hold FM or VA.'),('PATTERN SET','16 patterns in each project; each holds1–64 steps.'),('SONG LANES','32 entries per lane refer to the project’s patterns.'),
+ ('INSTRUMENT BANKS','64 Bank A +64 Bank B. Each slot can hold FM or VA.'),('PATTERN SET','16 patterns in each project; each holds1–64 steps.'),('SONG LANES','32 entries per lane refer to the project’s patterns.'),
  ('PROJECT','Working sound, patterns, lanes, mix and bank references.'),('PC LIBRARY','Named instruments/projects, collections and independent copies.'),('UNIT BACKUP','All populated banks/projects plus working/global settings.')], 'A project references track instruments. Moving a bank instrument can change projects that reference its slot.'),
  ('mode-workflow','Choose the right playing mode',[
- ('1V / MONO','One instrument and glide for connected lead or bass lines.'),('4V / POLY','One instrument; keys, arp and one sequence share four voices.'),('4T / PARTS','Four independent mono tracks, each with an instrument reference.'),
+ ('1V / MONO','One instrument and glide for connected lead or bass lines.'),('6V / POLY','One instrument; keys, arp and one sequence share six voices.'),('4T / PARTS','Four independent mono tracks, each with an instrument reference.'),
  ('DIRECT ACCESS','GLO K1 or SEQ / PLAY MODE K1 changes allocation explicitly.'),('PERFORM','4T opens Mixer. Single-instrument modes open one-lane Song.'),('RETURN','Hold SEQ0.8s to return. Use HOME for scopes; FX for effects.')], 'Entering/leaving4T stops playback. Ordinary page navigation and preset browsing do not change mode.'),
  ('paired-usb','Two-unit USB performance',[
  ('01 / PREPARE','Keep both units powered. Disconnect their computer cables.'),('02 / CHOOSE ROLES','GLO / USB LINK: Master on one, Receiver on the other.'),('03 / APPLY + CONNECT','SEL applies. Join the two USB-C ports with a data cable.'),
@@ -183,7 +183,7 @@ def clean(value):
     # Normal prose spacing; never alter captured software pixels or source IDs.
     import re
     value=re.sub(r'(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])', ' ', value)
-    for original in ('4T','4V','1V','K1','K2','K3','K4','DX7','x64'):
+    for original in ('4T','6V','1V','K1','K2','K3','K4','DX7','x64'):
         value=value.replace(re.sub(r'(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])',' ',original),original)
     return value
 
@@ -192,8 +192,8 @@ def text(x,y,value,size=24,color=INK,weight=400):
 def lines(x,y,value,width=54,size=24,color=MUTED):
     return ''.join(text(x,y+i*int(size*1.35),v,size,color) for i,v in enumerate(textwrap.wrap(value,width=width)))
 def shell(title,subtitle,height=1200):
-    return [f'<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="{height}" viewBox="0 0 1800 {height}" role="img"><title>{E(title)}</title><desc>{E(subtitle)}</desc><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="{PINK}"/></marker></defs><rect width="1800" height="{height}" fill="{BG}"/><g font-family="Segoe UI,Arial,sans-serif">',text(64,62,'FMER',42,GREEN,800),text(1736,55,'734 / FIELD GUIDE',18,MUTED).replace('x="1736"','x="1736" text-anchor="end"'),f'<path d="M64 86H1736" stroke="{PURPLE}"/>',text(64,143,title,40,INK,650),text(64,183,subtitle,24,MUTED)]
-def finish(parts,height=1200,caption='Actual734 renderer / illustrative state / annotations outside the software'):
+    return [f'<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="{height}" viewBox="0 0 1800 {height}" role="img"><title>{E(title)}</title><desc>{E(subtitle)}</desc><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="{PINK}"/></marker></defs><rect width="1800" height="{height}" fill="{BG}"/><g font-family="Segoe UI,Arial,sans-serif">',text(64,62,'FMER',42,GREEN,800),text(1736,55,'735 / FIELD GUIDE',18,MUTED).replace('x="1736"','x="1736" text-anchor="end"'),f'<path d="M64 86H1736" stroke="{PURPLE}"/>',text(64,143,title,40,INK,650),text(64,183,subtitle,24,MUTED)]
+def finish(parts,height=1200,caption='Actual735 renderer / illustrative state / annotations outside the software'):
     parts += [f'<path d="M64 {height-66}H1736" stroke="#4b4e5a"/>',text(64,height-30,caption,18,MUTED),'</g></svg>'];return ''.join(parts)
 def embedded(name,x,y,w,h):
     data=base64.b64encode((H/(name+'.png')).read_bytes()).decode()
@@ -213,14 +213,14 @@ def plate(item):
             out += [f'<path d="M{notes_x-10} {ly-8}L{endx} {endy}" stroke="{PINK}" stroke-width="3" fill="none" marker-end="url(#arrow)"/>',text(notes_x,ly,str(n+1).zfill(2),22,PINK,700),lines(notes_x,ly+34,label,19,23,INK)]
     by=1075 if app else 845
     for i,b in enumerate(bullets):out += [text(76,by+i*74,str(i+1).zfill(2),23,PINK,700),lines(128,by+i*74,b,113,24,INK)]
-    return finish(out,height,'Actual Companion browser capture / example library / no unit connected' if app else 'Actual734 renderer / illustrative state / annotations outside the software')
+    return finish(out,height,'Actual Companion browser capture / example library / no unit connected' if app else 'Actual735 renderer / illustrative state / annotations outside the software')
 def workflow(item):
     slug,title,nodes,note=item;out=shell(title,'WORKFLOW / follow the numbered steps or read each storage layer in order')
     for i,(label,body) in enumerate(nodes):
         x=64+(i%3)*570;y=255+(i//3)*330
         out += [f'<rect x="{x}" y="{y}" width="530" height="250" rx="12" fill="{PANEL}" stroke="{GREEN}" stroke-width="2"/>',text(x+28,y+48,label,26,GREEN,650),lines(x+28,y+95,body,32,25,INK)]
         if i%3<2:out.append(f'<path d="M{x+532} {y+125}h34" stroke="{PINK}" stroke-width="4" marker-end="url(#arrow)"/>')
-    out+= [lines(76,1005,note,115,25,INK)];return finish(out,caption='FMER734 / workflow reference / arrows indicate reading order, not automatic file transfer')
+    out+= [lines(76,1005,note,115,25,INK)];return finish(out,caption='FMER735 / workflow reference / arrows indicate reading order, not automatic file transfer')
 def cheatsheet():
     out=shell('Shortcuts / one-sheet reference','Hold the modifier first. SELECT is the rotary encoder; SEL is the button.',1400)
     for i,(gesture,result) in enumerate(SHORTCUTS):
@@ -228,7 +228,7 @@ def cheatsheet():
         if i%2==0:out.append(f'<rect x="64" y="{y-27}" width="1672" height="60" fill="{PANEL}"/>')
         out += [text(84,y+7,gesture,24,GREEN,600),text(900,y+7,result,23,INK)]
     out += [lines(76,1274,'Mode changes involving4T, SAVE/LOAD and saving a personal FX default stop playback. Track launch shortcuts are unavailable during recording.',126,21,INK)]
-    return finish(out,1400,'FMER734 / GLO contains the on-device icon legend and shortcut page')
+    return finish(out,1400,'FMER735 / GLO contains the on-device icon legend and shortcut page')
 
 def build(captures):
     for path in captures.glob('guide-*.ppm'):(H/(path.stem+'.png')).write_bytes(png(path.read_bytes()))
@@ -238,7 +238,7 @@ def build(captures):
     for f in WORKFLOWS:
         name='workflow-'+f[0]+'.svg';(H/name).write_text(workflow(f),encoding='utf8');entries.append(dict(slug=f[0],title=f[1],topic='workflows',file=name,summary=f[3],frames=[]))
     (H/'feature-shortcuts.svg').write_text(cheatsheet(),encoding='utf8');entries.append(dict(slug='shortcuts-sheet',title='Shortcuts / one sheet',topic='shortcuts',file='feature-shortcuts.svg',summary='Modifier gestures, navigation and performance commands.',frames=[]))
-    manifest=dict(firmware='FM-1_734',date='2026-10-20',capture_scope='Actual production renderer with illustrative fixtures; actual isolated Companion browser captures; no physical display photographs',features=entries,
+    manifest=dict(firmware='FM-1_735',date='2026-10-24',capture_scope='Actual production renderer with illustrative fixtures; actual isolated Companion browser captures; no physical display photographs',features=entries,
        inputs={p:hashlib.sha256((R/p).read_bytes()).hexdigest() for p in ('firmware/fm1/ui.h','firmware/fm1/panel_model.h','tools/feature_capture.cpp','tools/build_release_media.py')},
        source_images={f:hashlib.sha256((H/f).read_bytes()).hexdigest() for e in entries for f in e['frames']})
     (R/'docs/help/feature-plates.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8')
@@ -247,11 +247,11 @@ def build(captures):
     for e in entries:figures[e['topic']].insert(0,dict(file=e['file'],alt=e['title']+': annotated screen reference',caption=e['summary']+' Open for full-size view.'))
     (R/'docs/help/figures.json').write_text(json.dumps(figures,indent=2,ensure_ascii=True)+'\n',encoding='utf8')
     (H/'visual-guide.htm').write_text(gallery(entries),encoding='utf8')
-    print(json.dumps(dict(plates=len(entries),firmware=734,hardware_access=False)))
+    print(json.dumps(dict(plates=len(entries),firmware=735,hardware_access=False)))
 
 def gallery(entries):
     cards=''.join(f'<section class="plate" data-text="{E(e["title"].lower())}"><h2>{E(e["title"])}</h2><a href="{e["file"]}"><img src="{e["file"]}" alt="{E(e["title"])}"></a><p>{E(e["summary"])}</p></section>' for e in entries)
-    page='<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FMER734 / Visual field guide</title><style>body{margin:0;background:'+BG+';color:'+INK+';font:18px/1.5 system-ui}main{max-width:1500px;margin:auto;padding:36px}h1{font-size:42px;color:'+GREEN+'}a{color:'+GREEN+'}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:28px}.plate{min-width:0;background:'+PANEL+';padding:20px;border:1px solid #4b4e5a;border-radius:8px}img{width:100%;height:auto}input{padding:14px;font:inherit;width:min(500px,90%);margin-bottom:24px;background:#1b1b23;color:white;border:1px solid '+PINK+'}@media(max-width:500px){main{padding:16px}.grid{display:block}.plate{margin-bottom:20px}}@media print{input,header{display:none}.grid{display:block}.plate{break-after:page;padding:0;border:0}.plate h2,.plate p{display:none}main{padding:0}img{max-height:185mm;object-fit:contain}body{background:white}}</style><main><header><h1>FMER / visual field guide</h1><p>Build734 · Annotated screens, workflows and shortcuts. Click a sheet to open it at full size.</p><p><a href="index.htm">Full handbook</a> · <a href="feature-shortcuts.svg">Shortcut sheet</a></p><input aria-label="Find a guide" placeholder="Find a feature or workflow" oninput="document.querySelectorAll(\'.plate\').forEach(p=>p.hidden=!p.dataset.text.includes(this.value.toLowerCase()))"></header><div class="grid">'+cards+'</div></main></html>'
+    page='<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FMER735 / Visual field guide</title><style>body{margin:0;background:'+BG+';color:'+INK+';font:18px/1.5 system-ui}main{max-width:1500px;margin:auto;padding:36px}h1{font-size:42px;color:'+GREEN+'}a{color:'+GREEN+'}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:28px}.plate{min-width:0;background:'+PANEL+';padding:20px;border:1px solid #4b4e5a;border-radius:8px}img{width:100%;height:auto}input{padding:14px;font:inherit;width:min(500px,90%);margin-bottom:24px;background:#1b1b23;color:white;border:1px solid '+PINK+'}@media(max-width:500px){main{padding:16px}.grid{display:block}.plate{margin-bottom:20px}}@media print{input,header{display:none}.grid{display:block}.plate{break-after:page;padding:0;border:0}.plate h2,.plate p{display:none}main{padding:0}img{max-height:185mm;object-fit:contain}body{background:white}}</style><main><header><h1>FMER / visual field guide</h1><p>Build735 · Annotated screens, workflows and shortcuts. Click a sheet to open it at full size.</p><p><a href="index.htm">Full handbook</a> · <a href="feature-shortcuts.svg">Shortcut sheet</a></p><input aria-label="Find a guide" placeholder="Find a feature or workflow" oninput="document.querySelectorAll(\'.plate\').forEach(p=>p.hidden=!p.dataset.text.includes(this.value.toLowerCase()))"></header><div class="grid">'+cards+'</div></main></html>'
     return page
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--captures',type=Path,required=True);build(p.parse_args().captures)

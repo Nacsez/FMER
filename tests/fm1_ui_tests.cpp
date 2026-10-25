@@ -85,7 +85,7 @@ int main(int argc,char** argv) {
     fmer_pattern_state_t pattern{};pattern.revision=1;pattern.length=16;
     for(unsigned i=0;i<64;i++){pattern.pitch[i]=i%2?128:static_cast<uint8_t>(60+i%16);pattern.velocity[i]=100;pattern.gate[i]=75;}
     fmer_ui_state_t state{};state.controls=&controls;state.panel=&panel;state.scope=scope.data();
-    state.pattern=&pattern;state.build=734;state.gain=256;state.voice_limit=4;state.usb_ready=1;state.render_us=650;
+    state.pattern=&pattern;state.build=735;state.gain=256;state.voice_limit=6;state.usb_ready=1;state.render_us=650;
     state.battery_percent=101;
     state.performance.queued_pattern=16;
     state.patch_name="FM KEYS";state.preset_id=0;
@@ -235,7 +235,7 @@ int main(int argc,char** argv) {
     require(text(1,state)=="ARP ON 1/2" && text(5,state)=="ON - HOLD KEYS","enabledemptyarp promptsactualkeys and shows current page");
     if(argc>1)image((std::string(argv[1])+"-arp.ppm").c_str());
     controls.value[FMER_ARP_ORDER]=6;controls.value[FMER_ARP_OCTAVES]=4;state.performance.arp_held=2;
-    panel.focus_active=0;settle(state);require(text(5,state)=="MAX 4 VOICES","Repeat exposes the true admission limit without claiming all expanded notes sound");
+    panel.focus_active=0;settle(state);require(text(5,state)=="MAX 6 VOICES","Repeat exposes the true admission limit without claiming all expanded notes sound");
     if(argc>1)image((std::string(argv[1])+"-arp-capacity.ppm").c_str());
     controls.value[FMER_ARP_ORDER]=0;state.performance.arp_held=0;
 
@@ -272,12 +272,12 @@ int main(int argc,char** argv) {
             }
         }
     }
-    panel.family=FMER_PANEL_PRESETS;panel.focus_active=0;panel.preset_bank=1;panel.preset_candidate=15;
+    panel.family=FMER_PANEL_PRESETS;panel.focus_active=0;panel.preset_bank=0;panel.preset_candidate=15;
     state.candidate_name="VA VIBRA";state.sound_dirty=0;settle(state);
-    require(text(2,state)=="VA VIBRA" && text(3,state)=="VA SLOT 15" &&
+    require(text(2,state)=="VA VIBRA" && text(3,state)=="BANK A SLOT 15" &&
             text(4,state)=="PRESETS: BROWSE" && text(5,state)=="PLAY KEYS TO HEAR",
             "default browser has named exact ID and instant sound-only scope");
-    require(text(6,state)=="1 BANK VA" && text(7,state)==std::string("SELECT MODE ")+fmer_panel_mode_name(&controls) && text(8,state)=="SAVE TO KEEP EDITS" && text(9,state)=="HOME: PLAY / EDIT",
+    require(text(6,state)=="1 BANK A" && text(7,state)==std::string("SELECT MODE ")+fmer_panel_mode_name(&controls) && text(8,state)=="SAVE TO KEEP EDITS" && text(9,state)=="HOME: PLAY / EDIT",
             "instant preset browser labels independent preset/bank and playing mode controls");
     if(argc>1)image((std::string(argv[1])+"-presets.ppm").c_str());
     state.sound_dirty=1;settle(state);
@@ -288,10 +288,10 @@ int main(int argc,char** argv) {
             text(1,state).size()*12<=224,"long custom sound name and edited marker fit without clipping");
     state.patch_name="FM KEYS";state.preset_id=0;state.sound_dirty=0;
     panel.family=FMER_PANEL_SAVE;panel.focus_active=0;panel.save_slot=63;settle(state);
-    require(text(2,state)=="USER 63" && text(3,state)=="EMPTY SLOT" && text(5,state)=="STORE NOT READY",
+    require(text(2,state)=="BANK B 63" && text(3,state)=="EMPTY SLOT" && text(5,state)=="STORE NOT READY",
             "SAVE cannot claim persistence before storage mount");
     state.storage_ready=1;state.storage_valid_slots=64;settle(state);
-    require(text(5,state)=="SEL CONFIRM SAVE" && text(6,state)=="1 SLOT 63 2 USER" && text(7,state)=="SEL SAVE + STOP",
+    require(text(5,state)=="SEL CONFIRM SAVE" && text(6,state)=="1 SLOT 63 2 B" && text(7,state)=="SEL SAVE + STOP",
             "SAVE requires explicit destination confirmation and warns that performance stops");
     state.user_slot_present=1;state.user_slot_name="FM BELL";settle(state);
     require(text(3,state)=="FM BELL" && text(7,state)=="SEL REPLACE + STOP","occupied destination has exact name and replace warning");
@@ -309,7 +309,7 @@ int main(int argc,char** argv) {
     state.storage_result=0;state.storage_action=2;settle(state);
     require(text(5,state)=="SEL CONFIRM SAVE","successful load cannot masquerade as a save");
     panel.family=FMER_PANEL_PRESETS;panel.preset_bank=2;panel.preset_candidate=63;state.user_slot_present=0;settle(state);
-    require(text(2,state)=="EMPTY" && text(3,state)=="USER SLOT 63" && text(5,state)=="EMPTY - SKIPPED","empty user destination leaves current sound unchanged");
+    require(text(2,state)=="EMPTY" && text(3,state)=="BANK B SLOT 63" && text(5,state)=="EMPTY - SKIPPED","empty user destination leaves current sound unchanged");
     state.user_slot_present=1;state.candidate_name="FM BELL";settle(state);
     require(text(2,state)=="FM BELL" && text(5,state)=="PLAY KEYS TO HEAR" && text(8,state)=="SAVE TO KEEP EDITS","USER browser is sound-only like DEFAULT; full restore is separate");
     if(argc>1)image((std::string(argv[1])+"-user-presets.ppm").c_str());
@@ -605,13 +605,13 @@ int main(int argc,char** argv) {
     }
     std::printf("UI_TRANSFER_HASH %016llx\n",static_cast<unsigned long long>(transfer_hash));
 #ifndef FMER_UI_REFERENCE_HEADER
-    // Reviewed734 render stream: all bytes and rectangle positions, including
+    // Reviewed735 render stream: all bytes and rectangle positions, including
     // readiness, focus changes, scope damage, menus, grids, bank resets and
     // explicit inactive/active mixer transitions from the SINGLE default,
     // and four-part versus single/poly/mono glide instructions.
     // Screenshot mode additionally exercises poses; its transfer stream differs
     // from the standard no-argument regression run.
-    require(transfer_hash==(argc==1?0x0315d77b8cd1b902ull:0x7199bfab3d6d1361ull),"734 reviewed mode navigation, power indication, menus and waveform rendering");
+    require(transfer_hash==(argc==1?0x2a13586f795ea7feull:0xd1e18961b38828fdull),"735 reviewed mode navigation, power indication, menus and waveform rendering");
 #endif
     // Observable selection borders cover every track, including inactive switches.
     for(unsigned layer : {FMER_MIX_SOUND,FMER_MIX_PATTERN,FMER_MIX_RUN,FMER_MIX_LEVEL,FMER_MIX_MUTE,FMER_MIX_SOLO,FMER_MIX_FX}){

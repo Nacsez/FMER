@@ -1,4 +1,5 @@
 #include "synth.hpp"
+#include "target_hot.hpp"
 
 #include <algorithm>
 #include <array>
@@ -76,6 +77,7 @@ void initialize_tables() {
         Freqlut::init(Synth::native_sample_rate);
         PitchEnv::init(Synth::native_sample_rate);
         Lfo::init(Synth::native_sample_rate);
+        Dx7Note::init_tuning();
 #if defined(FMER_DEVICE)
     initialized = true;
 #else
@@ -85,11 +87,8 @@ void initialize_tables() {
 }
 
 struct Synth::Impl {
-    struct Voice {
-        Dx7Note fm{};
-        Lfo lfo{};
+    struct VoiceState {
         std::array<char, 156> snapshot{};
-        std::array<std::int32_t, control_block_size> block{};
         std::uint64_t age{};
         std::size_t cursor{control_block_size};
         std::uint8_t channel{}, note{}, source{};
@@ -112,7 +111,45 @@ struct Synth::Impl {
         std::int32_t fm_pitch_offset{};
         GlideContour glide_contour{GlideContour::linear};
         bool pitch_known{};
+        float last_sample{}, bridge_offset{};
+        std::uint16_t bridge_remaining{};
+        bool bridge_pending{};
     };
+    struct Voice : VoiceState {
+        Dx7Note fm{};
+        Lfo lfo{};
+        std::array<std::int32_t, control_block_size> block{};
+    };
+    struct VaCoefficients {
+        float cutoff{}, resonance{}, a1{}, a2{}, a3{}, k{};
+        bool valid{};
+    };
+    std::array<VaCoefficients,part_limit+1> va_coefficients{};
+    const VaCoefficients& coefficients(const VaParameters& p, std::uint8_t part) noexcept {
+        auto& c=va_coefficients[part<part_limit?part:part_limit];
+        if(!c.valid || c.cutoff!=p.cutoff_hz || c.resonance!=p.resonance) {
+#if defined(FMER_DEVICE)
+            const float g=std::tan(static_cast<float>(pi)*p.cutoff_hz/native_sample_rate);
+#else
+            const float g=static_cast<float>(std::tan(pi*p.cutoff_hz/native_sample_rate));
+#endif
+            c.k=2.f-1.9f*p.resonance;
+            c.a1=1.f/(1.f+g*(g+c.k));c.a2=g*c.a1;c.a3=g*c.a2;
+            c.cutoff=p.cutoff_hz;c.resonance=p.resonance;c.valid=true;
+        }
+        return c;
+    }
+    // A bounded correction bridges only interrupted voices. A free voice's
+    // attack is unchanged; no extra oscillator, allocation or retired voice.
+    static float continuous_sample(Voice& v,float sample) noexcept {
+        if(v.bridge_remaining) {
+            if(v.bridge_pending){v.bridge_offset=v.last_sample-sample;v.bridge_pending=false;}
+            sample+=v.bridge_offset*(static_cast<float>(v.bridge_remaining)/128.f);
+            --v.bridge_remaining;
+        }
+        v.last_sample=sample;return sample;
+    };
+
     struct Part { PartParameters instrument{}; float level{1.f}; bool muted{}; };
     struct HeldNote {
         std::uint8_t channel{},note{},velocity{},source{};
@@ -173,7 +210,7 @@ struct Synth::Impl {
         patch = make_init_patch();
         engine = SynthEngine::fm;
         va = VaParameters{};
-        parts = {};
+        parts = {}; va_coefficients = {};
         glide = {};
         counters = SynthStats{};
         std::memset(scope,0,sizeof scope);scope_frame=0;
@@ -193,7 +230,7 @@ struct Synth::Impl {
 #if defined(FMER_DEVICE)
         voice.frequency = 440.0f * std::exp2((voice.glide_target - 69) / 12.0f);
         const float interval = (bend - 8192) * (3.0f / 8192.0f);
-        voice.increment = std::min(0.49f, voice.frequency * std::exp2(interval / 12.0f) / native_sample_rate);
+        voice.increment = std::min(0.49f, voice.frequency * (bend==8192?1.f:std::exp2(interval / 12.0f)) / native_sample_rate);
 #else
         voice.frequency = 440.0 * std::pow(2.0, (voice.glide_target - 69) / 12.0);
         const double interval = (bend - 8192) * (3.0 / 8192.0);
@@ -262,7 +299,8 @@ struct Synth::Impl {
         return selected;
     }
 
-    static float va_sample(Voice& voice,float wheel,bool lfo_enabled) noexcept {
+    // Avoid a register-save/call/restore for every voice on every sample.
+    FMER_SAMPLE_INLINE static float va_sample(Voice& voice,float wheel,bool lfo_enabled) noexcept {
         voice.lfo_gain += .004f*((lfo_enabled?1.f:0.f)-voice.lfo_gain);
         if (voice.envelope_stage == 0) {
             voice.envelope += voice.attack_step;
@@ -343,6 +381,8 @@ void Synth::Impl::trigger(Voice& voice, const Patch& instrument, SynthEngine nex
                          bool honor_sustain, bool mono_note) noexcept {
     const float target = static_cast<float>(std::clamp(static_cast<int>(note) +
         static_cast<int>(instrument.vced[144]) - 24,0,127));
+    const bool interrupted = voice.active;
+    const float previous_sample=voice.last_sample;
     const bool overlapping = voice.active && voice.held;
     const bool should_glide = mono_note && next_glide.mode != GlideMode::off && voice.pitch_known &&
         (next_glide.mode == GlideMode::always || overlapping) && next_glide.time_ms > 0;
@@ -367,8 +407,15 @@ void Synth::Impl::trigger(Voice& voice, const Patch& instrument, SynthEngine nex
         // otherwise materializes a large temporary and copies all FM scratch
         // buffers a second time. Placement construction performs no allocation
         // and retains every default, including LFO random/phase reset.
-        voice.~Voice();
-        ::new (static_cast<void*>(&voice)) Voice{};
+        if(next_engine==SynthEngine::va) {
+            // FM scratch is not read by VA. Reset all shared/VA state without
+            // clearing thousands of unrelated bytes on every VA note attack.
+            static_cast<VoiceState&>(voice)=VoiceState{};
+        } else {
+            voice.~Voice();
+            ::new (static_cast<void*>(&voice)) Voice{};
+        }
+        if(interrupted){voice.last_sample=previous_sample;voice.bridge_pending=true;voice.bridge_remaining=128;}
         voice.lfo_gain=next_lfo?1.f:0.f;
         for(std::size_t i=0;i<instrument.vced.size();++i)voice.snapshot[i]=static_cast<char>(instrument.vced[i]);
         voice.snapshot[155]=0x3f;
@@ -383,14 +430,8 @@ void Synth::Impl::trigger(Voice& voice, const Patch& instrument, SynthEngine nex
             voice.velocity_gain=velocity/127.f;
             voice.attack_step=next_va.attack_ms>0?1.f/(next_va.attack_ms*.001f*native_sample_rate):1.f;
             voice.decay_step=next_va.decay_ms>0?(1.f-next_va.sustain)/(next_va.decay_ms*.001f*native_sample_rate):1.f;
-#if defined(FMER_DEVICE)
-            const float g=std::tan(static_cast<float>(pi)*next_va.cutoff_hz/native_sample_rate);
-#else
-            const float g=static_cast<float>(std::tan(pi*next_va.cutoff_hz/native_sample_rate));
-#endif
-            voice.filter_k=2.f-1.9f*next_va.resonance;
-            voice.filter_a1=1.f/(1.f+g*(g+voice.filter_k));
-            voice.filter_a2=g*voice.filter_a1; voice.filter_a3=g*voice.filter_a2;
+            const auto& c=coefficients(next_va,part_id);
+            voice.filter_k=c.k;voice.filter_a1=c.a1;voice.filter_a2=c.a2;voice.filter_a3=c.a3;
         }
         if(part_id<part_limit)voice.mix_gain=parts[part_id].muted?0.f:parts[part_id].level;
     }
@@ -442,6 +483,7 @@ bool Synth::set_va_parameters(const VaParameters& parameters) noexcept {
         ++impl_->counters.rejected_events;
         return false;
     }
+    impl_->coefficients(parameters,no_part);
     impl_->va = parameters;
     return true;
 }
@@ -476,6 +518,7 @@ bool Synth::configure_part(std::uint8_t part, const PartParameters& parameters) 
         static_cast<unsigned>(parameters.engine)>1 || !valid_va(parameters.va) || !valid_glide(parameters.glide)) {
         ++impl_->counters.rejected_events; return false;
     }
+    impl_->coefficients(parameters.va,part);
     impl_->parts[part].instrument=parameters; return true;
 }
 
@@ -722,7 +765,7 @@ void Synth::render(float* mono, std::size_t frames, float* dry, std::uint8_t byp
                     if(!voice.glide_tick)Impl::pitch_step(voice,state.controllers[voice.channel].values_[kControllerPitch]);
                     voice.glide_tick=(voice.glide_tick+1)%control_block_size;
                 }
-                const float sample = Impl::va_sample(voice,state.modwheel[voice.channel],lfo_enabled);
+                const float sample = Impl::continuous_sample(voice,Impl::va_sample(voice,state.modwheel[voice.channel],lfo_enabled));
                 if(is_part)tap(frame,sample*volume*expression);
                 if(!stable_route)route_sample(frame,sample*volume*expression*(stable_mix?part_gain:Impl::smooth_mix(voice,part_gain)));
                 else if(is_part && !stable_mix)destination[frame]+=sample*volume*expression*Impl::smooth_mix(voice,part_gain);
@@ -751,7 +794,14 @@ void Synth::render(float* mono, std::size_t frames, float* dry, std::uint8_t byp
                 voice.cursor = 0;
             }
             const auto count = std::min(frames-frame, control_block_size-voice.cursor);
-            if(!stable_route)for(std::size_t i=0;i<count;++i)
+            const bool bridging=voice.bridge_remaining!=0;
+            if(bridging)for(std::size_t i=0;i<count;++i) {
+                const float sample=Impl::continuous_sample(voice,static_cast<float>(voice.block[voice.cursor+i])*gain)*volume*expression;
+                if(is_part)tap(frame+i,sample);
+                const float mixed=sample*(stable_mix?part_gain:Impl::smooth_mix(voice,part_gain));
+                if(!stable_route)route_sample(frame+i,mixed);else destination[frame+i]+=mixed;
+            }
+            else if(!stable_route)for(std::size_t i=0;i<count;++i)
                 route_sample(frame+i,static_cast<float>(voice.block[voice.cursor+i])*gain*volume*expression*(stable_mix?part_gain:Impl::smooth_mix(voice,part_gain)));
             else if(is_part && !stable_mix)for(std::size_t i=0;i<count;++i)
                 destination[frame+i]+=static_cast<float>(voice.block[voice.cursor+i])*gain*volume*expression*Impl::smooth_mix(voice,part_gain);
@@ -761,7 +811,8 @@ void Synth::render(float* mono, std::size_t frames, float* dry, std::uint8_t byp
                 destination[frame+i] += static_cast<float>(voice.block[voice.cursor+i]) * gain;
             else for (std::size_t i = 0; i < count; ++i)
                 destination[frame+i] += static_cast<float>(voice.block[voice.cursor+i]) * gain * volume * expression;
-            if(is_part)for(std::size_t i=(4u-((state.scope_frame+frame)&3u))&3u;i<count;i+=4u)
+            if(!bridging)voice.last_sample=static_cast<float>(voice.block[voice.cursor+count-1])*gain;
+            if(is_part && !bridging)for(std::size_t i=(4u-((state.scope_frame+frame)&3u))&3u;i<count;i+=4u)
                 tap(frame+i,static_cast<float>(voice.block[voice.cursor+i])*gain*volume*expression);
             voice.cursor += count;
             frame += count;

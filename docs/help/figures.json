@@ -3,24 +3,24 @@
     {
       "file": "panel-home.png",
       "alt": "Home view",
-      "caption": "Home view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Home view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-home-four-tracks.png",
       "alt": "Home four tracks view",
-      "caption": "Home four tracks view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Home four tracks view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-splash.png",
       "alt": "Splash view",
-      "caption": "Splash view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Splash view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "getting-started": [
     {
       "file": "app-banks.png",
-      "alt": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.",
-      "caption": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC. Actual browser capture."
+      "alt": "Sound banks: choose, audition, edit and organize the 64 Bank A and 64 Bank B slots on the PC.",
+      "caption": "Sound banks: choose, audition, edit and organize the 64 Bank A and 64 Bank B slots on the PC. Actual browser capture."
     },
     {
       "file": "app-editor.png",
@@ -37,7 +37,7 @@
     {
       "file": "panel-usb-link.png",
       "alt": "Usb link view",
-      "caption": "Usb link view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Usb link view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "library": [
@@ -61,22 +61,22 @@
     {
       "file": "feature-instrument-banks.svg",
       "alt": "128 onboard instrument slots: annotated screen reference",
-      "caption": "64 editable DEFAULT slots and 64 independent USER slots. Open for full-size view."
+      "caption": "64 editable Bank A slots and 64 independent Bank B slots. Open for full-size view."
     },
     {
       "file": "app-banks.png",
-      "alt": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.",
-      "caption": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC. Actual browser capture."
+      "alt": "Sound banks: choose, audition, edit and organize the 64 Bank A and 64 Bank B slots on the PC.",
+      "caption": "Sound banks: choose, audition, edit and organize the 64 Bank A and 64 Bank B slots on the PC. Actual browser capture."
     },
     {
       "file": "panel-presets.png",
       "alt": "Presets view",
-      "caption": "Presets view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Presets view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-user-presets.png",
       "alt": "User presets view",
-      "caption": "User presets view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "User presets view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "controls-42.svg",
@@ -94,6 +94,52 @@
       "caption": "SAVE / PROJECT: knob positions and page actions. Diagram from the audited panel map."
     }
   ],
+  "loadouts": [
+    {
+      "file": "app-loadouts.png",
+      "alt": "Instrument loadouts: independent Bank A and Bank B profiles, reusable 64-slot collections and reviewed deployment.",
+      "caption": "Instrument loadouts: independent Bank A and Bank B profiles, reusable 64-slot collections and reviewed deployment. Actual browser capture."
+    },
+    {
+      "file": "app-install-loadouts.png",
+      "alt": "App install loadouts view",
+      "caption": "App install loadouts view Actual browser capture."
+    },
+    {
+      "file": "panel-presets.png",
+      "alt": "Presets view",
+      "caption": "Presets view Firmware 735 renderer capture; illustrative state, not a device photograph."
+    },
+    {
+      "file": "panel-user-presets.png",
+      "alt": "User presets view",
+      "caption": "User presets view Firmware 735 renderer capture; illustrative state, not a device photograph."
+    }
+  ],
+  "community": [
+    {
+      "file": "app-sound-sources.png",
+      "alt": "App sound sources view",
+      "caption": "App sound sources view Actual browser capture."
+    },
+    {
+      "file": "app-library.png",
+      "alt": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected.",
+      "caption": "Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected. Actual browser capture."
+    }
+  ],
+  "units": [
+    {
+      "file": "app-units.png",
+      "alt": "App units view",
+      "caption": "App units view Actual browser capture."
+    },
+    {
+      "file": "app-loadouts.png",
+      "alt": "Instrument loadouts: independent Bank A and Bank B profiles, reusable 64-slot collections and reviewed deployment.",
+      "caption": "Instrument loadouts: independent Bank A and Bank B profiles, reusable 64-slot collections and reviewed deployment. Actual browser capture."
+    }
+  ],
   "editor": [
     {
       "file": "feature-companion-banks.svg",
@@ -108,7 +154,7 @@
     {
       "file": "panel-focus.png",
       "alt": "Focus view",
-      "caption": "Focus view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Focus view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "fm": [
@@ -130,167 +176,167 @@
     {
       "file": "panel-algorithm-1.png",
       "alt": "Algorithm 1 view",
-      "caption": "Algorithm 1 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Algorithm 1 view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-algorithm-5.png",
       "alt": "Algorithm 5 view",
-      "caption": "Algorithm 5 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Algorithm 5 view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-fm-envelope.png",
       "alt": "Fm envelope view",
-      "caption": "Fm envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Fm envelope view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-algorithm-2.png",
       "alt": "FM algorithm 2",
-      "caption": "Algorithm 2: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 2: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-3.png",
       "alt": "FM algorithm 3",
-      "caption": "Algorithm 3: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 3: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-4.png",
       "alt": "FM algorithm 4",
-      "caption": "Algorithm 4: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 4: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-6.png",
       "alt": "FM algorithm 6",
-      "caption": "Algorithm 6: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 6: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-7.png",
       "alt": "FM algorithm 7",
-      "caption": "Algorithm 7: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 7: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-8.png",
       "alt": "FM algorithm 8",
-      "caption": "Algorithm 8: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 8: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-9.png",
       "alt": "FM algorithm 9",
-      "caption": "Algorithm 9: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 9: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-10.png",
       "alt": "FM algorithm 10",
-      "caption": "Algorithm 10: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 10: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-11.png",
       "alt": "FM algorithm 11",
-      "caption": "Algorithm 11: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 11: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-12.png",
       "alt": "FM algorithm 12",
-      "caption": "Algorithm 12: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 12: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-13.png",
       "alt": "FM algorithm 13",
-      "caption": "Algorithm 13: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 13: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-14.png",
       "alt": "FM algorithm 14",
-      "caption": "Algorithm 14: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 14: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-15.png",
       "alt": "FM algorithm 15",
-      "caption": "Algorithm 15: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 15: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-16.png",
       "alt": "FM algorithm 16",
-      "caption": "Algorithm 16: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 16: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-17.png",
       "alt": "FM algorithm 17",
-      "caption": "Algorithm 17: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 17: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-18.png",
       "alt": "FM algorithm 18",
-      "caption": "Algorithm 18: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 18: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-19.png",
       "alt": "FM algorithm 19",
-      "caption": "Algorithm 19: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 19: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-20.png",
       "alt": "FM algorithm 20",
-      "caption": "Algorithm 20: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 20: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-21.png",
       "alt": "FM algorithm 21",
-      "caption": "Algorithm 21: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 21: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-22.png",
       "alt": "FM algorithm 22",
-      "caption": "Algorithm 22: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 22: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-23.png",
       "alt": "FM algorithm 23",
-      "caption": "Algorithm 23: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 23: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-24.png",
       "alt": "FM algorithm 24",
-      "caption": "Algorithm 24: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 24: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-25.png",
       "alt": "FM algorithm 25",
-      "caption": "Algorithm 25: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 25: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-26.png",
       "alt": "FM algorithm 26",
-      "caption": "Algorithm 26: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 26: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-27.png",
       "alt": "FM algorithm 27",
-      "caption": "Algorithm 27: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 27: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-28.png",
       "alt": "FM algorithm 28",
-      "caption": "Algorithm 28: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 28: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-29.png",
       "alt": "FM algorithm 29",
-      "caption": "Algorithm 29: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 29: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-30.png",
       "alt": "FM algorithm 30",
-      "caption": "Algorithm 30: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 30: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-31.png",
       "alt": "FM algorithm 31",
-      "caption": "Algorithm 31: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 31: actual operator routing drawn by firmware 735."
     },
     {
       "file": "panel-algorithm-32.png",
       "alt": "FM algorithm 32",
-      "caption": "Algorithm 32: actual operator routing drawn by firmware 734."
+      "caption": "Algorithm 32: actual operator routing drawn by firmware 735."
     },
     {
       "file": "controls-02.svg",
@@ -342,7 +388,7 @@
     {
       "file": "panel-va-envelope.png",
       "alt": "Va envelope view",
-      "caption": "Va envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Va envelope view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "app-editor-va.png",
@@ -364,7 +410,7 @@
     {
       "file": "feature-drive-lfo.svg",
       "alt": "Drive and LFO enable: annotated screen reference",
-      "caption": "Add saturation or enable the sound’s stored modulation. Open for full-size view."
+      "caption": "Add saturation or enable the sound\u2019s stored modulation. Open for full-size view."
     },
     {
       "file": "feature-chorus-phaser.svg",
@@ -394,27 +440,27 @@
     {
       "file": "panel-effects-clean.png",
       "alt": "Effects clean view",
-      "caption": "Effects clean view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Effects clean view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-fx-chain.png",
       "alt": "Signal chain: selected stage and its position in the processing order.",
-      "caption": "Signal chain: selected stage and its position in the processing order. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Signal chain: selected stage and its position in the processing order. Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-home-filter-0.png",
       "alt": "Low-pass fill extends left of cutoff.",
-      "caption": "Low-pass fill extends left of cutoff. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Low-pass fill extends left of cutoff. Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-home-filter-1.png",
       "alt": "High-pass fill extends right of cutoff.",
-      "caption": "High-pass fill extends right of cutoff. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "High-pass fill extends right of cutoff. Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-home-filter-2.png",
       "alt": "Band-pass fill surrounds cutoff.",
-      "caption": "Band-pass fill surrounds cutoff. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Band-pass fill surrounds cutoff. Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "controls-13.svg",
@@ -446,17 +492,17 @@
     {
       "file": "panel-glide.png",
       "alt": "Glide view",
-      "caption": "Glide view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Glide view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-fm-envelope.png",
       "alt": "Fm envelope view",
-      "caption": "Fm envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Fm envelope view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-va-envelope.png",
       "alt": "Va envelope view",
-      "caption": "Va envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Va envelope view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "arp": [
@@ -468,17 +514,17 @@
     {
       "file": "panel-arp.png",
       "alt": "Arp view",
-      "caption": "Arp view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Arp view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-arp-exclusive.png",
       "alt": "Arp exclusive view",
-      "caption": "Arp exclusive view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Arp exclusive view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-arp-capacity.png",
       "alt": "Arp capacity view",
-      "caption": "Arp capacity view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Arp capacity view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "controls-20.svg",
@@ -505,17 +551,17 @@
     {
       "file": "panel-sequence.png",
       "alt": "Sequence view",
-      "caption": "Sequence view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Sequence view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-record.png",
       "alt": "Recording: four-beat count-in, quantization and Overdub/Replace.",
-      "caption": "Recording: four-beat count-in, quantization and Overdub/Replace. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Recording: four-beat count-in, quantization and Overdub/Replace. Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-tracks-single.png",
       "alt": "Tracks single view",
-      "caption": "Tracks single view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Tracks single view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "controls-22.svg",
@@ -582,17 +628,17 @@
     {
       "file": "panel-sequence-bank4.png",
       "alt": "Sequence bank4 view",
-      "caption": "Sequence bank4 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Sequence bank4 view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-patterns16.png",
       "alt": "Patterns16 view",
-      "caption": "Patterns16 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Patterns16 view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-chain.png",
       "alt": "Chain view",
-      "caption": "Chain view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Chain view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "performance": [
@@ -609,17 +655,17 @@
     {
       "file": "panel-mixer.png",
       "alt": "Mixer view",
-      "caption": "Mixer view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Mixer view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-home-four-tracks.png",
       "alt": "Home four tracks view",
-      "caption": "Home four tracks view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Home four tracks view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-four-track-fullscreen.png",
       "alt": "Four track fullscreen view",
-      "caption": "Four track fullscreen view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Four track fullscreen view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "projects": [
@@ -631,7 +677,7 @@
     {
       "file": "panel-project-save.png",
       "alt": "Project save view",
-      "caption": "Project save view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Project save view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "app-library.png",
@@ -648,12 +694,12 @@
     {
       "file": "panel-midi-output.png",
       "alt": "Midi output view",
-      "caption": "Midi output view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Midi output view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-midi-clock.png",
       "alt": "Midi clock view",
-      "caption": "Midi clock view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Midi clock view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "controls-34.svg",
@@ -685,7 +731,7 @@
     {
       "file": "panel-restore.png",
       "alt": "Restore view",
-      "caption": "Restore view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Restore view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "firmware": [
@@ -729,17 +775,17 @@
     {
       "file": "panel-record.png",
       "alt": "Recording: four-beat count-in, quantization and Overdub/Replace.",
-      "caption": "Recording: four-beat count-in, quantization and Overdub/Replace. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Recording: four-beat count-in, quantization and Overdub/Replace. Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-song.png",
       "alt": "Song: four lanes on a shared timeline, with repeat blocks and transposition.",
-      "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "app-banks.png",
-      "alt": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.",
-      "caption": "Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC. Actual browser capture."
+      "alt": "Sound banks: choose, audition, edit and organize the 64 Bank A and 64 Bank B slots on the PC.",
+      "caption": "Sound banks: choose, audition, edit and organize the 64 Bank A and 64 Bank B slots on the PC. Actual browser capture."
     }
   ],
   "troubleshooting": [
@@ -751,17 +797,17 @@
     {
       "file": "panel-global-mode.png",
       "alt": "Global mode view",
-      "caption": "Global mode view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Global mode view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-estimated-battery.png",
       "alt": "Estimated battery view",
-      "caption": "Estimated battery view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Estimated battery view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-legend.png",
       "alt": "Legend view",
-      "caption": "Legend view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Legend view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "app-feedback.png",
@@ -773,29 +819,29 @@
     {
       "file": "panel-algorithm-5.png",
       "alt": "Algorithm 5 view",
-      "caption": "Algorithm 5 view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Algorithm 5 view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-song.png",
       "alt": "Song: four lanes on a shared timeline, with repeat blocks and transposition.",
-      "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-mixer.png",
       "alt": "Mixer view",
-      "caption": "Mixer view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Mixer view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "limits": [
     {
       "file": "panel-tracks.png",
       "alt": "Tracks view",
-      "caption": "Tracks view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Tracks view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-estimated-battery.png",
       "alt": "Estimated battery view",
-      "caption": "Estimated battery view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Estimated battery view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "song": [
@@ -807,12 +853,12 @@
     {
       "file": "panel-song.png",
       "alt": "Song: four lanes on a shared timeline, with repeat blocks and transposition.",
-      "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Song: four lanes on a shared timeline, with repeat blocks and transposition. Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-song-setup.png",
       "alt": "Song lane setup: LIVE/SONG, end behavior and entry insertion/deletion.",
-      "caption": "Song lane setup: LIVE/SONG, end behavior and entry insertion/deletion. Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Song lane setup: LIVE/SONG, end behavior and entry insertion/deletion. Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "shortcuts": [
@@ -829,12 +875,12 @@
     {
       "file": "panel-shortcuts.png",
       "alt": "Shortcuts view",
-      "caption": "Shortcuts view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Shortcuts view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-scope-only.png",
       "alt": "Scope only view",
-      "caption": "Scope only view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Scope only view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "usb-link": [
@@ -846,12 +892,12 @@
     {
       "file": "panel-usb-link.png",
       "alt": "Usb link view",
-      "caption": "Usb link view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Usb link view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-midi-clock.png",
       "alt": "Midi clock view",
-      "caption": "Midi clock view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Midi clock view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "reference": [
@@ -863,12 +909,12 @@
     {
       "file": "panel-fm-envelope.png",
       "alt": "Fm envelope view",
-      "caption": "Fm envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Fm envelope view Firmware 735 renderer capture; illustrative state, not a device photograph."
     },
     {
       "file": "panel-va-envelope.png",
       "alt": "Va envelope view",
-      "caption": "Va envelope view Firmware 734 renderer capture; illustrative state, not a device photograph."
+      "caption": "Va envelope view Firmware 735 renderer capture; illustrative state, not a device photograph."
     }
   ],
   "licensing": [
@@ -1103,18 +1149,6 @@
       "file": "controls-44.svg",
       "alt": "SAVE / PROJECT physical control map",
       "caption": "SAVE / PROJECT: knob positions and page actions. Diagram from the audited panel map."
-    }
-  ],
-  "community": [
-    {
-      "file": "app-sound-sources.png",
-      "alt": "Included sound packs and community FM6 capture controls",
-      "caption": "Included & community sounds: add the separate FMER or OEM catalog, or read available FM6 voices without changing firmware."
-    },
-    {
-      "file": "app-library.png",
-      "alt": "FMER Companion Library with collections and instrument details",
-      "caption": "Library collections keep FMER defaults, OEM Patches and imported community sounds separate. Open Included & community sounds to add or read a collection."
     }
   ]
 }

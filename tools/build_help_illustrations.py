@@ -46,6 +46,9 @@ def build(captures):
       'index':['panel-home','panel-home-four-tracks','panel-splash'],
       'getting-started':['app-banks','app-editor'], 'connection':['app-unit','panel-usb-link'],
       'library':['app-library'], 'banks':['app-banks','panel-presets','panel-user-presets'],
+      'loadouts':['app-loadouts','app-install-loadouts','panel-presets','panel-user-presets'],
+      'community':['app-sound-sources','app-library'],
+      'units':['app-units','app-loadouts'],
       'editor':['app-editor','panel-focus'], 'fm':['panel-algorithm-1','panel-algorithm-5','panel-fm-envelope'],
       'va':['panel-va-envelope','app-editor-va'],
       'effects':['panel-effects-clean','panel-fx-chain','panel-home-filter-0','panel-home-filter-1','panel-home-filter-2'],
@@ -63,8 +66,9 @@ def build(captures):
       'song':['panel-song','panel-song-setup'], 'shortcuts':['panel-shortcuts','panel-scope-only'],
       'usb-link':['panel-usb-link','panel-midi-clock'],
       'reference':['app-editor','panel-fm-envelope','panel-va-envelope']}
-    captions={ 'app-library':'Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected.',
-      'app-banks':'Sound banks: choose, audition, edit and organize the 64 DEFAULT and 64 USER slots on the PC.',
+    captions={ 'app-loadouts':'Instrument loadouts: independent Bank A and Bank B profiles, reusable 64-slot collections and reviewed deployment.',
+      'app-library':'Companion Library: titles, collections, tags, selection and Trash. Example catalog; no unit connected.',
+      'app-banks':'Sound banks: choose, audition, edit and organize the 64 Bank A and 64 Bank B slots on the PC.',
       'app-editor':'Companion Editor: canonical values, musical selectors, sliders and local sound audition.',
       'app-editor-va':'Companion VA Editor: oscillator, filter and envelope controls.',
       'app-unit':'Your FM-1: explicit reads, destinations and verified transfers. Offline view.',
@@ -77,10 +81,10 @@ def build(captures):
       'panel-fx-chain':'Signal chain: selected stage and its position in the processing order.'}
     result={}
     for topic,names in maps.items():
-        result[topic]=[dict(file=name+'.png',alt=captions.get(name,name.removeprefix('panel-').replace('-',' ').capitalize()+' view'),caption=captions.get(name,name.removeprefix('panel-').replace('-',' ').capitalize()+' view')+(' Firmware 734 renderer capture; illustrative state, not a device photograph.' if name.startswith('panel-') else ' Actual browser capture.')) for name in names]
+        result[topic]=[dict(file=name+'.png',alt=captions.get(name,name.removeprefix('panel-').replace('-',' ').capitalize()+' view'),caption=captions.get(name,name.removeprefix('panel-').replace('-',' ').capitalize()+' view')+(' Firmware 735 renderer capture; illustrative state, not a device photograph.' if name.startswith('panel-') else ' Actual browser capture.')) for name in names]
     result['troubleshooting'].append(dict(file='app-feedback.png',alt='Beta feedback form',caption='Optional beta feedback and local diagnostic summary.'))
     result['licensing']=[dict(file='fmer-foundations.svg',alt='FMER software foundations and DX7 interchange boundaries',caption='Original architecture diagram: hardware support, musical engines and file interchange have distinct responsibilities and licenses.')]
-    result['fm'] += [dict(file=f'panel-algorithm-{i}.png',alt=f'FM algorithm {i}',caption=f'Algorithm {i}: actual operator routing drawn by firmware 734.') for i in range(1,33) if i not in (1,5)]
+    result['fm'] += [dict(file=f'panel-algorithm-{i}.png',alt=f'FM algorithm {i}',caption=f'Algorithm {i}: actual operator routing drawn by firmware 735.') for i in range(1,33) if i not in (1,5)]
     result['panel']=[dict(file=f'controls-{i:02}.svg',alt=row[0]+' physical control map',caption=row[0]+': knob positions and page actions. Diagram from the audited panel map.') for i,row in enumerate(panel)]
     # Add each relevant menu map to its explanatory topic as well.
     families={'fm':['FM EDIT'],'va':['VA EDIT'],'effects':['FX'],'modulation':['ENV','LFO'],'arp':['ARP'],'sequencer':['SEQ'],'midi':['GLO / MIDI'],'banks':['PRESETS','SAVE']}

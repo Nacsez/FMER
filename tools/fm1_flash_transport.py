@@ -68,6 +68,7 @@ DEFAULTS_TARGET_ID,DEFAULTS_LOADER_ID="FM-1_729","ota-FM-1_729"
 SONG_TARGET_ID,SONG_LOADER_ID="FM-1_730","ota-FM-1_730"
 LINK_TARGET_ID,LINK_LOADER_ID="FM-1_731","ota-FM-1_731"
 REFINEMENT_TARGET_ID,REFINEMENT_LOADER_ID="FM-1_733","ota-FM-1_733"
+POLYPHONY_TARGET_ID="FM-1_735"
 NAVIGATION_TARGET_ID="FM-1_734"  # Catalog release only; no legacy ota734 path.
 WORKFLOW_TARGET_ID,WORKFLOW_LOADER_ID="FM-1_727","ota-FM-1_727"
 POLISH_TARGET_ID,POLISH_LOADER_ID="FM-1_726","ota-FM-1_726"
@@ -75,7 +76,7 @@ RELEASE_TARGET_ID,RELEASE_LOADER_ID="FM-1_725","ota-FM-1_725"
 SUPPORTED_TARGET_IDS = (TARGET_ID, NEXT_TARGET_ID, CURRENT_TARGET_ID, BUILD_TARGET_ID, LATEST_TARGET_ID, DEVELOPMENT_TARGET_ID, CANDIDATE_TARGET_ID, INSTRUMENT_TARGET_ID, BANK_TARGET_ID, MIDI_TARGET_ID, WORKSPACE_TARGET_ID, FX_TARGET_ID, OPTIMIZED_FX_TARGET_ID, FINAL_FX_TARGET_ID, SHOWCASE_TARGET_ID, TIMBRE_TARGET_ID, VISUAL_TARGET_ID, REACTIVE_TARGET_ID, WORKSTATION_TARGET_ID, PROJECT_TARGET_ID, PERFORMANCE_TARGET_ID, SYNC_TARGET_ID, CLEANUP_TARGET_ID, PREVIEW_TARGET_ID, RELEASE_TARGET_ID, POLISH_TARGET_ID, WORKFLOW_TARGET_ID, ROUTING_TARGET_ID, DEFAULTS_TARGET_ID, SONG_TARGET_ID, LINK_TARGET_ID, REFINEMENT_TARGET_ID)
 SUPPORTED_LOADER_IDS = (LOADER_ID, NEXT_LOADER_ID, CURRENT_LOADER_ID, BUILD_LOADER_ID, LATEST_LOADER_ID, DEVELOPMENT_LOADER_ID, CANDIDATE_LOADER_ID, INSTRUMENT_LOADER_ID, BANK_LOADER_ID, MIDI_LOADER_ID, WORKSPACE_LOADER_ID, FX_LOADER_ID, OPTIMIZED_FX_LOADER_ID, FINAL_FX_LOADER_ID, SHOWCASE_LOADER_ID, TIMBRE_LOADER_ID, VISUAL_LOADER_ID, REACTIVE_LOADER_ID, WORKSTATION_LOADER_ID, PROJECT_LOADER_ID, PERFORMANCE_LOADER_ID, SYNC_LOADER_ID, CLEANUP_LOADER_ID, PREVIEW_LOADER_ID, RELEASE_LOADER_ID, POLISH_LOADER_ID, WORKFLOW_LOADER_ID, ROUTING_LOADER_ID, DEFAULTS_LOADER_ID, SONG_LOADER_ID, LINK_LOADER_ID, REFINEMENT_LOADER_ID)
 SUPPORTED_LOADER_IDS += ('ota-FM-1_933','ota-FM-1_934','ota-FM-1_935')
-SUPPORTED_TARGET_IDS += (NAVIGATION_TARGET_ID,)
+SUPPORTED_TARGET_IDS += (NAVIGATION_TARGET_ID,POLYPHONY_TARGET_ID)
 MAX_PACKAGE = 2 * 1024 * 1024
 MAX_DATA, MAX_REQUESTS, MAX_DUPLICATES = 512, 32768, 16
 PORT_NAME = re.compile(r"^(?:[0-9]+\s*-\s*)?(?:FM[- ]?1(?:\s+Midi)?|ota-FM-1|FMER (?:Test01|Citrine)(?: Update| Midi)?|FMER Update|FMER(?: Midi)?)(?:\s+[0-9]+)?$", re.I)
@@ -196,8 +197,8 @@ def update_identities(package) -> tuple[str, str, str]:
         import release_firmware
         return release_firmware.update_identities(package)
     target = report.get("product")
-    if target == NAVIGATION_TARGET_ID:
-        raise UpdateError("FMER734 requires its exact catalog-pinned release profile")
+    if target in (NAVIGATION_TARGET_ID,POLYPHONY_TARGET_ID):
+        raise UpdateError("FMER734/735 requires its exact catalog-pinned release profile")
     if target == TARGET_ID:
         expected = (STOCK_ID, LOADER_ID, TARGET_ID)
     elif target in SUPPORTED_TARGET_IDS[1:]:
@@ -654,12 +655,21 @@ def serve(session, package, stage_number, journal):
 def find_session(api, expected: str, journal, *, wait: float, transitional: str | None = None,
                  retry_identity_timeout: bool = False):
     deadline = time.monotonic() + wait
+    last_snapshot = None
+    identity_timeouts = 0
+    last_identity = None
     while True:
         endpoints = api.enumerate()
+        visible = {d: [{"id": r["id"], "name": r["name"]} for r in endpoints[d]]
+                   for d in ("inputs", "outputs")}
         if getattr(api, 'target_location', None):
             import unit_endpoints
             endpoints = unit_endpoints.filter_location(unit_endpoints.annotate(api,endpoints),api.target_location)
         counts = [sum(bool(PORT_NAME.fullmatch(r["name"])) for r in endpoints[d]) for d in ("inputs", "outputs")]
+        snapshot = dict(visible_ports=visible, matching_inputs=counts[0], matching_outputs=counts[1])
+        if snapshot != last_snapshot:
+            journal.record("discovery_ports", expected_identity=expected, **snapshot)
+            last_snapshot = snapshot
         if any(count > 1 for count in counts):
             raise UpdateError("Multiple candidate instruments; refusing ambiguous updater connection")
         if counts == [1, 1]:
@@ -668,6 +678,7 @@ def find_session(api, expected: str, journal, *, wait: float, transitional: str 
             try:
                 session.__enter__()
                 identity = session.identify()
+                last_identity = identity
                 compatible = expected == 'compatible-FM-1' and (re.fullmatch(r'FM-1_[0-9]{3,8}',identity) or identity=='ota-FM-1_935')
                 if identity == expected or compatible or expected is None:
                     session.expected_loader_identity = expected if expected in SUPPORTED_LOADER_IDS else None
@@ -675,6 +686,7 @@ def find_session(api, expected: str, journal, *, wait: float, transitional: str 
                 if identity != transitional and not (transitional=='compatible-FM-1' and re.fullmatch(r'FM-1_[0-9]{3,8}',identity)):
                     raise UpdateError(f"Unexpected identity {identity!r}; expected {expected!r}")
             except IdentityTimeout:
+                identity_timeouts += 1
                 failures = session.close()
                 journal.record("identity_timeout", expected_identity=expected,
                                retry_allowed=retry_identity_timeout, cleanup_errors=failures,
@@ -690,7 +702,15 @@ def find_session(api, expected: str, journal, *, wait: float, transitional: str 
             if session is not None and session.close():
                 raise UpdateError("Transition identity cleanup failed; refusing retry")
         if time.monotonic() >= deadline:
-            raise UpdateError(f"Timed out waiting for {expected}; no automatic reset or rollback sent")
+            if counts == [1, 1]:
+                reason = "identity_timeout" if identity_timeouts else "transitional_identity"
+            elif any(counts):
+                reason = "incomplete_pair"
+            else:
+                reason = "unrecognized_ports" if any(visible.values()) else "no_ports"
+            journal.record("discovery_timeout", reason=reason, expected_identity=expected,
+                           identity_timeouts=identity_timeouts, last_identity=last_identity, **snapshot)
+            raise UpdateError(f"Timed out waiting for {expected}; [discovery:{reason}]; no automatic reset or rollback sent")
         time.sleep(.25)
 
 

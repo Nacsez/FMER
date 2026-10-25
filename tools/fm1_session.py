@@ -32,6 +32,7 @@ import fm1_native_state_v8 as native_v8
 import fm1_native_state_v9 as native_v9
 import fm1_native_state_v10 as native_v10
 import fm1_native_state_v11 as native_v11
+import fm1_native_state_v12 as native_v12
 import fm1_flash_transport as transport
 import hardware_bridge
 
@@ -62,9 +63,10 @@ SONG_IDENTITY = "FM-1_730"
 LINK_IDENTITY = "FM-1_731"
 REFINEMENT_IDENTITY = "FM-1_733"
 NAVIGATION_IDENTITY = "FM-1_734"
+POLYPHONY_IDENTITY = "FM-1_735"
 WORKFLOW_IDENTITY = "FM-1_727"
 POLISH_IDENTITY = "FM-1_726"
-SYNC_IDENTITIES = (SYNC_IDENTITY,CLEANUP_IDENTITY,PREVIEW_IDENTITY,RELEASE_IDENTITY,POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY)
+SYNC_IDENTITIES = (SYNC_IDENTITY,CLEANUP_IDENTITY,PREVIEW_IDENTITY,RELEASE_IDENTITY,POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY)
 PROJECT_IDENTITIES = (PROJECT_IDENTITY,PERFORMANCE_IDENTITY,*SYNC_IDENTITIES)
 WORKSTATION_IDENTITIES = (WORKSTATION_IDENTITY,*PROJECT_IDENTITIES)
 OUTPUT_METRIC_IDENTITIES = (SHOWCASE_IDENTITY,TIMBRE_IDENTITY,VISUAL_IDENTITY,REACTIVE_IDENTITY,WORKSTATION_IDENTITY,*PROJECT_IDENTITIES)
@@ -250,7 +252,7 @@ def parse_trace(frame, *, maximum_storage_action=5, allow_native_timing=False):
     return dict(schema=schema, uptime_ms=uptime, newest_seq=newest, oldest_seq=oldest, events=events)
 
 
-def parse_controls(frame, expected_start, *, parameter_count=PARAMETER_COUNT, fx=False, workstation=False, projects=False, sync=False, polish=False):
+def parse_controls(frame, expected_start, *, parameter_count=PARAMETER_COUNT, fx=False, workstation=False, projects=False, sync=False, polish=False, six_voice=False):
     controls_request(expected_start, count=parameter_count)
     fields = decimal_fields(frame, 6)
     if len(fields) < 2:
@@ -265,7 +267,7 @@ def parse_controls(frame, expected_start, *, parameter_count=PARAMETER_COUNT, fx
     if any(value for identifier, value in enumerate(values, start) if (160 if sync else 159 if workstation else 150 if fx else 145) <= identifier < 160):
         raise ValueError("Reserved control IDs must read zero")
     if sync:
-        codec = native_v8 if polish else native_v7
+        codec = native_v12 if six_voice else native_v8 if polish else native_v7
         for identifier,value in enumerate(values,start):codec._integer(value,*codec.control_bounds(identifier),f'Control {identifier}')
     if workstation:
         for identifier,value in enumerate(values,start):
@@ -350,7 +352,7 @@ class ReadOnlySession(transport.MidiSession):
         super().__init__(api, selected, journal)
 
     def authorize_backup_ack(self, token, raw, saved_path):
-        native = native_v11 if self.expected_identity in (REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v10 if self.expected_identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v9 if self.expected_identity in (ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v8 if self.expected_identity in (POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v7 if self.expected_identity in SYNC_IDENTITIES else native_v6 if self.expected_identity == PERFORMANCE_IDENTITY else native_v5 if self.expected_identity == PROJECT_IDENTITY else native_v4 if self.expected_identity == WORKSTATION_IDENTITY else native_v3 if self.expected_identity in FX_IDENTITIES else native_v2 if self.expected_identity in ONBOARD_IDENTITIES else globals()["native"]
+        native = native_v12 if self.expected_identity == POLYPHONY_IDENTITY else native_v11 if self.expected_identity in (REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v10 if self.expected_identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v9 if self.expected_identity in (ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v8 if self.expected_identity in (POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v7 if self.expected_identity in SYNC_IDENTITIES else native_v6 if self.expected_identity == PERFORMANCE_IDENTITY else native_v5 if self.expected_identity == PROJECT_IDENTITY else native_v4 if self.expected_identity == WORKSTATION_IDENTITY else native_v3 if self.expected_identity in FX_IDENTITIES else native_v2 if self.expected_identity in ONBOARD_IDENTITIES else globals()["native"]
         """Permit one exact metadata acknowledgement after validated disk readback."""
         if (not getattr(self, "native_ack_enabled", False) or self.expected_identity not in NATIVE_IDENTITIES or
                 self.verified_identity != self.expected_identity or token != getattr(self, "_native_pending_save_token", 0)):
@@ -360,7 +362,7 @@ class ReadOnlySession(transport.MidiSession):
         self._native_authorized_ack = native.backup_ack_request(token, int.from_bytes(raw[28:32], "little"))
 
     def _send(self, packet, purpose):
-        native = native_v11 if self.expected_identity in (REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v10 if self.expected_identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v9 if self.expected_identity in (ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v8 if self.expected_identity in (POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v7 if self.expected_identity in SYNC_IDENTITIES else native_v6 if self.expected_identity == PERFORMANCE_IDENTITY else native_v5 if self.expected_identity == PROJECT_IDENTITY else native_v4 if self.expected_identity == WORKSTATION_IDENTITY else native_v3 if self.expected_identity in FX_IDENTITIES else native_v2 if self.expected_identity in ONBOARD_IDENTITIES else globals()["native"]
+        native = native_v12 if self.expected_identity == POLYPHONY_IDENTITY else native_v11 if self.expected_identity in (REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v10 if self.expected_identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v9 if self.expected_identity in (ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v8 if self.expected_identity in (POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v7 if self.expected_identity in SYNC_IDENTITIES else native_v6 if self.expected_identity == PERFORMANCE_IDENTITY else native_v5 if self.expected_identity == PROJECT_IDENTITY else native_v4 if self.expected_identity == WORKSTATION_IDENTITY else native_v3 if self.expected_identity in FX_IDENTITIES else native_v2 if self.expected_identity in ONBOARD_IDENTITIES else globals()["native"]
         allowed = packet == device_protocol.IDENTITY_QUERY
         if not allowed and self.verified_identity == self.expected_identity and isinstance(packet, bytes):
             allowed = packet in (PREFIX + bytes([2, 247]), PREFIX + bytes([8, 247]))
@@ -368,7 +370,7 @@ class ReadOnlySession(transport.MidiSession):
             if self.expected_identity in WORKSTATION_IDENTITIES and packet==PREFIX+bytes([28,247]):allowed=True
             if self.expected_identity in MIDI_IDENTITIES and packet==PREFIX+bytes([25,247]):allowed=True
             if self.expected_identity in (PERFORMANCE_IDENTITY,*SYNC_IDENTITIES) and packet==PREFIX+bytes([31,247]):allowed=True
-            if self.expected_identity in (LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) and packet==PREFIX+bytes([33,247]):allowed=True
+            if self.expected_identity in (LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) and packet==PREFIX+bytes([33,247]):allowed=True
             if self.expected_identity in ONBOARD_IDENTITIES and packet == PREFIX + bytes([21, 247]):
                 allowed = True
             if self.expected_identity in LED_IDENTITIES and packet == PREFIX + bytes([12, 247]):
@@ -632,7 +634,7 @@ def control_snapshot(session, journal, *, identity=IDENTITY):
     for start in range(0, count, 24):
         values.extend(parse_controls(request(session, controls_request(start, count=count), "recorder_controls_read"), start,
                                      parameter_count=count,fx=identity in FX_IDENTITIES,
-                                     workstation=identity in WORKSTATION_IDENTITIES,projects=identity in PROJECT_IDENTITIES,sync=identity in SYNC_IDENTITIES,polish=identity in (POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY)))
+                                     workstation=identity in WORKSTATION_IDENTITIES,projects=identity in PROJECT_IDENTITIES,six_voice=identity==POLYPHONY_IDENTITY,sync=identity in SYNC_IDENTITIES,polish=identity in (POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY)))
     after = performance_metrics(session, journal)
     same_epoch = after["uptime_ms"] >= before["uptime_ms"] and after["trace_newest"] >= before["trace_newest"]
     journal.record("control_snapshot", values=values, count=len(values),
@@ -662,7 +664,7 @@ class NativeBackupService:
         self.committed = None
 
     def poll(self, session, now):
-        native = native_v11 if self.identity in (REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v10 if self.identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v9 if self.identity in (ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v8 if self.identity in (POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else native_v7 if self.identity in SYNC_IDENTITIES else native_v6 if self.identity == PERFORMANCE_IDENTITY else native_v5 if self.identity == PROJECT_IDENTITY else native_v4 if self.identity == WORKSTATION_IDENTITY else native_v3 if self.identity in FX_IDENTITIES else native_v2 if self.identity in ONBOARD_IDENTITIES else globals()["native"]
+        native = native_v12 if self.identity == POLYPHONY_IDENTITY else native_v11 if self.identity in (REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v10 if self.identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v9 if self.identity in (ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v8 if self.identity in (POLISH_IDENTITY,WORKFLOW_IDENTITY,ROUTING_IDENTITY,DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else native_v7 if self.identity in SYNC_IDENTITIES else native_v6 if self.identity == PERFORMANCE_IDENTITY else native_v5 if self.identity == PROJECT_IDENTITY else native_v4 if self.identity == WORKSTATION_IDENTITY else native_v3 if self.identity in FX_IDENTITIES else native_v2 if self.identity in ONBOARD_IDENTITIES else globals()["native"]
         state = native.parse_status(request(session, native.status_request(), "recorder_native_status_read"))
         self.journal.record("native_status", **state)
         token = state["save_token"]
@@ -785,10 +787,11 @@ def source_pins(package=None, *, identity=IDENTITY):
     if identity in NATIVE_IDENTITIES:
         names += ["tools/fm1_native_state.py", "firmware/fm1/native_state.h", "tools/fm1_native_state_v2.py", "firmware/fm1/onboard_store.h", "firmware/fm1/preset_store.h",
                   "core/factory_presets.hpp", "core/factory_presets.cpp"]
+    if identity==POLYPHONY_IDENTITY:names += ["tools/fm1_native_bridge_v28.py","tools/fm1_native_state_v12.py"]
     if identity==NAVIGATION_IDENTITY:names += ["tools/fm1_native_bridge_v27.py"]
-    if identity in (REFINEMENT_IDENTITY,NAVIGATION_IDENTITY):names += ["tools/fm1_native_bridge_v26.py","tools/fm1_native_state_v11.py"]
-    if identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY):names += ["tools/fm1_native_bridge_v24.py","tools/fm1_native_state_v10.py"]
-    if identity in (DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY):names += ["tools/fm1_native_bridge_v23.py","tools/fm1_native_state_v9.py","tools/fm1_native_state_v8.py"]
+    if identity in (REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY):names += ["tools/fm1_native_bridge_v26.py","tools/fm1_native_state_v11.py"]
+    if identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY):names += ["tools/fm1_native_bridge_v24.py","tools/fm1_native_state_v10.py"]
+    if identity in (DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY):names += ["tools/fm1_native_bridge_v23.py","tools/fm1_native_state_v9.py","tools/fm1_native_state_v8.py"]
     if identity == ROUTING_IDENTITY:names += ["tools/fm1_native_bridge_v22.py","tools/fm1_native_state_v9.py","tools/fm1_native_state_v8.py"]
     if identity in (POLISH_IDENTITY,WORKFLOW_IDENTITY):names += ["tools/fm1_native_bridge_v20.py","tools/fm1_native_state_v8.py"]
     if identity == RELEASE_IDENTITY:names += ["tools/fm1_native_bridge_v19.py","tools/fm1_native_state_v7.py"]
@@ -901,7 +904,7 @@ def capture(api, journal, *, duration=600.0, stop_file=None, prior_state=None, c
                     backlog = False
                     for _ in range(8):  # At most48 events per turn; diagnostics retain service.
                         batch = parse_trace(request(session, trace_request(tracker.cursor), "recorder_trace_read"),
-                                            maximum_storage_action=12 if identity in (DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY) else 10 if identity in PROJECT_IDENTITIES else 6 if identity in MIDI_IDENTITIES else 5,
+                                            maximum_storage_action=12 if identity in (DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY) else 10 if identity in PROJECT_IDENTITIES else 6 if identity in MIDI_IDENTITIES else 5,
                                             allow_native_timing=identity in PROJECT_IDENTITIES)
                         backlog = tracker.accept(batch)
                         if not backlog or stopping():
@@ -913,7 +916,7 @@ def capture(api, journal, *, duration=600.0, stop_file=None, prior_state=None, c
                     if battery_service is not None:battery_service.poll(session,clock())
                     if identity in OUTPUT_METRIC_IDENTITIES:
                         journal.record("output_metrics",**parse_output_metrics(request(session,PREFIX+bytes([27,247]),"recorder_output_metrics")))
-                    if identity in (LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY):
+                    if identity in (LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY):
                         from fm1_native_bridge_v25 import parse_usb_link,usb_link_request
                         journal.record("usb_link_status",**parse_usb_link(request(session,usb_link_request(),"recorder_usb_link")))
                     if identity in MIDI_IDENTITIES:
@@ -934,9 +937,9 @@ def capture(api, journal, *, duration=600.0, stop_file=None, prior_state=None, c
                                 from fm1_native_bridge_v4 import parse_storage_status
                             if identity in PROJECT_IDENTITIES:
                                 from fm1_native_bridge_v14 import parse_storage_status
-                            if identity in (DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY):
+                            if identity in (DEFAULTS_IDENTITY,SONG_IDENTITY,LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY):
                                 from fm1_native_bridge_v23 import parse_storage_status
-                                if identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY):
+                                if identity in (SONG_IDENTITY, LINK_IDENTITY,REFINEMENT_IDENTITY,NAVIGATION_IDENTITY,POLYPHONY_IDENTITY):
                                     from fm1_native_bridge_v24 import parse_storage_status
                             storage = parse_storage_status(request(session, PREFIX+bytes([21,247]), "recorder_storage_status"))
                             journal.record("storage_status", **storage)
@@ -991,7 +994,7 @@ def capture(api, journal, *, duration=600.0, stop_file=None, prior_state=None, c
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--firmware", choices=("704", "705", "706", "707", "708", "709", "710", "711", "712", "713", "714", "715", "716", "717", "718", "719", "720", "721", "722", "723", "724", "725", "726", "727", "728", "729", "730", "731", "733", "734"), default="734", help="Exact expected identity; no automatic version substitution")
+    parser.add_argument("--firmware", choices=("704", "705", "706", "707", "708", "709", "710", "711", "712", "713", "714", "715", "716", "717", "718", "719", "720", "721", "722", "723", "724", "725", "726", "727", "728", "729", "730", "731", "733", "734", "735"), default="735", help="Exact expected identity; no automatic version substitution")
     parser.add_argument("--native-backup-directory", type=Path,
                         help="707/708 opt-in SAVE-to-PC: complete host files and metadata acknowledgements; no musical/flash writes")
     parser.add_argument("--duration", type=float, default=600.0, help="Seconds; 0 requires --stop-file")

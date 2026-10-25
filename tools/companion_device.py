@@ -4,9 +4,22 @@ from datetime import datetime,timezone
 import json,os,subprocess,sys,time,uuid
 from pathlib import Path
 import companion_bank as bank
-import fm1_native_bridge_v27 as bridge
+import fm1_native_bridge_v28 as bridge
+import fm1_native_bridge_v27 as legacy_bridge
 import fm1_native_bridge_v26 as previous_bridge
-BRIDGES={bridge.IDENTITY:bridge,previous_bridge.IDENTITY:previous_bridge}
+BRIDGES={bridge.IDENTITY:bridge,previous_bridge.IDENTITY:previous_bridge,legacy_bridge.IDENTITY:legacy_bridge}
+# The newer record only expands voice budget; old units retain their four-voice cap.
+def _legacy_client(module):
+    class Compatible(module.NativeBridge):
+        def restore(self,raw,*args,**kw):return super().restore(bridge.native.legacy_wire(raw),*args,**kw)
+        def push_slot(self,raw,*args,**kw):return super().push_slot(bridge.native.legacy_wire(raw),*args,**kw)
+        def push_project(self,raw,*args,**kw):return super().push_project(bridge.native.legacy_wire(raw),*args,**kw)
+        def reset_bank(self,action,directory,originals):return super().reset_bank(action,directory,[bridge.native.legacy_wire(r) for r in originals])
+    return Compatible
+LEGACY_CLIENTS={m.IDENTITY:_legacy_client(m) for m in (legacy_bridge,previous_bridge)}
+def native_client(identity,session,journal):
+    return (LEGACY_CLIENTS.get(identity) or BRIDGES[identity].NativeBridge)(session,journal)
+
 import hardware_bridge
 import library
 import companion_archive as archive
@@ -98,7 +111,10 @@ class Device:
             if action=='record':self.capture_battery=request.get('battery_telemetry',False)
             if action=='stop_recording':return dict(recording=False,path=str(self.capture) if self.capture else None)
             stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')+'-'+uuid.uuid4().hex[:8]
-            journal=bridge.transport.Journal(self.root/'device-logs'/stamp)
+            def connection_progress(event,**values):
+                if event in ('discovery_ports','discovery_timeout'):
+                    progress('Checking the FM-1 USB MIDI connection',discovery=dict(event=event,**values))
+            journal=bridge.transport.Journal(self.root/'device-logs'/stamp,progress=connection_progress)
             session=None;result=dict(success=False,action=action,identity=bridge.IDENTITY)
             try:
                 progress('Connecting to FM-1',phase='connect')
@@ -122,7 +138,7 @@ class Device:
                     raise ValueError('FM-1 is connected with '+identity+'. Install FMER to use instrument backups and library transfers. Stock firmware does not provide these commands.')
                 progress('Preparing '+action.replace('_',' '),identity=identity,phase='prepare')
                 self.record_identity=identity
-                client=BRIDGES[identity].NativeBridge(session,journal);backups=self.root/'device-backups'
+                client=native_client(identity,session,journal);backups=self.root/'device-backups'
                 if action in ('backup_all','restore_all','deploy_library'):
                     progress('Backing up the complete unit')
                     before=archive.capture(client,progress)

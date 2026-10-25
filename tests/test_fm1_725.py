@@ -14,6 +14,6 @@ class Release725(unittest.TestCase):
     with self.assertRaises(ValueError):pkg.transition_profile(pkg.RELEASE_PRODUCT,pkg.TEST01_TEMPLATE,value)
  def test_companion_advertises_exact_bridge_and_mode_limits(self):
   caps=companion_jobs.Jobs(None,"unused").capabilities()
-  self.assertEqual(caps['firmware_identity'],'FM-1_734')
-  self.assertEqual(caps['native_version'],11)
+  self.assertEqual(caps['firmware_identity'],'FM-1_735')
+  self.assertEqual(caps['native_version'],12)
   self.assertIn('mono',caps['voice_modes']['tracks'])

@@ -22,8 +22,9 @@ def inspect_bytes(raw):
     if release.digest(loader) != record['loader_sha256']:
         raise ValueError('This package uses a different updater. Companion supports the reviewed FMER 935 updater only; use the firmware publisher’s installer for this file.')
     flash = files['flash.bin']['payload']
-    if len(flash) != 0x93000 or flash[:0x4000] != release.distribution_head():
+    if len(flash) != 0x93000:
         raise ValueError('Firmware changes the protected boot descriptor or application extent')
+    package_format = release.head_format(flash[:0x4000])
     region, layout = package.app_layout(flash[0x4000:], package.TEST01_APP_SLOT)
     _, _, baseline = package.decode_package(release.bundled(release.PROFILE))
     original, _ = package.app_layout(baseline['flash.bin']['payload'][0x4000:], package.TEST01_APP_SLOT)
@@ -35,7 +36,7 @@ def inspect_bytes(raw):
     app = bytes(region[0x120:end])
     if app[:4] != bytes.fromhex('04818000') or (product+'\0').encode('ascii') not in app:
         raise ValueError('Firmware entry instruction or application identity does not match')
-    return dict(product=product, compatible_profile=PROFILE, origin_identity='compatible-FM-1',
+    return dict(product=product, compatible_profile=PROFILE, package_format=package_format, origin_identity='compatible-FM-1',
                 loader_identity=release.LOADER, package_sha256=release.digest(raw),
                 loader_sha256=record['loader_sha256'], loader_image_bytes=len(loader),
                 raw_app_sha256=release.digest(flash[0x4000:]), app_sha256_padded=release.digest(app),

@@ -12,7 +12,7 @@
 #include <stddef.h>
 #include <string.h>
 enum {
- FMER_NATIVE_VERSION=11, FMER_NATIVE_BYTES=4000, FMER_NATIVE_V9_BYTES=3728, FMER_NATIVE_SONG=3728, FMER_NATIVE_V1_BYTES=784, FMER_NATIVE_V4_BYTES=2176,
+ FMER_NATIVE_VERSION=12, FMER_NATIVE_BYTES=4000, FMER_NATIVE_V9_BYTES=3728, FMER_NATIVE_SONG=3728, FMER_NATIVE_V1_BYTES=784, FMER_NATIVE_V4_BYTES=2176,
  FMER_NATIVE_HEADER=32, FMER_NATIVE_CONTROLS=32,
  FMER_NATIVE_VCED=32+FMER_PARAM_COUNT*2, FMER_NATIVE_STEPS=FMER_NATIVE_VCED+155,
  FMER_NATIVE_PADDING=FMER_NATIVE_STEPS+16*193, FMER_NATIVE_V4_PADDING=2127,
@@ -100,7 +100,7 @@ static fmer_native_result_t fmer_native_validate(const uint8_t *p,size_t n)
  if(n!=FMER_NATIVE_BYTES&&n!=FMER_NATIVE_V9_BYTES&&n!=FMER_NATIVE_V4_BYTES&&n!=FMER_NATIVE_V1_BYTES)return FMER_NATIVE_SIZE;
  version=fmer_native_rd16(p+8);old=version==1u;count=old?195u:198u;vo=32u+count*2u;so=vo+155u;
  patterns=old?1u:version<5u?8u:16u;pad=old?769u:so+patterns*193u;
- if(version<1u||version>11u||n!=(old?FMER_NATIVE_V1_BYTES:version<5u?FMER_NATIVE_V4_BYTES:version<10u?FMER_NATIVE_V9_BYTES:FMER_NATIVE_BYTES)||
+ if(version<1u||version>12u||n!=(old?FMER_NATIVE_V1_BYTES:version<5u?FMER_NATIVE_V4_BYTES:version<10u?FMER_NATIVE_V9_BYTES:FMER_NATIVE_BYTES)||
   memcmp(p,"FMERNAT",7)||p[7]!=(version>=10u?'A'+version-10u:'0'+version)||fmer_native_rd16(p+10)!=32u||fmer_native_rd16(p+12)!=n||fmer_native_rd16(p+14)||
   fmer_native_rd16(p+22)!=count||fmer_native_rd16(p+24)!=155u||p[26]!=(old?64u:patterns)||(!old&&p[27]!=64u))return FMER_NATIVE_FORMAT;
  if(version>=4u) {
@@ -120,7 +120,7 @@ static fmer_native_result_t fmer_native_validate(const uint8_t *p,size_t n)
  for(i=0;i<count;i++){
   v=fmer_native_rd16(p+32+2u*i);
   if(i>=(version<3u?145u:version<4u?150u:version<7u?159u:160u)&&i<160u){if(v)return FMER_NATIVE_CONTROL;}
-  else if((version<8u&&((i==FMER_ARP_ORDER&&v>9u)||(i==FMER_VA_WAVE&&v>3u)))||(version<7u&&i==FMER_REVERB_MODEL&&v>1u)||!fmer_control_valid(i,v)||(old&&i==FMER_ARP_ORDER&&v>6u)||
+  else if((version<8u&&((i==FMER_ARP_ORDER&&v>9u)||(i==FMER_VA_WAVE&&v>3u)))||(version<7u&&i==FMER_REVERB_MODEL&&v>1u)||!fmer_control_valid(i,v)||(version<12u&&i==FMER_VOICE_BUDGET&&v>4u)||(old&&i==FMER_ARP_ORDER&&v>6u)||
     (version<5u&&((i==FMER_SEQ_PATTERN&&v>7u)||(i==FMER_SEQ_CHAIN_MASK&&v>255u)||(i==FMER_RECORD_MODE&&v>1u))))return FMER_NATIVE_CONTROL;
   if(i<145u&&v!=p[vo+i])return FMER_NATIVE_VOICE;
  }
@@ -142,8 +142,8 @@ static fmer_native_result_t fmer_native_encode(const fmer_native_state_t *s,uint
  uint32_t i,k;uint8_t *dst;const uint8_t *pitch,*vel,*gate;fmer_native_result_t result;
  if(!p)return FMER_NATIVE_ARGUMENT;if(capacity<FMER_NATIVE_BYTES)return FMER_NATIVE_SIZE;
  result=fmer_native_state_valid(s);if(result!=FMER_NATIVE_OK)return result;
- memset(p,0,FMER_NATIVE_BYTES);memcpy(p,"FMERNATB",8);
- fmer_native_wr16(p+8,11);fmer_native_wr16(p+10,32);fmer_native_wr16(p+12,FMER_NATIVE_BYTES);
+ memset(p,0,FMER_NATIVE_BYTES);memcpy(p,"FMERNATC",8);
+ fmer_native_wr16(p+8,12);fmer_native_wr16(p+10,32);fmer_native_wr16(p+12,FMER_NATIVE_BYTES);
  fmer_native_wr32(p+16,s->source_generation);fmer_native_wr16(p+20,s->preset_id);
  fmer_native_wr16(p+22,198);fmer_native_wr16(p+24,155);p[26]=16;p[27]=64;
  for(i=0;i<198u;i++)fmer_native_wr16(p+32+2u*i,s->controls.value[i]);memcpy(p+FMER_NATIVE_VCED,s->vced,155);
@@ -190,16 +190,17 @@ static fmer_native_result_t fmer_native_decode(const uint8_t *p,size_t n,fmer_na
 static void fmer_native_upgrade_v2(uint8_t *p)
 {
  uint32_t version=fmer_native_rd16(p+8),i,k,ref;uint8_t tracks[24],*dst;
- if(version>=11u)return;
+ if(version>=12u)return;
+ if(version==11u){if(fmer_native_validate(p,FMER_NATIVE_BYTES)!=FMER_NATIVE_OK)return;memcpy(p,"FMERNATC",8);fmer_native_wr16(p+8,12);fmer_native_wr32(p+28,fmer_native_crc(p));return;}
  if(version==10u){
   if(fmer_native_validate(p,FMER_NATIVE_BYTES)!=FMER_NATIVE_OK)return;
-  memcpy(p,"FMERNATB",8);fmer_native_wr16(p+8,11);memcpy(p+FMER_NATIVE_PADDING+34,"MOD1",4);
+  memcpy(p,"FMERNATC",8);fmer_native_wr16(p+8,12);memcpy(p+FMER_NATIVE_PADDING+34,"MOD1",4);
   fmer_native_wr32(p+28,fmer_native_crc(p));return;
  }
  if(version==5u || version==6u || version==7u || version==8u || version==9u){
   if(fmer_native_validate(p,FMER_NATIVE_V9_BYTES)!=FMER_NATIVE_OK)return;
   memset(p+FMER_NATIVE_SONG,0,FMER_SONG_BYTES);fmer_native_wr16(p+12,FMER_NATIVE_BYTES);
-  memcpy(p,"FMERNATB",8);fmer_native_wr16(p+8,11);memcpy(p+FMER_NATIVE_PADDING,"TRK3",4);
+  memcpy(p,"FMERNATC",8);fmer_native_wr16(p+8,12);memcpy(p+FMER_NATIVE_PADDING,"TRK3",4);
   memcpy(p+FMER_NATIVE_PADDING+28,"FX09",4);
   memcpy(p+FMER_NATIVE_PADDING+34,"MOD1",4);
   fmer_native_wr32(p+28,fmer_native_crc(p));return;
@@ -208,7 +209,7 @@ static void fmer_native_upgrade_v2(uint8_t *p)
  memcpy(tracks,p+FMER_NATIVE_V4_PADDING,24);
  memset(p+FMER_NATIVE_V4_PADDING,0,FMER_NATIVE_BYTES-FMER_NATIVE_V4_PADDING);
  for(k=8;k<16;k++){dst=p+FMER_NATIVE_STEPS+k*193;*dst++=16;for(i=0;i<64;i++){*dst++=FMER_REST;*dst++=100;*dst++=75;}}
- memcpy(p,"FMERNATB",8);fmer_native_wr16(p+8,11);fmer_native_wr16(p+12,FMER_NATIVE_BYTES);p[26]=16;
+ memcpy(p,"FMERNATC",8);fmer_native_wr16(p+8,12);fmer_native_wr16(p+12,FMER_NATIVE_BYTES);p[26]=16;
  if(version<3)fmer_native_wr16(p+32+FMER_LFO_ENABLE*2,1);
  memcpy(p+FMER_NATIVE_PADDING,"TRK3",4);
  if(version<4){

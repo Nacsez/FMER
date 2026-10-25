@@ -34,6 +34,12 @@ class StagingTests(unittest.TestCase):
             return stage.verify_companion(self.zip,self.proof)
     def test_verified_set_accepted(self):
         self.make();self.assertEqual(self.check(),self.record)
+    def test_explicit_profile_does_not_choose_first_catalog_entry(self):
+        self.make()
+        with patch.object(stage,'R',self.root),patch.object(stage.release,'catalog',return_value=[{'id':'historical'},self.record]),patch.object(stage.release,'bundled',return_value=b'qualified image') as bundled:
+            self.assertEqual(stage.verify_companion(self.zip,self.proof,'current'),self.record)
+            bundled.assert_called_once_with('current')
+            with self.assertRaisesRegex(ValueError,'not in the catalog'):stage.verify_companion(self.zip,self.proof,'unknown')
     def test_stale_rehearsal_rejected(self):
         self.make();self.proof.write_text(json.dumps({'status':'passed','zip_sha256':'0'*64}))
         with self.assertRaisesRegex(ValueError,'exact Companion ZIP'):self.check()

@@ -137,7 +137,7 @@
   "153": [
     "Sequencer mode",
     "0 SINGLE with the working instrument,1 four mono tracks with saved instrument references.",
-    "GLO / VOICE-TEMPO K1; SEQ / PLAY MODE K1; SELECT on PRESETS (1V/4V/4T also chooses voice budget); Companion Sound / Playing mode."
+    "GLO / VOICE-TEMPO K1; SEQ / PLAY MODE K1; SELECT on PRESETS (1V/6V/4T also chooses voice budget); Companion Sound / Playing mode."
   ],
   "154": [
     "Selected track",
@@ -321,8 +321,8 @@
   ],
   "191": [
     "Voice budget",
-    "1..4 local voices in SINGLE. Locked at four total in 4TRK (one mono voice per track), and at one while single-instrument glide is active. Select SINGLE explicitly via GLO K1 or SEL+HOME. Turning glide off restores the previous single voice budget; imported glide uses four as its return value.",
-    "GLO / VOICE-TEMPO K3; GLO / MONO GLIDE K4.1V/4V/4T shortcuts on PLAY MODE K1 or PRESETS SELECT. Locked in4TRK or active single glide."
+    "1..6 local voices in SINGLE. Locked at four total in 4TRK (one mono voice per track), and at one while single-instrument glide is active. Select SINGLE explicitly via GLO K1 or SEL+HOME. Turning glide off restores the previous single voice budget; imported glide uses six as its return value.",
+    "GLO / VOICE-TEMPO K3; GLO / MONO GLIDE K4.1V/6V/4T shortcuts on PLAY MODE K1 or PRESETS SELECT. Locked in4TRK or active single glide."
   ],
   "192": [
     "Arp triplets",

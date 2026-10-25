@@ -16,7 +16,7 @@ def companion_revision(path):
         if type(value) is not int or value<1:raise ValueError('Explicit Companion revision required')
         return value
 
-def verify_companion(path,rehearsal):
+def verify_companion(path,rehearsal,profile=None):
     proof=json.loads(rehearsal.read_text())
     if proof.get('status')!='passed' or proof.get('zip_sha256')!=sha(path):
         raise ValueError('Passing deployment rehearsal must identify this exact Companion ZIP')
@@ -33,7 +33,10 @@ def verify_companion(path,rehearsal):
             if hashlib.sha256(z.read(root+n)).hexdigest()!=h:raise ValueError('Companion file changed: '+n)
         catalog=json.loads(z.read(root+release.CATALOG))
         if catalog!=json.loads((R/release.CATALOG).read_text()):raise ValueError('Bundled release catalog differs')
-        record=release.catalog()[0];raw=release.bundled(record['id'])
+        records=release.catalog()
+        record=records[0] if profile is None else next((r for r in records if r['id']==profile),None)
+        if record is None:raise ValueError('Requested release profile is not in the catalog')
+        raw=release.bundled(record['id'])
         if z.read(root+'firmware/releases/'+record['filename'])!=raw:raise ValueError('Standalone and bundled firmware differ')
         # Source must describe exactly the runtime code we are distributing.
         import io

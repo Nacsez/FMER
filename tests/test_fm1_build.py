@@ -9,7 +9,7 @@ from tools import build_fm1_candidate as build
 
 class Fm1BuildTests(unittest.TestCase):
     def test_709_build_includes_factory_presets_and_native_state_provenance(self):
-        self.assertEqual(build.WIRE_IDENTITY, "FM-1_734")
+        self.assertEqual(build.WIRE_IDENTITY, "FM-1_735")
         sources = build.local_source_files()
         headers = build.local_header_files()
         self.assertIn(build.ROOT / "core/factory_presets.cpp", sources)

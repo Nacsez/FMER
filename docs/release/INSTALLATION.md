@@ -3,6 +3,13 @@
 Download files only from [Nacsez/FMER releases](https://github.com/Nacsez/FMER/releases).
 Firmware 734-r2 and Companion 734 r5 are the current candidate downloads.
 
+## Original V16 limitation
+
+M-VAVE V16 changes the boot and storage layout. Companion 734 r5 is not yet
+qualified to install V16 or return a V16 unit to FMER. Do not bypass a refusal.
+The vendor download URL now serves V16, which is not the pinned V15 recovery
+image. See [the V16 investigation](../research/STOCK_V16_2026-10-22.md).
+
 ## Companion: the qualified installation workflow
 
 1. Download **FMER-Companion-734-Windows-x64.zip** on Windows 10 or 11 x64

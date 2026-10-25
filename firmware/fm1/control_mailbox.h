@@ -38,16 +38,18 @@ static uint32_t fmer_control_publish(fmer_controls_t *canonical,volatile uint32_
 /* Select a new bank first, then its step, then merge deliberate field edits.
  * Each selection obtains fresh stored data before the next operation. An old
  * bank's length/cursor/fields are not edits unless their dirty bits say so.
- * This also covers shrinking after recording advances beyond main's snapshot. */
+ * This also covers shrinking after recording advances beyond main's snapshot.
+ * The apply callback must validate the complete batch (the board supplies
+ * fmer_dsp_apply_controls), including values returned by get. */
 static int fmer_control_adopt(const fmer_controls_t *desired,const volatile uint32_t *dirty,
     void (*get)(fmer_controls_t *),int (*apply)(const fmer_controls_t *))
 {
-    fmer_controls_t actual,next;uint32_t i,length,step;
+    fmer_controls_t actual,next;uint32_t i,word,bits,length,step;
     /* Refuse malformed explicit values before an intermediate selection can
      * mutate the instrument. Cross-field step/length is clamped below. */
-    for(i=0;i<FMER_PARAM_COUNT;i++)if(fmer_control_dirty(dirty,i)) {
-        if(!fmer_control_valid(i,desired->value[i]))return 0;
-    }
+    for(word=0;word<FMER_CONTROL_WORDS;word++)
+        for(bits=dirty[word],i=word*32u;bits && i<FMER_PARAM_COUNT;bits>>=1u,i++)
+            if((bits&1u) && !fmer_control_valid(i,desired->value[i]))return 0;
     get(&actual);
     if(fmer_control_dirty(dirty,FMER_SEQ_TRACK) && desired->value[FMER_SEQ_TRACK]!=actual.value[FMER_SEQ_TRACK]) {
         next=actual;next.value[FMER_SEQ_TRACK]=desired->value[FMER_SEQ_TRACK];
@@ -75,8 +77,12 @@ static int fmer_control_adopt(const fmer_controls_t *desired,const volatile uint
         get(&actual);
     }
     next=actual;
-    for(i=0;i<FMER_PARAM_COUNT;i++)if(fmer_control_dirty(dirty,i))next.value[i]=desired->value[i];
+    for(word=0;word<FMER_CONTROL_WORDS;word++)
+        for(bits=dirty[word],i=word*32u;bits && i<FMER_PARAM_COUNT;bits>>=1u,i++)
+            if(bits&1u)next.value[i]=desired->value[i];
     next.value[FMER_SEQ_STEP]=(uint16_t)step;
-    return fmer_control_batch_valid(&next) && apply(&next);
+    /* The canonical DSP setter validates the merged batch before committing.
+     * Repeating all198 checks here adds work to every unrelated knob edit. */
+    return apply(&next);
 }
 #endif

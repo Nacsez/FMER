@@ -86,15 +86,15 @@ class FakeSession:
             return frame(13, [2 if self.identity in capture.ONBOARD_IDENTITIES else 1,7,0,0,0,0,0,0,0])
         if packet[6] == 21:
             if self.identity in capture.PROJECT_IDENTITIES:
-                return frame(21,[4 if self.identity in (capture.DEFAULTS_IDENTITY,capture.SONG_IDENTITY,capture.LINK_IDENTITY,capture.REFINEMENT_IDENTITY,capture.NAVIGATION_IDENTITY) else 3,1,0,0,0,0,0,0,0,65535,0,0,73,0,0,0x7944953e,0,4000 if self.identity in (capture.SONG_IDENTITY,capture.LINK_IDENTITY,capture.REFINEMENT_IDENTITY,capture.NAVIGATION_IDENTITY) else 3728,3,65535,0,16]+([0] if self.identity in (capture.DEFAULTS_IDENTITY,capture.SONG_IDENTITY,capture.LINK_IDENTITY,capture.REFINEMENT_IDENTITY,capture.NAVIGATION_IDENTITY) else []))
+                return frame(21,[4 if self.identity in (capture.DEFAULTS_IDENTITY,capture.SONG_IDENTITY,capture.LINK_IDENTITY,capture.REFINEMENT_IDENTITY,capture.NAVIGATION_IDENTITY,capture.POLYPHONY_IDENTITY) else 3,1,0,0,0,0,0,0,0,65535,0,0,73,0,0,0x7944953e,0,4000 if self.identity in (capture.SONG_IDENTITY,capture.LINK_IDENTITY,capture.REFINEMENT_IDENTITY,capture.NAVIGATION_IDENTITY,capture.POLYPHONY_IDENTITY) else 3728,3,65535,0,16]+([0] if self.identity in (capture.DEFAULTS_IDENTITY,capture.SONG_IDENTITY,capture.LINK_IDENTITY,capture.REFINEMENT_IDENTITY,capture.NAVIGATION_IDENTITY,capture.POLYPHONY_IDENTITY) else []))
             return frame(21,[2 if self.identity in (capture.BANK_IDENTITY,*capture.MIDI_IDENTITIES) else 1,1,0,0,0,0,0,0,0,65535,0,0,73,0,0,0x7944953e,0,2176])
-        if packet[6]==27 and self.identity in ('FM-1_715','FM-1_716','FM-1_717','FM-1_718','FM-1_719','FM-1_720','FM-1_721','FM-1_722','FM-1_723','FM-1_724','FM-1_725','FM-1_726','FM-1_727','FM-1_728','FM-1_729','FM-1_730','FM-1_731','FM-1_733','FM-1_734'):
+        if packet[6]==27 and self.identity in ('FM-1_715','FM-1_716','FM-1_717','FM-1_718','FM-1_719','FM-1_720','FM-1_721','FM-1_722','FM-1_723','FM-1_724','FM-1_725','FM-1_726','FM-1_727','FM-1_728','FM-1_729','FM-1_730','FM-1_731','FM-1_733','FM-1_734','FM-1_735'):
             return frame(27,[1,0,0,0,0,0,0])
         if packet[6]==25:
             return frame(25,[1,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,919,0,0,0,0,1,0])
         if packet[6]==31 and self.identity in (capture.PERFORMANCE_IDENTITY,*capture.SYNC_IDENTITIES):
             return frame(31,[1,100,1,1,1,1,1,64,*([0]*12)])
-        if packet[6]==33 and self.identity in (capture.LINK_IDENTITY,capture.REFINEMENT_IDENTITY,capture.NAVIGATION_IDENTITY):
+        if packet[6]==33 and self.identity in (capture.LINK_IDENTITY,capture.REFINEMENT_IDENTITY,capture.NAVIGATION_IDENTITY,capture.POLYPHONY_IDENTITY):
             return frame(33,[1,*([0]*16)])
         raise AssertionError("Non-read-only request")
 
@@ -854,7 +854,7 @@ class Native708TelemetryTests(unittest.TestCase):
         with patch.object(capture.transport.MidiSession,'_send') as send:
             for identity in (*capture.SUPPORTED_IDENTITIES,'FM-1_732'):
                 session.expected_identity=session.verified_identity=identity
-                if identity in ('FM-1_715','FM-1_716','FM-1_717','FM-1_718','FM-1_719','FM-1_720','FM-1_721','FM-1_722','FM-1_723','FM-1_724','FM-1_725','FM-1_726','FM-1_727','FM-1_728','FM-1_729','FM-1_730','FM-1_731','FM-1_733','FM-1_734'):
+                if identity in ('FM-1_715','FM-1_716','FM-1_717','FM-1_718','FM-1_719','FM-1_720','FM-1_721','FM-1_722','FM-1_723','FM-1_724','FM-1_725','FM-1_726','FM-1_727','FM-1_728','FM-1_729','FM-1_730','FM-1_731','FM-1_733','FM-1_734','FM-1_735'):
                     session._send(packet,'read output meter')
                 else:
                     with self.assertRaises(capture.CaptureError):session._send(packet,'unsupported meter')

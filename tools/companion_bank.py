@@ -9,9 +9,9 @@ import hashlib
 from pathlib import Path
 import subprocess
 import library
-import fm1_native_state_v11 as native
+import fm1_native_state_v12 as native
 
-PROFILE='FMER Default 726.1'
+PROFILE='FMER Spectrum 735.1'
 CONFIRM={'reset_defaults':'Reset to FMER Default','reset_user':'Reset User Bank','clear_user':'Clear User Bank'}
 FM_CATEGORIES=['Keys','Bells','Bass','Brass','Organ','Plucks','Winds','Motion',
  'Keys','Keys','Plucks','Percussion','Mallets','Percussion','Bells','Percussion','Bass','Bass','Bass','Bass',
@@ -54,10 +54,10 @@ def import_fx(state,profile):
     native.validate_state(result)
     return result
 
-def profile(executable):
+def classic_profile(executable):
     result=subprocess.run([str(executable),'--factory'],creationflags=(subprocess.CREATE_NO_WINDOW if __import__('os').name=='nt' else 0), capture_output=True,timeout=10,check=True)
     catalog=library.strict_loads(result.stdout)
-    if catalog['profile']!=PROFILE or len(catalog['sounds'])!=64:raise ValueError('Build the current FMER Default profile first')
+    if catalog['profile']!='FMER Default 726.1' or len(catalog['sounds'])!=64:raise ValueError('Build the current FMER Default profile first')
     slots=[]
     for expected_id,sound in enumerate(catalog['sounds']):
         if sound['id']!=expected_id or sound['engine']!=(0 if expected_id<8 or 16<=expected_id<40 else 1):
@@ -75,6 +75,18 @@ def profile(executable):
                           audition_note=43 if category=='Bass' else 67 if category in ('Bells','Mallets') else 60,
                           native=pack(state)))
     return slots
+
+def profile(executable):
+    import json
+    value=json.loads((Path(__file__).resolve().parents[1]/'host/loadout_profiles.json').read_text(encoding='utf8'))
+    selected=next(p for p in value['profiles'] if p['id']=='A')
+    result=[]
+    for index,key in enumerate(selected['sound_ids']):
+        item=deepcopy(value['sounds'][key]['entry']);state=decode_record(item['native'])
+        state['preset_id']=index;state['controls'][191]=6;item['native']=pack(state);result.append(item)
+    if len(result)!=64:raise ValueError('Spectrum needs64 instruments')
+    return result
+
 
 class BankLibrary(library.PatchLibrary):
     def __init__(self,root,executable,*,defaults=None):
@@ -103,7 +115,7 @@ class BankLibrary(library.PatchLibrary):
 
     def _validate_state(self,state):
         if not isinstance(state,dict) or set(state)!={'format','version','profile','capacity','revision','slots','undo_slots'}:raise ValueError('Invalid bank fields')
-        if state['profile'] not in (PROFILE,'FMER Default 719.1','FMER Default 718.1','FMER Default 717.1','FMER Default 716.1','FMER Default 715.1','FMER Default 709.1','FMER Default 710.1'):raise ValueError('Bank profile differs; explicit profile migration required')
+        if state['profile'] not in (PROFILE,'FMER Default 726.1','FMER Default 719.1','FMER Default 718.1','FMER Default 717.1','FMER Default 716.1','FMER Default 715.1','FMER Default 709.1','FMER Default 710.1'):raise ValueError('Bank profile differs; explicit profile migration required')
         if state['format']!='FMER-SOUNDBANK' or type(state['version']) is not int or state['version']!=1 or state['capacity']!=128:raise ValueError('Unsupported bank format')
         library.integer(state['revision'],0,2**53-1,'revision')
         for key in ('slots','undo_slots'):
@@ -155,18 +167,18 @@ class BankLibrary(library.PatchLibrary):
                     if not isinstance(name,str) or not 1<=len(name)<=10 or not name.strip() or any(not 32<=ord(c)<=126 for c in name):raise ValueError('Use1..10 printable ASCII characters')
                     state['vced'][145:]=list(name.ljust(10).encode('ascii'));slots[idx]['name']=name;slots[idx]['native']=pack(state)
                 elif action=='delete':
-                    if idx<64:raise ValueError('DEFAULT slots stay populated; replace or reset this sound')
+                    if idx<64:raise ValueError('Bank A slots stay populated; replace or reset this sound')
                     slots[idx]=None
                 else:
                     dest=library.integer(request.get('destination'),0,127,'destination')
                     if dest==idx:raise ValueError('Choose another destination')
                     if action=='copy':slots[dest]=deepcopy(slots[idx])
                     elif action=='move':
-                        if idx<64:raise ValueError('DEFAULT slots stay populated; use Copy or Swap')
+                        if idx<64:raise ValueError('Bank A slots stay populated; use Copy or Swap')
                         if slots[dest] is not None:raise ValueError('Move needs an empty destination; use Swap to retain both sounds')
                         slots[dest],slots[idx]=slots[idx],None
                     else:
-                        if idx<64 and slots[dest] is None:raise ValueError('DEFAULT slots cannot be empty')
+                        if idx<64 and slots[dest] is None:raise ValueError('Bank A slots cannot be empty')
                         slots[dest],slots[idx]=slots[idx],slots[dest]
             return slots
         return self._mutate(request.get('revision'),action,change)

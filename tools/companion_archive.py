@@ -20,7 +20,7 @@ def validate(value):
     if not isinstance(value,dict) or set(value)!={'format','version','payload','sha256'} or value['format']!='FMER-UNIT-BACKUP' or type(value['version']) is not int or value['version']!=1:raise ValueError('Unsupported unit backup')
     p=value['payload'];raw=library.canonical(p)
     if len(raw)>library.MAX_FILE_BYTES or hashlib.sha256(raw).hexdigest()!=value['sha256']:raise ValueError('Unit backup checksum mismatch')
-    if not isinstance(p,dict) or set(p) not in ({'identity','created','instruments','projects','live','midi'},{'identity','created','instruments','projects','live','midi','fx_default'}) or p['identity'] not in ('FM-1_721','FM-1_722','FM-1_723','FM-1_724','FM-1_725','FM-1_726','FM-1_727','FM-1_728','FM-1_729','FM-1_730','FM-1_731','FM-1_733','FM-1_734'):raise ValueError('Backup requires FMER721-734')
+    if not isinstance(p,dict) or set(p) not in ({'identity','created','instruments','projects','live','midi'},{'identity','created','instruments','projects','live','midi','fx_default'}) or p['identity'] not in ('FM-1_721','FM-1_722','FM-1_723','FM-1_724','FM-1_725','FM-1_726','FM-1_727','FM-1_728','FM-1_729','FM-1_730','FM-1_731','FM-1_733','FM-1_734','FM-1_735'):raise ValueError('Backup requires FMER721-735')
     if 'fx_default' in p and (type(p['fx_default']) is not int or not 0<=p['fx_default']<720):raise ValueError('Invalid personal FX default')
     datetime.fromisoformat(p['created'])
     for key,size in (('instruments',128),('projects',16)):

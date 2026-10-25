@@ -27,7 +27,7 @@ class TransferTests(unittest.TestCase):
 
     def test_review_binds_bytes_and_destinations_and_refuses_collisions(self):
         plan=transfer.plan(self.rows)
-        self.assertEqual([r['destination'] for r in plan['rows']],['USER 00','USER 01'])
+        self.assertEqual([r['destination'] for r in plan['rows']],['Bank B 00','Bank B 01'])
         changed=deepcopy(self.rows);changed[1]['slot']=64
         self.assertNotEqual(plan['confirmation'],transfer.plan(changed)['confirmation'])
         changed[1]['slot']=0

@@ -249,15 +249,15 @@
   ],
   [
     "SEQ / PLAY MODE",
-    "1V / 4V / 4T",
+    "1V / 6V / 4T",
     "Glide Off/Legato/Always",
     "Glide time",
     "Glide contour",
-    "K1 changes1V/4V/4T;1V enables legato. ALGORITHM selects track. Glide is locked in4T. PRESETS changes sound."
+    "K1 changes1V/6V/4T;1V enables legato. ALGORITHM selects track. Glide is locked in4T. PRESETS changes sound."
   ],
   [
     "GLO / VOICE/TEMPO",
-    "Mode:1V /4V /4T",
+    "Mode:1V /6V /4T",
     "Tempo",
     "Voices",
     "Transpose",
@@ -337,16 +337,16 @@
   ],
   [
     "PRESETS",
-    "FM/VA/USER bank",
+    "Bank A/Bank B bank",
     "Inactive",
     "Inactive",
     "Inactive",
-    "PRESETS rotates through all128 slots. SELECT chooses1V/4V/4T. K1 jumps banks. HOME/SEL returns."
+    "PRESETS rotates through all128 slots. SELECT chooses1V/6V/4T. K1 jumps banks. HOME/SEL returns."
   ],
   [
     "SAVE / INSTRUMENT",
     "Slot0..63",
-    "DEFAULT/USER",
+    "Bank A/Bank B",
     "Save/Load",
     "Sound0/Project1",
     "SEL confirms."
